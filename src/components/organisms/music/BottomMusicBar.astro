@@ -1,0 +1,57 @@
+---
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import { siteConfig } from "@/config/siteConfig";
+import { musicConfig, resolveMusicOptions } from "@/config/musicConfig";
+import BottomMusicBarClient from "./BottomMusicBarClient.svelte";
+
+const options = resolveMusicOptions(musicConfig);
+const isRu = (siteConfig.lang || "ru").toLowerCase().startsWith("ru");
+
+const labels = {
+	playerTitle: i18n(I18nKey.musicPlayerTitle),
+	previous: i18n(I18nKey.musicPrevious),
+	play: i18n(I18nKey.musicPlay),
+	pause: i18n(I18nKey.musicPause),
+	next: i18n(I18nKey.musicNext),
+	mute: i18n(I18nKey.musicMute),
+	unmute: i18n(I18nKey.musicUnmute),
+	playbackMode: i18n(I18nKey.musicPlaybackMode),
+	modeSequence: i18n(I18nKey.musicModeSequence),
+	modeRepeatOne: i18n(I18nKey.musicModeRepeatOne),
+	modeShuffle: i18n(I18nKey.musicModeShuffle),
+	progress: i18n(I18nKey.musicProgress),
+	volume: i18n(I18nKey.musicVolume),
+	showPlaylist: i18n(I18nKey.musicShowPlaylist),
+	hidePlaylist: i18n(I18nKey.musicHidePlaylist),
+	empty: i18n(I18nKey.musicEmpty),
+	loading: i18n(I18nKey.musicLoading),
+	notRequested: i18n(I18nKey.musicNotRequested),
+	nowPlaying: i18n(I18nKey.musicNowPlaying),
+	filterAll: isRu ? "Все" : "All",
+	filterFavorites: isRu ? "Любимые" : "Favorites",
+	filterNew: isRu ? "Новые" : "New",
+	emptyFavorites: isRu
+		? "В избранном пока пусто. Нажмите ❤️ рядом с треком!"
+		: "Favorites list is empty. Click ❤️ next to a track!",
+	emptyNew: isRu ? "Нет новых треков" : "No new tracks",
+	resetFilters: isRu ? "Показать все" : "Show all",
+	expandPlayer: isRu ? "Развернуть аудиоплеер" : "Expand music player",
+	collapsePlayer: isRu ? "Свернуть аудиоплеер" : "Collapse music player",
+	randomTrack: isRu ? "Случайный трек" : "Random track",
+	close: isRu ? "Закрыть" : "Close",
+	favoriteAdd: isRu ? "В избранное" : "Add to favorites",
+	favoriteRemove: isRu ? "Удалить из избранного" : "Remove from favorites",
+	favoriteIn: isRu ? "В избранном" : "In favorites",
+	errors: {
+		"empty-playlist": i18n(I18nKey.musicErrorEmptyPlaylist),
+		"source-unavailable": i18n(I18nKey.musicErrorSourceUnavailable),
+		"autoplay-blocked": i18n(I18nKey.musicErrorAutoplayBlocked),
+		"invalid-track": i18n(I18nKey.musicErrorInvalidTrack),
+	},
+};
+---
+
+{options && (
+	<BottomMusicBarClient client:load {options} {labels} />
+)}
