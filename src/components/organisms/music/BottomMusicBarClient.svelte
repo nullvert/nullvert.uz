@@ -10,6 +10,7 @@ import type {
 	TrackDescriptor,
 } from "@/types/musicConfig";
 import BottomMusicDrawer from "./BottomMusicDrawer.svelte";
+import { createMusicRuntime, destroyMusicRuntime } from "@utils/music";
 import "./bottomMusicBar.css";
 
 interface Labels {
@@ -253,8 +254,6 @@ onMount(() => {
 	};
 	window.addEventListener("shirone-music-visibility-change", onVisibilityChange);
 
-	void import("@utils/music").then(({ createMusicRuntime, destroyMusicRuntime }) => {
-		if (!active) return;
 		destroyMusicRuntime();
 		runtime = createMusicRuntime(options, {
 			createAudio: () => {
@@ -324,7 +323,6 @@ onMount(() => {
 				});
 			} catch {}
 		}
-	});
 
 	return () => {
 		active = false;
