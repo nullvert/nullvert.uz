@@ -66,6 +66,12 @@ const hasMeting =
 		initialOptions.provider === "mixed") &&
 	Boolean(initialOptions.meting?.id);
 
+const isMobileDevice =
+	typeof window !== "undefined" &&
+	(window.matchMedia("(max-width: 768px)").matches ||
+		window.matchMedia("(pointer: coarse)").matches);
+const effectiveDefaultVolume = isMobileDevice ? 1.0 : initialOptions.defaultVolume;
+
 let snapshot = $state<MusicSnapshot>({
 	playlist: initialOptions.playlist,
 	currentIndex: hasInitialTracks ? 0 : -1,
@@ -73,7 +79,7 @@ let snapshot = $state<MusicSnapshot>({
 	status: "idle",
 	currentTime: 0,
 	duration: initialOptions.playlist[0]?.duration ?? 0,
-	volume: initialOptions.defaultVolume,
+	volume: effectiveDefaultVolume,
 	muted: false,
 	mode: initialOptions.defaultMode,
 	error: hasInitialTracks || hasMeting ? null : "empty-playlist",
@@ -255,7 +261,11 @@ onMount(() => {
 	window.addEventListener("shirone-music-visibility-change", onVisibilityChange);
 
 		destroyMusicRuntime();
-		runtime = createMusicRuntime(options, {
+		const runtimeOptions =
+			effectiveDefaultVolume !== options.defaultVolume
+				? { ...options, defaultVolume: effectiveDefaultVolume }
+				: options;
+		runtime = createMusicRuntime(runtimeOptions, {
 			createAudio: () => {
 				const el = new Audio();
 				el.addEventListener(

@@ -31,7 +31,7 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 	// IANA time zone for precise post and moment timestamps. It is independent of lang.
 	timeZone: "Asia/Tashkent",
 	themeColor: {
-		hue: 200, // Default hue 0-360. Подобран под цвет глаза/акцента логотипа nullvert (снежный барс, циан-голубой ≈200°)
+		hue: 193, // Default hue 0-360. Подобран под цвет глаза/акцента логотипа nullvert (снежный барс, циан-голубой ≈200°)
 		fixed: false, // Hide the theme color picker for visitors
 		// Dynamic Material 3 palette style (TonalSpot/Vibrant/Content/Expressive/Rainbow/FruitSalad/Monochrome/Neutral/Fidelity)
 		style: "tonalSpot",
