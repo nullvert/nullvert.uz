@@ -12,16 +12,7 @@
 
 ## 🎵 Музыка
 
-На сайте используются отдельные музыкальные треки из Creator-Safe библиотек (Riot Creator Safe Playlist, NoCopyrightSounds) во встроенном музыкальном плеере. Все права на музыку, обложки релизов и связанные материалы принадлежат соответствующим исполнителям и авторам.
-
-#### Get Jinxed
-
-**Artist:** Riot Games Music (feat. Agnete Kjølsrud / Djerv)  
-**Release:** Get Jinxed [League of Legends]
-
-- **Playlist / License:** Riot Games Creator Safe Playlist
-- **YouTube:** https://youtu.be/0nlJuwO0GDs
-- **Official Portal:** https://www.riotgames.com/
+На сайте используются отдельные музыкальные треки из Creator-Safe библиотек (NoCopyrightSounds, HoYo-LAB Guidelines) во встроенном музыкальном плеере. Все права на музыку, обложки релизов и связанные материалы принадлежат соответствующим исполнителям и авторам.
 
 #### Vienna
 
@@ -48,24 +39,6 @@
 - **Music by:** NoCopyrightSounds (NCS)
 - **Download / Stream:** https://ncs.io/defeat
 - **YouTube:** https://youtu.be/A_AtqKMqPUE
-
-#### Royalty
-
-**Artist:** Egzod, Maestro Chives, Neoni  
-**Release:** Royalty [NCS Release]
-
-- **Music by:** NoCopyrightSounds (NCS)
-- **Download / Stream:** https://ncs.io/Royalty
-- **YouTube:** https://ncs.lnk.to/RoyaltyAT/youtube
-
-#### Cradles
-
-**Artist:** Sub Urban  
-**Release:** Cradles [NCS Release]
-
-- **Music by:** NoCopyrightSounds (NCS)
-- **Download / Stream:** https://ncs.io/Cradles
-- **YouTube:** https://youtu.be/Hn4sfC2PbhI
 
 #### Monodrama
 

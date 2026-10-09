@@ -9,7 +9,7 @@ export default defineConfig({
     shirones({
       // Override individual components by mirroring the theme's structure in
       // `src/components/`, or point at them explicitly:
-      excludeRoutes: ["/archive"],
+      excludeRoutes: ["/archive", "/robots.txt"],
       components: {
         "organisms/Profile": "./src/components/organisms/Profile.astro",
         "organisms/DisplaySettings": "./src/components/organisms/DisplaySettings.svelte",
