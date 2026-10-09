@@ -14,6 +14,7 @@ export default defineConfig({
         "organisms/Profile": "./src/components/organisms/Profile.astro",
         "organisms/DisplaySettings": "./src/components/organisms/DisplaySettings.svelte",
         "organisms/ArchivePanel": "./src/components/organisms/ArchivePanel.svelte",
+        "organisms/SiteNavigationDrawer": "./src/components/organisms/SiteNavigationDrawer.svelte",
         "layouts/MainGridLayout": "./src/layouts/MainGridLayout.astro",
       },
     }),

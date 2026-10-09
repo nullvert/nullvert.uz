@@ -8,16 +8,12 @@ import { Icon } from "astro-icon/components";
 import type I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { url } from "@utils/url-utils";
-import { footerConfig, profileConfig, siteConfig } from "@/config";
-
-const currentYear = new Date().getFullYear();
-const authorName = profileConfig.name || siteConfig.title || "Nullvert";
+import { footerConfig } from "@/config";
 
 function t(key: string, fallback: string): string {
 	return i18n(key as I18nKey) ?? fallback;
 }
 
-const allRightsReservedText = t("footer.allRightsReserved", "All Rights Reserved.");
 const poweredByLabel = t("footer.poweredBy", "Powered by");
 const versionLabel = t("footer.version", "Version");
 const detailsSummaryLabel = t("footer.moreDetails", "Подробнее");
@@ -70,7 +66,7 @@ const hasSecondaryInfo = links.length > 0 || poweredBy.length > 0 || Boolean(ver
 			<details class="m3-blog-footer__details group">
 				<summary class="m3-blog-footer__summary" aria-label={detailsSummaryLabel} title={detailsSummaryLabel}>
 					<span class="m3-blog-footer__copyright m3-blog-footer__text">
-						&copy; {currentYear} {authorName}. {allRightsReservedText}
+						&copy; All Rights Reserved
 					</span>
 					<Icon name="material-symbols:expand-more-rounded" class="m3-blog-footer__summary-icon" />
 				</summary>
@@ -140,7 +136,7 @@ const hasSecondaryInfo = links.length > 0 || poweredBy.length > 0 || Boolean(ver
 			</details>
 		) : (
 			<p class="m3-blog-footer__copyright m3-blog-footer__text">
-				&copy; {currentYear} {authorName}. {allRightsReservedText}
+				&copy; All Rights Reserved
 			</p>
 		)}
 	</div>
@@ -170,16 +166,7 @@ const hasSecondaryInfo = links.length > 0 || poweredBy.length > 0 || Boolean(ver
 }
 
 .m3-blog-footer__divider {
-	border: none;
-	height: 1px;
-	background: linear-gradient(
-		90deg,
-		transparent,
-		color-mix(in srgb, var(--outline-variant) 60%, transparent),
-		transparent
-	);
-	margin: 3rem auto 1.75rem;
-	max-width: 90%;
+	display: none;
 }
 
 .m3-blog-footer__inner {
@@ -208,6 +195,13 @@ const hasSecondaryInfo = links.length > 0 || poweredBy.length > 0 || Boolean(ver
 
 .m3-blog-footer__copyright {
 	user-select: text;
+	font-size: 0.775rem;
+	opacity: 0.45;
+	transition: opacity var(--m3e-duration-short) var(--m3e-easing-standard);
+}
+
+.m3-blog-footer__summary:hover .m3-blog-footer__copyright {
+	opacity: 0.85;
 }
 
 .m3-blog-footer__sep {
@@ -272,7 +266,7 @@ const hasSecondaryInfo = links.length > 0 || poweredBy.length > 0 || Boolean(ver
 
 .m3-blog-footer__summary:hover .m3-blog-footer__summary-icon {
 	color: var(--primary);
-	opacity: 1;
+	opacity: 0.85;
 }
 
 .m3-blog-footer__summary:focus-visible {
@@ -282,9 +276,9 @@ const hasSecondaryInfo = links.length > 0 || poweredBy.length > 0 || Boolean(ver
 }
 
 .m3-blog-footer__summary-icon {
-	font-size: 1.15rem;
+	font-size: 1rem;
 	color: var(--on-surface-variant);
-	opacity: 0.7;
+	opacity: 0.35;
 	vertical-align: middle;
 	transition:
 		transform var(--m3e-duration-short) var(--m3e-easing-standard),
@@ -296,6 +290,10 @@ const hasSecondaryInfo = links.length > 0 || poweredBy.length > 0 || Boolean(ver
 	transform: rotate(180deg);
 	color: var(--primary);
 	opacity: 1;
+}
+
+.m3-blog-footer__details[open] .m3-blog-footer__copyright {
+	opacity: 0.75;
 }
 
 .m3-blog-footer__details-content {

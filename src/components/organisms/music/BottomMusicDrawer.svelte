@@ -64,6 +64,7 @@ let {
 </script>
 
 {#if isOpen}
+	<div class="playlist-scrim" aria-hidden="true" onclick={onClose}></div>
 	<div class="playlist-drawer" role="region" aria-label={labels.showPlaylist}>
 		<!-- Шапка очереди треков -->
 		<div class="playlist-drawer__header">
@@ -263,10 +264,26 @@ let {
 {/if}
 
 <style>
+/* Фоновый диммер при открытом плейлисте */
+.playlist-scrim {
+	position: fixed;
+	inset: 0;
+	background: color-mix(in srgb, var(--scrim, #000) 65%, transparent);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	z-index: 48;
+	animation: scrimFadeIn 200ms cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
+@keyframes scrimFadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
 /* Карточка очереди воспроизведения */
 .playlist-drawer {
-	position: absolute;
-	bottom: calc(100% + 12px);
+	position: fixed;
+	bottom: calc(56px + 12px);
 	right: 1.5rem;
 	width: 390px;
 	max-width: calc(100vw - 1.5rem);
@@ -703,6 +720,7 @@ let {
 
 @media (max-width: 768px) {
 	.playlist-drawer {
+		bottom: calc(58px + 10px);
 		right: 0.75rem;
 		left: 0.75rem;
 		width: auto;

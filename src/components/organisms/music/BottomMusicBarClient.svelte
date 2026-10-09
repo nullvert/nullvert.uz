@@ -296,7 +296,7 @@ onMount(() => {
 						navigator.mediaSession.metadata = new MediaMetadata({
 							title: track.title,
 							artist: track.artist || "Shirone",
-							album: track.album || "Playlist",
+							album: (track as { album?: string }).album || "Playlist",
 							artwork: track.cover
 								? [{ src: track.cover, sizes: "512x512", type: "image/webp" }]
 								: [],
@@ -751,26 +751,26 @@ function togglePlaylist(): void {
 					</button>
 				</div>
 			</div>
-
-			<!-- 5. Всплывающая карточка очереди воспроизведения -->
-			<BottomMusicDrawer
-				isOpen={playlistOpen}
-				items={filteredPlaylist}
-				currentIndex={snapshot.currentIndex}
-				playing={playing}
-				filterTab={filterTab}
-				favoritesCount={validFavoritesCount}
-				newCount={newCount}
-				totalNewCount={totalNewConfiguredCount}
-				totalCount={snapshot.playlist.length}
-				labels={labels}
-				onSelectTrack={handleTrackClick}
-				onToggleFavorite={toggleFavorite}
-				onShuffle={shuffleAndPlay}
-				onClose={() => (playlistOpen = false)}
-				onSetFilterTab={(tab) => (filterTab = tab)}
-				formatTime={formatTime}
-			/>
 		</aside>
+
+		<!-- 5. Всплывающая карточка очереди воспроизведения (вынесена за пределы aside, чтобы scrim и drawer не резались stacking context) -->
+		<BottomMusicDrawer
+			isOpen={playlistOpen}
+			items={filteredPlaylist}
+			currentIndex={snapshot.currentIndex}
+			playing={playing}
+			filterTab={filterTab}
+			favoritesCount={validFavoritesCount}
+			newCount={newCount}
+			totalNewCount={totalNewConfiguredCount}
+			totalCount={snapshot.playlist.length}
+			labels={labels}
+			onSelectTrack={handleTrackClick}
+			onToggleFavorite={toggleFavorite}
+			onShuffle={shuffleAndPlay}
+			onClose={() => (playlistOpen = false)}
+			onSetFilterTab={(tab) => (filterTab = tab)}
+			formatTime={formatTime}
+		/>
 	{/if}
 {/if}
