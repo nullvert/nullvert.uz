@@ -142,28 +142,29 @@ const links = config.links.map((item) => ({
 		.m3-profile:hover::before {
 		opacity: 1;
 	}
-		/* Стеклянные кнопки: утонченный glassmorphism, тонкая внутренняя рамка и блик */
+	/* Сдержанные кнопки со спокойной стеклянной глубиной без прыжков */
 	.m3-profile__link {
 		position: relative;
-		background: color-mix(in srgb, var(--surface-container-high) 65%, transparent);
+		border-radius: var(--shape-corner-m, 12px) !important;
+		background: color-mix(in srgb, var(--surface-container-high) 60%, transparent);
 		backdrop-filter: blur(8px);
 		-webkit-backdrop-filter: blur(8px);
-		box-shadow: 
-			inset 0 0 0 1px color-mix(in srgb, var(--primary) 25%, transparent),
-			inset 0 1px 0 0 color-mix(in srgb, white 20%, transparent),
-			0 2px 4px color-mix(in srgb, black 6%, transparent);
+		border: 1px solid color-mix(in srgb, var(--outline-variant) 38%, rgba(255, 255, 255, 0.08));
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 		transition:
-			background-color var(--m3e-duration-medium) var(--m3e-easing-standard),
-			box-shadow var(--m3e-duration-medium) var(--m3e-easing-standard),
-			color var(--m3e-duration-short) var(--m3e-easing-standard);
+			background-color 150ms ease,
+			border-color 150ms ease,
+			box-shadow 150ms ease,
+			color 150ms ease;
 	}
+
 	.m3-profile__link:hover {
-		background: color-mix(in srgb, var(--primary) 18%, var(--surface-container-high));
-		box-shadow: 
-			inset 0 0 0 1px color-mix(in srgb, var(--primary) 55%, transparent),
-			inset 0 1px 0 0 color-mix(in srgb, white 40%, transparent),
-			0 4px 12px color-mix(in srgb, var(--primary) 20%, transparent);
+		background: color-mix(in srgb, var(--primary) 14%, var(--surface-container-high));
+		border-color: color-mix(in srgb, var(--primary) 50%, transparent);
+		box-shadow: 0 2px 8px -1px color-mix(in srgb, var(--primary) 20%, transparent);
+		color: var(--primary);
 	}
+
 	@media (prefers-reduced-motion: reduce) {
 		.m3-profile::before,
 		.m3-profile__link {
