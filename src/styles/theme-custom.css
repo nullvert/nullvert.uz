@@ -56,6 +56,10 @@
 	margin-inline: auto;
 }
 
+#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"])) .footer {
+	margin-top: 2.5rem !important;
+}
+
 /* ── 2. Система эффекта стекла (M3E Universal Glassmorphism) ── */
 
 /* Системные парящие интерфейсные элементы — стекло по умолчанию */
@@ -543,111 +547,124 @@ widget-layout .collapse-wrapper.collapsed {
  * the override is limited to these selectors. Remove an entry once the theme
  * exposes the matching token or prop.
  */
-.m3-blog-taglist {
-	padding-top: 4px !important;
-	margin-top: -4px !important;
-}
-
-.m3-blog-taglist .m3-chip,
-.m3-blog-taglist .m3-chip--tonal {
-	position: relative !important;
-	height: 1.875rem !important;
-	padding: 0 0.875rem !important;
-	border-radius: var(--shape-corner-small, 8px) !important;
-	background: color-mix(in srgb, var(--surface-container-high) 75%, transparent) !important;
-	color: var(--on-surface-variant) !important;
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 45%, transparent) !important;
-	font: var(--m3e-type-label-medium) !important;
-	font-weight: 500 !important;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08) !important;
-	transition: background-color var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease),
-	            border-color var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease),
-	            color var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease),
-	            transform var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease),
-	            box-shadow var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease) !important;
-}
-
-.m3-blog-taglist .m3-chip:hover,
-.m3-blog-taglist .m3-chip--tonal:hover {
-	z-index: 5 !important;
-	background: color-mix(in srgb, var(--primary) 18%, var(--surface-container-highest)) !important;
-	color: var(--primary) !important;
-	border-color: color-mix(in srgb, var(--primary) 55%, transparent) !important;
-	transform: translateY(-1px) !important;
-	box-shadow: 0 2px 6px color-mix(in srgb, var(--primary) 22%, transparent) !important;
-}
-
-.m3-blog-tagbadge {
-	height: 1.625rem !important;
-	padding: 0 0.625rem !important;
-	border-radius: var(--shape-corner-extra-small, 6px) !important;
-	background: color-mix(in srgb, var(--surface-container-highest) 70%, transparent) !important;
-	color: var(--on-surface-variant) !important;
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 40%, transparent) !important;
-	font: var(--m3e-type-label-small) !important;
-	font-weight: 500 !important;
-	box-shadow: none !important;
-	transition: background-color var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease),
-	            border-color var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease),
-	            color var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease),
-	            transform var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease) !important;
-}
-
-.m3-blog-tagbadge:hover {
-	background: color-mix(in srgb, var(--primary) 18%, var(--surface-container-highest)) !important;
-	color: var(--primary) !important;
-	border-color: color-mix(in srgb, var(--primary) 55%, transparent) !important;
-	transform: translateY(-1px) !important;
-}
-
-.m3-blog-tagbadge__text {
-	letter-spacing: 0.02em !important;
-}
-
+/* Категории: интерактивные плашки с иконкой папки и бейджем */
 .m3-blog-categorylist {
-	gap: 0.25rem !important;
+	gap: 0.375rem !important;
 }
 
-.m3-blog-categorylist .m3-button,
-.m3-blog-categorylist .m3-button--text {
-	border-radius: var(--shape-corner-medium, 10px) !important;
-	padding: 0.4rem 0.625rem !important;
-	min-height: 2.25rem !important;
-	background: transparent !important;
-	color: var(--on-surface) !important;
-	font: var(--m3e-type-body-medium) !important;
+.m3-blog-categorylist .m3-button {
+	position: relative !important;
+	background: color-mix(in srgb, var(--surface-container-high) 45%, transparent) !important;
+	backdrop-filter: blur(8px) !important;
+	-webkit-backdrop-filter: blur(8px) !important;
+	border: 1px solid color-mix(in srgb, var(--outline-variant) 25%, transparent) !important;
+	border-radius: var(--shape-corner-m, 12px) !important;
+	padding: 0.5rem 0.75rem !important;
+	min-height: 2.375rem !important;
+	transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease, color 150ms ease !important;
+}
+
+.m3-blog-categorylist .m3-button:hover {
+	background: color-mix(in srgb, var(--primary) 14%, var(--surface-container-high)) !important;
+	border-color: color-mix(in srgb, var(--primary) 45%, transparent) !important;
+	transform: translateX(3px) !important;
+}
+
+.m3-blog-categorylist__name {
+	font-size: 0.84rem !important;
 	font-weight: 500 !important;
-	transition: background-color var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease),
-	            color var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease),
-	            transform var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease) !important;
+	color: var(--on-surface) !important;
+	transition: color 150ms ease !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 0.45rem !important;
 }
 
-.m3-blog-categorylist .m3-button:hover,
-.m3-blog-categorylist .m3-button--text:hover {
-	background: color-mix(in srgb, var(--primary) 12%, var(--surface-container-high)) !important;
+.m3-blog-categorylist__name::before {
+	content: "" !important;
+	display: inline-block !important;
+	width: 0.95rem !important;
+	height: 0.95rem !important;
+	background-color: var(--primary) !important;
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h6l2 2h8q.825 0 1.413.588T22 8v10q0 .825-.587 1.413T20 20zm0-2h16V8h-8.825l-2-2H4zm0 0V6z'/%3E%3C/svg%3E") !important;
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h6l2 2h8q.825 0 1.413.588T22 8v10q0 .825-.587 1.413T20 20zm0-2h16V8h-8.825l-2-2H4zm0 0V6z'/%3E%3C/svg%3E") !important;
+	mask-size: contain !important;
+	-webkit-mask-size: contain !important;
+	mask-repeat: no-repeat !important;
+	-webkit-mask-repeat: no-repeat !important;
+	opacity: 0.85 !important;
+	transition: transform 150ms ease, opacity 150ms ease !important;
+	flex-shrink: 0 !important;
+}
+
+.m3-blog-categorylist .m3-button:hover .m3-blog-categorylist__name::before {
+	opacity: 1 !important;
+	transform: scale(1.1) !important;
+}
+
+.m3-blog-categorylist .m3-button:hover .m3-blog-categorylist__name {
 	color: var(--primary) !important;
-	transform: translateX(2px) !important;
 }
 
 .m3-blog-categorylist__badge {
-	height: 1.5rem !important;
-	min-width: 1.75rem !important;
-	padding: 0 0.5rem !important;
-	border-radius: var(--shape-corner-full, 9999px) !important;
-	background: color-mix(in srgb, var(--surface-container-highest) 80%, transparent) !important;
-	color: var(--on-surface-variant) !important;
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 40%, transparent) !important;
-	font: var(--m3e-type-label-small) !important;
+	min-width: 1.625rem !important;
+	height: 1.4rem !important;
+	padding: 0 0.45rem !important;
+	border-radius: 9999px !important;
+	background: color-mix(in srgb, var(--primary) 16%, transparent) !important;
+	color: var(--primary) !important;
+	font-size: 0.72rem !important;
 	font-weight: 700 !important;
-	transition: background-color var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease),
-	            color var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease),
-	            border-color var(--m3e-duration-short4, 150ms) var(--m3e-easing-standard, ease) !important;
+	border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent) !important;
+	transition: background-color 150ms ease, transform 150ms ease, border-color 150ms ease !important;
 }
 
 .m3-blog-categorylist .m3-button:hover .m3-blog-categorylist__badge {
 	background: var(--primary) !important;
 	color: var(--on-primary) !important;
 	border-color: var(--primary) !important;
+	transform: scale(1.05) !important;
+}
+
+/* Теги: современные чипы в стиле Pill с решёткой '#' */
+.m3-blog-taglist {
+	gap: 0.45rem !important;
+}
+
+.m3-blog-taglist .m3-chip {
+	height: 1.875rem !important;
+	padding: 0 0.8rem !important;
+	background: color-mix(in srgb, var(--surface-container-high) 50%, transparent) !important;
+	backdrop-filter: blur(8px) !important;
+	-webkit-backdrop-filter: blur(8px) !important;
+	border: 1px solid color-mix(in srgb, var(--outline-variant) 30%, transparent) !important;
+	border-radius: 9999px !important;
+	color: var(--on-surface-variant) !important;
+	font-size: 0.78rem !important;
+	font-weight: 500 !important;
+	transition: all 160ms cubic-bezier(0.2, 0, 0, 1) !important;
+}
+
+.m3-blog-taglist .m3-chip .m3-chip__content::before {
+	content: "#" !important;
+	color: var(--primary) !important;
+	font-weight: 700 !important;
+	font-size: 0.85rem !important;
+	opacity: 0.8 !important;
+	margin-right: -0.25rem !important;
+	transition: opacity 150ms ease !important;
+}
+
+.m3-blog-taglist .m3-chip:hover {
+	background: color-mix(in srgb, var(--primary) 18%, var(--surface-container-high)) !important;
+	border-color: color-mix(in srgb, var(--primary) 55%, transparent) !important;
+	color: var(--primary) !important;
+	transform: translateY(-1.5px) !important;
+	box-shadow: 0 4px 10px -2px color-mix(in srgb, var(--primary) 30%, transparent) !important;
+}
+
+.m3-blog-taglist .m3-chip:hover .m3-chip__content::before {
+	opacity: 1 !important;
 }
 
 .m3-blog-postcard {
@@ -1678,128 +1695,73 @@ aside#sidebar-secondary widget-layout:hover .m3-card {
 	box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.24), 0 0 16px -4px color-mix(in srgb, var(--primary) 20%, transparent), inset 0 1px 0 0 rgba(255, 255, 255, 0.18) !important;
 }
 
-/* 2. Категории: интерактивные плашки с мягким ховером и аккуратными бейджами */
-.m3-blog-categorylist {
-	gap: 0.375rem !important;
-}
+/* 2. Категории и Теги в сайдбаре: стили консолидированы в секции 5 */
 
-.m3-blog-categorylist .m3-button {
+/* ============================================================
+   БЛОК «ПОДЕЛИТЬСЯ ЗАПИСЬЮ» (ArticleShare Clean & Minimal)
+   ============================================================ */
+
+.article-share {
 	position: relative !important;
-	background: color-mix(in srgb, var(--surface-container-high) 45%, transparent) !important;
-	backdrop-filter: blur(8px) !important;
-	-webkit-backdrop-filter: blur(8px) !important;
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 25%, transparent) !important;
 	border-radius: var(--shape-corner-m, 12px) !important;
-	padding: 0.5rem 0.75rem !important;
-	min-height: 2.375rem !important;
-	transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease, color 150ms ease !important;
+	background: color-mix(in srgb, var(--surface-container-low) 65%, transparent) !important;
+	backdrop-filter: blur(12px) saturate(160%) !important;
+	-webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+	border: 1px solid color-mix(in srgb, var(--outline-variant) 32%, rgba(255, 255, 255, 0.08)) !important;
+	box-shadow: 0 2px 8px -1px rgba(0, 0, 0, 0.12) !important;
+	padding: 1rem 1.25rem !important;
+	transition: border-color var(--m3e-duration-medium) ease, box-shadow var(--m3e-duration-medium) ease !important;
 }
 
-.m3-blog-categorylist .m3-button:hover {
-	background: color-mix(in srgb, var(--primary) 14%, var(--surface-container-high)) !important;
-	border-color: color-mix(in srgb, var(--primary) 45%, transparent) !important;
-	transform: translateX(3px) !important;
+.article-share:hover {
+	border-color: color-mix(in srgb, var(--primary) 35%, var(--outline-variant)) !important;
+	box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.18), 0 0 12px -3px color-mix(in srgb, var(--primary) 18%, transparent) !important;
 }
 
-.m3-blog-categorylist__name {
-	font-size: 0.84rem !important;
-	font-weight: 500 !important;
+/* 1. Убираем лишние дублирующиеся иконки (квадрат слева и гигантский фоновый водяной знак) */
+.article-share__icon-box,
+.article-share__watermark {
+	display: none !important;
+}
+
+/* 2. Чистая типографика: заголовок и пояснение */
+#article-share-title {
+	font-size: 0.95rem !important;
+	font-weight: 600 !important;
 	color: var(--on-surface) !important;
-	transition: color 150ms ease !important;
-	display: inline-flex !important;
-	align-items: center !important;
-	gap: 0.45rem !important;
+	letter-spacing: -0.01em !important;
+	margin: 0 !important;
 }
 
-/* Иконка папки перед категорией */
-.m3-blog-categorylist__name::before {
-	content: "" !important;
-	display: inline-block !important;
-	width: 0.95rem !important;
-	height: 0.95rem !important;
-	background-color: var(--primary) !important;
-	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h6l2 2h8q.825 0 1.413.588T22 8v10q0 .825-.587 1.413T20 20zm0-2h16V8h-8.825l-2-2H4zm0 0V6z'/%3E%3C/svg%3E") !important;
-	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h6l2 2h8q.825 0 1.413.588T22 8v10q0 .825-.587 1.413T20 20zm0-2h16V8h-8.825l-2-2H4zm0 0V6z'/%3E%3C/svg%3E") !important;
-	mask-size: contain !important;
-	-webkit-mask-size: contain !important;
-	mask-repeat: no-repeat !important;
-	-webkit-mask-repeat: no-repeat !important;
-	opacity: 0.85 !important;
-	transition: transform 150ms ease, opacity 150ms ease !important;
-	flex-shrink: 0 !important;
+.article-share p {
+	font-size: 0.8125rem !important;
+	line-height: 1.4 !important;
+	color: var(--on-surface-variant) !important;
+	opacity: 0.8 !important;
+	margin-top: 0.2rem !important;
 }
 
-.m3-blog-categorylist .m3-button:hover .m3-blog-categorylist__name::before {
-	opacity: 1 !important;
-	transform: scale(1.1) !important;
-}
-
-.m3-blog-categorylist .m3-button:hover .m3-blog-categorylist__name {
+/* 3. Единственная иконка остаётся в самой кнопке действия */
+.article-share .m3-button--filled {
+	border-radius: var(--shape-corner-m, 10px) !important;
+	background: color-mix(in srgb, var(--primary) 16%, var(--surface-container-high)) !important;
+	border: 1px solid color-mix(in srgb, var(--primary) 42%, transparent) !important;
 	color: var(--primary) !important;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+	padding: 0.45rem 1rem !important;
+	font-size: 0.82rem !important;
+	font-weight: 600 !important;
+	white-space: nowrap !important;
+	transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease !important;
 }
 
-/* Бейдж счётчика постов */
-.m3-blog-categorylist__badge {
-	min-width: 1.625rem !important;
-	height: 1.4rem !important;
-	padding: 0 0.45rem !important;
-	border-radius: 9999px !important;
-	background: color-mix(in srgb, var(--primary) 16%, transparent) !important;
-	color: var(--primary) !important;
-	font-size: 0.72rem !important;
-	font-weight: 700 !important;
-	border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent) !important;
-	transition: background-color 150ms ease, transform 150ms ease, border-color 150ms ease !important;
-}
-
-.m3-blog-categorylist .m3-button:hover .m3-blog-categorylist__badge {
+.article-share .m3-button--filled:hover {
 	background: var(--primary) !important;
 	color: var(--on-primary) !important;
 	border-color: var(--primary) !important;
-	transform: scale(1.05) !important;
+	box-shadow: 0 3px 10px color-mix(in srgb, var(--primary) 30%, transparent) !important;
 }
 
-/* 3. Теги: современные чипы в стиле Pill с решёткой '#' и акцентным hover */
-.m3-blog-taglist {
-	gap: 0.45rem !important;
-}
-
-.m3-blog-taglist .m3-chip {
-	height: 1.875rem !important;
-	padding: 0 0.8rem !important;
-	background: color-mix(in srgb, var(--surface-container-high) 50%, transparent) !important;
-	backdrop-filter: blur(8px) !important;
-	-webkit-backdrop-filter: blur(8px) !important;
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 30%, transparent) !important;
-	border-radius: 9999px !important;
-	color: var(--on-surface-variant) !important;
-	font-size: 0.78rem !important;
-	font-weight: 500 !important;
-	transition: all 160ms cubic-bezier(0.2, 0, 0, 1) !important;
-}
-
-.m3-blog-taglist .m3-chip .m3-chip__content::before {
-	content: "%23" !important;
-	content: "#" !important;
-	color: var(--primary) !important;
-	font-weight: 700 !important;
-	font-size: 0.85rem !important;
-	opacity: 0.8 !important;
-	margin-right: -0.25rem !important;
-	transition: opacity 150ms ease !important;
-}
-
-.m3-blog-taglist .m3-chip:hover {
-	background: color-mix(in srgb, var(--primary) 18%, var(--surface-container-high)) !important;
-	border-color: color-mix(in srgb, var(--primary) 55%, transparent) !important;
-	color: var(--primary) !important;
-	transform: translateY(-1.5px) !important;
-	box-shadow: 0 4px 10px -2px color-mix(in srgb, var(--primary) 30%, transparent) !important;
-}
-
-.m3-blog-taglist .m3-chip:hover .m3-chip__content::before {
-	opacity: 1 !important;
-}
 
 
 
