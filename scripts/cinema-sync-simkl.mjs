@@ -2,10 +2,13 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { downloadCoverIfMissing, cleanupOrphanedCovers } from "./media-cover-helper.mjs";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = resolve(__dirname, "..");
 const SNAPSHOT_DIR = resolve(ROOT_DIR, "shirones/config/data/cinema-snapshots");
 const SNAPSHOT_FILE = resolve(SNAPSHOT_DIR, "simkl.json");
+const COVERS_DIR = resolve(ROOT_DIR, "public/assets/media/cinema");
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -237,6 +240,27 @@ async function syncCinema() {
 		if (b.rating && a.rating && b.rating !== a.rating) return b.rating - a.rating;
 		return Number(b.year || 0) - Number(a.year || 0);
 	});
+
+	// Локальное скачивание постеров и Garbage Collection
+	console.log(`[Simkl] Downloading posters locally to ${COVERS_DIR}...`);
+	const activeCoverFilenames = new Set();
+
+	for (let i = 0; i < items.length; i++) {
+		const item = items[i];
+		if (!item.cover) continue;
+
+		const filename = `${item.id}.webp`;
+		activeCoverFilenames.add(filename);
+
+		const localFilePath = resolve(COVERS_DIR, filename);
+		const publicPath = `/assets/media/cinema/${filename}`;
+
+		// Скачиваем или берём готовый из кэша
+		item.cover = await downloadCoverIfMissing(item.cover, localFilePath, publicPath);
+	}
+
+	// Очищаем старые постеры, которых больше нет в коллекции
+	cleanupOrphanedCovers(COVERS_DIR, activeCoverFilenames, "Simkl");
 
 	if (!existsSync(SNAPSHOT_DIR)) {
 		mkdirSync(SNAPSHOT_DIR, { recursive: true });

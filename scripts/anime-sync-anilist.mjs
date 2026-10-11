@@ -2,10 +2,13 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { downloadCoverIfMissing, cleanupOrphanedCovers } from "./media-cover-helper.mjs";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = resolve(__dirname, "..");
 const SNAPSHOT_DIR = resolve(ROOT_DIR, "shirones/config/data/anime-snapshots");
 const SNAPSHOT_FILE = resolve(SNAPSHOT_DIR, "anilist.json");
+const COVERS_DIR = resolve(ROOT_DIR, "public/assets/media/anime");
 
 function loadEnv() {
 	const envPath = resolve(ROOT_DIR, ".env");
@@ -208,6 +211,27 @@ async function sync() {
 		}
 
 		console.log(`[AniList] Successfully parsed ${items.length} anime entries.`);
+
+		// Локальное скачивание обложек и Garbage Collection
+		console.log(`[AniList] Downloading covers locally to ${COVERS_DIR}...`);
+		const activeCoverFilenames = new Set();
+
+		for (let i = 0; i < items.length; i++) {
+			const item = items[i];
+			if (!item.cover) continue;
+
+			const id = item.identity?.subjectId || String(i);
+			const ext = item.cover.endsWith(".png") ? "png" : item.cover.endsWith(".webp") ? "webp" : "jpg";
+			const filename = `${id}.${ext}`;
+			activeCoverFilenames.add(filename);
+
+			const localFilePath = resolve(COVERS_DIR, filename);
+			const publicPath = `/assets/media/anime/${filename}`;
+
+			item.cover = await downloadCoverIfMissing(item.cover, localFilePath, publicPath);
+		}
+
+		cleanupOrphanedCovers(COVERS_DIR, activeCoverFilenames, "AniList");
 
 		if (!existsSync(SNAPSHOT_DIR)) {
 			mkdirSync(SNAPSHOT_DIR, { recursive: true });

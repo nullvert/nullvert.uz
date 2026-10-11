@@ -389,6 +389,7 @@ const ru: Partial<Record<I18nKey | string, string>> = {
 	"games.all": "Все игры",
 	"games.platformLabel": "Платформа",
 	"games.unitHours": "ч.",
+	"games.statusCompleted": "Пройдено",
 
 	"mediaCatalog.statusWatching": "Смотрю",
 	"mediaCatalog.statusPlaying": "Играю",

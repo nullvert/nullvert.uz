@@ -66,7 +66,7 @@ export const gamesDomain: MediaDomain<GameItem> = {
 			color: "var(--primary)",
 		},
 		completed: {
-			label: mediaLabel(MEDIA_LABEL.statusCompleted, "Пройдено"),
+			label: mediaLabel(MEDIA_LABEL.gamesStatusCompleted, "Пройдено"),
 			icon: "material-symbols:check-rounded",
 			color: "var(--tertiary)",
 		},

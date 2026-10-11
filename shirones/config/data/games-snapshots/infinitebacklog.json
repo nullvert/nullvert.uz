@@ -3,7 +3,7 @@
     "id": "119277",
     "title": "Genshin Impact",
     "slug": "genshin-impact",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coa9dy.jpg",
+    "cover": "/assets/media/games/119277.jpg",
     "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sco94a.jpg",
     "link": "https://infinitebacklog.net/games/genshin-impact",
     "status": "playing",
@@ -22,8 +22,8 @@
     "id": "178282",
     "title": "Honkai: Star Rail",
     "slug": "honkai-star-rail",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/cod0ux.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/game/178282.webp.jpg",
+    "cover": "/assets/media/games/178282.jpg",
+    "banner": "/assets/media/games/178282.jpg",
     "link": "https://infinitebacklog.net/games/honkai-star-rail",
     "status": "playing",
     "rating": 8,
@@ -42,8 +42,8 @@
     "id": "202956",
     "title": "Wuthering Waves",
     "slug": "wuthering-waves",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/cod0qr.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/game/202956.webp.jpg",
+    "cover": "/assets/media/games/202956.jpg",
+    "banner": "/assets/media/games/202956.jpg",
     "link": "https://infinitebacklog.net/games/wuthering-waves",
     "status": "playing",
     "rating": 8,
@@ -59,88 +59,10 @@
     "description": "Wuthering Waves is a story-rich open-world action RPG. You wake from your slumber as Rover, joined by a vibrant cast of Resonators on a journey to reclaim your lost memories and surmount the Lament.<br /><br />The game features fast-paced combat with a variety of mechanics such as Extreme Evasion and Dodge Counter. You can also absorb the remaining of the monsters you've defeated and use their power in battles."
   },
   {
-    "id": "199116",
-    "title": "Brotato",
-    "slug": "brotato",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coaauv.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ar1m88.jpg",
-    "link": "https://infinitebacklog.net/games/brotato",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2023",
-    "genres": [
-      "Fighting",
-      "Shooter",
-      "RPG",
-      "Indie",
-      "Arcade"
-    ],
-    "developer": "",
-    "description": "Brotato is a top-down arena shooter roguelite where you play a potato wielding up to 6 weapons at a time to fight off hordes of aliens."
-  },
-  {
-    "id": "103329",
-    "title": "Control",
-    "slug": "control",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2evj.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sq0fojs2sff78e1bhl0v.jpg",
-    "link": "https://infinitebacklog.net/games/control",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2019",
-    "genres": [
-      "Shooter",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Control is a third-person action-adventure game set in the Federal Bureau of Control, a secretive U.S. government agency that studies paranormal phenomena. Players control Jesse Faden, who arrives at the Bureau's headquarters, the Oldest House, to find it invaded by a hostile force called the Hiss. Gameplay combines supernatural abilities with a shape-shifting firearm, and the environment is reactive and destructible."
-  },
-  {
-    "id": "7329",
-    "title": "Dead Island 2",
-    "slug": "dead-island-2",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co5469.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/scii5s.jpg",
-    "link": "https://infinitebacklog.net/games/dead-island-2",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2023",
-    "genres": [
-      "Shooter",
-      "RPG",
-      "Brawler",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Dead Island 2 is a survival horror first-person shooter set in a zombie apocalypse in Los Angeles. Players explore an open world, gathering resources, interacting with survivors, and battling swarms of zombies in fast-paced combat. Set fifteen years after the events of Dead Island: Riptide, the game features a new cast of characters and narrative, while maintaining the series’ signature blend of brutal melee action and immersive environments."
-  },
-  {
-    "id": "19564",
-    "title": "Death Stranding",
-    "slug": "death-stranding",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/cocsvh.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ar3s0u.jpg",
-    "link": "https://infinitebacklog.net/games/death-stranding",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2019",
-    "genres": [
-      "Shooter",
-      "RPG",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Death Stranding is an action game set in a post-apocalyptic United States.<br /><br />Players control Sam Porter Bridges, a courier tasked with reconnecting isolated cities via a communication network while delivering essential cargo. The gameplay blends traversal, resource management, and narrative elements, with a focus on social connectivity through asynchronous multiplayer. It is known for its unique mechanics, atmospheric world, and philosophical themes."
-  },
-  {
     "id": "14362",
     "title": "Detroit: Become Human",
     "slug": "detroit-become-human--1",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/cocot9.jpg",
+    "cover": "/assets/media/games/14362.jpg",
     "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/wzgo0jtaajeq14vl4l0q.jpg",
     "link": "https://infinitebacklog.net/games/detroit-become-human--1",
     "status": "planned",
@@ -154,164 +76,10 @@
     "description": "Detroit: Become Human is an interactive narrative adventure game developed by Quantic Dream and released in 2018. Set in a near-future Detroit where androids serve humans, the story follows three android protagonists—Kara, Connor, and Markus—who shape the city’s fate through their choices. Gameplay combines exploration, dialogue interactions, and quick-time events, with branching storylines and multiple endings. The narrative explores themes of artificial intelligence, freedom, and morality."
   },
   {
-    "id": "152122",
-    "title": "Doki Doki Literature Club Plus!",
-    "slug": "doki-doki-literature-club-plus",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coawpa.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/arku8.jpg",
-    "link": "https://infinitebacklog.net/games/doki-doki-literature-club-plus",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2021",
-    "genres": [
-      "RPG",
-      "Simulator",
-      "Adventure",
-      "Indie",
-      "Visual Novel"
-    ],
-    "developer": "",
-    "description": "Welcome to the club! Write poems for your crush and experience the terror of school romance in this critically-acclaimed psychological horror story."
-  },
-  {
-    "id": "203367",
-    "title": "Eternights",
-    "slug": "eternights",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co4tg0.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ar1pb8.jpg",
-    "link": "https://infinitebacklog.net/games/eternights",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2023",
-    "genres": [
-      "RPG",
-      "Brawler",
-      "Adventure",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "Eternights is a dating action game where you try to make the most out of life during the apocalypse. Monday: Go on a date. Tuesday: Clear dungeon. Friday: Freak out! The clock is ticking!!"
-  },
-  {
-    "id": "15",
-    "title": "Fallout 3",
-    "slug": "fallout-3",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1ycw.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/j6vczdq7svdvttebwykb.jpg",
-    "link": "https://infinitebacklog.net/games/fallout-3",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2008",
-    "genres": [
-      "Shooter",
-      "RPG"
-    ],
-    "developer": "",
-    "description": "Fallout 3 from the creators of the award-winning Oblivion, featuring one of the most realized game worlds ever created. Create any kind of character you want and explore the open wastes of post-apocalyptic Washington D.C. Every minute is a fight for survival as you encounter Super Mutants, Ghouls, Raiders and other dangers of the Wasteland. Prepare for the future.<br /><br />The third game in the Fallout series, Fallout 3 is a singleplayer action role-playing game (RPG) set in a post-apocalyptic Washington DC. Combining the horrific insanity of the Cold War era theory of mutually assured destruction gone terribly wrong, with the kitschy naivety of American 1950s nuclear propaganda, Fallout 3 will satisfy both players familiar with the popular first two games in its series as well as those coming to the franchise for the first time."
-  },
-  {
-    "id": "23248",
-    "title": "Frostpunk",
-    "slug": "frostpunk",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coar27.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/zosdcehazsixi4yysvq6.jpg",
-    "link": "https://infinitebacklog.net/games/frostpunk",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2018",
-    "genres": [
-      "Simulator",
-      "Strategy",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "Frostpunk, the newest title from the creators of This War of Mine, is a society survival game where heat means life and every decision comes at a price. In an entirely frozen world, people develop steam-powered technology to oppose the overwhelming cold. You face the task of building the last city on Earth and securing the means necessary for your community to survive.<br /><br />Optimization and resource management often clash with empathy and thoughtful decision-making. While city and society management will consume most of the ruler’s time, at some point exploration of the outside world is necessary to understand its history and present state."
-  },
-  {
-    "id": "121752",
-    "title": "Ghostrunner",
-    "slug": "ghostrunner",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2nbk.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sc6wcj.jpg",
-    "link": "https://infinitebacklog.net/games/ghostrunner",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2020",
-    "genres": [
-      "Shooter",
-      "Platform",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Ascend humanity’s last remaining shelter, a great tower-city. The tower is torn by violence, poverty and chaos. Conquer your enemies, discover the secrets of the superstructure and your own origin and obtain the power to challenge The Keymaster."
-  },
-  {
-    "id": "250617",
-    "title": "Ghostrunner II",
-    "slug": "ghostrunner-ii",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co97mh.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/scmnfg.jpg",
-    "link": "https://infinitebacklog.net/games/ghostrunner-ii",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2023",
-    "genres": [
-      "Platform",
-      "Strategy",
-      "Brawler",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Ghostrunner II is a hardcore FPP slasher set in a post-apocalyptic, cyberpunk world. Featuring everything fans loved about Ghostrunner plus incredible boss fights, new interactive story, thrilling motorbike levels, improved skills, and more cyber ninja action."
-  },
-  {
-    "id": "134595",
-    "title": "Hitman 3",
-    "slug": "hitman-3",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co29lt.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sc8bi7.jpg",
-    "link": "https://infinitebacklog.net/games/hitman-3",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2021",
-    "genres": [
-      "Shooter",
-      "Tactical",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Hitman 3 is the dramatic conclusion to the World of Assassination trilogy. Become Agent 47, a legendary assassin and use creativity and improvisation to execute the most ingenious and spectacular eliminations, in sprawling sandbox locations all around the globe."
-  },
-  {
-    "id": "136625",
-    "title": "Hogwarts Legacy",
-    "slug": "hogwarts-legacy",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coaav6.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sclo0z.jpg",
-    "link": "https://infinitebacklog.net/games/hogwarts-legacy",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2023",
-    "genres": [
-      "RPG",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Hogwarts Legacy is an immersive, open-world action RPG set in the world first introduced in the Harry Potter books. Now you can take control of the action and be at the center of your own adventure in the wizarding world. Embark on a journey through familiar and new locations as you explore and discover fantastic beasts, customize your character and craft potions, master spell casting, upgrade talents, and become the wizard you want to be. Discover the feeling of living at Hogwarts as you make allies, battle Dark wizards, and ultimately decide the fate of the wizarding world. Your legacy is what you make of it."
-  },
-  {
     "id": "27744",
     "title": "House Flipper",
     "slug": "house-flipper",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co4xdy.jpg",
+    "cover": "/assets/media/games/27744.jpg",
     "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sgbofjalgwarzdgdpupz.jpg",
     "link": "https://infinitebacklog.net/games/house-flipper",
     "status": "planned",
@@ -329,7 +97,7 @@
     "id": "121084",
     "title": "In Sound Mind",
     "slug": "in-sound-mind",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co3p6y.jpg",
+    "cover": "/assets/media/games/121084.jpg",
     "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/arloo.jpg",
     "link": "https://infinitebacklog.net/games/in-sound-mind",
     "status": "planned",
@@ -347,103 +115,10 @@
     "description": "In Sound Mind is an imaginative first-person psychological horror with frenetic puzzles, unique boss fights, and original music. Journey within the inner workings of the one place you can’t seem to escape - your own mind."
   },
   {
-    "id": "37016",
-    "title": "Metro Exodus",
-    "slug": "metro-exodus",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coaroh.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ivyjv4twtzcbxysseq39.jpg",
-    "link": "https://infinitebacklog.net/games/metro-exodus",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2019",
-    "genres": [
-      "Shooter",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Metro Exodus is an epic, story-driven first person shooter from 4A Games that blends deadly combat and stealth with exploration and survival horror in one of the most immersive game worlds ever created. Explore the Russian wilderness across vast, non-linear levels and follow a thrilling story-line that spans an entire year through spring, summer and autumn to the depths of nuclear winter. Inspired by the novels of Dmitry Glukhovsky, Metro Exodus continues Artyom’s story in the greatest Metro adventure yet."
-  },
-  {
-    "id": "19531",
-    "title": "Prey",
-    "slug": "prey--1",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co9aoh.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/kdn9mk9gsdtgzmaqqvhp.jpg",
-    "link": "https://infinitebacklog.net/games/prey--1",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2017",
-    "genres": [
-      "Shooter",
-      "Puzzle",
-      "RPG",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "In Prey, you awaken aboard Talos I, a space station orbiting the moon in the year 2032. You are the key subject of an experiment meant to alter humanity forever – but things have gone terribly wrong. The space station has been overrun by hostile aliens and you are now being hunted. As you dig into the dark secrets of Talos I and your own past, you must survive using the tools found on the station, your wits, weapons, and mind-bending abilities."
-  },
-  {
-    "id": "7323",
-    "title": "Rise of the Tomb Raider",
-    "slug": "rise-of-the-tomb-raider",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1rqa.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/qgbk3c7ws8mapylzswat.jpg",
-    "link": "https://infinitebacklog.net/games/rise-of-the-tomb-raider",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2015",
-    "genres": [
-      "Shooter",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Rise of the Tomb Raider is a third-person action-adventure game in which players control Lara Croft as she searches for the legendary city of Kitezh and a promise of immortality. Combat involves firearms, stealth, and melee weapons, while semi-open hub areas offer challenge tombs with puzzles, side missions, and resource scavenging for crafting. Players earn experience and unlock skills across three trees focused on combat, hunting, and survival. The game features an Expeditions mode that allows replaying levels with modifiers in place of traditional multiplayer."
-  },
-  {
-    "id": "37777",
-    "title": "Shadow of the Tomb Raider",
-    "slug": "shadow-of-the-tomb-raider",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1vcn.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/lhvuo2txovuwqa9tp8ui.jpg",
-    "link": "https://infinitebacklog.net/games/shadow-of-the-tomb-raider",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2018",
-    "genres": [
-      "Shooter",
-      "Puzzle",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "As Lara Croft races to save the world from a Maya apocalypse, she must become the Tomb Raider she is destined to be."
-  },
-  {
-    "id": "144022",
-    "title": "Sifu",
-    "slug": "sifu",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co4h5s.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sc936z.jpg",
-    "link": "https://infinitebacklog.net/games/sifu",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2022",
-    "genres": [
-      "Brawler",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "Sifu is a realistic third-person brawler with tight Kung Fu combat mechanics and cinematic martial arts action embarking you on a path for revenge."
-  },
-  {
     "id": "20228",
     "title": "Sleeping Dogs: Definitive Edition",
     "slug": "sleeping-dogs-definitive-edition",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2i0n.jpg",
+    "cover": "/assets/media/games/20228.jpg",
     "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/jmpwspq96o9vlvguxb1q.jpg",
     "link": "https://infinitebacklog.net/games/sleeping-dogs-definitive-edition",
     "status": "planned",
@@ -460,236 +135,13 @@
     "description": "The Definitive Edition of the critically acclaimed, award winning open-world action adventure, reworked, rebuilt and re-mastered for the new generation. With all previously available DLC included and a wealth of tech and visual improvements, Hong Kong has never felt so alive.<br /><br />A vibrant, neon city teaming with life, Hong Kong’s exotic locations and busy streets and markets hide one of the most powerful and dangerous criminal organizations in the world: the notorious Triads. Play as Wei Shen – the highly skilled undercover cop trying to take down the Triads from the inside out. You'll have to prove yourself worthy as you fight your way up the organization, taking part in brutal criminal activities without blowing your cover.<br /><br />Destroy your opponents in brutal hand-to-hand combat using an unmatched martial arts system. Dominate Hong Kong’s buzzing streets in thrilling illegal street races and tear it up in explosive firearms action. Sleeping Dogs’ Hong Kong is the ultimate playground."
   },
   {
-    "id": "107155",
-    "title": "Sniper Ghost Warrior Contracts",
-    "slug": "sniper-ghost-warrior-contracts",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1ts7.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sc6r5m.jpg",
-    "link": "https://infinitebacklog.net/games/sniper-ghost-warrior-contracts",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2019",
-    "genres": [
-      "Shooter"
-    ],
-    "developer": "",
-    "description": "Experience the ultimate sniper gameplay, set against the rough terrain of the Siberian wilderness and featuring a brand new contracts system that encourages strategic thinking across engaging, replayable missions."
-  },
-  {
-    "id": "107141",
-    "title": "Spirit of the North",
-    "slug": "spirit-of-the-north",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co7ewy.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sc7gq0.jpg",
-    "link": "https://infinitebacklog.net/games/spirit-of-the-north",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2019",
-    "genres": [
-      "Puzzle",
-      "Adventure",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "\"Spirit of the North is a single player, 3rd-person adventure game inspired by the breathtaking and mysterious landscapes of Iceland. The story takes root from various pieces of Nordic folklore. The game is unique in that it purposefully has no dialog or narrative. Players must breathe in their surroundings to solve various puzzles and speculate the meaning of a lost ancient civilization. Play as an ordinary red fox who’s story becomes entwined with the guardian of the Northern Lights, a female spirit fox. As you journey over the mountains and under red stained skies you’ll discover more about your companion and a land left in ruin.\""
-  },
-  {
-    "id": "125628",
-    "title": "Tell Me Why",
-    "slug": "tell-me-why",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2ej1.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/game/125628.webp.jpg",
-    "link": "https://infinitebacklog.net/games/tell-me-why",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2020",
-    "genres": [
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Tell Me Why is the latest narrative adventure game from DONTNOD Entertainment, the studio behind the beloved franchise, Life is Strange. In this intimate mystery, twins Tyler and Alyson Ronan use their supernatural bond to unravel the mysteries of their loving but troubled childhood in beautiful small-town Alaska."
-  },
-  {
-    "id": "103283",
-    "title": "The Awesome Adventures of Captain Spirit",
-    "slug": "the-awesome-adventures-of-captain-spirit",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/cobugo.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/spfxwhhwhp75ezudzzdl.jpg",
-    "link": "https://infinitebacklog.net/games/the-awesome-adventures-of-captain-spirit",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2018",
-    "genres": [
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Have you ever dreamt of being a superhero? Meet Chris, a creative and imaginative 9 year old boy who escapes reality with fantastical adventures as his alter ego, the Awesome Captain Spirit! Captain Spirit is a free demo set in the Life is Strange universe."
-  },
-  {
-    "id": "141538",
-    "title": "The Callisto Protocol",
-    "slug": "the-callisto-protocol",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co4ymo.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/schtud.jpg",
-    "link": "https://infinitebacklog.net/games/the-callisto-protocol",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2022",
-    "genres": [
-      "Shooter",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "In this narrative-driven, third-person survival horror game set 300 years in the future, the player will take on the role of Jacob Lee – a victim of fate thrown into Black Iron Prison, a maximum-security penitentiary located on Jupiter's moon, Callisto. When inmates begin to transform into monstrous creatures, the prison is thrown into chaos."
-  },
-  {
-    "id": "4786",
-    "title": "The Evil Within",
-    "slug": "the-evil-within",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co5wgs.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/n7koht6e3j6nooarwxej.jpg",
-    "link": "https://infinitebacklog.net/games/the-evil-within",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2014",
-    "genres": [
-      "Shooter",
-      "Puzzle",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "The Evil Within embodies the meaning of pure survival horror. Highly-crafted environments, horrifying anxiety, and an intricate story are combined to create an immersive world that will bring you to the height of tension. With limited resources at your disposal, you’ll fight for survival and experience profound fear in this perfect blend of horror and action."
-  },
-  {
-    "id": "36813",
-    "title": "The Evil Within 2",
-    "slug": "the-evil-within-2",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co5wgu.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/f74macclfv9siu4apzt5.jpg",
-    "link": "https://infinitebacklog.net/games/the-evil-within-2",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2017",
-    "genres": [
-      "Shooter",
-      "RPG",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "The Evil Within 2 is the latest evolution of survival horror. Detective Sebastian Castellanos has lost it all. But when given a chance to save his daughter, he must descend once more into the nightmarish world of STEM.<br /><br />Horrifying threats emerge from every corner as the world twists and warps around him. Will Sebastian face adversity head on with weapons and traps, or sneak through the shadows to survive."
-  },
-  {
-    "id": "26381",
-    "title": "TheHunter: Call of the Wild",
-    "slug": "thehunter-call-of-the-wild",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1u14.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/p36f93vwdovsrcxapi05.jpg",
-    "link": "https://infinitebacklog.net/games/thehunter-call-of-the-wild",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2017",
-    "genres": [
-      "Shooter",
-      "Simulator",
-      "Sport",
-      "Strategy",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Never before have you experienced a hunting game like theHunter: Call of the Wild. Plunge into an atmospheric open world, teeming with life: from the majestic true-to-life animals to the rustling of leaves above you as you stalk your prey. You can decide to hunt on your own or join up and hunt together with friends. Just remember, you are not just a visitor in this world, you are a living and breathing part of it. As you finally spot the majestic crown of your first red deer through the brush, the feeling is indescribable."
-  },
-  {
-    "id": "1164",
-    "title": "Tomb Raider",
-    "slug": "tomb-raider--2",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1rbu.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/game/1164.webp.jpg",
-    "link": "https://infinitebacklog.net/games/tomb-raider--2",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2013",
-    "genres": [
-      "Shooter",
-      "Platform",
-      "Puzzle",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Tomb Raider explores the intense and gritty origin story of Lara Croft and her ascent from a young woman to a hardened survivor. Armed only with raw instincts and the ability to push beyond the limits of human endurance, Lara must fight to unravel the dark history of a forgotten island to escape its relentless hold."
-  },
-  {
-    "id": "8729",
-    "title": "Vampyr",
-    "slug": "vampyr",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co8lrg.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/cocupbckfeqp8dvjelpm.jpg",
-    "link": "https://infinitebacklog.net/games/vampyr",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2018",
-    "genres": [
-      "RPG",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "London, 1918. You are newly-turned Vampyr Dr. Jonathan Reid. As a doctor, you must find a cure to save the city’s flu-ravaged citizens. As a Vampyr, you are cursed to feed on those you vowed to heal.<br /><br />Will you embrace the monster within? Survive and fight against Vampyr hunters, undead skals, and other supernatural creatures. Use your unholy powers to manipulate and delve into the lives of those around you, to decide who will be your next victim. Struggle to live with your decisions… your actions will save or doom London."
-  },
-  {
-    "id": "142549",
-    "title": "Viewfinder",
-    "slug": "viewfinder",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coaev1.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ar25k7.jpg",
-    "link": "https://infinitebacklog.net/games/viewfinder",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2023",
-    "genres": [
-      "Platform",
-      "Puzzle",
-      "Adventure",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "Viewfinder is a puzzle game where you can reshape the world around you by taking photos with an instant camera."
-  },
-  {
-    "id": "2031",
-    "title": "Wolfenstein: The New Order",
-    "slug": "wolfenstein-the-new-order",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co21c0.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/dq87ooxc88vl6hy2k8td.jpg",
-    "link": "https://infinitebacklog.net/games/wolfenstein-the-new-order",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2014",
-    "genres": [
-      "Shooter",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Wolfenstein: The New Order is an action-adventure shooter game played from a first-person perspective. It is the semi-sequel to 2009's Wolfenstein, however utilizes very little from the game and drops any direct references to veil or supernatural.<br /><br />To progress through the story, the player battle enemies throughout levels. The game utilizes a health system in which players' health is divided into separate sections that regenerate; if an entire section is lost, the player must use a health pack to replenish the missing health. In combat, a cover system can be used as assistance against enemies. The player have the ability to lean around, over, and under cover, which can be used as a tactical advantage during shootouts and stealth levels. The game gives the player a wide variety of weapon options—they can be found on the ground, retrieved from dead enemies, or removed from their stationary position and carried around."
-  },
-  {
     "id": "261554",
     "title": "An Arcade Full of Cats",
     "slug": "an-arcade-full-of-cats",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co775h.jpg",
+    "cover": "/assets/media/games/261554.jpg",
     "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/scnx4i.jpg",
     "link": "https://infinitebacklog.net/games/an-arcade-full-of-cats",
-    "status": "completed",
+    "status": "onHold",
     "hours": 1,
     "platform": "Windows PC",
     "year": "2023",
@@ -704,7 +156,7 @@
     "id": "1342",
     "title": "Beyond: Two Souls",
     "slug": "beyond-two-souls",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co8r4w.jpg",
+    "cover": "/assets/media/games/1342.jpg",
     "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/hbwpvsmuj18ppdylxhiy.jpg",
     "link": "https://infinitebacklog.net/games/beyond-two-souls",
     "status": "completed",
@@ -722,7 +174,7 @@
     "id": "80853",
     "title": "Metro 2033 Redux",
     "slug": "metro-2033-redux",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coar0z.jpg",
+    "cover": "/assets/media/games/80853.jpg",
     "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/x0st6hufx5godw4fyueh.jpg",
     "link": "https://infinitebacklog.net/games/metro-2033-redux",
     "status": "completed",
@@ -742,7 +194,7 @@
     "id": "143292",
     "title": "Metro Exodus: Enhanced Edition",
     "slug": "metro-exodus-enhanced-edition",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coab4r.jpg",
+    "cover": "/assets/media/games/143292.jpg",
     "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/scaiks.jpg",
     "link": "https://infinitebacklog.net/games/metro-exodus-enhanced-edition",
     "status": "completed",
@@ -761,7 +213,7 @@
     "id": "50199",
     "title": "Metro: Last Light Redux",
     "slug": "metro-last-light-redux",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coar10.jpg",
+    "cover": "/assets/media/games/50199.jpg",
     "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/fpetgb32llqjauhrykcx.jpg",
     "link": "https://infinitebacklog.net/games/metro-last-light-redux",
     "status": "completed",
@@ -781,10 +233,10 @@
     "id": "334486",
     "title": "Bongo Cat",
     "slug": "bongo-cat",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co9ibr.jpg",
+    "cover": "/assets/media/games/334486.jpg",
     "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ar3cju.jpg",
     "link": "https://infinitebacklog.net/games/bongo-cat",
-    "status": "completed",
+    "status": "dropped",
     "hours": 290,
     "platform": "Windows PC",
     "year": "2025",
@@ -799,10 +251,10 @@
     "id": "135881",
     "title": "eFootball PES 2021 Season Update",
     "slug": "efootball-pes-2021-season-update",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2g3c.jpg",
+    "cover": "/assets/media/games/135881.jpg",
     "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sc8fj0.jpg",
     "link": "https://infinitebacklog.net/games/efootball-pes-2021-season-update",
-    "status": "completed",
+    "status": "dropped",
     "rating": 7,
     "hours": 105,
     "platform": "Windows PC",
@@ -818,10 +270,10 @@
     "id": "308535",
     "title": "NTE: Neverness to Everness",
     "slug": "nte-neverness-to-everness",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/cod2j1.jpg",
+    "cover": "/assets/media/games/308535.jpg",
     "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sc11n1f.jpg",
     "link": "https://infinitebacklog.net/games/nte-neverness-to-everness",
-    "status": "completed",
+    "status": "dropped",
     "hours": 56,
     "platform": "Windows PC",
     "year": "2026",
@@ -836,586 +288,11 @@
     "id": "200551",
     "title": "Zenless Zone Zero",
     "slug": "zenless-zone-zero",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/cocnek.jpg",
+    "cover": "/assets/media/games/200551.jpg",
     "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sch7o8.jpg",
     "link": "https://infinitebacklog.net/games/zenless-zone-zero",
-    "status": "completed",
+    "status": "dropped",
     "hours": 1,
-    "platform": "Windows PC",
-    "year": "2024",
-    "genres": [
-      "RPG",
-      "Brawler",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Zenless Zone Zero is an all-new 3D action game from HoYoverse, here to provide a thrilling combat experience. Build a squad of up to three and begin your assault with Basic and Special Attacks. Dodge and Parry to neutralize your opponents' counterattacks, and when they're Stunned, unleash a powerful combo of Chain Attacks to finish them off! Remember, different opponents have different traits, and it would be prudent to use their weaknesses to your advantage."
-  },
-  {
-    "id": "11426",
-    "title": "100% Orange Juice",
-    "slug": "100-percent-orange-juice",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co9oqh.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/arkt1.jpg",
-    "link": "https://infinitebacklog.net/games/100-percent-orange-juice",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2009",
-    "genres": [
-      "Strategy",
-      "Turn-Based Strategy",
-      "Indie",
-      "Card & Board Game"
-    ],
-    "developer": "",
-    "description": "100% Orange Juice is a goal-oriented boardgame played by OrangeJuice's all-star cast including characters from Acceleration of Suguri, Flying Red Barrel: A Diary of Little Aviator, Sora, and QP Shooting.<br /><br />This is a world where dogs, people and machines fly through the air. In that world, a small patch of darkness was born. Infinitesimal at first, it gradually began to envelope everything...<br /><br />A youth named Kai, led by the mysterious life form known as Marie Poppo, begins a journey that will span worlds. The black, bottomless darkness of desire slowly eats away at both Kai and the world itself...<br /><br />Let Marie Poppo lead you into a mysterious world to play. Grab your deck of cards and let the games begin!"
-  },
-  {
-    "id": "115270",
-    "title": "112 Operator",
-    "slug": "112-operator",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1xea.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/arscg.jpg",
-    "link": "https://infinitebacklog.net/games/112-operator",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2020",
-    "genres": [
-      "Puzzle",
-      "Simulator",
-      "Strategy",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "Manage the emergency services in any city in the world! Take calls and dispatch rescue forces. Handle difficult situations, now depending on the weather, terrain and traffic. Help the citizens through cataclysms and natural disasters, becoming a better emergency number operator every day!"
-  },
-  {
-    "id": "20927",
-    "title": "911 Operator",
-    "slug": "911-operator",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2gjv.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ykrqpp9jprrcbyh2udju.jpg",
-    "link": "https://infinitebacklog.net/games/911-operator",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2017",
-    "genres": [
-      "Simulator",
-      "Strategy",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "911 Operator is a game about the difficult work of people that manage emergency lines and services. Main task is to answer incoming calls and to react properly - give first aid instructions, advise, dispatch correct number of firemen / police / ambulances, or sometimes just ignore the call."
-  },
-  {
-    "id": "7352",
-    "title": "Abzu",
-    "slug": "abzu",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co28sy.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/game/7352.webp.jpg",
-    "link": "https://infinitebacklog.net/games/abzu",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2016",
-    "genres": [
-      "Puzzle",
-      "Adventure",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "Abzu is an exploration game where you are a lone diver in a lush ocean world. The diver descends deeper and deeper into the depths, where she will encounter majestic creatures, discover ancient secrets, and search for her true purpose. Abzu roughly translates to \"The Ocean of Wisdom\" from ancient Sumerian."
-  },
-  {
-    "id": "32136",
-    "title": "Along the Edge",
-    "slug": "along-the-edge",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2nro.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ar583h.jpg",
-    "link": "https://infinitebacklog.net/games/along-the-edge",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2016",
-    "genres": [
-      "Adventure",
-      "Indie",
-      "Visual Novel"
-    ],
-    "developer": "",
-    "description": "Along the Edge is a visual novel set in the European countryside, where your choices impact the main character's personality and appearance."
-  },
-  {
-    "id": "6292",
-    "title": "Black Desert",
-    "slug": "black-desert",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coclea.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ar4sic.jpg",
-    "link": "https://infinitebacklog.net/games/black-desert",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2014",
-    "genres": [
-      "RPG",
-      "Strategy",
-      "Brawler",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Black Desert is a game that tests the limitations of MMORPG<br />by implementing remastered graphics and audio. Enjoy exciting combat and siege,<br />exploration, trading, fishing, training, alchemy, cooking, gathering, hunting, and more in the vast open world."
-  },
-  {
-    "id": "40470",
-    "title": "Car Mechanic Simulator 2018",
-    "slug": "car-mechanic-simulator-2018",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co22v4.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/armc2.jpg",
-    "link": "https://infinitebacklog.net/games/car-mechanic-simulator-2018",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2017",
-    "genres": [
-      "Racing",
-      "Simulator"
-    ],
-    "developer": "",
-    "description": "Build and expand your repair service empire in this incredibly detailed and highly realistic simulation game, where attention to car detail is astonishing. Find classic, unique cars in the new Barn Find module and Junkyard module. You can even add your self-made car in the Car Editor."
-  },
-  {
-    "id": "105712",
-    "title": "Coloring Pixels",
-    "slug": "coloring-pixels",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2958.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ardlr.jpg",
-    "link": "https://infinitebacklog.net/games/coloring-pixels",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2018",
-    "genres": [
-      "Indie"
-    ],
-    "developer": "",
-    "description": "A relaxing coloring by numbers game. Enjoy completing a variety of images with differing themes complexity and sizes."
-  },
-  {
-    "id": "1369",
-    "title": "Company of Heroes 2",
-    "slug": "company-of-heroes-2",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coaayw.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/arr0t.jpg",
-    "link": "https://infinitebacklog.net/games/company-of-heroes-2",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2013",
-    "genres": [
-      "Real Time Strategy",
-      "Simulator",
-      "Strategy"
-    ],
-    "developer": "",
-    "description": "Experience the ultimate WWII RTS platform with COH2 and its standalone expansions. This package includes the base game, which you can then upgrade by purchasing The Western Front Armies, Ardennes Assault and/or The British Forces. More info in the \"About This Game\" section below."
-  },
-  {
-    "id": "231",
-    "title": "Half-Life",
-    "slug": "half-life",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coc2ea.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/arpo4.jpg",
-    "link": "https://infinitebacklog.net/games/half-life",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "1998",
-    "genres": [
-      "Shooter",
-      "Puzzle",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Half-Life is a 1998 first-person shooter (FPS) game developed by Valve Corporation and published by Sierra Studios for Windows. It was Valve's debut product and the first game in the Half-Life series. The player assumes the role of Gordon Freeman, a theoretical physicist who must escape from the Black Mesa Research Facility after it is overrun by aliens following a disastrous scientific experiment. Its gameplay consists of diverse combat, exploration and puzzles."
-  },
-  {
-    "id": "233",
-    "title": "Half-Life 2",
-    "slug": "half-life-2",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1nmw.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/arkbf.jpg",
-    "link": "https://infinitebacklog.net/games/half-life-2",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2004",
-    "genres": [
-      "Shooter"
-    ],
-    "developer": "",
-    "description": "1998. HALF-LIFE sends a shock through the game industry with its combination of pounding action and continuous, immersive storytelling.<br /><br />NOW. By taking the suspense, challenge and visceral charge of the original, and adding startling new realism and responsiveness, Half-Life 2 opens the door to a world where the player's presence affects everything around them, from the physical environment to the behaviors even the emotions of both friends and enemies."
-  },
-  {
-    "id": "9471",
-    "title": "Half-Life 2: Deathmatch",
-    "slug": "half-life-2-deathmatch",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2mw4.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/armn0.jpg",
-    "link": "https://infinitebacklog.net/games/half-life-2-deathmatch",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2004",
-    "genres": [
-      "Shooter"
-    ],
-    "developer": "",
-    "description": "Fast multiplayer action set in the Half-Life 2 universe! HL2's physics adds a new dimension to deathmatch play. Play straight deathmatch or try Combine vs. Resistance teamplay. Toss a toilet at your friend today!"
-  },
-  {
-    "id": "19348",
-    "title": "Half-Life Deathmatch: Source",
-    "slug": "half-life-deathmatch-source",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coc32g.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/dsbqagmvusalb1kdnlrv.jpg",
-    "link": "https://infinitebacklog.net/games/half-life-deathmatch-source",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2006",
-    "genres": [
-      "Shooter"
-    ],
-    "developer": "",
-    "description": "Half-Life Deathmatch: Source is a recreation of the first multiplayer game set in the Half-Life universe. Features all the classic weapons and most-played maps, now running on the Source engine."
-  },
-  {
-    "id": "139491",
-    "title": "Infinitode 2: Infinite Tower Defense",
-    "slug": "infinitode-2-infinite-tower-defense",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2i7y.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ar13ne.jpg",
-    "link": "https://infinitebacklog.net/games/infinitode-2-infinite-tower-defense",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2019",
-    "genres": [
-      "Strategy",
-      "Tactical",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "Infinitode 2 - a strategy in the Tower Defense genre, in which the player will have to build towers to protect his base from endless waves of enemies. The game features huge maps, lots of towers, resource miners, upgrade tree and map editor."
-  },
-  {
-    "id": "212652",
-    "title": "Islands of Insight",
-    "slug": "islands-of-insight--1",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co6lym.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ar1s8q.jpg",
-    "link": "https://infinitebacklog.net/games/islands-of-insight--1",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2024",
-    "genres": [
-      "Puzzle",
-      "RPG",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Islands of Insight is an epic shared-world puzzle game where you play as a Seeker on a peaceful journey of exploration and discovery. Seek out and solve mysterious puzzles at your own pace across an awe-inspiring world of floating islands."
-  },
-  {
-    "id": "7599",
-    "title": "Life Is Strange",
-    "slug": "life-is-strange",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1r8e.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/ar69ks.jpg",
-    "link": "https://infinitebacklog.net/games/life-is-strange",
-    "status": "planned",
-    "hours": 1,
-    "platform": "Windows PC",
-    "year": "2015",
-    "genres": [
-      "Puzzle",
-      "Adventure",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "Life Is Strange is a five part episodic game that sets out to revolutionize story based choice and consequence games by allowing the player to rewind time and affect the past, present and future."
-  },
-  {
-    "id": "39",
-    "title": "Mafia",
-    "slug": "mafia",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1qrt.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/armyx.jpg",
-    "link": "https://infinitebacklog.net/games/mafia",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2002",
-    "genres": [
-      "Fighting",
-      "Shooter",
-      "Racing",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "Mafia is a 3D action crime epic set in the seedy underworld of the 1930's. Rise from the lowly but well-dressed Footsoldier, to an envied and feared Made Man in an era of mob hits, car chases, and bootlegging. Earn a reputation as a tough enforcer, daring getaway driver, and deadly hitman in your quest for respect and power within the Salieri Family."
-  },
-  {
-    "id": "495",
-    "title": "Metro 2033",
-    "slug": "metro-2033",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coctol.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/akfsuhtx1gc3dsntrj8g.jpg",
-    "link": "https://infinitebacklog.net/games/metro-2033",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2010",
-    "genres": [
-      "Shooter",
-      "RPG"
-    ],
-    "developer": "",
-    "description": "Metro 2033 is a first-person shooter with survival horror elements, based on the Russian book of the same name by Dmitry Glukhovsky. Most of the game takes place underground, but several times Artyom will have to venture outside, into the perpetual nuclear winter. Game progression is fairly linear, though areas may be explored more thoroughly for items and ammunition. Setpieces include a few on-rails sequences, missions that involve defending a location from an onslaught of monsters, and others. A few stages can be completed in a stealthy fashion."
-  },
-  {
-    "id": "539",
-    "title": "Metro: Last Light",
-    "slug": "metro-last-light",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2h9d.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/q3k22exn75undqrrodit.jpg",
-    "link": "https://infinitebacklog.net/games/metro-last-light",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2013",
-    "genres": [
-      "Shooter"
-    ],
-    "developer": "",
-    "description": "Based on the Russian novel Metro 2033 by Dmitry Glukhovsky, Metro: Last Light is a post-apocalyptic horror first-person shooter that serves as a new chapter in the Metro saga and is the sequel to Metro 2033. Like its predecessor, the game is a primarily story-driven shooter with heavy stealth elements. Artyom may carry up to three weapons at a time, however bullets are scarce and valuable to the point that higher grade bullets are, in fact, the Metro's currency. When dealing with armed opponents, stealth is encouraged and it is wise to save ammunition for the many mutant creatures encountered in combat. In many situations the player can choose between straightforward shooting and stealth, also having the option for lethal or non-lethal enemy takedowns."
-  },
-  {
-    "id": "54789",
-    "title": "MudRunner",
-    "slug": "mudrunner",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1m95.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/arpa8.jpg",
-    "link": "https://infinitebacklog.net/games/mudrunner",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2017",
-    "genres": [
-      "Racing",
-      "Simulator",
-      "Strategy"
-    ],
-    "developer": "",
-    "description": "Like Spintires before it, Spintires: MudRunner puts players in the driver seat and dares them to take charge of incredible all-terrain vehicles, venturing across extreme Siberian landscapes with only a map and compass as guides! This edition comes complete with a brand new Sandbox Map joining the original game's 5 environments, a total graphical overhaul, a new Challenge mode with 9 new dedicated maps, 13 new vehicles and other comprehensive improvements."
-  },
-  {
-    "id": "308535",
-    "title": "NTE: Neverness to Everness",
-    "slug": "nte-neverness-to-everness",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/cod2j1.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sc11n1f.jpg",
-    "link": "https://infinitebacklog.net/games/nte-neverness-to-everness",
-    "status": "planned",
-    "hours": 1,
-    "platform": "Windows PC",
-    "year": "2026",
-    "genres": [
-      "RPG",
-      "Adventure"
-    ],
-    "developer": "",
-    "description": "NTE: Neverness to Everness is a supernatural open-world RPG developed by Hotta Studio. The story begins in the city of Hethereau, where you play as its first \"unlicensed\" Anomaly Hunter. You'll join the crew at Eibon, a rundown antique shop that keeps the lights on by taking Anomaly commissions from anyone willing to pay. Alongside a diverse cast of extraordinary companions, you'll unravel urban mysteries, ride out adventures full of laughs and heartbreak, and write your own stories in the neon-lit streets."
-  },
-  {
-    "id": "24440",
-    "title": "Pankapu",
-    "slug": "pankapu",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co1z3h.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/a6jxeze33tqnassb3qmw.jpg",
-    "link": "https://infinitebacklog.net/games/pankapu",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2016",
-    "genres": [
-      "Platform",
-      "RPG",
-      "Adventure",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "Pankapu is a 2D platform/action game, narrative and episodic:<br /><br />In a world full of Dreams and Nightmares, a tiny warrior has to fight for the safety of his homeland. However, the real purpose of his his quest, beyond the struggle of good and evil, is the mental health of a traumatized child.<br /><br />Told in the manner of a fable read to a child, the game has two levels of reading: the story of Pankapu, epic and naive, and the second one, about Djaha’rell life, the one to whom the tale is told, dark and tragic."
-  },
-  {
-    "id": "143596",
-    "title": "Press Any Button",
-    "slug": "press-any-button",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co2thg.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/aryvp.jpg",
-    "link": "https://infinitebacklog.net/games/press-any-button",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2021",
-    "genres": [
-      "Indie",
-      "Arcade"
-    ],
-    "developer": "",
-    "description": "This video game realized how boring it had been and now is trying its best to fix that."
-  },
-  {
-    "id": "27789",
-    "title": "PUBG: Battlegrounds",
-    "slug": "pubg-battlegrounds",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coaam4.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/jj2skjcwdnv0qavbutlh.jpg",
-    "link": "https://infinitebacklog.net/games/pubg-battlegrounds",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2017",
-    "genres": [
-      "Shooter"
-    ],
-    "developer": "",
-    "description": "PUBG: Battlegrounds is a battle royale shooter that pits 100 players against each other in a struggle for survival. Gather supplies and outwit your opponents to become the last person standing."
-  },
-  {
-    "id": "74881",
-    "title": "Steel Rats",
-    "slug": "steel-rats",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co24a0.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/gsevnh7zz1y02zkd0rcx.jpg",
-    "link": "https://infinitebacklog.net/games/steel-rats",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2018",
-    "genres": [
-      "Platform",
-      "Racing",
-      "Arcade"
-    ],
-    "developer": "",
-    "description": "\"Steel Rats is a visceral and groundbreaking evolution of the 2.5D action arcade genre, fusing destructive, octane-fuelled motorbike combat and death-defying stunt gameplay, set in a visually stylised retro future world.<br /><br />Become one with your bike as you master the realistic physics based controls of these powerful and deadly vehicles. Choose how you want to tear through the stylised and highly detailed environments of Steel Rats, traversing up, down left and right as your bike speeds fluidly in and out of the game world, over rooftops and through enemy-infested tunnels.\""
-  },
-  {
-    "id": "84130",
-    "title": "Sudoku Universe",
-    "slug": "sudoku-universe--2",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co42l0.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/arses.jpg",
-    "link": "https://infinitebacklog.net/games/sudoku-universe--2",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2017",
-    "genres": [
-      "Strategy",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "Beautiful Sudoku puzzles by @konstructors."
-  },
-  {
-    "id": "28856",
-    "title": "The Crew 2",
-    "slug": "the-crew-2",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coab5o.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/duzggz8mg267ttxa7mmm.jpg",
-    "link": "https://infinitebacklog.net/games/the-crew-2",
-    "status": "planned",
-    "hours": 1,
-    "platform": "Windows PC",
-    "year": "2018",
-    "genres": [
-      "Racing"
-    ],
-    "developer": "",
-    "description": "The newest iteration in the revolutionary franchise, The Crew 2 captures the thrill of the American motorsports spirit in one of the most exhilarating open worlds ever created. Welcome to Motornation, a huge, varied, action-packed, and beautiful playground built for motorsports throughout the entire US of A. Enjoy unrestrained exploration on ground, sea, and sky. From coast to coast, street and pro racers, off-road explorers, and freestylers gather and compete in all kinds of disciplines. Join them in high-octane contests and share every glorious moment with the world."
-  },
-  {
-    "id": "116413",
-    "title": "The Red Lantern",
-    "slug": "the-red-lantern",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co7lby.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sc69kf.jpg",
-    "link": "https://infinitebacklog.net/games/the-red-lantern",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2020",
-    "genres": [
-      "Simulator",
-      "Adventure",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "The Red Lantern is a narrative, survival game where you and your team of 5 sled dogs, lost in the wilderness, must navigate the ever-changing events of the Alaskan bush to find your way home.<br /><br />Choose how you want to interact with the world, do you tackle it head on hunting everything that moves, or do you take a more cautious approach?"
-  },
-  {
-    "id": "150000",
-    "title": "Toy Tinker Simulator",
-    "slug": "toy-tinker-simulator",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/co319m.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/arujj.jpg",
-    "link": "https://infinitebacklog.net/games/toy-tinker-simulator",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2021",
-    "genres": [
-      "Simulator",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "Have you ever wanted to be a toy tinker? This is a unique chance to become one! Repair toys and start your toy-museums to make everyone happy!"
-  },
-  {
-    "id": "7555",
-    "title": "World of Guns: Gun Disassembly",
-    "slug": "world-of-guns-gun-disassembly",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/coca33.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/arhaw.jpg",
-    "link": "https://infinitebacklog.net/games/world-of-guns-gun-disassembly",
-    "status": "planned",
-    "hours": 0,
-    "platform": "Windows PC",
-    "year": "2014",
-    "genres": [
-      "Shooter",
-      "Puzzle",
-      "Simulator",
-      "Indie"
-    ],
-    "developer": "",
-    "description": "Do you know how the insides of a Terminator’s Minigun work? Try World of Guns: the world’s most realistic 3D simulator of firearms (and other things from tanks to DeLorean time machines). Find out what makes legendary pistols, rifles, machine guns and artillery pieces tick… Then disassemble them down to the tiniest part!<br /><br />A free-to-play game and an interactive encyclopedia, simulating real firearms in 3D. Here, you can literally climb inside a gun and understand its workings; cut it in half, fire it and bring time to a crawl; and finally, completely disassemble it and put it back again (against the clock if you wish).<br /><br />WoG meticulously recreates historical and modern examples of firearm designer genius — from a tiny Liberator pistol to a 16000-pound FlaK 88 anti-aircraft gun. It has both legendary World War guns and rare models that even museums struggle to find. World of Guns puts 200 years of firearm history into a single, sleek and engaging video game."
-  },
-  {
-    "id": "200551",
-    "title": "Zenless Zone Zero",
-    "slug": "zenless-zone-zero",
-    "cover": "https://images.igdb.com/igdb/image/upload/t_cover_big/cocnek.jpg",
-    "banner": "https://images.igdb.com/igdb/image/upload/t_screenshot_big/sch7o8.jpg",
-    "link": "https://infinitebacklog.net/games/zenless-zone-zero",
-    "status": "planned",
-    "hours": 6,
     "platform": "Windows PC",
     "year": "2024",
     "genres": [

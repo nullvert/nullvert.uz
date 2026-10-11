@@ -2,10 +2,13 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { downloadCoverIfMissing, cleanupOrphanedCovers } from "./media-cover-helper.mjs";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = resolve(__dirname, "..");
 const SNAPSHOT_DIR = resolve(ROOT_DIR, "shirones/config/data/games-snapshots");
 const SNAPSHOT_FILE = resolve(SNAPSHOT_DIR, "infinitebacklog.json");
+const COVERS_DIR = resolve(ROOT_DIR, "public/assets/media/games");
 
 function loadEnv() {
 	const envPath = resolve(ROOT_DIR, ".env");
@@ -134,18 +137,32 @@ async function main() {
 		const gameId = game.id || entry.game_id;
 		if (!gameId) continue;
 
-		// Статусы:
-		// playing -> playing (Играю)
-		// played -> completed (Пройдено)
-		// unplayed -> planned (В планах / Бэклог)
-		// dropped / on_hold (если есть) или noStatus
-		let status = "planned";
-		if (entry.status === "playing") status = "playing";
-		else if (entry.status === "played") status = "completed";
-		else if (entry.status === "unplayed") status = "planned";
-		else if (entry.status === "dropped") status = "dropped";
-		else if (entry.status === "on_hold" || entry.status === "paused") status = "onHold";
-		else status = "planned";
+		// Статусы InfiniteBacklog:
+		// status: playing | played | unplayed | noStatus | dropped | on_hold | paused
+		// completion: continuous | campaignCompleted | completed | mastered | dropped | unfinished | notStarted | noStatus
+		let status = null;
+		if (entry.completion === "dropped" || entry.status === "dropped") {
+			status = "dropped";
+		} else if (entry.status === "playing") {
+			status = "playing";
+		} else if (entry.status === "played") {
+			// Если кампания пройдена или игра полностью завершена
+			if (entry.completion === "campaignCompleted" || entry.completion === "completed" || entry.completion === "mastered") {
+				status = "completed";
+			} else if (entry.completion === "unfinished") {
+				// Играл, но не закончил: если брошена не помечено, либо onHold, либо playing
+				status = "onHold";
+			} else {
+				status = "completed";
+			}
+		} else if (entry.status === "unplayed") {
+			status = "planned";
+		} else if (entry.status === "on_hold" || entry.status === "paused") {
+			status = "onHold";
+		}
+
+		// Игры из общей библиотеки без назначенного статуса (noStatus) не включаем в бэклог «В планах»
+		if (!status) continue;
 
 		// Обложка IGDB
 		const coverHash = game.cover?.image_id || (game.cover?.url ? game.cover.url.replace(/\.[^.]+$/, "") : null);
@@ -223,6 +240,29 @@ async function main() {
 	}
 
 	console.log(`\n[InfiniteBacklog] Done processing ${normalizedItems.length} games.`);
+
+	// Локальное скачивание обложек и Garbage Collection
+	console.log(`[InfiniteBacklog] Downloading covers locally to ${COVERS_DIR}...`);
+	const activeCoverFilenames = new Set();
+
+	for (let i = 0; i < normalizedItems.length; i++) {
+		const item = normalizedItems[i];
+		if (!item.cover) continue;
+
+		const filename = `${item.id}.jpg`;
+		activeCoverFilenames.add(filename);
+
+		const localFilePath = resolve(COVERS_DIR, filename);
+		const publicPath = `/assets/media/games/${filename}`;
+
+		item.cover = await downloadCoverIfMissing(item.cover, localFilePath, publicPath);
+		// Баннер оставляем либо локальным, либо оригинальным
+		if (item.banner && item.banner.includes(item.id)) {
+			item.banner = item.cover;
+		}
+	}
+
+	cleanupOrphanedCovers(COVERS_DIR, activeCoverFilenames, "InfiniteBacklog");
 
 	// 5. Запись в JSON
 	if (!existsSync(SNAPSHOT_DIR)) {

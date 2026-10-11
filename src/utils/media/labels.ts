@@ -32,6 +32,7 @@ export const MEDIA_LABEL = {
 	gamesAll: "games.all",
 	gamesPlatformLabel: "games.platformLabel",
 	gamesUnitHours: "games.unitHours",
+	gamesStatusCompleted: "games.statusCompleted",
 
 	// Общие статусы
 	statusWatching: "mediaCatalog.statusWatching",
