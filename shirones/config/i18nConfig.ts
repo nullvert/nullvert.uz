@@ -363,6 +363,40 @@ const ru: Partial<Record<I18nKey | string, string>> = {
 	"displaySettings.resetDefault": "Сбросить по умолчанию",
 	"displaySettings.glassEffect": "Эффект стекла",
 
+	// ── Медиа-каталоги (Аниме, Кино, Игры) ──
+	"mediaCatalog.all": "Все",
+	"mediaCatalog.status": "Статус",
+	"mediaCatalog.sort": "Сортировка",
+	"mediaCatalog.source": "Источник",
+	"mediaCatalog.options": "Параметры",
+	"mediaCatalog.optionsAndFilters": "Параметры и фильтры",
+	"mediaCatalog.searchPlaceholder": "Поиск...",
+	"mediaCatalog.noResults": "Ничего не найдено",
+
+	"mediaCatalog.sortDefault": "По умолчанию",
+	"mediaCatalog.sortYear": "По году",
+	"mediaCatalog.sortRating": "По оценке",
+	"mediaCatalog.sortTitle": "По алфавиту",
+
+	"cinema.typeAll": "Всё",
+	"cinema.typeMovie": "Фильмы",
+	"cinema.typeShow": "Сериалы",
+	"cinema.sourceLabel": "Тип медиа",
+	"cinema.counts": "наименований",
+	"cinema.unitEpisode": "эп.",
+	"cinema.unitMinute": "мин.",
+
+	"games.all": "Все игры",
+	"games.platformLabel": "Платформа",
+	"games.unitHours": "ч.",
+
+	"mediaCatalog.statusWatching": "Смотрю",
+	"mediaCatalog.statusPlaying": "Играю",
+	"mediaCatalog.statusCompleted": "Просмотрено",
+	"mediaCatalog.statusPlanned": "В планах",
+	"mediaCatalog.statusOnHold": "Отложено",
+	"mediaCatalog.statusDropped": "Брошено",
+
 	// ── RSS и Atom ──
 	[I18nKey.rss]: "RSS-лента",
 	[I18nKey.rssSubtitle]: "Подписка на публикации через RSS-ридер",

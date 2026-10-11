@@ -9,12 +9,14 @@ export default defineConfig({
     shirones({
       // Override individual components by mirroring the theme's structure in
       // `src/components/`, or point at them explicitly:
-      excludeRoutes: ["/archive", "/robots.txt"],
+      excludeRoutes: ["/archive", "/robots.txt", "/games", "/anime"],
       components: {
         "organisms/Profile": "./src/components/organisms/Profile.astro",
         "organisms/DisplaySettings": "./src/components/organisms/DisplaySettings.svelte",
         "organisms/ArchivePanel": "./src/components/organisms/ArchivePanel.svelte",
         "organisms/SiteNavigationDrawer": "./src/components/organisms/SiteNavigationDrawer.svelte",
+        "organisms/AnimeSection": "./src/components/organisms/AnimeSection.svelte",
+        "organisms/GamesSection": "./src/components/organisms/GamesSection.svelte",
         "layouts/MainGridLayout": "./src/layouts/MainGridLayout.astro",
       },
     }),

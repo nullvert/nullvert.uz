@@ -40,16 +40,14 @@ import { withUserConfig } from "@/utils/config-overlay.ts";
  */
 export const animeConfig: AnimeConfig = withUserConfig("anime", {
 	/** Включить страницу аниме; если false, пункт меню скрывается, а при переходе на /anime/ отдается 404 */
-	enable: false,
+	enable: true,
 	title: "$t:anime",
 	description: "$t:animeBanner",
 
 	/** Основной источник данных */
 	source: {
-		kind: "local",
-		// provider: "bangumi",
-		// file: "bangumi.json",
-		// fetchOnDev: true,
+		kind: "snapshot",
+		file: "anilist.json",
 	},
 
 	/** Стратегия отката при ошибке (если снапшот поврежден или отсутствует — откат к локальным данным) */

@@ -10,6 +10,10 @@
     "preview": "astro preview",
     "check": "astro check",
     "type-check": "astro check",
+    "anime:sync": "node scripts/anime-sync-anilist.mjs",
+    "cinema:sync": "node scripts/cinema-sync-simkl.mjs",
+    "games:sync": "node scripts/games-sync-infinitebacklog.mjs",
+    "media:sync": "node scripts/anime-sync-anilist.mjs && node scripts/cinema-sync-simkl.mjs && node scripts/games-sync-infinitebacklog.mjs",
     "astro": "astro"
   },
   "dependencies": {

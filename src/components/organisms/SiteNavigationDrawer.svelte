@@ -58,7 +58,12 @@ const primaryItems = links.map((link) => {
 });
 
 function syncFromRoute() {
-	const pageKey = resolvePageKey(new URL(window.location.href));
+	const currentUrl = new URL(window.location.href);
+	const path = currentUrl.pathname.replace(/\/+$/, "") || "/";
+	let pageKey = resolvePageKey(currentUrl);
+	if (!pageKey && path === "/cinema") {
+		pageKey = "cinema";
+	}
 	activePrimary = "";
 	for (const item of primaryItems) {
 		if (item.pageKey && item.pageKey === pageKey) {
@@ -107,6 +112,61 @@ onMount(() => {
 	};
 });
 
+let isDragging = $state(false);
+let startX = 0;
+let startY = 0;
+let currentTranslateX = $state(0);
+let isHorizontalGesture = false;
+let gestureDecided = false;
+
+function handleTouchStart(e: TouchEvent) {
+	if (!open || e.touches.length !== 1) return;
+	const touch = e.touches[0];
+	startX = touch.clientX;
+	startY = touch.clientY;
+	isDragging = true;
+	currentTranslateX = 0;
+	isHorizontalGesture = false;
+	gestureDecided = false;
+}
+
+function handleTouchMove(e: TouchEvent) {
+	if (!isDragging || e.touches.length !== 1) return;
+	const touch = e.touches[0];
+	const deltaX = touch.clientX - startX;
+	const deltaY = touch.clientY - startY;
+
+	if (!gestureDecided) {
+		if (Math.abs(deltaX) > 8 || Math.abs(deltaY) > 8) {
+			gestureDecided = true;
+			isHorizontalGesture = Math.abs(deltaX) > Math.abs(deltaY);
+		}
+	}
+
+	if (isHorizontalGesture) {
+		// Для левого меню закрывающий свайп направлен влево (deltaX < 0)
+		if (deltaX < 0) {
+			currentTranslateX = deltaX;
+			if (e.cancelable) e.preventDefault();
+		} else {
+			// Эластичное сопротивление вправо
+			currentTranslateX = deltaX * 0.15;
+		}
+	}
+}
+
+function handleTouchEnd() {
+	if (!isDragging) return;
+	isDragging = false;
+	// Порог закрытия: если сдвинули влево более чем на 75px
+	if (isHorizontalGesture && currentTranslateX < -75) {
+		open = false;
+	}
+	currentTranslateX = 0;
+	gestureDecided = false;
+	isHorizontalGesture = false;
+}
+
 let drawerEl: HTMLElement | undefined = $state();
 </script>
 
@@ -121,6 +181,11 @@ let drawerEl: HTMLElement | undefined = $state();
 		role="dialog"
 		aria-modal="true"
 		aria-label={siteConfig.title}
+		style={isDragging && currentTranslateX < 0 ? `transform: translateX(${currentTranslateX}px); transition: none;` : undefined}
+		ontouchstart={handleTouchStart}
+		ontouchmove={handleTouchMove}
+		ontouchend={handleTouchEnd}
+		ontouchcancel={handleTouchEnd}
 	>
 		<div class="site-drawer__header">
 			<div class="site-drawer__brand">

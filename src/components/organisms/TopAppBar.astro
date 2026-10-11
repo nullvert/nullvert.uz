@@ -16,15 +16,19 @@ import Search from "@components/organisms/Search.svelte";
 
 const className = Astro.props.class;
 const links = resolveNavBarLinks(navBarConfig.links);
-const currentPageKey = resolvePageKey(Astro.url);
+const rawPageKey = resolvePageKey(Astro.url);
+const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const currentPageKey = rawPageKey || (currentPath === "/cinema" ? "cinema" : "");
 
 function hrefFor(path?: string) {
 	return path ? url(path) : undefined;
 }
 
 function isActive(link: (typeof links)[number]): boolean {
+	const linkPath = link.url ? link.url.replace(/\/+$/, "") || "/" : "";
 	return Boolean(
 		(link.pageKey && link.pageKey === currentPageKey) ||
+			(linkPath && linkPath === currentPath) ||
 			link.children?.some(isActive),
 	);
 }
@@ -86,7 +90,8 @@ const logoSuffix = schemeIdx !== -1 ? rawTitle.slice(schemeIdx + 3) : rawTitle;
 						{link.children && <div class="top-app-bar__submenu" role="menu">
 							{link.children.map((child) => {
 								const childHref = child.external ? child.url : hrefFor(child.url);
-							return <a href={childHref} target={child.external ? "_blank" : undefined} rel={child.external ? "noopener noreferrer" : undefined} role="menuitem" data-nav-key={child.pageKey ?? ""} class="top-app-bar__submenu-item">
+								const childActive = isActive(child);
+							return <a href={childHref} target={child.external ? "_blank" : undefined} rel={child.external ? "noopener noreferrer" : undefined} role="menuitem" data-nav-key={child.pageKey ?? ""} aria-current={childActive ? "page" : undefined} class:list={["top-app-bar__submenu-item", childActive && "top-app-bar__nav-link--active"]}>
 									{child.icon && <Icon name={child.icon} class="text-[1.2rem]"></Icon>}{child.name}{child.external && <Icon name="material-symbols:arrow-outward-rounded" class="ml-auto text-[0.875rem]"></Icon>}
 								</a>;
 							})}
@@ -112,7 +117,13 @@ const logoSuffix = schemeIdx !== -1 ? rawTitle.slice(schemeIdx + 3) : rawTitle;
 	import { resolvePageKey } from "@utils/nav-utils";
 
 	function syncTopAppBarNavigation() {
-		setTopAppBarNavigation(resolvePageKey(new URL(window.location.href)));
+		const currentUrl = new URL(window.location.href);
+		const path = currentUrl.pathname.replace(/\/+$/, "") || "/";
+		let key = resolvePageKey(currentUrl);
+		if (!key && path === "/cinema") {
+			key = "cinema";
+		}
+		setTopAppBarNavigation(key);
 	}
 
 	function setTopAppBarNavigation(pageKey: string) {

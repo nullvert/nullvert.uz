@@ -25,6 +25,12 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env*.local
+*.env.local
+
+# local guides & notes
+GUIDE.md
+guide.md
 
 # macOS-specific files
 .DS_Store
@@ -45,8 +51,7 @@ src/assets/fonts/.subset/
 src/generated/local-icon-collections.ts
 *.iml
 
-# anime snapshot data & downloaded covers
-shirones/config/data/anime-snapshots/*.json
+# anime downloaded covers
 public/assets/anime/covers/*
 !public/assets/anime/covers/.gitkeep
 

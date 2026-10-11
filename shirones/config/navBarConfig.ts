@@ -57,8 +57,14 @@ export const LinkPresets: Record<string, NavBarLink> = {
 	Anime: {
 		name: i18n(I18nKey.anime),
 		url: "/anime/",
-		icon: "material-symbols:live-tv-outline-rounded",
+		icon: "fa6-solid:torii-gate",
 		pageKey: "anime",
+	},
+	Cinema: {
+		name: "Кино",
+		url: "/cinema/",
+		icon: "material-symbols:movie-outline-rounded",
+		pageKey: "cinema",
 	},
 	Compass: {
 		name: i18n(I18nKey.compass),
@@ -137,11 +143,13 @@ export const LinkPresets: Record<string, NavBarLink> = {
 
 const defaultNavBarConfig: NavBarConfig = {
 	links: [
-		LinkPresets.Home,
-		LinkPresets.Archive,
 		LinkPresets.Categories,
 		LinkPresets.Tags,
+		LinkPresets.Anime,
+		LinkPresets.Cinema,
+		LinkPresets.Games,
 		LinkPresets.About,
+		LinkPresets.Archive,
 	],
 };
 

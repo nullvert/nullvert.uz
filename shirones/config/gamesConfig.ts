@@ -13,7 +13,7 @@ import { withUserConfig } from "@/utils/config-overlay.ts";
  * Примечание: сами игры (название, разработчик, обложка, рейтинг, время игры, отзыв) настраиваются в `src/data/games.ts`.
  */
 export const gamesConfig: GamesConfig = withUserConfig("games", {
-	enable: false,
+	enable: true,
 	title: "$t:games",
 	description: "$t:gamesBanner",
 	categories: [

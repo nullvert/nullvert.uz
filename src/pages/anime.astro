@@ -1,0 +1,19 @@
+---
+/**
+ * Раздел «Аниме»: коллекция из AniList.
+ */
+import AnimeSection from "../components/organisms/AnimeSection.svelte";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { animeConfig } from "../../shirones/config/animeConfig";
+
+if (!animeConfig.enable) {
+	return Astro.redirect("/404/");
+}
+
+const pageTitle = "Аниме";
+const pageDescription = "Моя коллекция аниме из AniList";
+---
+
+<MainGridLayout title={pageTitle} description={pageDescription} page="anime">
+	<AnimeSection client:visible />
+</MainGridLayout>

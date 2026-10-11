@@ -5,6 +5,7 @@
 
 /* ── 1. Макет и системные плавающие контролы ── */
 
+
 /* Отступ снизу для контента страницы, чтобы нижний плеер не перекрывал футер */
 #main-layout {
 	padding-bottom: 4.5rem;
@@ -216,8 +217,8 @@ dialog.m3-dialog::backdrop {
 :root[data-glass="cards"] #main-layout .m3-blog-postcard,
 :root[data-glass="cards"] #main-layout .card-base {
 	background: color-mix(in srgb, var(--card-bg) 48%, transparent) !important;
-	backdrop-filter: blur(12px) saturate(180%) !important;
-	-webkit-backdrop-filter: blur(12px) saturate(180%) !important;
+	backdrop-filter: blur(14px) saturate(180%) !important;
+	-webkit-backdrop-filter: blur(14px) saturate(180%) !important;
 	border: 1px solid color-mix(in srgb, var(--outline-variant) 40%, rgba(255, 255, 255, 0.16)) !important;
 	box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12), 0 8px 24px -4px rgba(0, 0, 0, 0.25) !important;
 }
@@ -1761,6 +1762,41 @@ aside#sidebar-secondary widget-layout:hover .m3-card {
 	border-color: var(--primary) !important;
 	box-shadow: 0 3px 10px color-mix(in srgb, var(--primary) 30%, transparent) !important;
 }
+
+
+
+.anime-list--grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 1.25rem;
+	padding-top: 0;
+}
+
+@media (max-width: 78rem) {
+	.anime-list--grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+}
+
+@media (max-width: 52rem) {
+	.anime-list--grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 0.875rem;
+	}
+}
+
+@media (max-width: 36rem) {
+	.anime-list--grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.75rem;
+	}
+}
+
+
+
+
+
 
 
 

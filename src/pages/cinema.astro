@@ -1,0 +1,19 @@
+---
+/**
+ * Раздел «Кино и Сериалы»: фильмы и сериалы из Simkl / Kinorium.
+ */
+import CinemaSection from "../components/organisms/CinemaSection.svelte";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { cinemaConfig } from "../../shirones/config/cinemaConfig";
+
+if (!cinemaConfig.enable) {
+	return Astro.redirect("/404/");
+}
+
+const pageTitle = cinemaConfig.title;
+const pageDescription = cinemaConfig.description;
+---
+
+<MainGridLayout title={pageTitle} description={pageDescription} page="cinema">
+	<CinemaSection client:visible />
+</MainGridLayout>

@@ -1,0 +1,19 @@
+---
+/**
+ * Раздел «Игры»: коллекция и бэклог из Infinite Backlog.
+ */
+import GamesSection from "../components/organisms/GamesSection.svelte";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { gamesConfig } from "../../shirones/config/gamesConfig";
+
+if (!gamesConfig.enable) {
+	return Astro.redirect("/404/");
+}
+
+const pageTitle = "Игры";
+const pageDescription = "Игровая коллекция, бэклог и пройденные тайтлы";
+---
+
+<MainGridLayout title={pageTitle} description={pageDescription} page="games">
+	<GamesSection client:visible />
+</MainGridLayout>
