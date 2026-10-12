@@ -14,6 +14,7 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 	base: "/",
 	title: "nv://blog",
 	subtitle: "личный техноблог",
+	ogImage: "/assets/images/og.jpg",
 	// Выравнивание заголовка и навигации в верхней панели на десктопе: "left" — по левому краю, "center" — по центру.
 	topAppBar: {
 		contentAlign: "center",
