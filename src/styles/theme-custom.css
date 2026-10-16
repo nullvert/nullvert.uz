@@ -39,26 +39,63 @@
 	display: none !important;
 }
 
-/* Центрирование страниц архива (/archive/), категорий (/categories/) и тегов (/tags/) без сайдбара */
-#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"])) {
+/* Центрирование страниц без сайдбара (архив, категории, теги, медиа-каталоги, компас) */
+body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #main-grid,
+#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"])) #sidebar,
-#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"])) #sidebar-secondary {
-	display: none;
+body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #sidebar,
+body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #sidebar-secondary,
+#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) #sidebar,
+#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) #sidebar-secondary {
+	display: none !important;
 }
 
+body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"]) #main-content-column,
 #main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"])) #main-content-column {
 	width: 100%;
 	max-width: 58rem;
 	margin-inline: auto;
 }
 
-#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"])) .footer {
+body:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #main-content-column,
+body:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #swup-container,
+body:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #content-wrapper,
+#main-grid:has(#swup-container:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) #main-content-column,
+#main-grid:has(#swup-container:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) #swup-container,
+#main-grid:has(#swup-container:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) #content-wrapper {
+	width: 100%;
+	min-width: 0;
+	overflow: visible !important;
+}
+
+body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) .footer,
+#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) .footer {
 	margin-top: 2.5rem !important;
+}
+
+/* Сетка карточек Компаса: 3 колонки (Wider Cards: grid-cols-1 sm:grid-cols-2 lg:grid-cols-3) */
+.compass-shelf__grid {
+	display: grid !important;
+	grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+	gap: 1.125rem !important;
+}
+
+@media (max-width: 64rem) {
+	.compass-shelf__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+		gap: 1rem !important;
+	}
+}
+
+@media (max-width: 40rem) {
+	.compass-shelf__grid {
+		grid-template-columns: 1fr !important;
+		gap: 0.875rem !important;
+	}
 }
 
 /* ── 2. Система эффекта стекла (M3E Universal Glassmorphism) ── */
@@ -203,6 +240,10 @@ dialog.m3-dialog::backdrop {
 :root:not([data-glass="cards"]) #main-layout .m3-card,
 :root:not([data-glass="cards"]) #main-layout .m3-profile,
 :root:not([data-glass="cards"]) #main-layout .m3-blog-postcard,
+:root:not([data-glass="cards"]) #main-layout .book-card,
+:root:not([data-glass="cards"]) #main-layout .reading-goal-card,
+:root:not([data-glass="cards"]) #main-layout .compass-tile,
+:root:not([data-glass="cards"]) #main-layout .catalog-shell__sidebar-inner,
 :root:not([data-glass="cards"]) #main-layout .card-base {
 	background: var(--card-bg) !important;
 	backdrop-filter: none !important;
@@ -215,6 +256,10 @@ dialog.m3-dialog::backdrop {
 :root[data-glass="cards"] #main-layout .m3-card,
 :root[data-glass="cards"] #main-layout .m3-profile,
 :root[data-glass="cards"] #main-layout .m3-blog-postcard,
+:root[data-glass="cards"] #main-layout .book-card,
+:root[data-glass="cards"] #main-layout .reading-goal-card,
+:root[data-glass="cards"] #main-layout .compass-tile,
+:root[data-glass="cards"] #main-layout .catalog-shell__sidebar-inner,
 :root[data-glass="cards"] #main-layout .card-base {
 	background: color-mix(in srgb, var(--card-bg) 48%, transparent) !important;
 	backdrop-filter: blur(14px) saturate(180%) !important;
@@ -223,9 +268,16 @@ dialog.m3-dialog::backdrop {
 	box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12), 0 8px 24px -4px rgba(0, 0, 0, 0.25) !important;
 }
 
-:root[data-glass="cards"] #main-layout .m3-blog-postcard:hover {
-	border-color: color-mix(in srgb, var(--outline-variant) 50%, rgba(255, 255, 255, 0.24));
-	box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.18), 0 12px 28px -4px rgba(0, 0, 0, 0.3);
+:root[data-glass="cards"] #main-layout .m3-blog-postcard:hover,
+:root[data-glass="cards"] #main-layout .book-card:hover,
+:root[data-glass="cards"] #main-layout .reading-goal-card:hover,
+:root[data-glass="cards"] #main-layout .compass-tile:hover {
+	border-color: color-mix(in srgb, var(--outline-variant) 50%, rgba(255, 255, 255, 0.24)) !important;
+	box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.18), 0 12px 28px -4px rgba(0, 0, 0, 0.3) !important;
+}
+
+:root[data-glass="cards"] #main-layout .catalog-shell__sidebar-inner:hover {
+	border-color: color-mix(in srgb, var(--outline-variant) 50%, rgba(255, 255, 255, 0.22)) !important;
 }
 
 .top-app-bar__nav-link {
@@ -1791,6 +1843,11 @@ aside#sidebar-secondary widget-layout:hover .m3-card {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 0.75rem;
 	}
+}
+
+/* Скрывать категорию у постов без категории, чтобы не отображалась китайская заглушка «未分类» */
+.m3-blog-postmeta__item:has(.m3-meta-icon svg[data-icon*="book-2"]):has(> .m3-blog-postmeta__text) {
+	display: none !important;
 }
 
 

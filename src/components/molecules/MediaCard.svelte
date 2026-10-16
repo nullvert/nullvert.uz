@@ -19,15 +19,27 @@ let {
 	delay = 0,
 	showTitle = true,
 	showTitleOnPoster = false,
+	bookSpine = false,
+	bookCoverStyle = "typographic",
 }: {
 	item: MediaItemData;
-	aspect?: "poster" | "landscape";
+	aspect?: "poster" | "landscape" | "game";
 	delay?: number;
 	showTitle?: boolean;
 	showTitleOnPoster?: boolean;
+	bookSpine?: boolean;
+	bookCoverStyle?: "typographic" | "default";
 } = $props();
 
 let coverFailed = $state(false);
+
+const imageDimensions = $derived(
+	aspect === "game"
+		? { width: 264, height: 352 }
+		: aspect === "landscape"
+			? { width: 640, height: 360 }
+			: { width: 340, height: 510 },
+);
 
 const showCover = $derived(Boolean(item.cover) && !coverFailed);
 
@@ -126,7 +138,8 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 <article
 	class="media-card media-card--{aspect} media-card--rating-{ratingTier}"
 	class:media-card--title-on-poster={showTitleOnPoster}
-	style={`--media-status-color: ${statusColor};`}
+	class:media-card--book-spine={bookSpine}
+	style={`--media-status-color: ${statusColor};${ratingTier === "normal" || ratingTier === "none" ? ` --electric-color: ${statusColor};` : ""}`}
 	onpointerenter={(e) => trackPointer(e, true)}
 	onpointermove={(e) => trackPointer(e, false)}
 	onpointerleave={(e) => resetPointer(e)}
@@ -135,11 +148,16 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 	<!-- Постер с плавающими иконками-бейджами -->
 	<div class="media-card__media-wrap">
 		{#snippet mediaContent()}
+			{#if bookSpine}
+				<div class="media-card__spine-crease" aria-hidden="true"></div>
+			{/if}
 			{#if showCover}
 				<img
 					class="media-card__cover"
 					src={url(item.cover!)}
 					alt={item.title}
+					width={imageDimensions.width}
+					height={imageDimensions.height}
 					loading="lazy"
 					decoding="async"
 					fetchpriority="low"
@@ -152,8 +170,8 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 					<div class="media-card__placeholder-content">
 						<Icon
 							icon={aspect === "landscape"
-								? "material-symbols:sports-esports-outline-rounded"
-								: "material-symbols:movie-outline-rounded"}
+							? "material-symbols:sports-esports-outline-rounded"
+							: "material-symbols:movie-outline-rounded"}
 							class="media-card__placeholder-icon"
 						/>
 						<span class="media-card__placeholder-title">{item.title}</span>
@@ -163,8 +181,15 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 			{/if}
 
 			<!-- Полупрозрачные бейджи в верхних углах постера -->
-			<!-- Статус: показывается слева вверху (иконка статуса) -->
-			{#if item.statusLabel}
+			{#if item.topAction}
+				<span
+					class="media-card__top-status media-card__top-status--text"
+					title={`Позиция в списке: ${item.topAction}`}
+					aria-label={`Позиция в списке: ${item.topAction}`}
+				>
+					<span class="media-card__top-rank-val">{item.topAction}</span>
+				</span>
+			{:else if item.statusLabel}
 				<span
 					class="media-card__top-status"
 					title={item.statusLabel}
@@ -182,38 +207,58 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 				</span>
 			{/if}
 
-			<!-- Оценка: в правом верхнем углу (числовой бейдж без звездочки) -->
-			{#if item.rating !== undefined && item.rating > 0}
+			<!-- Оценка или цена/скидка в аутентичном стиле Steam: в правом верхнем углу -->
+			{#if item.topBadge}
+				<div
+					class="media-card__top-price-badge"
+					class:media-card__top-price-badge--discounted={Boolean(item.topDiscount)}
+					title={item.topDiscount ? `Скидка ${item.topDiscount}: ${item.topBadge}` : `Цена: ${item.topBadge}`}
+				>
+					{#if item.topDiscount}
+						<span class="media-card__steam-discount">{item.topDiscount}</span>
+					{/if}
+					<span class="media-card__steam-price" class:media-card__steam-price--discounted={Boolean(item.topDiscount)}>
+						{item.topBadge}
+					</span>
+				</div>
+			{:else if item.rating !== undefined && item.rating > 0}
 				<span class="media-card__top-rating" title={`Оценка: ${item.rating}`}>
 					<span class="media-card__top-rating-val">{item.rating}</span>
 				</span>
 			{/if}
 
-
 			<!-- Затемнение градиентом -->
 			<div class="media-card__scrim" aria-hidden="true"></div>
 
-			<!-- Hover-оверлей поверх постера с названием, мета-шапкой, описанием и деталями -->
+			<!-- Hover-оверлей поверх постера -->
 			<div class="media-card__overlay">
 				<h3 class="media-card__overlay-title" title={item.title}>
 					{item.title}
 				</h3>
 
-				{#if item.year || item.authorOrStudio}
-					<div class="media-card__overlay-meta">
-						{#if item.year}
-							<span class="media-card__overlay-year">{item.year}</span>
-						{/if}
-						{#if item.year && item.authorOrStudio}
-							<span class="media-card__overlay-dot" aria-hidden="true">·</span>
-						{/if}
-						{#if item.authorOrStudio}
-							<span class="media-card__overlay-extra">{item.authorOrStudio}</span>
-						{/if}
-					</div>
-				{/if}
+					{#if item.authorOrStudio || item.year || item.subMeta}
+						<div class="media-card__overlay-meta">
+							{#if item.authorOrStudio}
+								<span class="media-card__overlay-author" title={item.authorOrStudio}>
+									{item.authorOrStudio}
+								</span>
+							{/if}
+							{#if item.authorOrStudio && (item.year || item.subMeta)}
+								<span class="media-card__overlay-dot" aria-hidden="true">·</span>
+							{/if}
+							{#if item.year}
+								<span class="media-card__overlay-year">{item.year}</span>
+							{/if}
+							{#if item.year && item.subMeta}
+								<span class="media-card__overlay-dot" aria-hidden="true">·</span>
+							{/if}
+							{#if item.subMeta}
+								<span class="media-card__overlay-sub">{item.subMeta}</span>
+							{/if}
+						</div>
+					{/if}
 
-				<div class="media-card__overlay-details">
+			<div class="media-card__overlay-details">
 					<div class="media-card__overlay-details-inner">
 						{#if item.description}
 							<p class="media-card__overlay-desc">{item.description}</p>
@@ -262,15 +307,19 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 			</div>
 		{/if}
 
-		<!-- Fancy Hover Border (Temani Afif style): пробегающая рамка из углов с акцентным цветом для всех карточек -->
+		<!-- Hover Border: показываем рамку fancy-border для всех карточек, кроме золотого masterpiece -->
 		{#if ratingTier !== "masterpiece"}
 			<div class="media-card__fancy-border" aria-hidden="true"></div>
 		{/if}
 
-		<!-- Pure CSS Animated Gradient Border: для золотого (masterpiece) без SVG -->
+		<!-- Pure CSS Animated Gradient Border: только для золотых карточек с фотообложкой -->
 		{#if ratingTier === "masterpiece"}
 			<div class="media-card__foil-shine" aria-hidden="true"></div>
 			<div class="media-card__gradient-border" aria-hidden="true"></div>
+		{/if}
+
+		<!-- Pointer Hover Glow: матовое золотое свечение за курсором для всех masterpiece карточек -->
+		{#if ratingTier === "masterpiece"}
 			<div class="media-card__gold-aura" aria-hidden="true"></div>
 		{/if}
 	</div>
@@ -290,7 +339,6 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 	border: none
 	box-shadow: none
 	transition: transform var(--m3e-duration-medium) var(--m3e-easing-emphasized-decelerate)
-	--electric-color: var(--primary)
 
 	&:hover
 		/* Мягкий фокус без прыжков карточки */
@@ -321,20 +369,21 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 	   ГАЧА-ГРЕЙДЫ: ЦВЕТОВЫЕ АКЦЕНТЫ БЕЙДЖЕЙ
 	   ══════════════════════════════════════════════════════════════ */
 
-	/* ── Fancy Animated Border (Temani Afif style): пробегающая рамка из углов ── */
+	/* ── Fancy Animated Border (Temani Afif style): четкая, выразительная неоновая рамка ── */
 	&__fancy-border
 		position: absolute
 		inset: -2px
 		z-index: 10
 		pointer-events: none
-		--c: var(--electric-color, var(--primary))
-		--b: 2.5px
+		--c: var(--electric-color, var(--media-status-color, var(--primary)))
+		--b: 2px
 		--_g: unquote("#0000 25%, var(--c) 0")
 		background:
 			unquote("conic-gradient(from 180deg at top var(--b) right var(--b), var(--_g)) var(--_i, 200%) 0 / 200% var(--_i, var(--b)) no-repeat"),
 			unquote("conic-gradient(at bottom var(--b) left var(--b), var(--_g)) 0 var(--_i, 200%) / var(--_i, var(--b)) 200% no-repeat")
 		transition: 0.35s ease, background-position 0.35s 0.35s ease
 		opacity: 0
+		filter: drop-shadow(0 0 4px unquote("color-mix(in oklab, var(--c) 40%, transparent)"))
 
 		.media-card:hover &
 			--_i: 100%
@@ -344,13 +393,13 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 	/* ── Pure CSS Animated Gradient Border: вращающийся золотой луч через mask (без SVG) ── */
 	&__gradient-border
 		position: absolute
-		inset: -2.5px
+		inset: -1.5px
 		z-index: 10
 		pointer-events: none
 		opacity: 0
 		border-radius: 0
 		overflow: hidden
-		--b: 2.5px
+		--b: 1.5px
 		--_m: unquote("linear-gradient(#000 0 0)")
 		-webkit-mask:
 			var(--_m) content-box,
@@ -368,11 +417,11 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 			left: -50%
 			width: 200%
 			height: 200%
-			background: conic-gradient(from 0deg, transparent 0%, transparent 60%, rgba(255, 230, 163, 0.4) 75%, #ffb338 88%, #ffe89e 96%, transparent 100%)
+			background: conic-gradient(from 0deg, transparent 0%, transparent 60%, rgba(255, 230, 163, 0.3) 75%, rgba(255, 179, 56, 0.75) 88%, rgba(255, 232, 158, 0.9) 96%, transparent 100%)
 			transform: rotate(var(--angle, 0deg))
 
 		.media-card:hover &
-			opacity: 1
+			opacity: 0.85
 
 	/* ── Золотое свечение и поинтер-ховер (матовый золотой глянец) ── */
 	&__gold-aura
@@ -460,9 +509,7 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 	&--rating-great,
 	&--rating-poor
 		.media-card__top-rating-val
-			font-weight: 900
-			color: var(--on-surface)
-			text-shadow: none
+			font-weight: 800
 
 	/* ── 1. Золото: 10 / 10 ── */
 	&--rating-masterpiece
@@ -498,12 +545,31 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 			color: #ff8a80
 			text-shadow: 0 0 6px rgba(194, 54, 47, 0.6)
 
-	&--poster &__media-wrap
+	&--poster &__media-wrap,
+	&--game &__media-wrap
 		aspect-ratio: 2 / 3
 
 	&--landscape &__media-wrap
 		aspect-ratio: 16 / 9
 
+	&--book-spine
+		perspective: none
+
+		.media-card__media-wrap
+			border-radius: 0
+			box-shadow: none
+			transform: none !important
+			transform-style: flat
+
+		&:hover .media-card__media-wrap
+			transform: none !important
+			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4)
+
+		.media-card__media-link
+			border-radius: 0
+
+			&::before
+				display: none
 	&__media-link
 		position: relative
 		display: block
@@ -612,23 +678,99 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 		border: none
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3)
 		transition:
-			background var(--m3e-duration-short) var(--m3e-easing-standard),
+			background var(--m3e-duration-medium) var(--m3e-easing-standard),
+			border-color var(--m3e-duration-medium) var(--m3e-easing-standard),
 			transform var(--m3e-duration-short) var(--m3e-easing-standard)
 
-		&:hover
-			background: rgba(15, 23, 42, 0.88)
+		.media-card:hover &
+			background: unquote("color-mix(in oklab, var(--electric-color, var(--primary)) 28%, rgba(15, 23, 42, 0.88))")
 
 		:global(.media-card__top-status-icon)
 			width: unquote("calc(var(--badge-size, 1.875rem) * 0.57)")
 			height: unquote("calc(var(--badge-size, 1.875rem) * 0.57)")
 			color: rgba(255, 255, 255, 0.88)
 			flex-shrink: 0
+			transition: color var(--m3e-duration-medium) var(--m3e-easing-standard)
+
+		.media-card:hover & :global(.media-card__top-status-icon)
+			color: #ffffff
 
 	&__status-dot
 		width: 0.5rem
 		height: 0.5rem
 		border-radius: 50%
 		background: rgba(255, 255, 255, 0.88)
+
+	&__top-status--text
+		padding: unquote("0 calc(var(--badge-size, 1.875rem) * 0.25)")
+		width: auto
+		min-width: var(--badge-size, 1.875rem)
+
+	&__top-rank-val
+		font-family: ui-monospace, "SF Pro Rounded", "JetBrains Mono Variable", "SFMono-Regular", Menlo, Monaco, Consolas, "Segoe UI", sans-serif
+		font-size: unquote("calc(var(--badge-size, 1.875rem) * 0.42)")
+		font-weight: 800
+		line-height: 1
+		color: #ffffff
+		font-variant-numeric: tabular-nums
+
+	/* ── Аутентичный бейдж цены и скидки Steam: правый верхний угол ── */
+	&__top-price-badge
+		position: absolute
+		top: 0
+		right: 0
+		z-index: 6
+		display: inline-flex
+		align-items: stretch
+		height: var(--badge-size, 1.875rem)
+		box-sizing: border-box
+		border-radius: unquote("0 0 0 calc(var(--badge-size, 1.875rem) * 0.33)")
+		overflow: hidden
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35)
+		background: #101822
+
+		&--discounted
+			background: linear-gradient(90deg, #3d581a 0%, #344c16 48%, #1f2b1d 68%, #0f1822 100%)
+			backdrop-filter: blur(8px)
+			-webkit-backdrop-filter: blur(8px)
+
+	&__steam-discount
+		display: inline-flex
+		align-items: center
+		justify-content: center
+		padding: 0 0.45rem
+		background: transparent
+		color: #bbf812
+		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6)
+		font-family: "Motiva Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
+		font-size: 0.75rem
+		font-weight: 700
+		letter-spacing: 0
+		line-height: var(--badge-size, 1.875rem)
+		user-select: none
+
+	&__steam-price
+		display: inline-flex
+		align-items: center
+		justify-content: center
+		padding: 0 0.5rem
+		background: rgba(15, 23, 42, 0.78)
+		backdrop-filter: blur(12px)
+		-webkit-backdrop-filter: blur(12px)
+		color: #ffffff
+		font-family: "Motiva Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
+		font-size: 0.75rem
+		font-weight: 600
+		letter-spacing: 0
+		line-height: var(--badge-size, 1.875rem)
+
+		&--discounted
+			background: transparent
+			backdrop-filter: none
+			-webkit-backdrop-filter: none
+			color: #ffffff
+			text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7)
+			font-weight: 700
 
 	/* ── Полупрозрачный бейдж оценки: бесшовное слияние с правым верхним углом ── */
 	&__top-rating
@@ -650,11 +792,12 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 		border: none
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3)
 		transition:
-			background var(--m3e-duration-short) var(--m3e-easing-standard),
+			background var(--m3e-duration-medium) var(--m3e-easing-standard),
+			border-color var(--m3e-duration-medium) var(--m3e-easing-standard),
 			transform var(--m3e-duration-short) var(--m3e-easing-standard)
 
-		&:hover
-			background: rgba(15, 23, 42, 0.88)
+		.media-card:hover &
+			background: unquote("color-mix(in oklab, var(--electric-color, var(--primary)) 28%, rgba(15, 23, 42, 0.88))")
 
 	&__top-rating-val
 		font-family: ui-monospace, "SF Pro Rounded", "JetBrains Mono Variable", "SFMono-Regular", Menlo, Monaco, Consolas, "Segoe UI", sans-serif
@@ -663,8 +806,11 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 		line-height: 1
 		letter-spacing: -0.01em
 		font-variant-numeric: tabular-nums lining-nums
-		color: var(--on-surface)
-		text-shadow: none
+		color: rgba(255, 255, 255, 0.95)
+		transition: color var(--m3e-duration-medium) var(--m3e-easing-standard)
+
+		.media-card:hover &
+			color: #ffffff
 
 	/* ── Hover Overlay: ультра-плавный кинематографичный переход при наведении ── */
 	&__overlay
@@ -677,69 +823,93 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 		padding: 0.875rem
 		border-radius: inherit
 		background: linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.78) 35%, rgba(0, 0, 0, 0.96) 100%)
-		backdrop-filter: blur(4px)
-		-webkit-backdrop-filter: blur(4px)
 		opacity: 0
 		pointer-events: none
-		transform: none
+		transform: translateZ(0)
+		backface-visibility: hidden
+		-webkit-font-smoothing: subpixel-antialiased
 		transition:
-			opacity var(--m3e-duration-long) var(--m3e-easing-standard)
+			opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1)
+
+		/* Плавный подъем контента без дрожания субпикселей */
+		.media-card__overlay-title,
+		.media-card__overlay-meta
+			will-change: transform, opacity
+			transform: translate3d(0, 8px, 0)
+			opacity: 0.85
+			transition:
+				transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+				opacity 0.35s ease
+
+		.media-card__overlay-details-inner
+			will-change: transform, opacity
+			transform: translate3d(0, 12px, 0)
+			opacity: 0
+			transition:
+				transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.04s,
+				opacity 0.32s ease 0.04s
 
 		.media-card:hover &
 			opacity: 1
 			pointer-events: auto
 
+			.media-card__overlay-title,
+			.media-card__overlay-meta
+				transform: translate3d(0, 0, 0)
+				opacity: 1
+
+			.media-card__overlay-details-inner
+				transform: translate3d(0, 0, 0)
+				opacity: 1
+
 	/* ── Режим ТОЛЬКО ДЛЯ АНИМЕ (title-on-poster):
 	   Снизу постера всегда виден мягкий градиент с названием и мета (год · студия).
-	   При наведении неспешно и шелковисто раскрывается расширенный блок (описание, прогресс, жанры). ── */
+	   При наведении четко раскрывается аккордеон с описанием, прогрессом и жанрами. ── */
 	&--title-on-poster
 		.media-card__overlay
 			opacity: 1
 			pointer-events: auto
-			transform: translateY(0)
-			background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 30%, rgba(0, 0, 0, 0.88) 100%)
-			backdrop-filter: blur(0px)
-			-webkit-backdrop-filter: blur(0px)
-			transition:
-				background 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
-				backdrop-filter 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
-				-webkit-backdrop-filter 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)
+			background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.45) 40%, rgba(0, 0, 0, 0.88) 100%)
+			transition: background 0.4s ease
 
-		/* Плавное раскрытие через CSS Grid: шелковистое скольжение */
+			.media-card__overlay-title,
+			.media-card__overlay-meta
+				transform: none
+				opacity: 1
+				transition: none
+
+		/* Раскрытие через CSS Grid без размытия и дрожания шрифтов */
 		.media-card__overlay-details
 			display: grid
 			grid-template-rows: 0fr
 			opacity: 0
 			pointer-events: none
 			transition:
-				grid-template-rows 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
-				opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)
+				grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+				opacity 0.3s ease
 
 		.media-card__overlay-details-inner
 			min-height: 0
 			overflow: hidden
-			transform: translateY(6px)
+			will-change: transform
+			transform: translate3d(0, 4px, 0)
+			opacity: 0
 			transition:
-				transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)
+				transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+				opacity 0.3s ease
 
 		&:hover
 			.media-card__overlay
-				background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.82) 32%, rgba(0, 0, 0, 0.96) 100%)
-				backdrop-filter: blur(4px)
-				-webkit-backdrop-filter: blur(4px)
+				background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.82) 32%, rgba(0, 0, 0, 0.96) 100%)
 
 			.media-card__overlay-details
 				grid-template-rows: 1fr
 				opacity: 1
 				pointer-events: auto
-				transition:
-					grid-template-rows 0.85s cubic-bezier(0.2, 0.8, 0.2, 1),
-					opacity 0.85s cubic-bezier(0.2, 0.8, 0.2, 1)
 
 			.media-card__overlay-details-inner
-				transform: translateY(0)
-				transition:
-					transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1)
+				transform: translate3d(0, 0, 0)
+				opacity: 1
 
 	&__overlay-title
 		margin: 0 0 0.3125rem
@@ -758,28 +928,45 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 	&__overlay-meta
 		display: flex
 		align-items: center
+		flex-wrap: nowrap
 		gap: 0.375rem
-		margin-bottom: 0.375rem
+		margin-bottom: 0.4375rem
 		font: var(--m3e-type-label-small)
 		font-size: 0.75rem
 		font-weight: 600
-		color: rgba(255, 255, 255, 0.85)
+		color: rgba(255, 255, 255, 0.88)
 		white-space: nowrap
 		overflow: hidden
 		text-overflow: ellipsis
+
+	&__overlay-author
+		color: rgba(255, 255, 255, 0.95)
+		white-space: nowrap
+		overflow: hidden
+		text-overflow: ellipsis
+		letter-spacing: -0.01em
 
 	&__overlay-year
 		color: var(--primary)
 		font-variant-numeric: tabular-nums
 		flex-shrink: 0
 
+	&__overlay-sub
+		color: rgba(255, 255, 255, 0.85)
+		white-space: nowrap
+		overflow: hidden
+		text-overflow: ellipsis
+
 	&__overlay-dot
 		color: rgba(255, 255, 255, 0.4)
 		user-select: none
 		flex-shrink: 0
+		flex-shrink: 0
 
+	&__overlay-sub,
 	&__overlay-extra
-		color: rgba(255, 255, 255, 0.9)
+		color: rgba(255, 255, 255, 0.8)
+		font-variant-numeric: tabular-nums
 		overflow: hidden
 		text-overflow: ellipsis
 		flex: 1
@@ -826,21 +1013,30 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 	&__overlay-genres
 		display: flex
 		flex-wrap: wrap
-		gap: 0.25rem
+		gap: 0.3125rem
 
 	&__genre-tag
 		display: inline-flex
 		align-items: center
 		justify-content: center
 		text-align: center
-		line-height: 1.2
-		padding: 0.1875rem 0.5rem
-		border-radius: var(--shape-corner-xs)
-		background: rgba(255, 255, 255, 0.18)
+		height: 1.375rem
+		box-sizing: border-box
+		line-height: 1
+		padding: 0 0.5rem
+		border-radius: var(--shape-corner-xs, 4px)
+		background: rgba(255, 255, 255, 0.16)
+		backdrop-filter: blur(6px)
+		-webkit-backdrop-filter: blur(6px)
+		border: 1px solid rgba(255, 255, 255, 0.08)
 		color: rgba(255, 255, 255, 0.95)
 		font: var(--m3e-type-label-small)
-		font-size: 0.71875rem
+		font-size: 0.6875rem
 		font-weight: 500
+		white-space: nowrap
+		overflow: hidden
+		text-overflow: ellipsis
+		max-width: 100%
 
 	/* Simkl-стиль: компактная плашка серий/длительности в правом нижнем углу постера */
 	&__corner-pill

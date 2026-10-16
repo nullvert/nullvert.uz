@@ -6,12 +6,15 @@ import AnimeSection from "../components/organisms/AnimeSection.svelte";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { animeConfig } from "../../shirones/config/animeConfig";
 
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+
 if (!animeConfig.enable) {
 	return Astro.redirect("/404/");
 }
 
-const pageTitle = "Аниме";
-const pageDescription = "Моя коллекция аниме из AniList";
+const pageTitle = i18n(I18nKey.anime);
+const pageDescription = i18n(I18nKey.animeBanner);
 ---
 
 <MainGridLayout title={pageTitle} description={pageDescription} page="anime">

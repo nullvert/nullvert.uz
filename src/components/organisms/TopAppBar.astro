@@ -18,7 +18,8 @@ const className = Astro.props.class;
 const links = resolveNavBarLinks(navBarConfig.links);
 const rawPageKey = resolvePageKey(Astro.url);
 const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
-const currentPageKey = rawPageKey || (currentPath === "/cinema" ? "cinema" : "");
+const pathSegments = currentPath.split("/").filter(Boolean);
+const currentPageKey = rawPageKey || (pathSegments.length === 1 ? pathSegments[0] : "");
 
 function hrefFor(path?: string) {
 	return path ? url(path) : undefined;
@@ -119,10 +120,9 @@ const logoSuffix = schemeIdx !== -1 ? rawTitle.slice(schemeIdx + 3) : rawTitle;
 	function syncTopAppBarNavigation() {
 		const currentUrl = new URL(window.location.href);
 		const path = currentUrl.pathname.replace(/\/+$/, "") || "/";
-		let key = resolvePageKey(currentUrl);
-		if (!key && path === "/cinema") {
-			key = "cinema";
-		}
+		const containerPage = document.getElementById("swup-container")?.getAttribute("data-current-page");
+		const segments = path.split("/").filter(Boolean);
+		const key = resolvePageKey(currentUrl) || containerPage || (segments.length === 1 ? segments[0] : "");
 		setTopAppBarNavigation(key);
 	}
 
@@ -161,10 +161,7 @@ const logoSuffix = schemeIdx !== -1 ? rawTitle.slice(schemeIdx + 3) : rawTitle;
 		const updateTopScrim = () => {
 			if (!scrimEl) return;
 			const searchPanel = document.getElementById("search-panel");
-			const displayPanel = document.getElementById("display-setting");
-			const isOpen =
-				(searchPanel && !searchPanel.classList.contains("float-panel-closed")) ||
-				(displayPanel && !displayPanel.classList.contains("float-panel-closed"));
+			const isOpen = searchPanel && !searchPanel.classList.contains("float-panel-closed");
 			scrimEl.classList.toggle("top-app-bar__scrim--visible", Boolean(isOpen));
 		};
 
@@ -173,22 +170,17 @@ const logoSuffix = schemeIdx !== -1 ? rawTitle.slice(schemeIdx + 3) : rawTitle;
 			scrimEl.onclick = (e) => {
 				e.stopPropagation();
 				document.getElementById("search-panel")?.classList.add("float-panel-closed");
-				document.getElementById("display-setting")?.classList.add("float-panel-closed");
 				updateTopScrim();
 			};
 		}
 
 		if (settingBtn) {
 			settingBtn.onclick = () => {
-				const settingPanel = document.getElementById("display-setting");
-				if (settingPanel) {
-					settingPanel.classList.toggle("float-panel-closed");
-					updateTopScrim();
-				}
+				document.dispatchEvent(new CustomEvent("display-settings:toggle"));
 			};
 		}
 
-		// Автоматически отслеживаем изменения классов у search-panel и display-setting
+		// Автоматически отслеживаем изменения классов у search-panel
 		const observePanel = (id: string) => {
 			const el = document.getElementById(id);
 			if (el && !(el as any)._scrimObserved) {
@@ -198,12 +190,10 @@ const logoSuffix = schemeIdx !== -1 ? rawTitle.slice(schemeIdx + 3) : rawTitle;
 			}
 		};
 		observePanel("search-panel");
-		observePanel("display-setting");
 
 		// Повторно проверяем при любых кликах и нажатиях клавиш
 		document.addEventListener("click", () => {
 			observePanel("search-panel");
-			observePanel("display-setting");
 			setTimeout(updateTopScrim, 20);
 		});
 

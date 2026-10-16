@@ -85,10 +85,12 @@ export const animeDomain: MediaDomain<AnimeItem> = {
 	],
 	defaultSort: "default",
 	defaultSortOrder: "desc",
-	searchPlaceholder: "Поиск аниме...",
+	searchPlaceholder: "Поиск...",
 	countLabel: (count) => `${count} ${i18n(I18nKey.animeCounts)}`,
 	cardProps: {
 		showTitleOnPoster: true,
+		aspect: "poster",
+		maxNativeWidth: 340,
 	},
 	hooks: {
 		onStatusChange: (newStatus, ctx) => {

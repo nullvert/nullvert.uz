@@ -19,7 +19,7 @@ import { withUserConfig } from "@/utils/config-overlay.ts";
 export const postListConfig: PostListConfig = withUserConfig("postList", {
 	pageSize: 8,
 	layout: {
-		mode: "list",
+		mode: "grid",
 		cover: "right",
 		cardWidth: "regular",
 	},

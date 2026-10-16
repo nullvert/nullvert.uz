@@ -5,7 +5,7 @@
  */
 import MediaCatalog from "./MediaCatalog.svelte";
 import { cinemaDomain, type CinemaItem } from "../../utils/media/domains/cinema";
-import simklSnapshot from "../../../shirones/config/data/cinema-snapshots/simkl.json";
+import simklSnapshot from "../../../shirones/config/data/snapshots/simkl.json";
 
 let {
 	title = "Кино",
@@ -13,7 +13,7 @@ let {
 	title?: string;
 } = $props();
 
-const allCinemaItems: CinemaItem[] = (simklSnapshot as unknown as CinemaItem[]) || [];
+const allCinemaItems: CinemaItem[] = (simklSnapshot.items as unknown as CinemaItem[]) || [];
 </script>
 
 <MediaCatalog domain={cinemaDomain} items={allCinemaItems} {title} />

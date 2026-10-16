@@ -3,8 +3,8 @@ title: "Шпаргалка по Markdown и Shirone"
 published: 2026-08-08
 pinned: false
 description: "Полный обзор возможностей оформления постов: код, диаграммы, формулы, файловые деревья, аннотации и уникальные расширения Shirone."
-tags: ["Markdown"]
-category: "Тест"
+tags: []
+category: "Заметки"
 image: "./keyboard.webp"
 alias: "markdown-showcase"
 draft: false

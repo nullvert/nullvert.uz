@@ -15,6 +15,7 @@ export default defineConfig({
         "organisms/DisplaySettings": "./src/components/organisms/DisplaySettings.svelte",
         "organisms/ArchivePanel": "./src/components/organisms/ArchivePanel.svelte",
         "organisms/SiteNavigationDrawer": "./src/components/organisms/SiteNavigationDrawer.svelte",
+        "organisms/TopAppBar": "./src/components/organisms/TopAppBar.astro",
         "organisms/AnimeSection": "./src/components/organisms/AnimeSection.svelte",
         "organisms/GamesSection": "./src/components/organisms/GamesSection.svelte",
         "layouts/MainGridLayout": "./src/layouts/MainGridLayout.astro",

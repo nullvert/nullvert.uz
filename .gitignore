@@ -26,6 +26,11 @@ pnpm-debug.log*
 .env
 .env.production
 .env*.local
+
+# local notes & todo
+TODO.md
+todo.md
+REFACTORING_AUDIT_PLAN.md
 *.env.local
 
 # local guides & notes

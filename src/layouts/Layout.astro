@@ -40,7 +40,7 @@ interface Props {
 	description?: string;
 	lang?: string;
 	setOGTypeArticle?: boolean;
-	page?: SidebarPage;
+	page?: SidebarPage | (string & {});
 }
 
 let { title, banner, ogImage, description, lang, setOGTypeArticle, page } =
@@ -206,6 +206,13 @@ const hasMonoFont =
 				if (!isNaN(textureOpacity)) {
 					document.documentElement.style.setProperty('--texture-opacity', String(textureOpacity));
 				}
+			}
+
+			if (localStorage.getItem('shirone-music-enabled') === 'false') {
+				document.documentElement.dataset.music = 'disabled';
+			}
+			if (localStorage.getItem('shirone-glass-effect') === 'true') {
+				document.documentElement.dataset.glass = 'cards';
 			}
 
 			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));

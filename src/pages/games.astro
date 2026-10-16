@@ -6,12 +6,15 @@ import GamesSection from "../components/organisms/GamesSection.svelte";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { gamesConfig } from "../../shirones/config/gamesConfig";
 
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+
 if (!gamesConfig.enable) {
 	return Astro.redirect("/404/");
 }
 
-const pageTitle = "Игры";
-const pageDescription = "Игровая коллекция, бэклог и пройденные тайтлы";
+const pageTitle = i18n(I18nKey.games);
+const pageDescription = i18n(I18nKey.gamesBanner);
 ---
 
 <MainGridLayout title={pageTitle} description={pageDescription} page="games">

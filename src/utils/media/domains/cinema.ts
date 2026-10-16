@@ -91,7 +91,11 @@ export const cinemaDomain: MediaDomain<CinemaItem> = {
 		{ value: "show", label: mediaLabel(MEDIA_LABEL.cinemaTypeShow, "Сериалы"), icon: "material-symbols:tv-outline-rounded" },
 	],
 	sourceLabel: mediaLabel(MEDIA_LABEL.cinemaSourceLabel, "Тип медиа"),
-	searchPlaceholder: "Поиск фильма или сериала...",
+	searchPlaceholder: "Поиск...",
 	countLabel: (count) => `${count} ${mediaLabel(MEDIA_LABEL.cinemaCounts, "наименований")}`,
 	filterBySource: (item, source) => source === "all" || item.type === source,
+	cardProps: {
+		aspect: "poster",
+		maxNativeWidth: 340,
+	},
 };

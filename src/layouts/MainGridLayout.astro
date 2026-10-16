@@ -56,30 +56,16 @@ const {
 } = Astro.props;
 
 // 响应式侧栏配置（数据驱动布局）
-const isCatalogPage = page === "anime" || (page as string) === "cinema" || (page as string) === "games";
-const typedPage = (isCatalogPage ? undefined : page) as SidebarPage | undefined;
+const typedPage = page as SidebarPage | undefined;
 const sidebarResponsive = getResponsiveSidebarConfig();
-const gridClasses = isCatalogPage ? "grid-cols-1" : generateGridClasses(sidebarResponsive);
-const sidebarClasses = isCatalogPage ? "hidden" : generatePrimarySidebarClasses(sidebarResponsive);
-const secondarySidebarClasses = isCatalogPage ? "hidden" : generateSecondarySidebarClasses(sidebarResponsive);
-const mainContentClasses = isCatalogPage ? "col-span-1 min-w-0" : generateMainContentClasses(sidebarResponsive);
+const gridClasses = generateGridClasses(sidebarResponsive);
+const sidebarClasses = generatePrimarySidebarClasses(sidebarResponsive);
+const secondarySidebarClasses = generateSecondarySidebarClasses(sidebarResponsive);
+const mainContentClasses = generateMainContentClasses(sidebarResponsive);
 ---
 
-<Layout title={title} banner={banner} ogImage={ogImage} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} page={typedPage}>
+<Layout title={title} banner={banner} ogImage={ogImage} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} page={page}>
 
-<!-- Head inline script: синхронная проверка настроек до первого рендера -->
-<script is:inline slot="head">
-	if (!localStorage.getItem("theme")) {
-		localStorage.setItem("theme", "dark");
-		document.documentElement.classList.add("dark");
-	}
-	if (localStorage.getItem("shirone-music-enabled") === "false") {
-		document.documentElement.dataset.music = "disabled";
-	}
-	if (localStorage.getItem("shirone-glass-effect") === "true") {
-		document.documentElement.dataset.glass = "cards";
-	}
-</script>
 <slot slot="head" name="head"></slot>
 <header id="top-row" class="z-50 pointer-events-none relative transition-all duration-700 max-w-[var(--page-width)] px-0 md:px-4 mx-auto" class:list={[""]}>
     <div id="navbar-wrapper" class="pointer-events-auto sticky top-0 transition-all">
@@ -105,7 +91,6 @@ const mainContentClasses = isCatalogPage ? "col-span-1 min-w-0" : generateMainCo
                     id="swup-container"
                     data-current-post-category={postCategory || ""}
                     data-current-page={page}
-                    data-is-catalog={isCatalogPage ? "true" : "false"}
                     data-has-comments={hasComments ? "true" : "false"}
                     data-banner-title={title || ""}
                     data-banner-description={description || ""}
@@ -114,17 +99,14 @@ const mainContentClasses = isCatalogPage ? "col-span-1 min-w-0" : generateMainCo
                 >
                     <div id="content-wrapper" class="onload-animation">
                         <slot></slot>
-                        {!isCatalogPage && (
-                            <div class="footer col-span-2 onload-animation hidden lg:block">
-                                <Footer></Footer>
-                            </div>
-                        )}
+                        <div class="footer col-span-2 onload-animation hidden lg:block">
+                            <Footer></Footer>
+                        </div>
                     </div>
                 </main>
             </div>
 
-            <!-- Футер: для обычных страниц на мобилке, либо на всю ширину сетки для каталога -->
-            <div id="catalog-footer-row" class={`footer col-span-2 onload-animation ${isCatalogPage ? "block w-full mt-8" : "block lg:hidden"}`}>
+            <div id="catalog-footer-row" class="footer col-span-2 onload-animation block lg:hidden">
                 <Footer></Footer>
             </div>
         </div>
@@ -133,56 +115,6 @@ const mainContentClasses = isCatalogPage ? "col-span-1 min-w-0" : generateMainCo
         <RouteProgress client:load />
     </div>
 </div>
-
-<script is:inline>
-	function syncLayoutMode() {
-		const swupContainer = document.getElementById("swup-container");
-		const page = swupContainer?.dataset.currentPage;
-		const isCatalogAttr = swupContainer?.dataset.isCatalog;
-		const isCatalog = isCatalogAttr === "true" || page === "anime" || page === "cinema" || page === "games";
-
-		const mainGrid = document.getElementById("main-grid");
-		const sidebar = document.getElementById("sidebar");
-		const sidebarSecondary = document.getElementById("sidebar-secondary");
-		const mainColumn = document.getElementById("main-content-column");
-		const catalogFooter = document.getElementById("catalog-footer-row");
-
-		if (isCatalog) {
-			if (mainGrid) {
-				mainGrid.classList.remove("lg:grid-cols-[var(--sidebar-width)_1fr]", "lg:grid-cols-[1fr_var(--sidebar-width)]", "xl:grid-cols-[var(--sidebar-width)_1fr_var(--sidebar-width)]");
-				mainGrid.classList.add("grid-cols-1");
-			}
-			if (sidebar) sidebar.classList.add("hidden");
-			if (sidebarSecondary) sidebarSecondary.classList.add("hidden");
-			if (mainColumn) {
-				mainColumn.className = "col-span-1 min-w-0";
-			}
-			if (catalogFooter) {
-				catalogFooter.className = "footer col-span-2 onload-animation block w-full mt-8";
-			}
-		} else {
-			if (mainGrid) {
-				mainGrid.classList.remove("grid-cols-1");
-				mainGrid.classList.add("lg:grid-cols-[1fr_var(--sidebar-width)]");
-			}
-			if (sidebar) {
-				sidebar.classList.remove("hidden");
-			}
-			if (sidebarSecondary) {
-				sidebarSecondary.classList.remove("hidden");
-			}
-			if (mainColumn) {
-				mainColumn.className = "col-span-2 lg:col-span-1 overflow-hidden min-w-0 lg:col-start-1";
-			}
-			if (catalogFooter) {
-				catalogFooter.className = "footer col-span-2 onload-animation block lg:hidden";
-			}
-		}
-	}
-
-	document.addEventListener("swup:content:replace", syncLayoutMode);
-	document.addEventListener("swup:page:view", syncLayoutMode);
-</script>
 
 
 <!-- Полноразмерный нижний стриминговый аудиоплеер в постоянной оболочке (Persistent Shell) -->

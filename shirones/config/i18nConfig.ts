@@ -52,8 +52,8 @@ const ru: Partial<Record<I18nKey | string, string>> = {
 	[I18nKey.animeConfigMissingBilibili]: "UID Bilibili не настроен",
 	[I18nKey.animeSyncEmpty]: "В источнике не найдено записей",
 
-	// ── Навигатор / Полезные ссылки ──
-	[I18nKey.compass]: "Навигатор",
+	// ── Закладки / Полезные ссылки ──
+	[I18nKey.compass]: "Закладки",
 	[I18nKey.compassBanner]:
 		"Полезные сервисы, инструменты и ссылки, к которым я часто возвращаюсь.",
 	[I18nKey.compassNoResults]: "Ничего не найдено",
@@ -339,7 +339,7 @@ const ru: Partial<Record<I18nKey | string, string>> = {
 	[I18nKey.scanToRead]: "QR-код для чтения с телефона",
 
 	// ── Внешний вид страницы ──
-	[I18nKey.reduceMotion]: "Уменьшение движения",
+	[I18nKey.reduceMotion]: "Уменьшение анимаций",
 	[I18nKey.wallpaperMode]: "Фон страницы",
 	[I18nKey.wallpaperModeBanner]: "С баннером",
 	[I18nKey.wallpaperModeNone]: "Сплошной",
@@ -351,7 +351,7 @@ const ru: Partial<Record<I18nKey | string, string>> = {
 	[I18nKey.texturePresetGeometric]: "Геометрия",
 	[I18nKey.texturePresetSakura]: "Снежинки",
 	[I18nKey.textureOpacity]: "Интенсивность текстуры",
-	[I18nKey.layoutMode]: "Вид списка",
+	[I18nKey.layoutMode]: "Отображение постов",
 	[I18nKey.layoutList]: "Список",
 	[I18nKey.layoutGrid]: "Сетка",
 	[I18nKey.resetConfirmTitle]: "Сбросить оформление?",
@@ -361,7 +361,7 @@ const ru: Partial<Record<I18nKey | string, string>> = {
 	[I18nKey.reset]: "Сбросить",
 	// Ключи слоя проекта (нет в I18nKey пакета); в других языках используется запасной текст в компоненте.
 	"displaySettings.resetDefault": "Сбросить по умолчанию",
-	"displaySettings.glassEffect": "Эффект стекла",
+	"displaySettings.glassEffect": "Текнолоджия",
 
 	// ── Медиа-каталоги (Аниме, Кино, Игры) ──
 	"mediaCatalog.all": "Все",
@@ -395,6 +395,7 @@ const ru: Partial<Record<I18nKey | string, string>> = {
 	"mediaCatalog.statusPlaying": "Играю",
 	"mediaCatalog.statusCompleted": "Просмотрено",
 	"mediaCatalog.statusPlanned": "В планах",
+	"mediaCatalog.statusWishlist": "Список желаемого",
 	"mediaCatalog.statusOnHold": "Отложено",
 	"mediaCatalog.statusDropped": "Брошено",
 

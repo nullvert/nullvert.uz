@@ -18,6 +18,7 @@ Shirone is a blog theme built with Astro 7, Svelte 5, Tailwind 4, Stylus, and pn
 - Keep designs original and differentiated. `research/` is reference material only: do not copy its schemas, names, defaults, algorithms, component compositions, or visual layouts. Do not edit, install, build, format, or commit inside research checkouts; descendant `AGENTS.md` files there are upstream artifacts, not Shirone instructions.
 - Persistent shell elements outside `#swup-container` are not rerendered by Swup. Logic that reacts to route changes must use the appropriate Swup lifecycle hook (`content:replace`, `page:view`, or event delegation) and must be tested for both direct load and client navigation.
 - Shirone also ships as an npm package (`shirones`); `src/integration/` rebuilds `astro.config.mjs` for user projects. Any change to the theme source must keep both modes working — mirror config changes into `src/integration/`, avoid `process.cwd()` reads of theme-owned files, register Markdown syntax in the manifest, and follow the overlay rules. See `rules/project-rules.md` §12 and `docs/packaging-contract.md`.
+- **Token economy & concise communication**: Keep explanations and conversational text brief, direct, and free of fluff. Prioritize code quality, strict adherence to architecture/M3E/typing rules, and test verification over verbose dialogue.
 
 ## Required documents
 

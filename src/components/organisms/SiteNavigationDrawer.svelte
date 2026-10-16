@@ -55,6 +55,16 @@ try {
 		height: 24,
 		body: '<path fill="currentColor" d="M12.713 16.713Q13 16.425 13 16v-4q0-.425-.288-.712T12 11t-.712.288T11 12v4q0 .425.288.713T12 17t.713-.288m0-8Q13 8.425 13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9t.713-.288M12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/>',
 	});
+	addIcon("material-symbols:bookmarks-rounded", {
+		width: 24,
+		height: 24,
+		body: '<path fill="currentColor" d="M4 22V6q0-.825.588-1.412T6 4h12q.825 0 1.413.588T20 6v16l-8-3.5zm2-3.05l6-2.625l6 2.625V6H6zM4 4h16V2H4z"/>',
+	});
+	addIcon("material-symbols:menu-book-outline-rounded", {
+		width: 24,
+		height: 24,
+		body: '<path fill="currentColor" d="M6.5 17q1.125 0 2.2-.288T10.75 16q.925-.5 1.938-.775T14.625 15q1.125 0 2.2.288t2.05.862q.313.175.613.263t.612.087q.575 0 1.013-.288T20 18.15V6.1q0-.275-.137-.525T19.45 5.2q-1.175-.575-2.412-.888T14.5 4q-1.45 0-2.837.375T9 5.5q-1.275-.75-2.662-1.125T3.5 4q-1.3 0-2.538.313T1.55 5.2q-.275.125-.412.375T1 6.1v12.05q0 .575.488.875t1.012.025q.925-.5 1.938-.775T6.5 17M3 16.6V6.7q.875-.35 1.738-.525T6.5 6q1.1 0 2.175.3t2.175.9v9.85q-1.1-.525-2.212-.787T6.5 16q-.9 0-1.762.15T3 16.6m18 0q-.875-.35-1.737-.525T17.5 16q-1.1 0-2.212.788T13 17.05V7.2q1.025-.6 2.175-.9T17.5 6q.9 0 1.763.15T21 6.6zM14 9.9q.95-.225 1.825-.225t1.825.225q.6.225 1.213.338T20 10.6v-1.6q-.6-.225-1.225-.25T17.5 8.5q-.775 0-1.525.125t-1.45.375zm0 2.75q.95-.237 1.825-.237t1.825.237q.6.225 1.213.338T20 13.35v-1.6q-.6-.225-1.225-.25T17.5 11.25q-.775 0-1.525.125T14 11.75zm0 2.75q.95-.225 1.825-.225t1.825.225q.6.225 1.213.338T20 16.1v-1.6q-.6-.225-1.225-.25T17.5 14q-.775 0-1.525.125t-1.45.375z"/>',
+	});
 	addIcon("material-symbols:close-rounded", {
 		width: 24,
 		height: 24,
@@ -114,6 +124,16 @@ const STATIC_ICONS: Record<string, { width: number; height: number; body: string
 		height: 24,
 		body: '<path fill="currentColor" d="M12.713 16.713Q13 16.425 13 16v-4q0-.425-.288-.712T12 11t-.712.288T11 12v4q0 .425.288.713T12 17t.713-.288m0-8Q13 8.425 13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9t.713-.288M12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/>',
 	},
+	"material-symbols:bookmarks-rounded": {
+		width: 24,
+		height: 24,
+		body: '<path fill="currentColor" d="M4 22V6q0-.825.588-1.412T6 4h12q.825 0 1.413.588T20 6v16l-8-3.5zm2-3.05l6-2.625l6 2.625V6H6zM4 4h16V2H4z"/>',
+	},
+	"material-symbols:menu-book-outline-rounded": {
+		width: 24,
+		height: 24,
+		body: '<path fill="currentColor" d="M6.5 17q1.125 0 2.2-.288T10.75 16q.925-.5 1.938-.775T14.625 15q1.125 0 2.2.288t2.05.862q.313.175.613.263t.612.087q.575 0 1.013-.288T20 18.15V6.1q0-.275-.137-.525T19.45 5.2q-1.175-.575-2.412-.888T14.5 4q-1.45 0-2.837.375T9 5.5q-1.275-.75-2.662-1.125T3.5 4q-1.3 0-2.538.313T1.55 5.2q-.275.125-.412.375T1 6.1v12.05q0 .575.488.875t1.012.025q.925-.5 1.938-.775T6.5 17M3 16.6V6.7q.875-.35 1.738-.525T6.5 6q1.1 0 2.175.3t2.175.9v9.85q-1.1-.525-2.212-.787T6.5 16q-.9 0-1.762.15T3 16.6m18 0q-.875-.35-1.737-.525T17.5 16q-1.1 0-2.212.788T13 17.05V7.2q1.025-.6 2.175-.9T17.5 6q.9 0 1.763.15T21 6.6zM14 9.9q.95-.225 1.825-.225t1.825.225q.6.225 1.213.338T20 10.6v-1.6q-.6-.225-1.225-.25T17.5 8.5q-.775 0-1.525.125t-1.45.375zm0 2.75q.95-.237 1.825-.237t1.825.237q.6.225 1.213.338T20 13.35v-1.6q-.6-.225-1.225-.25T17.5 11.25q-.775 0-1.525.125T14 11.75zm0 2.75q.95-.225 1.825-.225t1.825.225q.6.225 1.213.338T20 16.1v-1.6q-.6-.225-1.225-.25T17.5 14q-.775 0-1.525.125t-1.45.375z"/>',
+	},
 	"material-symbols:close-rounded": {
 		width: 24,
 		height: 24,
@@ -163,10 +183,9 @@ const primaryItems = links.map((link) => {
 function syncFromRoute() {
 	const currentUrl = new URL(window.location.href);
 	const path = currentUrl.pathname.replace(/\/+$/, "") || "/";
-	let pageKey = resolvePageKey(currentUrl);
-	if (!pageKey && path === "/cinema") {
-		pageKey = "cinema";
-	}
+	const containerPage = typeof document !== "undefined" ? document.getElementById("swup-container")?.getAttribute("data-current-page") : null;
+	const segments = path.split("/").filter(Boolean);
+	const pageKey = resolvePageKey(currentUrl) || containerPage || (segments.length === 1 ? segments[0] : "");
 	activePrimary = "";
 	for (const item of primaryItems) {
 		if (item.pageKey && item.pageKey === pageKey) {
@@ -476,7 +495,7 @@ let drawerEl: HTMLElement | undefined = $state();
 		min-height: 52px
 		box-sizing: border-box
 		padding: 0 var(--m3e-space-4)
-		border-radius: var(--shape-corner-full, 9999px)
+		border-radius: var(--shape-corner-m, 12px)
 		color: var(--on-surface-variant)
 		text-decoration: none
 		cursor: pointer
@@ -537,7 +556,7 @@ let drawerEl: HTMLElement | undefined = $state();
 		box-sizing: border-box
 		padding: 0 16px
 		border: none
-		border-radius: var(--shape-corner-full, 9999px)
+		border-radius: var(--shape-corner-m, 12px)
 		background: none
 		color: var(--on-surface-variant)
 		cursor: pointer

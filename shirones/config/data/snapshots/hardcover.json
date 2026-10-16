@@ -1,0 +1,169 @@
+{
+  "updatedAt": "2026-10-15T10:51:05.732Z",
+  "user": {
+    "id": 183578,
+    "username": "nullvert",
+    "name": "Javohir"
+  },
+  "goals": [
+    {
+      "id": "155334",
+      "description": "2026 Reading Goal",
+      "goal": 2,
+      "progress": 0,
+      "metric": "book",
+      "startDate": "2026-10-12",
+      "endDate": "2027-01-01",
+      "state": "active"
+    }
+  ],
+  "items": [
+    {
+      "id": "443116",
+      "userBookId": "19548292",
+      "title": "Metro 2033",
+      "author": "Dmitry Glukhovsky",
+      "series": "Metro #1",
+      "cover": "/assets/media/books/book_443116_19548292.jpeg",
+      "link": "https://hardcover.app/books/metro-2033",
+      "status": "reading",
+      "originalRating": null,
+      "starred": false,
+      "progress": {
+        "watched": 0,
+        "total": 453,
+        "unit": "стр."
+      },
+      "pages": 453,
+      "year": "2002",
+      "genres": [
+        "Science Fiction",
+        "Adventure",
+        "Fantasy",
+        "Dystopian",
+        "Post-Apocalyptic",
+        "Military",
+        "Space Opera"
+      ],
+      "description": "The year is 2033. The world has been reduced to rubble. Humanity is nearly extinct and the half-destroyed cities have become uninhabitable through radiation. Beyond their boundaries, they say, lie endless burned-out deserts and the remains of splintered forests. Survivors still remember the past greatness of humankind, but the last remains of civilisation have already become a distant memory.\n\nMan has handed over stewardship of the Earth to new life-forms. Mutated by radiation, they are better adapted to the new world. A few score thousand survivors live on, not knowing whether they are the only ones left on Earth, living in the Moscow Metro - the biggest air-raid shelter ever built. Stations have become mini-statelets, their people uniting around ideas, religions, water-filters, or the need to repulse enemy incursion.\n\nVDNKh is the northernmost inhabited station on its line, one of the Metro's best stations and secure. But a new and terrible threat has appeared. Artyom, a young man living in VDNKh, is given the task of penetrating to the heart of the Metro to alert everyone to the danger and to get help. He holds the future of his station in his hands, the whole Metro - and maybe the whole of humanity."
+    },
+    {
+      "id": "464849",
+      "userBookId": "19637265",
+      "title": "Soft Skills",
+      "author": "John Sonmez",
+      "cover": "/assets/media/books/book_464849_19637265.jpeg",
+      "link": "https://hardcover.app/books/soft-skills",
+      "status": "completed",
+      "rating": 8,
+      "originalRating": 4,
+      "starred": false,
+      "progress": {
+        "watched": 504,
+        "total": 504,
+        "unit": "стр."
+      },
+      "pages": 504,
+      "year": "2015",
+      "genres": [
+        "Career",
+        "Programming",
+        "Self-Help"
+      ],
+      "description": "For most software developers, coding is the fun part. The hard bits are dealing with clients, peers, and managers and staying productive, achieving financial security, keeping yourself in shape, and finding true love. This book is here to help. Soft Skills: The Software Developer's Life Manual is a guide to a well-rounded, satisfying life as a technology professional. In it, developer and life coach John Sonmez offers advice to developers on important subjects like career and productivity, personal finance and investing, and even fitness and relationships. Arranged as a collection of 71 short chapters, this fun listen invites you to dip in wherever you like. A \"Taking Action\" section at the end of each chapter tells you how to get quick results. Soft Skills will help make you a better programmer, a more valuable employee, and a happier, healthier person."
+    },
+    {
+      "id": "1171960",
+      "userBookId": "19636863",
+      "title": "The Children of Captain Grant",
+      "author": "Jules Verne",
+      "cover": "/assets/media/books/book_1171960_19636863.jpeg",
+      "link": "https://hardcover.app/books/the-children-of-captain-grant",
+      "status": "completed",
+      "rating": 9,
+      "originalRating": 4.5,
+      "starred": false,
+      "year": "2016",
+      "genres": [
+        "Adventure",
+        "Classics",
+        "Science Fiction",
+        "Thriller"
+      ]
+    },
+    {
+      "id": "431713",
+      "userBookId": "19548319",
+      "title": "The Metamorphosis",
+      "author": "Franz Kafka",
+      "cover": "/assets/media/books/book_431713_19548319.jpeg",
+      "link": "https://hardcover.app/books/the-metamorphosis",
+      "status": "planned",
+      "originalRating": null,
+      "starred": false,
+      "pages": 128,
+      "year": "1915",
+      "genres": [
+        "Classics",
+        "Philosophy"
+      ],
+      "description": "Franz Kafka’s The Metamorphosis begins with one of the most shocking openings in literature: traveling salesman Gregor Samsa wakes up to discover he has turned into a giant insect. But this is not just a story of absurd metamorphosis—it is a deeply human tale of alienation, family obligation, and what happens when someone is no longer “useful” to society.\n\nAs Gregor’s family struggles to cope with his bizarre condition, Kafka explores powerful themes of dependence, dignity, and the quiet cruelty of social expectations. Both absurd and painfully realistic, this modern classic strikes a unique balance of dark humor and existential insight.\n\nFor fans of George Orwell, Albert Camus, and modernist fiction that blurs the line between the strange and the familiar.\n\nWhether you're reading it for the first time or rediscovering it with fresh eyes, The Metamorphosis is a novella that stays with you—long after you’ve turned the final page."
+    },
+    {
+      "id": "197990",
+      "userBookId": "19548301",
+      "title": "The Fault in Our Stars",
+      "author": "John Green",
+      "cover": "/assets/media/books/book_197990_19548301.jpeg",
+      "link": "https://hardcover.app/books/the-fault-in-our-stars",
+      "status": "planned",
+      "originalRating": null,
+      "starred": false,
+      "pages": 218,
+      "year": "2012",
+      "genres": [
+        "Romance"
+      ],
+      "description": "Sixteen-year-old Hazel, a stage IV thyroid cancer patient, has accepted her terminal diagnosis until a chance meeting with a boy at cancer support group forces her to reexamine her perspective on love, loss, and life."
+    },
+    {
+      "id": "484884",
+      "userBookId": "19548297",
+      "title": "Sweetpea",
+      "author": "C.J. Skuse",
+      "series": "Sweetpea #1",
+      "cover": "/assets/media/books/book_484884_19548297.jpeg",
+      "link": "https://hardcover.app/books/sweetpea",
+      "status": "planned",
+      "originalRating": null,
+      "starred": false,
+      "pages": 472,
+      "year": "2017",
+      "genres": [
+        "Suspense",
+        "Thriller"
+      ],
+      "description": "Rhiannon is your average girl next door, settled with her boyfriend and little dog…but she’s got a killer secret.\n\nBy day her job as an editorial assistant is demeaning and unsatisfying. By evening she dutifully listens to her friend’s plans for marriage and babies whilst secretly making a list.\n\nA kill list.\n\nFrom the man on the checkout who always mishandles her apples, to the driver who cuts her off on her way to work, to the people who have got it coming, Rhiannon’s ready to get her revenge.\n\nBecause the girl everyone overlooks might be able to get away with murder…"
+    },
+    {
+      "id": "202093",
+      "userBookId": "19548295",
+      "title": "Animal Farm and 1984",
+      "author": "George Orwell",
+      "cover": "/assets/media/books/book_202093_19548295.jpeg",
+      "link": "https://hardcover.app/books/1984-animal-farm-1945",
+      "status": "planned",
+      "originalRating": null,
+      "starred": false,
+      "pages": 405,
+      "year": "1945",
+      "genres": [
+        "Dystopian",
+        "Fantasy",
+        "Classics",
+        "Science Fiction"
+      ],
+      "description": "THE 100TH ANNIVERSARY of George Orwell's birth has brought these two groundbreaking novels together for the first time, along with a revealing new introduction by Christopher Hitchens.\r\n\r\nALL ANIMALS ARE EQUAL BUT SOME ANIMALS ARE MORE EQUAL THAN OTHERS\r\nGeorge Orwell's classic satire of the Russian Revolution is the account of the bold struggle, initiated by the animals, that transforms Mr. Jones's Manor Farm into Animal Farm—a wholly democratic society built on the credo that All Animals Are Created Equal. Out of their cleverness, the pigs Napoleon, Squealer, and Snowball emerge as leaders of the new community in a subtle evolution that proves disastrous. The climax is the brutal betrayal of the faithful horse Boxer, when totalitarian rule is reestablished with the bloodstained postscript to the founding slogan: But Some Animals Are More Equal Than Others.\r\n\r\nWAR IS PEACE. FREEDOM IS SLAVERY IGNORANCE IS STRENGTH.\r\nIn 1984, London is a grim city where Big Brother is always watching you and the Thought Police can practically read your mind. Winston is a man in grave danger for the simple reason that his memory still functions. Drawn into a forbidden love affair, Winston finds the courage to join a secret revolutionary organization called The Brotherhood, dedicated to the destruction of the Party. Together with his beloved Julia. he hazards his life in a death match against the powers that be.\r\n--front flap"
+    }
+  ]
+}

@@ -14,10 +14,18 @@ let {
 	domain,
 	items = [],
 	title = "",
+	extraSidebar,
+	extraStatusBottom,
+	extraTopContent,
+	itemSnippet,
 }: {
 	domain: MediaDomain<T>;
 	items: T[];
 	title?: string;
+	extraSidebar?: import("svelte").Snippet;
+	extraStatusBottom?: import("svelte").Snippet<[{ selectedStatus: string; onStatusChange: (s: string) => void }]>;
+	extraTopContent?: import("svelte").Snippet;
+	itemSnippet?: import("svelte").Snippet<[T]>;
 } = $props();
 
 const getSortStorageKey = () => `shirone:${domain.key}-sort-type`;
@@ -29,7 +37,17 @@ let selectedStatus = $state(untrack(() => domain.defaultStatus));
 let currentSort = $state(untrack(() => domain.defaultSort));
 let sortOrder = $state<"asc" | "desc">(untrack(() => domain.defaultSortOrder || "desc"));
 let currentSource = $state("all");
+let forceHover = $state(false);
+let showBorder = $state(true);
 let initialized = false;
+
+// Динамические варианты сортировки в зависимости от выбранного статуса/режима
+const activeSortOptions = $derived.by(() => {
+	if (domain.getSortOptions) {
+		return domain.getSortOptions(selectedStatus);
+	}
+	return domain.sortOptions;
+});
 
 // Подготовка и дедупликация исходных элементов при необходимости
 const preparedItems = $derived.by(() => {
@@ -48,15 +66,17 @@ const itemsBySource = $derived.by(() => {
 const dynamicSources = $derived.by<SourceOption[]>(() => {
 	if (domain.sources) return domain.sources;
 	if (domain.key === "games") {
-		const platforms = Array.from(
-			new Set((preparedItems as any[]).map((item) => item.platform).filter(Boolean)),
-		) as string[];
+		const rawPlatforms = (preparedItems as any[]).map((item) => {
+			const p = item.platform || "PC";
+			return p === "Windows PC" ? "PC" : p;
+		}).filter(Boolean);
+		const platforms = Array.from(new Set(rawPlatforms)) as string[];
 		if (platforms.length <= 1) return [];
 		return [
 			{ value: "all", label: "Все игры", icon: "material-symbols:sports-esports-outline-rounded" },
 			...platforms.map((plat) => ({
 				value: plat,
-				label: plat === "Windows PC" ? "PC" : plat,
+				label: plat,
 				icon: "material-symbols:desktop-windows-outline-rounded",
 			})),
 		];
@@ -112,6 +132,10 @@ const filteredItems = $derived.by(() => {
 		return tokenSearch(tokens, searchable);
 	});
 
+	if (domain.sort) {
+		return domain.sort(matched, currentSort, sortOrder);
+	}
+
 	return sortMediaItems(matched as any[], currentSort, sortOrder) as T[];
 });
 
@@ -124,6 +148,10 @@ function onStatusChange(newStatus: string) {
 		setSort: (s: string) => {
 			currentSort = s;
 			setSafeStorageItem(getSortStorageKey(), s);
+		},
+		setOrder: (o: "asc" | "desc") => {
+			sortOrder = o;
+			setSafeStorageItem(getSortOrderStorageKey(), o);
 		},
 	});
 }
@@ -204,26 +232,44 @@ onMount(() => {
 	bind:query
 	{statusItems}
 	bind:selectedStatus
-	sortOptions={domain.sortOptions}
+	sortOptions={activeSortOptions}
 	bind:currentSort
 	bind:sortOrder
-	totalAllCount={itemsBySource.length}
+	totalAllCount={domain.countAllItems ? domain.countAllItems(itemsBySource) : itemsBySource.length}
 	totalFilteredCount={filteredItems.length}
 	countLabel={domain.countLabel ? domain.countLabel(filteredItems.length) : `${filteredItems.length}`}
+	bind:forceHover
+	bind:showBorder
 	{onStatusChange}
 	{onSourceChange}
 	{onSortChange}
 	{onSortOrderChange}
+	{extraSidebar}
+	extraStatusBottom={extraStatusBottom ? extraStatusBottomContent : undefined}
+	{extraTopContent}
 >
+	{#snippet extraStatusBottomContent()}
+		{@render extraStatusBottom?.({ selectedStatus, onStatusChange })}
+	{/snippet}
 	{#if filteredItems.length > 0}
-		<MediaCardGrid ariaLabel={title}>
+		<MediaCardGrid
+			ariaLabel={title}
+			{forceHover}
+			{showBorder}
+			columns={domain.cardProps?.columns ?? 4}
+		>
 			{#each filteredItems as item (domain.getId(item))}
 				<div role="listitem">
-					<MediaCard
-						item={domain.toCard(item)}
-						aspect="poster"
-						showTitleOnPoster={domain.cardProps?.showTitleOnPoster}
-					/>
+					{#if itemSnippet}
+						{@render itemSnippet(item)}
+					{:else}
+						<MediaCard
+							item={domain.toCard(item)}
+							aspect={domain.cardProps?.aspect ?? "poster"}
+							showTitleOnPoster={domain.cardProps?.showTitleOnPoster}
+							bookSpine={domain.cardProps?.bookSpine}
+						/>
+					{/if}
 				</div>
 			{/each}
 		</MediaCardGrid>

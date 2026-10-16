@@ -1,35 +1,21 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { resolve } from "node:path";
 
-import { downloadCoverIfMissing, cleanupOrphanedCovers } from "./media-cover-helper.mjs";
+import {
+	ROOT_DIR,
+	SNAPSHOT_DIR,
+	loadEnvFile,
+	getSetting,
+	fetchJson,
+	writeJsonAtomic,
+} from "./sync-common.mjs";
+import { syncLocalCovers } from "./media-cover-helper.mjs";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT_DIR = resolve(__dirname, "..");
-const SNAPSHOT_DIR = resolve(ROOT_DIR, "shirones/config/data/anime-snapshots");
 const SNAPSHOT_FILE = resolve(SNAPSHOT_DIR, "anilist.json");
 const COVERS_DIR = resolve(ROOT_DIR, "public/assets/media/anime");
 
-function loadEnv() {
-	const envPath = resolve(ROOT_DIR, ".env");
-	if (!existsSync(envPath)) return {};
-	const content = readFileSync(envPath, "utf8");
-	const env = {};
-	for (const line of content.split("\n")) {
-		const match = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
-		if (match) {
-			let val = (match[2] || "").trim();
-			if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
-			if (val.startsWith("'") && val.endsWith("'")) val = val.slice(1, -1);
-			env[match[1]] = val;
-		}
-	}
-	return env;
-}
-
-const env = loadEnv();
+const env = loadEnvFile();
 const ANILIST_GRAPHQL_ENDPOINT = "https://graphql.anilist.co";
-const USERNAME = process.argv[2] || process.env.ANILIST_USERNAME || env.ANILIST_USERNAME;
+const USERNAME = getSetting("ANILIST_USERNAME", { cliValue: process.argv[2], env });
 
 if (!USERNAME) {
 	console.error("[AniList] Error: ANILIST_USERNAME not specified in arguments or .env!");
@@ -52,6 +38,7 @@ function mapAniListStatus(status) {
 		case "DROPPED":
 			return "dropped";
 		default:
+			console.warn(`[AniList] Unknown list status "${status}"; defaulting to completed.`);
 			return "completed";
 	}
 }
@@ -100,7 +87,7 @@ async function fetchAniListUserAnime(userName) {
 
 	console.log(`[AniList] Fetching anime list for user "${userName}"...`);
 
-	const res = await fetch(ANILIST_GRAPHQL_ENDPOINT, {
+	const data = await fetchJson(ANILIST_GRAPHQL_ENDPOINT, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -110,15 +97,7 @@ async function fetchAniListUserAnime(userName) {
 			query,
 			variables: { userName },
 		}),
-	});
-
-	if (!res.ok) {
-		throw new Error(
-			`AniList API returned HTTP ${res.status}: ${res.statusText}`,
-		);
-	}
-
-	const data = await res.json();
+	}, { label: "AniList" });
 	if (data.errors && data.errors.length > 0) {
 		throw new Error(
 			`AniList GraphQL Error: ${data.errors.map((e) => e.message).join("; ")}`,
@@ -212,30 +191,16 @@ async function sync() {
 
 		console.log(`[AniList] Successfully parsed ${items.length} anime entries.`);
 
-		// Локальное скачивание обложек и Garbage Collection
-		console.log(`[AniList] Downloading covers locally to ${COVERS_DIR}...`);
-		const activeCoverFilenames = new Set();
-
-		for (let i = 0; i < items.length; i++) {
-			const item = items[i];
-			if (!item.cover) continue;
-
-			const id = item.identity?.subjectId || String(i);
-			const ext = item.cover.endsWith(".png") ? "png" : item.cover.endsWith(".webp") ? "webp" : "jpg";
-			const filename = `${id}.${ext}`;
-			activeCoverFilenames.add(filename);
-
-			const localFilePath = resolve(COVERS_DIR, filename);
-			const publicPath = `/assets/media/anime/${filename}`;
-
-			item.cover = await downloadCoverIfMissing(item.cover, localFilePath, publicPath);
-		}
-
-		cleanupOrphanedCovers(COVERS_DIR, activeCoverFilenames, "AniList");
-
-		if (!existsSync(SNAPSHOT_DIR)) {
-			mkdirSync(SNAPSHOT_DIR, { recursive: true });
-		}
+		await syncLocalCovers(items, {
+			coversDir: COVERS_DIR,
+			publicPrefix: "/assets/media/anime",
+			getFilename: (item, i) => {
+				const id = item.identity?.subjectId || String(i);
+				const ext = item.cover.endsWith(".png") ? "png" : item.cover.endsWith(".webp") ? "webp" : "jpg";
+				return `${id}.${ext}`;
+			},
+			providerName: "AniList",
+		});
 
 		const envelope = {
 			schemaVersion: 1,
@@ -245,7 +210,7 @@ async function sync() {
 			items,
 		};
 
-		writeFileSync(SNAPSHOT_FILE, JSON.stringify(envelope, null, 2), "utf-8");
+		writeJsonAtomic(SNAPSHOT_FILE, envelope);
 		console.log(`[AniList] Snapshot saved to: ${SNAPSHOT_FILE}`);
 	} catch (err) {
 		console.error("[AniList] Sync failed:", err);

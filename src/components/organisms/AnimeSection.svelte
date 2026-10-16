@@ -8,7 +8,7 @@ import { animeDomain } from "../../utils/media/domains/anime";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import type { AnimeItem } from "shirones/src/data/anime.ts";
-import anilistSnapshot from "../../../shirones/config/data/anime-snapshots/anilist.json";
+import anilistSnapshot from "../../../shirones/config/data/snapshots/anilist.json";
 
 let {
 	animes = [],

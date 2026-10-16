@@ -39,6 +39,7 @@ export const MEDIA_LABEL = {
 	statusPlaying: "mediaCatalog.statusPlaying",
 	statusCompleted: "mediaCatalog.statusCompleted",
 	statusPlanned: "mediaCatalog.statusPlanned",
+	statusWishlist: "mediaCatalog.statusWishlist",
 	statusOnHold: "mediaCatalog.statusOnHold",
 	statusDropped: "mediaCatalog.statusDropped",
 } as const;

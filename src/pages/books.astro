@@ -1,0 +1,19 @@
+---
+/**
+ * Раздел «Книги»: коллекция и цели чтения из Hardcover.
+ */
+import BooksSection from "../components/organisms/BooksSection.svelte";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { booksConfig } from "../../shirones/config/booksConfig";
+
+if (!booksConfig.enable) {
+	return Astro.redirect("/404/");
+}
+
+const pageTitle = booksConfig.title || "Книги";
+const pageDescription = booksConfig.description || "Моя коллекция книг и цели чтения из Hardcover";
+---
+
+<MainGridLayout title={pageTitle} description={pageDescription} page="books">
+	<BooksSection client:visible />
+</MainGridLayout>

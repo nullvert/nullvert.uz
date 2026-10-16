@@ -47,7 +47,7 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 	// Конфигурация системы текстур фона
 	texture: {
 		enable: true, // Включить систему текстур фона
-		defaultPreset: "sakura", // Пресет текстуры по умолчанию: "none" (сплошной чистый фон)
+		defaultPreset: "starlight", // Пресет текстуры по умолчанию: "starlight" (клеточная сетка)
 		defaultOpacity: 0.12, // Прозрачность текстуры по умолчанию (0.05 ~ 0.25)
 		allowMotion: true, // Разрешить микро-анимацию фона
 	},

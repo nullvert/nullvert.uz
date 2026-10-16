@@ -3,6 +3,7 @@ import { i18n } from "@i18n/translation";
 import { aboutConfig } from "@/config/aboutConfig";
 import { albumsConfig } from "@/config/albumsConfig";
 import { animeConfig } from "@/config/animeConfig";
+import { booksConfig } from "./booksConfig";
 import { compassConfig } from "@/config/compassConfig";
 import { devicesConfig } from "@/config/devicesConfig";
 import { friendsConfig } from "@/config/friendsConfig";
@@ -66,10 +67,16 @@ export const LinkPresets: Record<string, NavBarLink> = {
 		icon: "material-symbols:movie-outline-rounded",
 		pageKey: "cinema",
 	},
+	Books: {
+		name: "Книги",
+		url: "/books/",
+		icon: "material-symbols:menu-book-outline-rounded",
+		pageKey: "books",
+	},
 	Compass: {
 		name: i18n(I18nKey.compass),
 		url: "/compass/",
-		icon: "material-symbols:explore-rounded",
+		icon: "material-symbols:bookmarks-rounded",
 		pageKey: "compass",
 	},
 	Skills: {
@@ -143,13 +150,11 @@ export const LinkPresets: Record<string, NavBarLink> = {
 
 const defaultNavBarConfig: NavBarConfig = {
 	links: [
-		LinkPresets.Categories,
-		LinkPresets.Tags,
-		LinkPresets.Anime,
 		LinkPresets.Cinema,
+		LinkPresets.Anime,
 		LinkPresets.Games,
-		LinkPresets.About,
-		LinkPresets.Archive,
+		LinkPresets.Books,
+		LinkPresets.Compass,
 	],
 };
 
@@ -179,6 +184,7 @@ const unavailableFeatureRoutes: ReadonlySet<string> = new Set([
 	...(gamesConfig.enable ? [] : ["/games"]),
 	...(timelineConfig.enable ? [] : ["/timeline"]),
 	...(aboutConfig.enable ? [] : ["/about"]),
+	...(booksConfig.enable ? [] : ["/books"]),
 	...(seriesConfig.enable ? [] : ["/series"]),
 ]);
 

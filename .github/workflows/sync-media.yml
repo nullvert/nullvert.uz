@@ -1,0 +1,91 @@
+name: Sync Media (Anime, Cinema, Books, Games)
+
+on:
+  schedule:
+    # Запуск 1 раз в 4 дня в 03:00 UTC (экономия минут)
+    - cron: '0 3 */4 * *'
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Что синхронизировать?'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - anime
+          - cinema
+          - books
+          - games
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-media
+  cancel-in-progress: false
+
+jobs:
+  sync-media:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 1
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Sync Anime (AniList)
+        if: github.event.inputs.target == 'all' || github.event.inputs.target == 'anime' || github.event_name == 'schedule'
+        continue-on-error: true
+        env:
+          ANILIST_USERNAME: ${{ secrets.ANILIST_USERNAME }}
+        run: pnpm anime:sync
+
+      - name: Sync Cinema (Simkl)
+        if: github.event.inputs.target == 'all' || github.event.inputs.target == 'cinema' || github.event_name == 'schedule'
+        continue-on-error: true
+        env:
+          SIMKL_CLIENT_ID: ${{ secrets.SIMKL_CLIENT_ID }}
+          SIMKL_ACCESS_TOKEN: ${{ secrets.SIMKL_ACCESS_TOKEN }}
+        run: pnpm cinema:sync
+
+      - name: Sync Books (Hardcover)
+        if: github.event.inputs.target == 'all' || github.event.inputs.target == 'books' || github.event_name == 'schedule'
+        continue-on-error: true
+        env:
+          HARDCOVER_TOKEN: ${{ secrets.HARDCOVER_TOKEN }}
+        run: pnpm books:sync
+
+      - name: Sync Games (InfiniteBacklog & Steam)
+        if: github.event.inputs.target == 'all' || github.event.inputs.target == 'games' || github.event_name == 'schedule'
+        continue-on-error: true
+        env:
+          INFINITEBACKLOG_USERNAME: ${{ secrets.INFINITEBACKLOG_USERNAME }}
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          STEAM_ID64: ${{ secrets.STEAM_ID64 }}
+        run: pnpm games:sync
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add shirones/config/data/snapshots/ public/assets/media/
+          if git diff --staged --quiet; then
+            echo "No media changes found. Skipping commit."
+          else
+            git commit -m "chore(media): sync catalogs"
+            git push origin main
+          fi

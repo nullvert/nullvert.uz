@@ -1,0 +1,54 @@
+name: Sync Compass (Raindrop)
+
+on:
+  schedule:
+    # Запуск 1 раз в неделю в воскресенье в 04:00 UTC
+    - cron: '0 4 * * 0'
+  workflow_dispatch: # Ручной запуск в любой момент через Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-compass
+  cancel-in-progress: false
+
+jobs:
+  sync-compass:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 1
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Sync Raindrop Bookmarks
+        env:
+          RAINDROP_TOKEN: ${{ secrets.RAINDROP_TOKEN }}
+          RAINDROP_COLLECTION_ID: ${{ secrets.RAINDROP_COLLECTION_ID }}
+        run: pnpm compass:sync
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add shirones/config/data/compass.ts
+          if git diff --staged --quiet; then
+            echo "No bookmark changes found. Skipping commit."
+          else
+            git commit -m "chore(compass): sync raindrops"
+            git push origin main
+          fi

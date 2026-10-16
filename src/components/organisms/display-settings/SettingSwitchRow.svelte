@@ -32,7 +32,7 @@ let { checked = $bindable(false), title, icon }: Props = $props();
         display: flex
         align-items: center
         justify-content: space-between
-        padding: 0.72rem 0.85rem
+        padding: 0.85rem 1rem
         cursor: pointer
         user-select: none
         border-radius: var(--shape-corner-s, 8px)
@@ -47,8 +47,8 @@ let { checked = $bindable(false), title, icon }: Props = $props();
         min-width: 0
 
     .m3e-switch-icon-wrap
-        width: 28px
-        height: 28px
+        width: 32px
+        height: 32px
         border-radius: var(--shape-corner-full)
         background: var(--surface-container-high)
         display: flex
@@ -57,7 +57,7 @@ let { checked = $bindable(false), title, icon }: Props = $props();
         flex-shrink: 0
 
     .m3e-switch-title
-        font-size: 0.8125rem
+        font-size: 0.875rem
         font-weight: 500
         letter-spacing: 0.012em
         line-height: 1.4

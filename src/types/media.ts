@@ -17,7 +17,12 @@ export interface MediaItemData {
 	progress?: MediaProgress;
 	year?: string | number;
 	authorOrStudio?: string;
+	subMeta?: string;
 	description?: string;
 	genres?: string[];
 	badge?: string;
+	topBadge?: string;
+	topBadgeColor?: string;
+	topDiscount?: string;
+	topAction?: string;
 }

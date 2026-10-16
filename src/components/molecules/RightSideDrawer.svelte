@@ -229,16 +229,16 @@ onDestroy(() => {
 		right: 0
 		display: flex
 		flex-direction: column
-		width: 320px
-		max-width: 85vw
+		width: 360px
+		max-width: 90vw
 		height: 100%
 		height: 100dvh
 		box-sizing: border-box
 		background: var(--surface-container-low)
 		color: var(--on-surface)
-		border-left: 1px solid var(--outline-variant)
+		border-left: 1px solid unquote("color-mix(in srgb, var(--outline-variant) 35%, transparent)")
 		border-radius: var(--shape-corner-xl, 28px) 0 0 var(--shape-corner-xl, 28px)
-		box-shadow: -8px 0 48px rgba(0, 0, 0, 0.45)
+		box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45)
 		transform: translateX(100%)
 		transition: transform var(--m3e-duration-long) var(--m3e-easing-emphasized-decelerate)
 		z-index: 1
@@ -251,32 +251,42 @@ onDestroy(() => {
 		display: flex
 		align-items: center
 		justify-content: space-between
-		padding: 1.125rem 1.25rem 1rem
-		border-bottom: 1px solid var(--outline-variant)
-		flex-shrink: 0
+		padding: var(--m3e-space-4) var(--m3e-space-4) var(--m3e-space-2) var(--m3e-space-5)
+		min-height: 64px
+		box-sizing: border-box
+		border-bottom: 1px solid unquote("color-mix(in srgb, var(--outline-variant) 30%, transparent)")
+		flex: none
 
 	&__title-group
 		display: flex
 		align-items: center
-		gap: 0.625rem
+		gap: 0.85rem
+		flex: 1
+		min-width: 0
 
-	&__header-icon
-		width: 1.375rem
-		height: 1.375rem
+	&__header-icon,
+	:global(.right-drawer__header-icon),
+	:global(.right-drawer__title-group svg)
+		width: 1.5rem !important
+		height: 1.5rem !important
 		color: var(--primary)
+		flex-shrink: 0
 
 	&__title
 		margin: 0
 		color: var(--on-surface)
-		font: var(--m3e-type-title-medium)
+		font: var(--m3e-type-title-large)
 		font-weight: 700
+		white-space: nowrap
+		overflow: hidden
+		text-overflow: ellipsis
 
 	&__close
 		display: inline-flex
 		align-items: center
 		justify-content: center
-		width: 2.25rem
-		height: 2.25rem
+		width: 40px
+		height: 40px
 		border: none
 		border-radius: var(--shape-corner-full, 9999px)
 		background: transparent
@@ -284,16 +294,16 @@ onDestroy(() => {
 		cursor: pointer
 		-webkit-tap-highlight-color: transparent
 		transition:
-			background-color var(--m3e-duration-short) var(--m3e-easing-standard),
-			color var(--m3e-duration-short) var(--m3e-easing-standard)
+			background-color var(--m3e-duration-short) ease,
+			color var(--m3e-duration-short) ease
 
 		&:hover
-			background: var(--surface-container-high)
+			background: unquote("color-mix(in oklab, var(--on-surface) 8%, transparent)")
 			color: var(--on-surface)
 
 		> :global(svg)
-			width: 1.25rem
-			height: 1.25rem
+			width: 1.35rem
+			height: 1.35rem
 
 	&__body
 		flex: 1
