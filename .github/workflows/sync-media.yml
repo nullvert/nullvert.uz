@@ -1,4 +1,4 @@
-name: Sync Media (Anime, Cinema, Books, Games)
+name: Sync Media (Anime, Cinema, Games)
 
 on:
   schedule:
@@ -15,7 +15,6 @@ on:
           - all
           - anime
           - cinema
-          - books
           - games
 
 permissions:
@@ -62,12 +61,6 @@ jobs:
           SIMKL_ACCESS_TOKEN: ${{ secrets.SIMKL_ACCESS_TOKEN }}
         run: pnpm cinema:sync
 
-      - name: Sync Books (Hardcover)
-        if: github.event.inputs.target == 'all' || github.event.inputs.target == 'books' || github.event_name == 'schedule'
-        continue-on-error: true
-        env:
-          HARDCOVER_TOKEN: ${{ secrets.HARDCOVER_TOKEN }}
-        run: pnpm books:sync
 
       - name: Sync Games (InfiniteBacklog & Steam)
         if: github.event.inputs.target == 'all' || github.event.inputs.target == 'games' || github.event_name == 'schedule'

@@ -34,7 +34,7 @@ import {
 } from "@utils/setting-utils";
 import { getStyle, setSpec, setStyle } from "@utils/theme-utils";
 import { onMount } from "svelte";
-import { getDefaultStyle } from "@/config";
+import { getDefaultStyle, postListConfig } from "@/config";
 import type { PostListMode } from "@/types/postListConfig";
 import type { TexturePreset } from "@/types/textureConfig";
 
@@ -61,7 +61,7 @@ let isMobile = $state(false);
 let isDrawerOpen = $state(false);
 
 // Вид списка статей (list / grid)
-const defaultLayoutMode = defaultMode();
+const defaultLayoutMode = postListConfig?.layout?.mode || defaultMode();
 let postListMode = $state<PostListMode>(getStoredMode());
 let lastAppliedMode = postListMode;
 let isHomePage = $state(
@@ -82,14 +82,7 @@ let texturePreset = $state<TexturePreset>(
 let lastAppliedTexturePreset = texturePreset;
 let textureOpacity = $state<number>(getStoredTextureOpacity());
 
-// Аудиоплеер: состояние включения/выключения виджета
-let musicPlayerEnabled = $state(true);
-let musicPlayerInitialized = false;
-let isExternalMusicChange = false;
 
-// Эффект стекла (Glassmorphism для карточек): по умолчанию отключен, включается тумблером
-let glassEnabled = $state(false);
-let glassInitialized = false;
 
 const textureOptions: {
 	value: TexturePreset;
@@ -124,27 +117,15 @@ onMount(() => {
 	setSpec("2025");
 
 	if (typeof window !== "undefined") {
-		musicPlayerEnabled = localStorage.getItem("shirone-music-enabled") !== "false";
-		musicPlayerInitialized = true;
-		if (!musicPlayerEnabled) {
-			document.documentElement.dataset.music = "disabled";
-		}
 
-		glassEnabled = localStorage.getItem("shirone-glass-effect") === "true";
-		glassInitialized = true;
-		if (glassEnabled) {
-			document.documentElement.dataset.glass = "cards";
+
+		const storedMode = localStorage.getItem("post-list-mode");
+		if (storedMode === "list" || storedMode === "grid") {
+			postListMode = storedMode;
+		} else {
+			postListMode = defaultLayoutMode;
 		}
 	}
-
-	const onVisibilityChange = (e: Event) => {
-		const detail = (e as CustomEvent<{ enabled: boolean }>).detail;
-		if (typeof detail?.enabled === "boolean" && detail.enabled !== musicPlayerEnabled) {
-			isExternalMusicChange = true;
-			musicPlayerEnabled = detail.enabled;
-		}
-	};
-	window.addEventListener("shirone-music-visibility-change", onVisibilityChange);
 
 	const mql = window.matchMedia("(max-width: 1023px)");
 	isMobile = mql.matches;
@@ -186,7 +167,6 @@ onMount(() => {
 		observer.disconnect();
 		mql.removeEventListener("change", onResize);
 		document.removeEventListener("display-settings:toggle", onToggleSettings);
-		window.removeEventListener("shirone-music-visibility-change", onVisibilityChange);
 		document.removeEventListener("swup:page:view", syncHomePage);
 		document.removeEventListener("swup:content:replace", syncHomePage);
 		window.removeEventListener("popstate", syncHomePage);
@@ -200,14 +180,7 @@ function confirmReset() {
 	postListMode = defaultLayoutMode;
 	texturePreset = defaultTexturePreset;
 	textureOpacity = defaultTextureOpacity;
-	musicPlayerEnabled = true;
-	glassEnabled = false;
 	setSpec("2025");
-	if (typeof window !== "undefined") {
-		delete document.documentElement.dataset.music;
-		delete document.documentElement.dataset.glass;
-		localStorage.setItem("shirone-glass-effect", "false");
-	}
 }
 
 /** Есть ли изменённые параметры */
@@ -216,9 +189,7 @@ const isDirty = $derived(
 		style !== defaultStyle ||
 		postListMode !== defaultLayoutMode ||
 		texturePreset !== defaultTexturePreset ||
-		textureOpacity !== defaultTextureOpacity ||
-		musicPlayerEnabled !== true ||
-		glassEnabled !== false,
+		textureOpacity !== defaultTextureOpacity,
 );
 
 $effect(() => {
@@ -251,45 +222,8 @@ $effect(() => {
 	if (container) flipToMode(container, postListMode);
 });
 
-$effect(() => {
-	const current = musicPlayerEnabled;
-	if (!musicPlayerInitialized) return;
-	if (isExternalMusicChange) {
-		isExternalMusicChange = false;
-		return;
-	}
-	if (typeof window !== "undefined") {
-		if (current) {
-			delete document.documentElement.dataset.music;
-		} else {
-			document.documentElement.dataset.music = "disabled";
-		}
-		localStorage.setItem("shirone-music-enabled", String(current));
-		window.dispatchEvent(
-			new CustomEvent("shirone-music-visibility-change", {
-				detail: { enabled: current },
-			}),
-		);
-	}
-});
 
-$effect(() => {
-	const current = glassEnabled;
-	if (!glassInitialized) return;
-	if (typeof window !== "undefined") {
-		if (current) {
-			document.documentElement.dataset.glass = "cards";
-		} else {
-			delete document.documentElement.dataset.glass;
-		}
-		localStorage.setItem("shirone-glass-effect", String(current));
-		window.dispatchEvent(
-			new CustomEvent("shirone-glass-change", {
-				detail: { enabled: current },
-			}),
-		);
-	}
-});
+
 
 function styleKey(s: McStyle): I18nKey {
 	switch (s) {
@@ -372,6 +306,7 @@ const stylePreviews = $derived(
                             <path d="M11 22v-4.15l-3.25 3.2l-1.4-1.4L11 15v-2H9l-4.65 4.65l-1.4-1.4L6.15 13H2v-2h4.15l-3.2-3.25l1.4-1.4L9 11h2V9L6.35 4.35l1.4-1.4L11 6.15V2h2v4.15l3.25-3.2l1.4 1.4L13 9v2h2l4.65-4.65l1.4 1.4l-3.2 3.25H22v2h-4.15l3.2 3.25l-1.4 1.4L15 13h-2v2l4.65 4.65l-1.4 1.4l-3.25-3.2V22z"/>
                         </svg>
                     {/if}
+                    <span class="m3e-segment-label">{i18n(opt.labelKey)}</span>
                 </button>
             {/each}
         </div>
@@ -446,26 +381,6 @@ const stylePreviews = $derived(
                 </svg>
             {/snippet}
         </SettingSwitchRow>
-
-        <div class="m3e-switch-divider" aria-hidden="true"></div>
-
-        <SettingSwitchRow bind:checked={musicPlayerEnabled} title={i18n(I18nKey.musicPlayerTitle)}>
-            {#snippet icon()}
-                <svg viewBox="0 0 24 24" class="w-4 h-4 text-[var(--primary)]" fill="currentColor">
-                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-                </svg>
-            {/snippet}
-        </SettingSwitchRow>
-
-        <div class="m3e-switch-divider" aria-hidden="true"></div>
-
-        <SettingSwitchRow bind:checked={glassEnabled} title={localLabel(DISPLAY_LABEL.glassEffect, "Glass effect")}>
-            {#snippet icon()}
-                <svg viewBox="0 0 24 24" class="w-4 h-4 text-[var(--primary)]" fill="currentColor">
-                    <path d="M10.59 9.17L5.41 4L4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/>
-                </svg>
-            {/snippet}
-        </SettingSwitchRow>
     </div>
 {/snippet}
 
@@ -490,9 +405,114 @@ const stylePreviews = $derived(
     <div class="flex flex-col gap-5">
         {@render settingsContent()}
     </div>
+
+    {#snippet footer()}
+        <div class="m3-drawer-footer">
+            <details class="m3-drawer-footer__details group">
+                <summary class="m3-drawer-footer__summary" aria-label="Подробнее" title="Подробнее">
+                    <span class="m3-drawer-footer__copyright">
+                        &copy; All Rights Reserved
+                    </span>
+                    <svg class="m3-drawer-footer__chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                    </svg>
+                </summary>
+
+                <div class="m3-drawer-footer__content">
+                    <div class="m3-drawer-footer__links">
+                        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--primary)] transition-colors">CC BY-NC-SA 4.0</a>
+                        <span class="opacity-40">·</span>
+                        <a href="/rss/" class="hover:text-[var(--primary)] transition-colors">RSS</a>
+                        <span class="opacity-40">·</span>
+                        <a href="/atom/" class="hover:text-[var(--primary)] transition-colors">Atom</a>
+                        <span class="opacity-40">·</span>
+                        <a href="/sitemap-index.xml" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--primary)] transition-colors">Sitemap</a>
+                    </div>
+                    <div class="m3-drawer-footer__powered">
+                        Powered by <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--primary)] transition-colors">Astro</a> &amp; <a href="https://github.com/LyraVoid/Shirone" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--primary)] transition-colors">Shirone</a> <span class="opacity-40">·</span> v0.1.5
+                    </div>
+                </div>
+            </details>
+        </div>
+    {/snippet}
 </RightSideDrawer>
 
 <style lang="stylus">
+    /* ── Футер внутри шторки параметров ── */
+    .m3-drawer-footer
+        width: 100%
+        display: flex
+        flex-direction: column
+        align-items: center
+
+    .m3-drawer-footer__details
+        width: 100%
+        cursor: pointer
+
+    .m3-drawer-footer__summary
+        display: flex
+        align-items: center
+        justify-content: center
+        gap: 0.35rem
+        list-style: none
+        user-select: none
+        outline: none
+        color: var(--on-surface-variant)
+        opacity: 0.75
+        transition: opacity var(--m3e-duration-short) ease, color var(--m3e-duration-short) ease
+
+        &::-webkit-details-marker
+            display: none
+
+        &:hover
+            opacity: 1
+            color: var(--on-surface)
+
+    .m3-drawer-footer__copyright
+        font: var(--m3e-type-label-medium)
+        font-size: 0.75rem
+        letter-spacing: 0.02em
+
+    .m3-drawer-footer__chevron
+        width: 1.1rem
+        height: 1.1rem
+        transition: transform var(--m3e-duration-medium) var(--m3e-easing-standard)
+
+    .m3-drawer-footer__details[open] .m3-drawer-footer__chevron
+        transform: rotate(180deg)
+
+    .m3-drawer-footer__content
+        display: flex
+        flex-direction: column
+        align-items: center
+        gap: 0.35rem
+        padding-top: 0.65rem
+        font-size: 0.75rem
+        color: var(--on-surface-variant)
+        text-align: center
+
+    .m3-drawer-footer__links
+        display: flex
+        flex-wrap: wrap
+        align-items: center
+        justify-content: center
+        gap: 0.4rem
+
+        a
+            color: var(--on-surface-variant)
+            text-decoration: none
+            transition: color var(--m3e-duration-short) ease
+
+    .m3-drawer-footer__powered
+        font-size: 0.7rem
+        opacity: 0.65
+        margin-top: 0.15rem
+
+        a
+            color: inherit
+            text-decoration: none
+            border-bottom: 1px dotted currentColor
+
     .display-settings__section-label
         font-size: 0.8125rem
         font-weight: 600
@@ -540,6 +560,12 @@ const stylePreviews = $derived(
         border: 1px solid unquote("color-mix(in srgb, var(--outline-variant) 30%, transparent)")
         box-sizing: border-box
 
+        @media (max-width: 639px)
+            height: auto
+            flex-direction: column
+            padding: 4px
+            gap: 4px
+
     .m3e-segment
         flex: 1 1 0
         min-width: 0
@@ -563,6 +589,12 @@ const stylePreviews = $derived(
         transition: background-color var(--m3e-duration-short, 140ms) var(--m3e-easing-standard, ease),
                     color var(--m3e-duration-short, 140ms) var(--m3e-easing-standard, ease),
                     box-shadow var(--m3e-duration-short, 140ms) var(--m3e-easing-standard, ease)
+
+        @media (max-width: 639px)
+            width: 100%
+            height: 2.625rem
+            padding: 0 1rem
+            justify-content: center
 
         &:hover:not(.selected)
             background: unquote("color-mix(in srgb, var(--on-surface) 6%, transparent)")

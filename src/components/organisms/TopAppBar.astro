@@ -34,10 +34,7 @@ function isActive(link: (typeof links)[number]): boolean {
 	);
 }
 
-const rawTitle = siteConfig.title as string;
-const schemeIdx = rawTitle.indexOf("://");
-const logoPrefix = schemeIdx !== -1 ? rawTitle.slice(0, schemeIdx) + "://" : null;
-const logoSuffix = schemeIdx !== -1 ? rawTitle.slice(schemeIdx + 3) : rawTitle;
+const siteTitle = "Javohir";
 ---
 
 <div
@@ -56,15 +53,9 @@ const logoSuffix = schemeIdx !== -1 ? rawTitle.slice(schemeIdx + 3) : rawTitle;
 			class="group flex h-10 items-center gap-2 px-2 text-[var(--on-surface)] transition whitespace-nowrap"
 		>
 			<span class="h-5 w-1 rounded-full bg-[var(--primary)] transition-all group-hover:h-7"></span>
-			{logoPrefix
-				? (
-					<span class="text-lg leading-none select-none">
-						<span class="font-mono font-semibold text-[var(--primary)] tracking-tight">{logoPrefix}</span><span class="font-bold group-hover:text-[var(--primary)] transition-colors">{logoSuffix}</span>
-					</span>
-				)
-				: <span class="text-lg font-bold group-hover:text-[var(--primary)]">{rawTitle}</span>
-			}
+			<span class="text-lg font-semibold group-hover:text-[var(--primary)] transition-colors">{siteTitle}</span>
 		</a>
+
 		<nav class:list={["top-app-bar__nav hidden h-full items-center gap-1 lg:flex", siteConfig.topAppBar.contentAlign === "center" ? "lg:absolute lg:left-1/2 lg:-translate-x-1/2" : "ml-4"]} aria-label="Main navigation">
 			{links.map((link) => {
 				const href = link.external ? link.url : hrefFor(link.url);
@@ -73,7 +64,7 @@ const logoSuffix = schemeIdx !== -1 ? rawTitle.slice(schemeIdx + 3) : rawTitle;
 					<div class="top-app-bar__nav-group" data-nav-group>
 						{link.children ? (
 							<button class:list={[
-								"top-app-bar__nav-link m3-state-layer relative flex h-10 items-center gap-1.5 px-3.5 text-sm font-bold rounded-full text-[var(--on-surface-variant)] transition-colors hover:text-[var(--on-surface)]",
+								"top-app-bar__nav-link m3-state-layer relative flex h-10 items-center gap-1.5 px-3.5 text-sm font-medium rounded-full text-[var(--on-surface-variant)] transition-colors hover:text-[var(--on-surface)]",
 								active && "top-app-bar__nav-link--active",
 							]} aria-expanded="false">
 								{link.icon && <Icon name={link.icon} class="text-[1.1rem]"></Icon>}
@@ -83,7 +74,7 @@ const logoSuffix = schemeIdx !== -1 ? rawTitle.slice(schemeIdx + 3) : rawTitle;
 						) : (
 							<a href={href} target={link.external ? "_blank" : undefined} rel={link.external ? "noopener noreferrer" : undefined}
 								aria-current={active ? "page" : undefined} data-nav-key={link.pageKey ?? ""}
-								class:list={["top-app-bar__nav-link m3-state-layer relative flex h-10 items-center gap-1.5 px-3.5 text-sm font-bold rounded-full text-[var(--on-surface-variant)] transition-colors hover:text-[var(--on-surface)]", active && "top-app-bar__nav-link--active"]}>
+								class:list={["top-app-bar__nav-link m3-state-layer relative flex h-10 items-center gap-1.5 px-3.5 text-sm font-medium rounded-full text-[var(--on-surface-variant)] transition-colors hover:text-[var(--on-surface)]", active && "top-app-bar__nav-link--active"]}>
 								{link.icon && <Icon name={link.icon} class="text-[1.1rem]"></Icon>}{link.name}
 								{link.external && <Icon name="material-symbols:arrow-outward-rounded" class="ml-1 text-[0.875rem]"></Icon>}
 							</a>
@@ -384,27 +375,20 @@ document.addEventListener('swup:content:replace', bindSearchTriggers);
 		}
 
 	.top-app-bar__nav-link {
-		border-radius: var(--shape-corner-full, 9999px);
 		transition: color var(--m3e-duration-short) var(--m3e-easing-standard);
 	}
 
-	.top-app-bar--transparent .top-app-bar__nav-link--active::after {
-		background: white;
+	.top-app-bar__nav-link::before {
+		display: none !important;
 	}
 
 	.top-app-bar__nav-link--active {
-		color: var(--primary);
-		--m3e-state-color: var(--primary);
+		color: var(--primary) !important;
+		font-weight: 600;
 	}
 
 	.top-app-bar__nav-link--active::after {
-		content: "";
-		position: absolute;
-		inset-inline: 0.875rem;
-		bottom: 3px;
-		height: 3px;
-		border-radius: var(--shape-corner-full);
-		background: var(--primary);
+		display: none !important;
 	}
 
 	.top-app-bar__nav-group {

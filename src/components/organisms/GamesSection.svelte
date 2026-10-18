@@ -5,12 +5,13 @@
  */
 import MediaCatalog from "./MediaCatalog.svelte";
 import { gamesDomain, type GameItem } from "../../utils/media/domains/games";
-import infiniteBacklogSnapshot from "../../../shirones/config/data/snapshots/infinitebacklog.json";
+import infiniteBacklogSnapshot from "../../data/snapshots/infinitebacklog.json";
+import { MEDIA_LABEL, mediaLabel } from "../../utils/media/labels";
 
 import CatalogFilterItem from "../molecules/CatalogFilterItem.svelte";
 
 let {
-	title = "Игры",
+	title = mediaLabel(MEDIA_LABEL.gamesAll, "Игры"),
 }: {
 	title?: string;
 } = $props();

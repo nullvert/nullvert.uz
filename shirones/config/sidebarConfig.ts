@@ -34,7 +34,7 @@ export const sidebarConfig: SidebarConfig = withUserConfig("sidebar", {
 			type: "categories",
 			enable: true,
 			slot: "sticky",
-			collapseAfter: 5,
+			collapseAfter: 4,
 			pages: [
 				"home",
 				"friends",
@@ -53,7 +53,7 @@ export const sidebarConfig: SidebarConfig = withUserConfig("sidebar", {
 			type: "series",
 			enable: false,
 			slot: "sticky",
-			collapseAfter: 5,
+			collapseAfter: 4,
 			pages: [
 				"home",
 				"friends",
@@ -66,14 +66,14 @@ export const sidebarConfig: SidebarConfig = withUserConfig("sidebar", {
 				"timeline",
 				"albums",
 				"about",
-				"post",
+				// "post",
 			],
 		},
 		{
 			type: "tags",
 			enable: true,
 			slot: "sticky",
-			collapseAfter: 6,
+			collapseAfter: 10,
 			pages: [
 				"home",
 				"friends",

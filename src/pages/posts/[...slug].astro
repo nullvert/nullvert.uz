@@ -1,0 +1,523 @@
+---
+import { type CollectionEntry, render } from "astro:content";
+import path from "node:path";
+import Card from "@components/atoms/display/Card.svelte";
+import Markdown from "@components/content/Markdown.astro";
+import ImageWrapper from "@components/molecules/ImageWrapper.astro";
+import LastUpdatedNotice from "@components/molecules/LastUpdatedNotice.astro";
+import SeriesCard from "@/components/molecules/SeriesCard.astro";
+import CommentSection from "@components/organisms/comment/CommentSection.astro";
+import EncryptedContent from "@components/organisms/EncryptedContent.astro";
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { discoverArticles } from "@utils/article-discovery";
+import { resolveAsset } from "@utils/asset-utils";
+import { getPublishedInstant, getUpdatedInstant } from "@utils/content-date";
+import {
+	getSeriesCatalog,
+	getSortedPosts,
+	type PostForList,
+} from "@utils/content-utils";
+import { formatDateToYYYYMMDD } from "@utils/date-utils";
+import { getMarkdownStylesheetAssets } from "@utils/markdown-assets";
+import { getSourceMarkdownSyntaxSnapshot } from "@utils/markdown-source-syntaxes.mjs";
+import {
+	hasMarkdownSyntax,
+	mergeMarkdownSyntaxSnapshots,
+} from "@utils/markdown-syntaxes.mjs";
+import { initPostIdMap } from "@utils/permalink-utils";
+import {
+	buildSeriesContexts,
+	type SeriesPostContext,
+} from "@utils/series-utils";
+import {
+	getCategoryUrl,
+	getDir,
+	getPostUrl,
+	getPostUrlBySlug,
+	getTagUrl,
+	removeFileExtension,
+	url,
+} from "@utils/url-utils";
+import { Icon } from "astro-icon/components";
+import katexStylesheet from "katex/dist/katex.css?url";
+import overlayScrollbarsStylesheet from "overlayscrollbars/overlayscrollbars.css?url";
+import {
+	articleConfig,
+	commentConfig,
+	profileConfig,
+	resolveArticleDiscoveryOptions,
+	resolveArticleShareOptions,
+	resolveCommentOptions,
+	resolveLastUpdatedNoticeOptions,
+	seriesConfig,
+	siteConfig,
+} from "@/config";
+import ArticleShare from "shirones/src/components/organisms/ArticleShare.svelte";
+
+export async function getStaticPaths() {
+	const blogEntries = await getSortedPosts();
+	initPostIdMap(blogEntries);
+
+	const seriesContexts = seriesConfig.enable
+		? buildSeriesContexts({
+				catalog: await getSeriesCatalog(),
+				posts: blogEntries.map((entry) => ({
+					slug: entry.id,
+					title: entry.data.title,
+					published: entry.data.published,
+					series: entry.data.series,
+					seriesOrder: entry.data.seriesOrder,
+				})),
+			})
+		: new Map<string, SeriesPostContext>();
+
+	const discoveryCandidates = blogEntries.map((entry) => ({
+		slug: entry.id,
+		data: entry.data,
+	}));
+	const discoveryOptions = resolveArticleDiscoveryOptions(articleConfig);
+
+	const paths: {
+		params: { slug: string };
+		props: {
+			entry: CollectionEntry<"posts">;
+			discovery: { related: PostForList[]; random: PostForList[] };
+			series: SeriesPostContext | null;
+		};
+	}[] = [];
+
+	for (const entry of blogEntries) {
+		const defaultSlug = removeFileExtension(entry.id);
+		const current = discoveryCandidates.find(
+			(candidate) => candidate.slug === entry.id,
+		);
+		const discovery =
+			discoveryOptions && current
+				? discoverArticles(
+						current,
+						discoveryCandidates,
+						discoveryOptions.relatedCount,
+						discoveryOptions.randomCount,
+					)
+				: { related: [], random: [] };
+
+		paths.push({
+			params: { slug: defaultSlug },
+			props: {
+				entry,
+				discovery,
+				series: seriesContexts.get(entry.id) ?? null,
+			},
+		});
+
+		if (entry.data.alias) {
+			let alias = entry.data.alias.replace(/^\/+/, "").replace(/\/+$/, "");
+			if (alias.startsWith("posts/")) {
+				alias = alias.replace(/^posts\//, "");
+			}
+			if (alias && alias !== defaultSlug) {
+				paths.push({
+					params: { slug: alias },
+					props: {
+						entry,
+						discovery,
+						series: seriesContexts.get(entry.id) ?? null,
+					},
+				});
+			}
+		}
+	}
+
+	return paths;
+}
+
+const { entry, series } = Astro.props;
+const isEncrypted = Boolean(
+	entry.data.password && entry.data.password.trim().length > 0,
+);
+
+const seriesCardVisible =
+	seriesConfig.enable &&
+	series !== null &&
+	!(isEncrypted && entry.data.hideHomeContent);
+const scope = `post:${entry.id}`;
+
+const { Content, headings, remarkPluginFrontmatter } = await render(entry);
+const renderedMarkdownSyntaxes = remarkPluginFrontmatter.markdownSyntaxes;
+const sourceMarkdownSyntaxes = hasMarkdownSyntax(
+	renderedMarkdownSyntaxes,
+	"expressive-code",
+)
+	? undefined
+	: getSourceMarkdownSyntaxSnapshot(entry.body);
+const markdownSyntaxes = mergeMarkdownSyntaxSnapshots(
+	renderedMarkdownSyntaxes,
+	sourceMarkdownSyntaxes,
+);
+const hasMath = hasMarkdownSyntax(markdownSyntaxes, "math");
+const markdownStylesheetAssets =
+	await getMarkdownStylesheetAssets(markdownSyntaxes);
+const effectiveHeadings = isEncrypted ? [] : headings;
+const imageBasePath = entry.filePath
+	? path.relative(path.resolve("src"), path.dirname(entry.filePath))
+	: path.join("content/posts/", getDir(entry.id));
+const effectiveUpdatedDate = entry.data.updated ?? entry.data.published;
+const publishedInstant = getPublishedInstant(entry.data);
+const updatedInstant = getUpdatedInstant(entry.data);
+const postCommentEnabled =
+	entry.data.comment !== false && Boolean(resolveCommentOptions(commentConfig));
+const lastUpdatedNotice = resolveLastUpdatedNoticeOptions(articleConfig);
+const shareOptions = resolveArticleShareOptions(articleConfig);
+const authorAvatarUrl = shareOptions
+	? await resolveAsset(profileConfig.avatar ?? "")
+	: "";
+
+const effectiveDescription =
+	isEncrypted && entry.data.hideHomeContent
+		? i18n(I18nKey.postEncryptedSummary)
+		: entry.data.description || entry.data.title;
+const ogImage = entry.data.image
+	? await resolveAsset(entry.data.image, imageBasePath)
+	: undefined;
+
+const canonicalPostUrl = getPostUrl(entry);
+
+// Контекстная навигация по статьям:
+// Если статья входит в серию — листаем строго по главам серии
+// Иначе — листаем по общей хронологической ленте блога
+const inSeries = Boolean(seriesCardVisible && series);
+const navPrev = inSeries && series?.prev
+	? {
+			url: getPostUrlBySlug(series.prev.slug),
+			title: series.prev.title,
+			label: `Часть ${series.index - 1} из ${series.total}`,
+	  }
+	: entry.data.nextSlug
+	? {
+			url: entry.data.nextUrl || getPostUrlBySlug(entry.data.nextSlug),
+			title: entry.data.nextTitle,
+			label: "Назад",
+	  }
+	: null;
+
+const navNext = inSeries && series?.next
+	? {
+			url: getPostUrlBySlug(series.next.slug),
+			title: series.next.title,
+			label: `Часть ${series.index + 1} из ${series.total}`,
+	  }
+	: entry.data.prevSlug
+	? {
+			url: entry.data.prevUrl || getPostUrlBySlug(entry.data.prevSlug),
+			title: entry.data.prevTitle,
+			label: "Далее",
+	  }
+	: null;
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: entry.data.title,
+	description: effectiveDescription,
+	keywords: entry.data.tags,
+	author: {
+		"@type": "Person",
+		name: profileConfig.name,
+		url: Astro.site,
+	},
+	datePublished: entry.data.publishedAt
+		? publishedInstant.toISOString()
+		: formatDateToYYYYMMDD(entry.data.published),
+	dateModified: entry.data.updatedAt
+		? updatedInstant.toISOString()
+		: formatDateToYYYYMMDD(effectiveUpdatedDate),
+	inLanguage: entry.data.lang
+		? entry.data.lang.replace("_", "-")
+		: siteConfig.lang.replace("_", "-"),
+};
+---
+
+<MainGridLayout banner={entry.data.image} ogImage={ogImage} title={entry.data.title} description={effectiveDescription} bannerDate={formatDateToYYYYMMDD(entry.data.published)} lang={entry.data.lang} setOGTypeArticle={true} headings={effectiveHeadings} postCategory={entry.data.category || undefined} page="post" hasComments={postCommentEnabled}>
+    {hasMath && <link slot="head" rel="stylesheet" data-swup-optional="math" href={katexStylesheet} />}
+    {hasMath && <link slot="head" rel="stylesheet" data-swup-optional="math" href={overlayScrollbarsStylesheet} />}
+    {markdownStylesheetAssets.map(({ pack, css }) => <style is:inline slot="head" data-swup-optional={pack} set:html={css}></style>)}
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <div class="flex w-full rounded-[var(--shape-corner-xl)] overflow-hidden relative mb-4">
+		<Card color="var(--card-bg)" radius="xl" class="post-card z-10 !p-0 relative w-full overflow-hidden !rounded-[var(--shape-corner-xl)]">
+			
+			<!-- 1. Премиум Edge-to-Edge Hero баннер обложки на самом верху карточки -->
+			{entry.data.image && (
+				<div class="relative w-full overflow-hidden banner-wrapper">
+					<ImageWrapper
+						id="post-cover"
+						src={entry.data.image}
+						basePath={imageBasePath}
+						class="w-full banner-container onload-animation"
+						loading="eager"
+						fetchPriority="high"
+						widths={[360, 720, 1080, 1440]}
+						sizes="(min-width: 1280px) 720px, (min-width: 768px) calc(100vw - 22rem), calc(100vw - 3.5rem)"
+						formats={["avif", "webp"]}
+						quality={75}
+					/>
+				</div>
+			)}
+
+			<div class="px-4 md:px-8 pt-6 pb-6">
+				<!-- 2. Заголовок статьи -->
+				<div class="relative onload-animation mb-3.5">
+					<h1
+						data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title"
+						class="transition w-full block font-bold text-2xl md:text-3.5xl text-[var(--on-surface)] leading-snug m-0"
+					>
+						{entry.data.title}
+					</h1>
+				</div>
+
+				<!-- 3. Метаданные статьи сразу под заголовком -->
+				<div class="onload-animation flex flex-wrap items-center gap-x-3.5 gap-y-2 text-xs text-[var(--on-surface-variant)] mb-6">
+					<!-- Дата публикации -->
+					<span class="inline-flex items-center gap-1.5 font-medium">
+						<Icon name="material-symbols:calendar-today-outline-rounded" class="text-sm text-[var(--primary)]" />
+						<time datetime={publishedInstant.toISOString()}>{formatDateToYYYYMMDD(entry.data.published)}</time>
+					</span>
+
+					<!-- Время чтения и объем -->
+					{remarkPluginFrontmatter.minutes && (
+						<span class="inline-flex items-center gap-1.5">
+							<Icon name="material-symbols:schedule-outline-rounded" class="text-sm opacity-70" />
+							<span>{remarkPluginFrontmatter.minutes} {i18n(remarkPluginFrontmatter.minutes === 1 ? I18nKey.minuteCount : I18nKey.minutesCount)}</span>
+						</span>
+					)}
+					<!-- Объем слов -->
+					{remarkPluginFrontmatter.words && (
+						<span class="inline-flex items-center gap-1.5 opacity-80">
+							<Icon name="material-symbols:article-outline-rounded" class="text-sm opacity-70" />
+							<span>{remarkPluginFrontmatter.words} {i18n(remarkPluginFrontmatter.words === 1 ? I18nKey.wordCount : I18nKey.wordsCount)}</span>
+						</span>
+					)}
+
+					<!-- Разделитель-точка -->
+					{(entry.data.category || (entry.data.tags && entry.data.tags.length > 0)) && (
+						<span class="hidden sm:inline-block w-1 h-1 rounded-full bg-[var(--outline-variant)] opacity-60"></span>
+					)}
+
+					<!-- Категория: компактная аккуратная плашка (h-[1.75rem]) -->
+					{entry.data.category && (
+						<a
+							href={getCategoryUrl(entry.data.category)}
+							class="inline-flex items-center gap-1.5 h-[1.75rem] px-2.5 rounded-[8px] bg-[color-mix(in_srgb,var(--surface-container-highest)_60%,transparent)] border border-[color-mix(in_srgb,var(--outline-variant)_30%,transparent)] text-[color-mix(in_srgb,var(--on-surface)_90%,transparent)] hover:bg-[color-mix(in_srgb,var(--surface-container-highest)_95%,transparent)] hover:text-[var(--primary)] transition-all text-[0.75rem] font-medium"
+						>
+							<Icon name="material-symbols:folder-outline-rounded" class="text-[0.875rem] text-[var(--primary)]" />
+							<span>{entry.data.category}</span>
+						</a>
+					)}
+
+					<!-- Теги: идентичные компактные плашки (h-[1.75rem]) -->
+					{entry.data.tags && entry.data.tags.length > 0 && (
+						<div class="flex flex-wrap items-center gap-1.5">
+							{entry.data.tags.map((tag: string) => (
+								<a
+									href={getTagUrl(tag)}
+									class="inline-flex items-center gap-1 h-[1.75rem] px-2.5 rounded-[8px] bg-[color-mix(in_srgb,var(--surface-container-highest)_60%,transparent)] border border-[color-mix(in_srgb,var(--outline-variant)_30%,transparent)] text-[color-mix(in_srgb,var(--on-surface)_90%,transparent)] hover:bg-[color-mix(in_srgb,var(--surface-container-highest)_95%,transparent)] hover:text-[var(--primary)] transition-all text-[0.75rem] font-medium"
+								>
+									<span class="text-[color-mix(in_srgb,var(--on-surface-variant)_70%,transparent)] font-semibold">#</span>
+									<span>{tag.trim()}</span>
+								</a>
+							))}
+						</div>
+					)}
+				</div>
+
+				<!-- 4. Аккордеон серии -->
+				{seriesCardVisible && series && (
+					<div class="mb-6 onload-animation">
+						<SeriesCard context={series} currentSlug={entry.id} />
+					</div>
+				)}
+
+				<!-- 4. Основной текст статьи -->
+            {isEncrypted ? (
+                <EncryptedContent
+                    password={entry.data.password!}
+                    scope={scope}
+                    hint={entry.data.passwordHint}
+                >
+                    <Content />
+                </EncryptedContent>
+            ) : (
+                <Markdown class="mb-8 onload-animation">
+                    <Content />
+                </Markdown>
+            )}
+			</div>
+
+			<!-- 5. Завершение статьи: от края до края карточки (как обложка наверху) -->
+			<footer class="onload-animation border-t border-[var(--outline-variant)]/30 bg-[var(--surface-container-low)] divide-y divide-[var(--outline-variant)]/25 rounded-b-[var(--shape-corner-xl)] overflow-hidden">
+				<!-- 1. Верхний ряд: На десктопе вопрос слева + кнопки справа; на мобилке чистые центрированные кнопки -->
+				<div class="flex items-center justify-center sm:justify-between gap-4 px-5 sm:px-8 py-5 sm:py-6">
+					<div class="hidden sm:flex items-center gap-2.5 text-[var(--on-surface)] select-none shrink-0">
+						<Icon name="material-symbols:thumb-up-outline-rounded" class="text-xl text-[var(--primary)] shrink-0" />
+						<span class="text-sm font-semibold">
+							Было полезно?
+						</span>
+					</div>
+					<div class="flex items-center justify-center sm:justify-end gap-3 w-full sm:w-auto max-w-sm sm:max-w-none">
+						<!-- Кнопка 1: Закинуть монетку -->
+						<a
+							href={url("/support/")}
+							class="group/support flex-1 sm:flex-none flex items-center justify-center gap-2.5 h-11 px-5 sm:px-6 rounded-[var(--shape-corner-m,14px)] bg-[var(--surface-container-high)] hover:bg-[var(--primary)] text-[var(--on-surface)] hover:text-[var(--on-primary)] transition-all duration-200 font-semibold text-sm select-none border border-[var(--outline-variant)]/40 hover:border-[var(--primary)]"
+						>
+							<Icon
+								name="material-symbols:savings-rounded"
+								class="text-lg text-[var(--primary)] group-hover/support:text-[var(--on-primary)] transition-colors shrink-0"
+							/>
+							<span>Закинуть монетку</span>
+						</a>
+						<!-- Кнопка 2: Поделиться -->
+						<button
+							type="button"
+							id="native-share-btn"
+							class="flex-1 sm:flex-none flex items-center justify-center gap-2.5 h-11 px-5 sm:px-6 rounded-[var(--shape-corner-m,14px)] bg-[var(--surface-container-high)] hover:bg-[var(--surface-container-highest)] text-[var(--on-surface)] hover:text-[var(--primary)] transition-all duration-200 font-semibold text-sm cursor-pointer select-none border border-[var(--outline-variant)]/40 hover:border-[var(--primary)]/60"
+						>
+							<Icon name="material-symbols:share-outline-rounded" class="text-lg shrink-0" />
+							<span>Поделиться</span>
+						</button>
+					</div>
+				</div>
+
+				<!-- Официальный компонент ArticleShare (баннер скрыт, диалог модалки открывается при клике на «Поделиться») -->
+				{shareOptions && (
+					<ArticleShare
+						client:load
+						options={shareOptions}
+						title={entry.data.title}
+						description={effectiveDescription}
+						author={profileConfig.name}
+						published={formatDateToYYYYMMDD(entry.data.published)}
+						siteTitle={siteConfig.title}
+						postPath={canonicalPostUrl}
+						coverSelector={entry.data.image ? "#post-cover img" : undefined}
+						avatarUrl={authorAvatarUrl}
+						class="article-share--hidden-banner"
+					/>
+				)}
+
+				<!-- 2. Навигационные строки: предыдущая влево (←), следующая вправо (→) -->
+				{(navPrev || navNext) && (
+					<nav class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-[var(--outline-variant)]/25" aria-label="Предыдущая и следующая статья">
+						{navPrev ? (
+							<a
+								href={navPrev.url}
+								class="group flex flex-col justify-center items-start text-left gap-1.5 px-5 sm:px-8 py-5 sm:py-6 hover:bg-[var(--surface-container-high)]/50 transition-colors overflow-hidden"
+							>
+								<span class="text-[0.75rem] font-bold text-[var(--primary)] uppercase tracking-wider flex items-center gap-1.5">
+									<span class="text-sm transition-transform group-hover:-translate-x-1">←</span>
+									<span>{navPrev.label}</span>
+								</span>
+								<span class="text-sm sm:text-base font-semibold text-[var(--on-surface)] group-hover:text-[var(--primary)] transition-colors truncate max-w-full">
+									{navPrev.title}
+								</span>
+							</a>
+						) : (
+							<div class="hidden sm:block p-4" />
+						)}
+
+						{navNext ? (
+							<a
+								href={navNext.url}
+								class="group flex flex-col justify-center items-end text-right gap-1.5 px-5 sm:px-8 py-5 sm:py-6 hover:bg-[var(--surface-container-high)]/50 transition-colors overflow-hidden"
+							>
+								<span class="text-[0.75rem] font-bold text-[var(--primary)] uppercase tracking-wider flex items-center gap-1.5 justify-end">
+									<span>{navNext.label}</span>
+									<span class="text-sm transition-transform group-hover:translate-x-1">→</span>
+								</span>
+								<span class="text-sm sm:text-base font-semibold text-[var(--on-surface)] group-hover:text-[var(--primary)] transition-colors truncate max-w-full">
+									{navNext.title}
+								</span>
+							</a>
+						) : (
+							<div class="hidden sm:block p-4" />
+						)}
+					</nav>
+				)}
+			</footer>
+		</Card>
+    </div>
+
+    <CommentSection
+        context={{
+            key: `post:${entry.id}`,
+            path: canonicalPostUrl,
+            title: entry.data.title,
+            language: entry.data.lang || siteConfig.lang,
+        }}
+        postCommentEnabled={entry.data.comment}
+        class="onload-animation"
+    />
+
+    {lastUpdatedNotice && (
+        <LastUpdatedNotice
+            date={updatedInstant}
+            minimumAgeDays={lastUpdatedNotice.minimumAgeDays}
+            class="mb-4 onload-animation"
+        />
+    )}
+
+</MainGridLayout>
+
+<style is:global lang="stylus">
+	/* Скрываем баннер ArticleShare визуально, сохраняя все его кнопки и слушатели кликов активными в DOM */
+	section.article-share--hidden-banner
+		position: absolute !important
+		left: -9999px !important
+		top: -9999px !important
+		width: 1px !important
+		height: 1px !important
+		overflow: hidden !important
+		opacity: 0 !important
+		pointer-events: none !important
+
+	/* Диалог модалки вырывается в нативный <dialog> и должен полноценно принимать клики */
+	dialog.m3-dialog.article-share-dialog
+		pointer-events: auto !important
+		*
+			pointer-events: auto !important
+
+	.post-nav
+		.post-nav__arrow
+			transition: transform var(--m3e-duration-medium) var(--m3e-easing-emphasized-decelerate)
+
+		.post-nav__title
+			font: var(--m3e-type-title-medium)
+			font-weight: 600
+			color: var(--on-surface-variant)
+			transition: color var(--m3e-duration-short) var(--m3e-easing-standard)
+
+		&:hover .post-nav__title
+			color: var(--primary)
+
+		&--prev:hover .post-nav__arrow
+			transform: translateX(-0.25rem)
+
+		&--next:hover .post-nav__arrow
+			transform: translateX(0.25rem)
+</style>
+
+<script is:inline>
+	// Обработчик кнопки «Поделиться»: открывает встроенную модалку постера с QR-кодом
+	document.addEventListener("click", (e) => {
+		const target = e.target && e.target.closest("#native-share-btn");
+		if (!target) return;
+
+		e.preventDefault();
+		// Ищем кнопку внутри ArticleShare (m3-button) и кликаем по ней
+		const shareSection = document.querySelector("[data-article-share]");
+		const triggerBtn = shareSection ? shareSection.querySelector("button") : null;
+		if (triggerBtn) {
+			triggerBtn.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+		}
+	});
+</script>

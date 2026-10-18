@@ -12,10 +12,10 @@
     "type-check": "astro check",
     "anime:sync": "node scripts/sync/anime-sync-anilist.mjs",
     "cinema:sync": "node scripts/sync/cinema-sync-simkl.mjs",
-    "books:sync": "node scripts/sync/books-sync-hardcover.mjs",
+    "books:sync": "node scripts/sync/books-sync-storygraph.mjs",
     "games:sync": "node scripts/sync/games-sync-infinitebacklog.mjs",
     "compass:sync": "node scripts/sync/compass-sync-raindrop.mjs",
-    "media:sync": "node scripts/sync/anime-sync-anilist.mjs && node scripts/sync/cinema-sync-simkl.mjs && node scripts/sync/books-sync-hardcover.mjs && node scripts/sync/games-sync-infinitebacklog.mjs",
+    "media:sync": "node scripts/sync/anime-sync-anilist.mjs && node scripts/sync/cinema-sync-simkl.mjs && node scripts/sync/games-sync-infinitebacklog.mjs",
     "all:sync": "pnpm media:sync && pnpm compass:sync",
     "astro": "astro"
   },

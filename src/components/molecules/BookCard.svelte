@@ -1,12 +1,11 @@
 <script lang="ts">
 /**
  * BookCard — цифровая читательская карточка (Digital Library Card).
- * Чистый реестровый UI без водянистых синопсисов:
- * - Четкая иерархия: Автор и статус вверху, крупный красивый заголовок, метаданные (год, страницы, серия), прогресс и теги.
- * - Одинаковая стройная высота карточек, идеально садится в сетку как на мобильном, так и на десктопе.
+ * Премиальный M3E дизайн с описанием, метаданными и статусом.
  */
 import Icon from "@iconify/svelte";
 import type { MediaItemData } from "@/types/media";
+import { MEDIA_LABEL, mediaLabel } from "../../utils/media/labels";
 
 interface Props {
 	item: MediaItemData;
@@ -15,18 +14,6 @@ interface Props {
 
 const { item, onclick }: Props = $props();
 
-const ratingTier = $derived(
-	item.rating !== undefined && item.rating > 0
-		? item.rating >= 10
-			? "masterpiece"
-			: item.rating >= 8
-				? "great"
-				: item.rating <= 3
-					? "poor"
-					: "normal"
-		: "none",
-);
-
 const progressPercent = $derived(
 	item.progress && item.progress.total > 0
 		? Math.round(Math.min((item.progress.watched / item.progress.total) * 100, 100))
@@ -34,16 +21,29 @@ const progressPercent = $derived(
 );
 
 const statusColor = $derived(item.statusColor || "var(--primary)");
+
+const statusIconName = $derived(
+	item.status === "completed"
+		? "material-symbols:check-circle-rounded"
+		: item.status === "reading"
+			? "material-symbols:menu-book-rounded"
+			: item.status === "onHold"
+				? "material-symbols:pause-circle-rounded"
+				: item.status === "dropped"
+					? "material-symbols:cancel-rounded"
+					: "material-symbols:bookmark-rounded",
+);
 </script>
 
 <article
-	class="book-card book-card--tier-{ratingTier}"
+	class="book-card"
 	class:book-card--has-link={Boolean(item.link)}
 	style={`--book-status-color: ${statusColor};`}
 >
-	<!-- Верхняя строка: автор слева, статус справа -->
+	<!-- Верхняя строка: автор слева, бейдж статуса справа -->
 	<header class="book-card__header">
 		<div class="book-card__author-wrap">
+			<Icon icon="material-symbols:edit-note-rounded" class="book-card__author-icon" aria-hidden="true" />
 			{#if item.authorOrStudio}
 				<span class="book-card__author" title={item.authorOrStudio}>
 					{item.authorOrStudio}
@@ -52,13 +52,14 @@ const statusColor = $derived(item.statusColor || "var(--primary)");
 		</div>
 
 		{#if item.statusLabel}
-			<span class="book-card__status" title={`Статус: ${item.statusLabel}`}>
-				{item.statusLabel}
+			<span class="book-card__status-badge" title={`${mediaLabel(MEDIA_LABEL.status, "Статус")}: ${item.statusLabel}`}>
+				<Icon icon={statusIconName} class="book-card__status-icon" aria-hidden="true" />
+				<span class="book-card__status-text">{item.statusLabel}</span>
 			</span>
 		{/if}
 	</header>
 
-	<!-- Заголовок книги -->
+	<!-- Основная часть: заголовок и метаданные -->
 	<div class="book-card__main">
 		{#if item.link}
 			<a
@@ -82,30 +83,42 @@ const statusColor = $derived(item.statusColor || "var(--primary)");
 		<!-- Метаданные: Год • Страницы • Серия -->
 		<div class="book-card__meta">
 			{#if item.year}
-				<span class="book-card__meta-item book-card__year">{item.year}</span>
-			{/if}
-			{#if item.year && item.subMeta}
-				<span class="book-card__bullet" aria-hidden="true">•</span>
+				<span class="book-card__meta-item book-card__year">
+					<Icon icon="material-symbols:calendar-today-rounded" class="book-card__meta-icon" aria-hidden="true" />
+					{item.year}
+				</span>
 			{/if}
 			{#if item.subMeta}
-				<span class="book-card__meta-item book-card__pages">{item.subMeta}</span>
+				<span class="book-card__meta-item book-card__pages">
+					<Icon icon="material-symbols:auto-stories-outline-rounded" class="book-card__meta-icon" aria-hidden="true" />
+					{item.subMeta}
+				</span>
 			{/if}
 			{#if item.badge}
-				<span class="book-card__bullet" aria-hidden="true">•</span>
-				<span class="book-card__meta-item book-card__series" title={item.badge}>{item.badge}</span>
+				<span class="book-card__meta-item book-card__series" title={item.badge}>
+					<Icon icon="material-symbols:collections-bookmark-outline-rounded" class="book-card__meta-icon" aria-hidden="true" />
+					{item.badge}
+				</span>
 			{/if}
 		</div>
+
+		<!-- Описание книги -->
+		{#if item.description}
+			<p class="book-card__description" title={item.description}>
+				{item.description}
+			</p>
+		{/if}
 	</div>
 
-	<!-- Нижняя часть: прогресс и жанровые теги -->
+	<!-- Нижняя часть: прогресс чтения и жанровые теги -->
 	<div class="book-card__bottom">
-		<!-- Прогресс чтения (только для читаемых в данный момент книг или незавершенного чтения) -->
+		<!-- Прогресс чтения -->
 		{#if item.status === "reading" && item.progress && item.progress.total > 0}
 			<div class="book-card__progress">
 				<div class="book-card__progress-info">
-					<span class="book-card__progress-label">Прогресс</span>
+					<span class="book-card__progress-label">{mediaLabel(MEDIA_LABEL.booksProgress, "Прогресс")}</span>
 					<span class="book-card__progress-count">
-						{item.progress.watched} / {item.progress.total} {item.progress.unit ?? "стр."}
+						{item.progress.watched} / {item.progress.total} {item.progress.unit ?? mediaLabel(MEDIA_LABEL.booksUnitPages, "стр.")}
 					</span>
 				</div>
 				<div
@@ -120,11 +133,11 @@ const statusColor = $derived(item.statusColor || "var(--primary)");
 			</div>
 		{/if}
 
-		<!-- Футер: жанровые теги (максимум 3) -->
+		<!-- Футер: жанровые теги -->
 		{#if item.genres && item.genres.length > 0}
-			<footer class="book-card__footer" aria-label="Жанры">
+			<footer class="book-card__footer" aria-label={mediaLabel(MEDIA_LABEL.booksGenres, "Жанры")}>
 				<div class="book-card__genres">
-					{#each item.genres.slice(0, 3) as genre (genre)}
+					{#each item.genres as genre (genre)}
 						<span class="book-card__genre-tag">{genre}</span>
 					{/each}
 				</div>
@@ -139,15 +152,17 @@ const statusColor = $derived(item.statusColor || "var(--primary)");
 	display: flex
 	flex-direction: column
 	justify-content: space-between
-	gap: 0.75rem
+	gap: 1rem
 	width: 100%
 	height: 100%
-	background: var(--card-bg, rgba(255, 255, 255, 0.03))
-	border: 1px solid var(--outline-variant, rgba(255, 255, 255, 0.08))
-	border-radius: var(--shape-corner-card, 16px)
-	padding: 1rem 1.125rem
+	background: unquote("color-mix(in srgb, var(--surface-container-high) 65%, transparent)")
+	border: 1px solid unquote("color-mix(in srgb, var(--outline-variant) 30%, transparent)")
+	border-radius: var(--shape-corner-xl, 20px)
+	padding: 1.25rem 1.375rem
 	box-sizing: border-box
-	overflow: hidden
+	backdrop-filter: blur(24px) saturate(180%)
+	-webkit-backdrop-filter: blur(24px) saturate(180%)
+	box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.25)
 	transition:
 		border-color var(--m3e-duration-medium, 250ms) var(--m3e-easing-standard),
 		box-shadow var(--m3e-duration-medium, 250ms) var(--m3e-easing-standard),
@@ -155,52 +170,67 @@ const statusColor = $derived(item.statusColor || "var(--primary)");
 		transform var(--m3e-duration-medium, 250ms) var(--m3e-easing-standard)
 
 	&:hover
-		border-color: unquote("color-mix(in oklab, var(--primary) 45%, transparent)")
-		background: var(--surface-container, rgba(255, 255, 255, 0.05))
-		box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.4)
-		transform: translateY(-2px)
+		border-color: unquote("color-mix(in oklab, var(--primary) 40%, transparent)")
+		background: unquote("color-mix(in srgb, var(--surface-container-highest) 75%, transparent)")
+		box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.4), 0 0 0 1px unquote("color-mix(in oklab, var(--primary) 20%, transparent)")
+		transform: translateY(-3px)
 
 	/* ── Верхняя строка: автор и статус ── */
 	&__header
 		display: flex
 		align-items: center
 		justify-content: space-between
-		gap: 0.5rem
+		gap: 0.75rem
 
 	&__author-wrap
+		display: flex
+		align-items: center
+		gap: 0.375rem
 		min-width: 0
 		flex: 1
 
+	:global(.book-card__author-icon)
+		font-size: 1rem
+		color: var(--primary)
+		flex-shrink: 0
+		opacity: 0.85
+
 	&__author
-		font-family: inherit
-		font-size: 0.6875rem
+		font-size: 0.75rem
 		font-weight: 700
 		text-transform: uppercase
-		letter-spacing: 0.08em
-		color: unquote("color-mix(in oklab, var(--primary) 70%, var(--on-surface-variant, #ffffff))")
+		letter-spacing: 0.06em
+		color: unquote("color-mix(in oklab, var(--primary) 70%, var(--on-surface))")
 		white-space: nowrap
 		overflow: hidden
 		text-overflow: ellipsis
-		display: block
 
-	/* Статус чтения */
-	&__status
+	/* Капсульный бейдж статуса */
+	&__status-badge
+		display: inline-flex
+		align-items: center
+		gap: 0.3125rem
+		height: 1.5rem
+		padding: 0 0.625rem
+		border-radius: var(--shape-corner-full, 9999px)
+		background: unquote("color-mix(in srgb, var(--book-status-color) 12%, var(--surface-container-highest))")
+		border: 1px solid unquote("color-mix(in srgb, var(--book-status-color) 28%, transparent)")
+		color: var(--on-surface)
 		font-size: 0.6875rem
-		font-weight: 500
-		color: var(--on-surface-variant, rgba(255, 255, 255, 0.5))
+		font-weight: 600
 		white-space: nowrap
 		flex-shrink: 0
 		user-select: none
-		transition: color var(--m3e-duration-short) ease
 
-		.book-card:hover &
-			color: var(--on-surface-variant, rgba(255, 255, 255, 0.75))
+	:global(.book-card__status-icon)
+		font-size: 0.875rem
+		color: var(--book-status-color)
 
-	/* ── Основной контент: заголовок и метаданные ── */
+	/* ── Основной контент: заголовок, метаданные и описание ── */
 	&__main
 		display: flex
 		flex-direction: column
-		gap: 0.3125rem
+		gap: 0.625rem
 
 	&__title-link
 		text-decoration: none
@@ -215,15 +245,15 @@ const statusColor = $derived(item.statusColor || "var(--primary)");
 			.book-card__title
 				color: var(--primary)
 			.book-card__arrow
-				opacity: 0.9
+				opacity: 1
 				transform: translate(2px, -2px)
 
 	&__title
 		margin: 0
-		font-family: inherit
-		font-size: 1.0625rem
+		font-size: 1.1875rem
 		font-weight: 700
 		line-height: 1.3
+		letter-spacing: -0.01em
 		color: var(--on-surface, #ffffff)
 		display: -webkit-box
 		-webkit-line-clamp: 2
@@ -232,7 +262,7 @@ const statusColor = $derived(item.statusColor || "var(--primary)");
 		transition: color var(--m3e-duration-short) ease
 
 	&__arrow
-		font-size: 0.8125rem
+		font-size: 0.875rem
 		line-height: 1
 		color: var(--primary)
 		opacity: 0.4
@@ -240,43 +270,57 @@ const statusColor = $derived(item.statusColor || "var(--primary)");
 			opacity var(--m3e-duration-short) ease,
 			transform var(--m3e-duration-short) ease
 
-	/* Метаданные (Год • Страницы • Серия) */
+	/* Метаданные (Год, Страницы, Серия) */
 	&__meta
 		display: flex
 		align-items: center
 		flex-wrap: wrap
-		gap: 0.375rem
-		font-size: 0.75rem
-		font-weight: 500
-		color: var(--on-surface-variant, rgba(255, 255, 255, 0.65))
-		font-variant-numeric: tabular-nums lining-nums
+		gap: 0.5rem
 
 	&__meta-item
+		display: inline-flex
+		align-items: center
+		gap: 0.25rem
+		font-size: 0.75rem
+		font-weight: 500
+		color: var(--on-surface-variant)
+		background: unquote("color-mix(in srgb, var(--surface-container-highest) 45%, transparent)")
+		border: 1px solid unquote("color-mix(in srgb, var(--outline-variant) 20%, transparent)")
+		padding: 0.1875rem 0.5rem
+		border-radius: var(--shape-corner-xs, 6px)
 		white-space: nowrap
 
+	:global(.book-card__meta-icon)
+		font-size: 0.8125rem
+		opacity: 0.7
+
 	&__year
-		color: var(--on-surface, #ffffff)
+		color: var(--on-surface)
 		font-weight: 600
-
-	&__bullet
-		color: rgba(255, 255, 255, 0.25)
-		user-select: none
-
-	&__pages
-		color: var(--on-surface-variant, rgba(255, 255, 255, 0.7))
 
 	&__series
-		overflow: hidden
-		text-overflow: ellipsis
-		color: unquote("color-mix(in oklab, var(--primary) 75%, #ffffff)")
+		color: unquote("color-mix(in oklab, var(--primary) 80%, #ffffff)")
 		font-weight: 600
+
+	/* Описание книги */
+	&__description
+		margin: 0.25rem 0 0 0
+		font-size: 0.84375rem
+		line-height: 1.55
+		color: var(--on-surface-variant)
+		display: -webkit-box
+		-webkit-line-clamp: 3
+		-webkit-box-orient: vertical
+		overflow: hidden
+		word-break: break-word
 
 	/* ── Нижний блок ── */
 	&__bottom
 		display: flex
 		flex-direction: column
-		gap: 0.5rem
+		gap: 0.625rem
 		margin-top: auto
+		padding-top: 0.5rem
 
 	/* Прогресс чтения */
 	&__progress
@@ -286,19 +330,20 @@ const statusColor = $derived(item.statusColor || "var(--primary)");
 		display: flex
 		justify-content: space-between
 		align-items: center
-		margin-bottom: 0.25rem
+		margin-bottom: 0.3125rem
 		font-size: 0.6875rem
 		font-weight: 600
-		color: var(--on-surface-variant, rgba(255, 255, 255, 0.65))
+		color: var(--on-surface-variant)
 
 	&__progress-count
 		font-variant-numeric: tabular-nums lining-nums
+		color: var(--on-surface)
 
 	&__progress-track
 		width: 100%
-		height: 4px
+		height: 5px
 		border-radius: 9999px
-		background: rgba(255, 255, 255, 0.08)
+		background: unquote("color-mix(in srgb, var(--surface-container-highest) 60%, transparent)")
 		overflow: hidden
 
 	&__progress-fill
@@ -307,51 +352,42 @@ const statusColor = $derived(item.statusColor || "var(--primary)");
 		background: var(--primary)
 		transition: width var(--m3e-duration-medium) var(--m3e-easing-standard)
 
-	/* Футер: только теги в 1 аккуратную строку */
+	/* Футер: аккуратные теги */
 	&__footer
 		display: flex
 		align-items: center
 		overflow: hidden
 
-	/* Жанровые теги — стиль кино (MediaCard.svelte), строго в 1 строку без прыжков высоты */
 	&__genres
 		display: flex
-		flex-wrap: nowrap
-		gap: 0.3125rem
-		overflow: hidden
-		white-space: nowrap
-		width: 100%
+		flex-wrap: wrap
+		gap: 0.375rem
 
 	&__genre-tag
 		display: inline-flex
 		align-items: center
-		justify-content: center
-		text-align: center
-		line-height: 1.2
-		padding: 0.1875rem 0.5rem
-		border-radius: var(--shape-corner-xs, 4px)
-		background: var(--surface-container-high, rgba(125, 125, 125, 0.12))
-		border: 1px solid var(--outline-variant, rgba(125, 125, 125, 0.15))
+		padding: 0.2rem 0.5625rem
+		border-radius: var(--shape-corner-xs, 6px)
+		background: unquote("color-mix(in srgb, var(--surface-container-high) 50%, transparent)")
+		border: 1px solid unquote("color-mix(in srgb, var(--outline-variant) 25%, transparent)")
 		color: var(--on-surface-variant)
-		font: var(--m3e-type-label-small)
-		font-size: 0.71875rem
+		font-size: 0.6875rem
 		font-weight: 500
-		flex-shrink: 0
+		line-height: 1.2
 		transition:
 			background-color var(--m3e-duration-short) ease,
 			border-color var(--m3e-duration-short) ease,
 			color var(--m3e-duration-short) ease
 
 		&:hover
-			background: var(--surface-container-highest, rgba(125, 125, 125, 0.2))
-			border-color: var(--outline, rgba(125, 125, 125, 0.25))
+			background: unquote("color-mix(in oklab, var(--primary) 15%, var(--surface-container-highest))")
+			border-color: unquote("color-mix(in oklab, var(--primary) 35%, transparent)")
 			color: var(--on-surface)
 
 @media (max-width: 36rem)
 	.book-card
-		padding: 0.9375rem 1rem
-		gap: 0.625rem
-		min-height: auto
+		padding: 1rem 1.125rem
+		gap: 0.75rem
 
 		&__title
 			font-size: 1.0625rem

@@ -5,12 +5,11 @@
  * 顶部显示筛选头（面包屑）——索引页链接 › 当前筛选值，一键回溯到分类/标签索引页；
  * 无筛选时显示分组切换，可按年 / 按分类 / 按标签切换全量归档的分组。
  */
-import ArchiveList from "@components/atoms/blog/ArchiveList.svelte";
+import ArchiveList from "../atoms/blog/ArchiveList.svelte";
 import type {
 	ArchiveGroup,
 	ArchiveItem,
-} from "@components/atoms/blog/ArchiveList.svelte";
-import Card from "@components/atoms/display/Card.svelte";
+} from "../atoms/blog/ArchiveList.svelte";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
@@ -95,20 +94,14 @@ const filterCrumb = $derived.by(() => {
 			type: "tag",
 			href: url("/tags/"),
 			label: i18n(I18nKey.tags),
-			value: `#${tag}`,
+			value: tag,
 			icon: "material-symbols:tag-rounded",
 		};
 	}
 	return null;
 });
 
-const groupOptions = [
-	{ value: "year", label: i18n(I18nKey.archiveGroupYear) },
-	{ value: "category", label: i18n(I18nKey.archiveGroupCategory) },
-	{ value: "tag", label: i18n(I18nKey.archiveGroupTag) },
-];
-
-/** 筛选后的文章（分组维度与之正交，均在下方消费） */
+/** 筛选后的文章（учитывает URL параметры ?category= / ?tag= / ?uncategorized） */
 const filtered = $derived(
 	sortedPosts.filter((p) => {
 		if (uncategorized && p.data.category) return false;
@@ -119,7 +112,12 @@ const filtered = $derived(
 );
 
 function formatDate(date: Date) {
-	return formatCalendarDate(date).slice(5);
+	const cal = formatCalendarDate(date); // YYYY-MM-DD
+	const parts = cal.split("-");
+	if (parts.length === 3) {
+		return `${parts[2]}.${parts[1]}`;
+	}
+	return cal.slice(5);
 }
 
 function toItem(post: Post): ArchiveItem {
@@ -136,7 +134,10 @@ function countLabel(count: number) {
 	return `${count} ${i18n(count === 1 ? I18nKey.postCount : I18nKey.postsCount)}`;
 }
 
-/** 按当前分组维度构建组；组内保持筛选后顺序（时间倒序）。 */
+/** 
+ * Группировка: для "По годам", а также для категорий и тегов группируем по годам!
+ * Больше никаких 100 раскрывашек с 1 постом! Чипы фильтруют, а список идет единым чистым таймлайном.
+ */
 const groups = $derived.by((): ArchiveGroup[] => {
 	if (filtered.length === 0) return [];
 	const buckets = new Map<string, ArchiveItem[]>();
@@ -145,30 +146,17 @@ const groups = $derived.by((): ArchiveGroup[] => {
 		if (list) list.push(item);
 		else buckets.set(key, [item]);
 	};
-	if (groupBy === "category") {
-		for (const p of filtered) {
-			add(p.data.category ?? i18n(I18nKey.uncategorized), toItem(p));
-		}
-	} else if (groupBy === "tag") {
-		for (const p of filtered) {
-			for (const t of p.data.tags) add(`#${t}`, toItem(p));
-		}
-	} else {
-		for (const p of filtered) {
-			add(formatCalendarDate(p.data.published).slice(0, 4), toItem(p));
-		}
+
+	for (const p of filtered) {
+		add(formatCalendarDate(p.data.published).slice(0, 4), toItem(p));
 	}
+
 	const list = [...buckets.entries()].map(([id, items]) => ({
 		id,
 		title: id,
 		items,
 	}));
-	if (groupBy === "year") {
-		return list.sort((a, b) => Number(b.title) - Number(a.title));
-	}
-	return list.sort((a, b) =>
-		a.title.toLowerCase().localeCompare(b.title.toLowerCase()),
-	);
+	return list.sort((a, b) => Number(b.title) - Number(a.title));
 });
 
 onMount(() => {
@@ -200,7 +188,7 @@ $effect(() => {
 });
 </script>
 
-<Card color="var(--card-bg)" radius="l" class="archive-panel px-8 py-6">
+<div class="archive-panel px-5 py-6 sm:px-10 sm:py-8 rounded-[var(--shape-corner-l,16px)]">
 	<!-- Активный фильтр в стиле M3E: чистый чип фильтра и кнопка сброса -->
 	{#if filterCrumb}
 		<div class="m3e-filter-header">
@@ -214,8 +202,8 @@ $effect(() => {
 					<a
 						href={url("/archive/")}
 						class="m3e-active-chip__clear m3-state-layer"
-						title="Сбросить фильтр"
-						aria-label="Сбросить фильтр"
+						title={i18n(I18nKey.clear)}
+						aria-label={i18n(I18nKey.clear)}
 					>
 						<Icon icon="material-symbols:close-rounded" />
 					</a>
@@ -225,36 +213,13 @@ $effect(() => {
 				<span class="m3e-filter-header__count">{countLabel(filtered.length)}</span>
 			</div>
 		</div>
-	{:else}
-		<!-- Переключатель группировки (Segmented Button в стиле M3E Capsule) показывается только когда фильтр не активен -->
-		<div class="archive-panel__group-switch">
-			<div class="m3-segmented" role="radiogroup" aria-label={i18n(I18nKey.archiveGroup)}>
-				{#each groupOptions as opt (opt.value)}
-					<button
-						type="button"
-						role="radio"
-						aria-checked={groupBy === opt.value}
-						class="m3-segmented__segment m3-state-layer"
-						class:selected={groupBy === opt.value}
-						onclick={() => (groupBy = opt.value)}
-					>
-						{#if groupBy === opt.value}
-							<span class="m3-segmented__check" aria-hidden="true">
-								<Icon icon="material-symbols:check-rounded" />
-							</span>
-						{/if}
-						<span>{opt.label}</span>
-					</button>
-				{/each}
-			</div>
-		</div>
 	{/if}
-
 	{#if groups.length > 0}
 		<ArchiveList
 			{groups}
 			{countLabel}
 			{restoredCollapsed}
+			hideGroupHeader={!!filterCrumb}
 			onCollapsedChange={persistCollapsedState}
 		/>
 	{:else}
@@ -265,5 +230,5 @@ $effect(() => {
 			<span>{i18n(I18nKey.noData)}</span>
 		</div>
 	{/if}
-</Card>
+</div>
 

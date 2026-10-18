@@ -3,7 +3,7 @@ import { i18n } from "@i18n/translation";
 import { aboutConfig } from "@/config/aboutConfig";
 import { albumsConfig } from "@/config/albumsConfig";
 import { animeConfig } from "@/config/animeConfig";
-import { booksConfig } from "./booksConfig";
+import { booksConfig } from "../../src/config/domains/booksConfig";
 import { compassConfig } from "@/config/compassConfig";
 import { devicesConfig } from "@/config/devicesConfig";
 import { friendsConfig } from "@/config/friendsConfig";
@@ -70,7 +70,7 @@ export const LinkPresets: Record<string, NavBarLink> = {
 	Books: {
 		name: "Книги",
 		url: "/books/",
-		icon: "material-symbols:menu-book-outline-rounded",
+		icon: "material-symbols:book-4-outline-rounded",
 		pageKey: "books",
 	},
 	Compass: {
@@ -139,6 +139,12 @@ export const LinkPresets: Record<string, NavBarLink> = {
 		icon: "material-symbols:info-outline-rounded",
 		pageKey: "about",
 	},
+	Support: {
+		name: "Поддержать",
+		url: "/support/",
+		icon: "material-symbols:savings-rounded",
+		pageKey: "support",
+	},
 	GitHub: {
 		name: "GitHub",
 		url: "https://github.com/LyraVoid/Shirone",
@@ -150,11 +156,20 @@ export const LinkPresets: Record<string, NavBarLink> = {
 
 const defaultNavBarConfig: NavBarConfig = {
 	links: [
-		LinkPresets.Cinema,
-		LinkPresets.Anime,
-		LinkPresets.Games,
-		LinkPresets.Books,
-		LinkPresets.Compass,
+		LinkPresets.Archive,
+		LinkPresets.Categories,
+		LinkPresets.Tags,
+		{
+			name: "Медиатека",
+			icon: "material-symbols:video-library-outline-rounded",
+			children: [
+				LinkPresets.Cinema,
+				LinkPresets.Anime,
+				LinkPresets.Games,
+				LinkPresets.Compass,
+			],
+		},
+		LinkPresets.Support,
 	],
 };
 

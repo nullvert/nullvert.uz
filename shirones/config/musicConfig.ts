@@ -38,7 +38,7 @@ import { withUserConfig } from "@/utils/config-overlay.ts";
  * ─────────────────────────────────────────────────────────────────────────────
  */
 export const musicConfig: MusicConfig = withUserConfig("music", {
-	enable: true,
+	enable: false,
 	provider: "local",
 	// tracks: [
 	// 	{
@@ -103,7 +103,7 @@ function normalizeTrack(
 		track.duration > 0
 			? track.duration
 			: undefined;
-	const isNew = typeof track.isNew === "boolean" ? track.isNew : undefined;
+	const isNew = typeof (track as { isNew?: boolean }).isNew === "boolean" ? (track as { isNew?: boolean }).isNew : undefined;
 
 	return Object.freeze({ id, title, source, artist, cover, duration, isNew });
 }

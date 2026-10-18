@@ -3,24 +3,104 @@
    Стандарты: Material 3 Expressive, CSS-токены, Zero-burden
    ============================================================ */
 
+/* ── Токены единого матового стекла блога ── */
+:root {
+	--shirone-card-bg: color-mix(in srgb, var(--surface-container-high) 70%, transparent);
+	--shirone-card-blur: blur(24px) saturate(180%);
+	--shirone-card-bg-hover: color-mix(in srgb, var(--surface-container-highest) 85%, transparent);
+	--card-bg: var(--shirone-card-bg);
+}
+
+:root.dark {
+	--shirone-card-bg: color-mix(in srgb, var(--surface-container-high) 70%, transparent);
+	--shirone-card-blur: blur(24px) saturate(180%);
+	--shirone-card-bg-hover: color-mix(in srgb, var(--surface-container-highest) 85%, transparent);
+	--card-bg: var(--shirone-card-bg);
+}
+
 /* ── 1. Макет и системные плавающие контролы ── */
 
+/* ── 1.1 Кастомный системный скроллбар (Material 3 Expressive Scrollbar) ── */
+html {
+	scrollbar-width: thin;
+	scrollbar-color: color-mix(in srgb, var(--primary) 35%, transparent) transparent;
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: color-mix(in srgb, var(--primary) 30%, transparent);
+	border: 2px solid transparent;
+	background-clip: padding-box;
+	border-radius: var(--shape-corner-full, 9999px);
+	transition: background-color var(--m3e-duration-short, 150ms) ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: color-mix(in srgb, var(--primary) 65%, transparent);
+	border: 2px solid transparent;
+	background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:active {
+	background: var(--primary);
+	border: 2px solid transparent;
+	background-clip: padding-box;
+}
+
+/* OverlayScrollbars интеграция (если подключен плагин) */
+.os-scrollbar-handle {
+	background: color-mix(in srgb, var(--primary) 35%, transparent) !important;
+	border-radius: var(--shape-corner-full, 9999px) !important;
+}
+
+.os-scrollbar:hover .os-scrollbar-handle {
+	background: color-mix(in srgb, var(--primary) 65%, transparent) !important;
+}
+
+.os-scrollbar-handle:active {
+	background: var(--primary) !important;
+}
 
 /* Отступ снизу для контента страницы, чтобы нижний плеер не перекрывал футер */
 #main-layout {
 	padding-bottom: 4.5rem;
 }
 
-/* FAB кнопки (Наверх, TOC): приподняты над нижней панелью плеера (56px) */
+/* FAB кнопки (Наверх): отступ 1.25rem от нижнего края экрана */
+/* На широких мониторах выравниваем FAB строго по правому краю сайдбара / карточек */
 #floating-controls {
-	--fab-bottom: calc(56px + 1.25rem) !important;
+	--fab-bottom: 1.25rem !important;
+	bottom: 1.25rem !important;
 	z-index: 50 !important;
+	right: max(1.25rem, calc((100vw - var(--page-width)) / 2 + 1rem)) !important;
+}
+
+@media (max-width: 1280px) {
+	#floating-controls {
+		right: 1.25rem !important;
+	}
 }
 
 #back-to-top-btn,
 .back-to-top-compatibility {
-	bottom: calc(56px + 1.25rem) !important;
+	bottom: 1.25rem !important;
 	z-index: 50 !important;
+	right: max(1.25rem, calc((100vw - var(--page-width)) / 2 + 1rem)) !important;
+}
+
+@media (max-width: 1280px) {
+	#back-to-top-btn,
+	.back-to-top-compatibility {
+		right: 1.25rem !important;
+	}
 }
 
 /* Когда плеер отключен пользователем: мгновенно скрываем и сбрасываем отступы */
@@ -39,41 +119,49 @@
 	display: none !important;
 }
 
-/* Центрирование страниц без сайдбара (архив, категории, теги, медиа-каталоги, компас) */
-body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #main-grid,
-#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+/* Центрирование страниц без сайдбара (архив, категории, теги, медиа-каталоги, компас, поддержка) */
+body.is-catalog-page #main-grid,
+body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"]) #main-grid,
+#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"])),
+body:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"])) #main-grid {
+	display: grid !important;
+	grid-template-columns: minmax(0, 1fr) !important;
+	width: 100% !important;
 }
 
-body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #sidebar,
-body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #sidebar-secondary,
-#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) #sidebar,
-#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) #sidebar-secondary {
+body.is-catalog-page #sidebar,
+body.is-catalog-page #sidebar-secondary,
+body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"]) #sidebar,
+body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"]) #sidebar-secondary,
+#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"])) #sidebar,
+#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"])) #sidebar-secondary {
 	display: none !important;
 }
 
-body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"]) #main-content-column,
-#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"])) #main-content-column {
-	width: 100%;
-	max-width: 58rem;
-	margin-inline: auto;
+body.is-catalog-page:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="support"]) #main-content-column,
+body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="support"]) #main-content-column,
+#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="support"])) #main-content-column {
+	width: 100% !important;
+	max-width: 58rem !important;
+	margin-inline: auto !important;
 }
 
+body.is-catalog-page:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #main-content-column,
 body:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #main-content-column,
 body:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #swup-container,
 body:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #content-wrapper,
 #main-grid:has(#swup-container:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) #main-content-column,
 #main-grid:has(#swup-container:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) #swup-container,
 #main-grid:has(#swup-container:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) #content-wrapper {
-	width: 100%;
-	min-width: 0;
+	grid-column: 1 / -1 !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
 	overflow: visible !important;
 }
 
-body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) .footer,
-#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) .footer {
+body.is-catalog-page .footer,
+body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"]) .footer {
 	margin-top: 2.5rem !important;
 }
 
@@ -84,29 +172,133 @@ body:is([data-current-page="archive"], [data-current-page="categories"], [data-c
 	gap: 1.125rem !important;
 }
 
+/* Карточки закладок («Компас»): плоский матовый стиль без теней */
+.compass-tile,
+#main-layout .compass-tile {
+	border-radius: var(--card-outer-radius, 16px) !important;
+	border: none !important;
+	box-shadow: none !important;
+	background: var(--shirone-card-bg, color-mix(in srgb, var(--surface-container-high) 70%, transparent)) !important;
+	backdrop-filter: var(--shirone-card-blur, blur(24px) saturate(180%)) !important;
+	-webkit-backdrop-filter: var(--shirone-card-blur, blur(24px) saturate(180%)) !important;
+	transition: background 200ms ease, transform 200ms ease !important;
+}
+
+.compass-tile:hover,
+#main-layout .compass-tile:hover {
+	background: var(--shirone-card-bg-hover, color-mix(in srgb, var(--surface-container-highest) 85%, transparent)) !important;
+	box-shadow: none !important;
+	transform: translateY(-2px) !important;
+}
+
 @media (max-width: 64rem) {
 	.compass-shelf__grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-		gap: 1rem !important;
-	}
-}
-
-@media (max-width: 40rem) {
-	.compass-shelf__grid {
-		grid-template-columns: 1fr !important;
 		gap: 0.875rem !important;
 	}
 }
 
+/* На смартфонах (< 640px) делаем карточки компактными в 1 колонку, а на планшетах (до 1024px) сохраняем 2 колонки */
+@media (max-width: 40rem) {
+	.compass-shelf__grid {
+		grid-template-columns: 1fr !important;
+		gap: 0.625rem !important;
+	}
+
+	.compass-tile {
+		padding: 0.875rem 1rem !important;
+		border-radius: var(--shape-corner-m, 12px) !important;
+	}
+
+	.compass-tile .compass-tile__link {
+		gap: 0.375rem !important;
+	}
+
+	.compass-tile .compass-tile__header {
+		gap: 0.625rem !important;
+	}
+
+	.compass-tile .compass-tile__icon,
+	.compass-tile .compass-tile__letter {
+		width: 1.5rem !important;
+		height: 1.5rem !important;
+	}
+
+	.compass-tile .compass-tile__icon > svg {
+		width: 1.35rem !important;
+		height: 1.35rem !important;
+	}
+
+	.compass-tile .compass-tile__label {
+		font-size: 0.9375rem !important;
+		line-height: 1.25 !important;
+	}
+
+	.compass-tile .compass-tile__note {
+		font-size: 0.8125rem !important;
+		line-height: 1.35 !important;
+	}
+
+	.compass-tile .compass-tile__footer {
+		padding-top: 0.5rem !important;
+	}
+
+	.compass-tile .compass-tile__host {
+		height: 1.25rem !important;
+		font-size: 0.6875rem !important;
+		padding: 0 0.5rem !important;
+	}
+}
+
+/* ── Чистый стиль для закладок (Компаса) без иконок в заголовках и фильтрах ── */
+body[data-current-page="compass"] .compass-controls__label,
+body[data-current-page="compass"] .section-title__icon,
+.compass-page-content .section-title__icon,
+.compass-controls__chip > svg,
+.compass-controls__chip > :global(svg) {
+	display: none !important;
+}
+
+/* Исправление клика по полю поиска во всех медиа-сайдбарах:
+   input и его родитель растягиваются на 100% ширины и высоты, чтобы клик срабатывал в любой точке плашки */
+.catalog-search,
+.compass-controls__mobile-search {
+	cursor: text !important;
+}
+
+.catalog-search .m3-text-field,
+.compass-controls__mobile-search .m3-text-field {
+	cursor: text !important;
+	cursor: pointer;
+}
+
+.catalog-search .m3-text-field__field,
+.compass-controls__mobile-search .m3-text-field__field {
+	cursor: text !important;
+	width: 100% !important;
+	height: 100% !important;
+	display: flex !important;
+	align-items: center !important;
+}
+
+.catalog-search input,
+.compass-controls__mobile-search input {
+	cursor: text !important;
+	width: 100% !important;
+	height: 100% !important;
+	flex: 1 1 auto !important;
+	display: block !important;
+}
+
 /* ── 2. Система эффекта стекла (M3E Universal Glassmorphism) ── */
 
-/* Системные парящие интерфейсные элементы — стекло по умолчанию */
+/* Системные парящие интерфейсные элементы — премиальный плотный фон */
 #navbar.top-app-bar:not(.top-app-bar--transparent) {
-	background: color-mix(in srgb, var(--surface) 55%, transparent);
-	backdrop-filter: blur(16px) saturate(180%);
-	-webkit-backdrop-filter: blur(16px) saturate(180%);
-	border-bottom: 1px solid color-mix(in srgb, var(--outline-variant) 40%, rgba(255, 255, 255, 0.12));
-	box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.15);
+	background: var(--surface) !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+	border-bottom: 1px solid var(--outline-variant) !important;
+	box-shadow: 0 2px 12px -2px rgba(0, 0, 0, 0.25) !important;
 }
 
 .bottom-music-bar {
@@ -119,21 +311,21 @@ body:is([data-current-page="archive"], [data-current-page="categories"], [data-c
 
 #floating-controls .m3-fab,
 #back-to-top-btn .m3-fab {
-	background: color-mix(in srgb, var(--surface-container-high) 60%, transparent);
+	background: color-mix(in srgb, var(--surface-container-high) 75%, transparent);
 	backdrop-filter: blur(16px) saturate(180%);
 	-webkit-backdrop-filter: blur(16px) saturate(180%);
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 45%, rgba(255, 255, 255, 0.2));
+	border: none !important;
 	color: var(--primary);
-	box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.16), 0 8px 24px rgba(0, 0, 0, 0.25);
-	transition: background-color 150ms ease, transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+	box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.25) !important;
+	transition: background-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
 }
 
 #floating-controls .m3-fab:hover,
 #back-to-top-btn .m3-fab:hover {
-	transform: translateY(-2px) scale(1.06);
-	background: color-mix(in srgb, var(--primary) 24%, var(--surface-container-high));
-	border-color: color-mix(in srgb, var(--primary) 65%, rgba(255, 255, 255, 0.3));
-	box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.25), 0 12px 28px color-mix(in srgb, var(--primary) 35%, transparent);
+	transform: translateY(-2px);
+	background: color-mix(in srgb, var(--surface-container-highest) 90%, transparent);
+	border: none !important;
+	box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.3) !important;
 	color: var(--primary);
 }
 
@@ -196,14 +388,130 @@ body:is([data-current-page="archive"], [data-current-page="categories"], [data-c
 
 /* Усиленное затемнение для нативных модальных окон <dialog> (поделиться статьей и т.д.) */
 dialog.m3-dialog::backdrop {
-	background: color-mix(in srgb, var(--scrim, #000) 65%, transparent) !important;
-	backdrop-filter: blur(8px) !important;
-	-webkit-backdrop-filter: blur(8px) !important;
+	background: color-mix(in srgb, var(--scrim, #000) 75%, transparent) !important;
+	backdrop-filter: blur(12px) !important;
+	-webkit-backdrop-filter: blur(12px) !important;
 }
+
+/* ── Редизайн модалки «Поделиться записью» (Article Share Modal Redesign) ── */
+dialog.m3-dialog.article-share-dialog {
+	background: var(--surface-container-high, #161a20) !important;
+	border: 1px solid var(--outline-variant, rgba(255, 255, 255, 0.08)) !important;
+	border-radius: var(--shape-corner-xl, 1.25rem) !important;
+	box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.45) !important;
+	padding: 1.125rem 1.25rem 1.25rem !important;
+	max-width: min(32rem, calc(100vw - 2rem)) !important;
+	color: var(--on-surface) !important;
+}
+
+:root:not(.dark) dialog.m3-dialog.article-share-dialog {
+	background: #ffffff !important;
+	border-color: rgba(0, 0, 0, 0.08) !important;
+	box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.18) !important;
+}
+
+dialog.m3-dialog.article-share-dialog .m3-dialog__header {
+	margin-bottom: 0.75rem !important;
+}
+
+dialog.m3-dialog.article-share-dialog .m3-dialog__title {
+	font-size: 1.0625rem !important;
+	font-weight: 700 !important;
+	letter-spacing: -0.01em !important;
+	color: var(--on-surface) !important;
+}
+
+/* Кнопка закрытия модалки */
+dialog.m3-dialog.article-share-dialog .m3-dialog__close-btn {
+	width: 2rem !important;
+	height: 2rem !important;
+	border-radius: 9999px !important;
+	background: color-mix(in oklab, var(--on-surface) 6%, transparent) !important;
+	color: var(--on-surface-variant) !important;
+	transition: background-color 150ms ease, color 150ms ease !important;
+}
+
+dialog.m3-dialog.article-share-dialog .m3-dialog__close-btn:hover {
+	background: color-mix(in oklab, var(--on-surface) 12%, transparent) !important;
+	color: var(--on-surface) !important;
+}
+
+/* Превью постера: аккуратное скругление и матовый контур */
+dialog.m3-dialog.article-share-dialog .share-poster-preview {
+	background: transparent !important;
+	border: none !important;
+	padding: 0 !important;
+	border-radius: var(--shape-corner-m, 12px) !important;
+	overflow: hidden !important;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+}
+
+dialog.m3-dialog.article-share-dialog .share-poster-preview__img {
+	border-radius: var(--shape-corner-m, 12px) !important;
+	border: 1px solid color-mix(in oklab, var(--outline-variant) 50%, transparent) !important;
+	box-sizing: border-box !important;
+}
+
+/* Нижний блок действий: поднимаем кнопки выше ближе к картинке */
+dialog.m3-dialog.article-share-dialog .m3-dialog__actions {
+	margin-top: 0.625rem !important;
+}
+
+dialog.m3-dialog.article-share-dialog .share-dialog-actions {
+	margin-top: 0 !important;
+	gap: 0.625rem !important;
+}
+
+
+/* Кнопка 1: «Скопировать ссылку» (вторичная, контурная / subtle ghost) */
+dialog.m3-dialog.article-share-dialog .share-dialog-actions .m3-button--tonal {
+	background: color-mix(in srgb, var(--on-surface) 6%, transparent) !important;
+	color: var(--on-surface) !important;
+	border: 1px solid color-mix(in srgb, var(--outline-variant) 40%, transparent) !important;
+	border-radius: var(--shape-corner-m, 12px) !important;
+	height: 2.5rem !important;
+	padding: 0 1rem !important;
+	font-size: 0.8125rem !important;
+	font-weight: 500 !important;
+	letter-spacing: 0.01em !important;
+	box-shadow: none !important;
+	transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease !important;
+}
+
+dialog.m3-dialog.article-share-dialog .share-dialog-actions .m3-button--tonal:hover {
+	background: color-mix(in srgb, var(--on-surface) 10%, transparent) !important;
+	border-color: color-mix(in srgb, var(--outline) 60%, transparent) !important;
+	color: var(--on-surface) !important;
+}
+
+/* Кнопка 2: «Скачать изображение» (первичная, приятный акцентный контейнер без тяжелого синего блока) */
+dialog.m3-dialog.article-share-dialog .share-dialog-actions .m3-button--filled {
+	background: var(--primary-container, color-mix(in srgb, var(--primary) 18%, var(--surface-container-high))) !important;
+	color: var(--on-primary-container, var(--primary)) !important;
+	border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent) !important;
+	border-radius: var(--shape-corner-m, 12px) !important;
+	height: 2.5rem !important;
+	padding: 0 1rem !important;
+	font-size: 0.8125rem !important;
+	font-weight: 600 !important;
+	letter-spacing: 0.01em !important;
+	box-shadow: none !important;
+	transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease !important;
+}
+
+dialog.m3-dialog.article-share-dialog .share-dialog-actions .m3-button--filled:hover {
+	background: var(--primary) !important;
+	color: var(--on-primary) !important;
+	border-color: var(--primary) !important;
+	box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 25%, transparent) !important;
+}
+
 
 /* Усиленное затемнение для бокового меню навигации (SiteNavigationDrawer) */
 .site-drawer__scrim {
 	background: color-mix(in srgb, var(--scrim, #000) 65%, transparent) !important;
+}
+.site-drawer--open .site-drawer__scrim {
 	backdrop-filter: blur(8px) !important;
 	-webkit-backdrop-filter: blur(8px) !important;
 }
@@ -236,117 +544,235 @@ dialog.m3-dialog::backdrop {
 	box-shadow: 0 20px 48px -4px rgba(0, 0, 0, 0.55), 0 4px 16px rgba(0, 0, 0, 0.25) !important;
 }
 
-/* Карточки контента: ПО УМОЛЧАНИЮ СПЛОШНЫЕ */
-:root:not([data-glass="cards"]) #main-layout .m3-card,
-:root:not([data-glass="cards"]) #main-layout .m3-profile,
-:root:not([data-glass="cards"]) #main-layout .m3-blog-postcard,
-:root:not([data-glass="cards"]) #main-layout .book-card,
-:root:not([data-glass="cards"]) #main-layout .reading-goal-card,
-:root:not([data-glass="cards"]) #main-layout .compass-tile,
-:root:not([data-glass="cards"]) #main-layout .catalog-shell__sidebar-inner,
-:root:not([data-glass="cards"]) #main-layout .card-base {
-	background: var(--card-bg) !important;
+/* ── Токены единого матового стекла блога ── */
+:root {
+	--shirone-card-bg: color-mix(in srgb, var(--surface-container-high) 70%, transparent);
+	--shirone-card-blur: blur(24px) saturate(180%);
+	--shirone-card-bg-hover: color-mix(in srgb, var(--surface-container-highest) 85%, transparent);
+	--card-bg: var(--shirone-card-bg);
+}
+
+:root.dark {
+	--shirone-card-bg: color-mix(in srgb, var(--surface-container-high) 70%, transparent);
+	--shirone-card-blur: blur(24px) saturate(180%);
+	--shirone-card-bg-hover: color-mix(in srgb, var(--surface-container-highest) 85%, transparent);
+	--card-bg: var(--shirone-card-bg);
+}
+
+/* ── Единый стиль карточек контента и блоков интерфейса: легкий прозрачный фон, без теней и рамок ── */
+#main-layout .m3-card,
+#main-layout .m3-profile,
+.m3-profile,
+#main-layout .m3-blog-postcard,
+#main-layout .book-card,
+#main-layout .reading-goal-card,
+#main-layout .compass-tile,
+#main-layout .card-base,
+.post-card,
+.post-card.m3-card,
+.archive-panel,
+.service-card,
+.wishlist-card,
+.wishlist-list-container,
+.article-share,
+.catalog-shell__sidebar-inner,
+.catalog-shell .catalog-shell__sidebar-inner,
+.support-card,
+.category-index__row,
+#sidebar widget-layout .m3-card,
+#sidebar-secondary widget-layout .m3-card,
+aside#sidebar widget-layout .m3-card,
+aside#sidebar-secondary widget-layout .m3-card,
+#sidebar .m3-profile,
+#sidebar-secondary .m3-profile,
+aside#sidebar .m3-profile,
+aside#sidebar-secondary .m3-profile {
+	background: var(--shirone-card-bg) !important;
+	backdrop-filter: var(--shirone-card-blur) !important;
+	-webkit-backdrop-filter: var(--shirone-card-blur) !important;
+	border: none !important;
+	box-shadow: none !important;
+	transition: background var(--m3e-duration-medium) var(--m3e-easing-standard) !important;
+}
+
+/* Hover эффекты: легкое высветление без теней и без рамок (только для контентных карточек, сайдбары статичны) */
+#main-layout .m3-blog-postcard:hover,
+#main-layout .book-card:hover,
+#main-layout .reading-goal-card:hover,
+#main-layout .compass-tile:hover,
+.service-card:hover,
+.wishlist-card:hover,
+.article-share:hover,
+.catalog-shell__sidebar-inner:hover {
+	background: var(--shirone-card-bg-hover) !important;
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
+}
+
+/* Сайдбары и виджеты оглавления никогда не меняют фон и не имеют ореолов/теней при ховере */
+#sidebar widget-layout .m3-card,
+#sidebar-secondary widget-layout .m3-card,
+aside#sidebar widget-layout .m3-card,
+aside#sidebar-secondary widget-layout .m3-card,
+#sidebar widget-layout:hover .m3-card,
+#sidebar-secondary widget-layout:hover .m3-card,
+aside#sidebar widget-layout:hover .m3-card,
+aside#sidebar-secondary widget-layout:hover .m3-card,
+.sidebar-toc {
+	background: var(--shirone-card-bg) !important;
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
+}
+
+/* Сам список TOC внутри виджета должен быть полностью прозрачным, без своего фона и размытия */
+.sidebar-toc__content,
+.m3-blog-toc,
+table-of-contents {
+	background: transparent !important;
 	backdrop-filter: none !important;
 	-webkit-backdrop-filter: none !important;
-	border: 1px solid var(--outline-variant) !important;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+	border: none !important;
+	box-shadow: none !important;
 }
 
-/* Карточки контента: В РЕЖИМЕ СТЕКЛА (:root[data-glass="cards"]) */
-:root[data-glass="cards"] #main-layout .m3-card,
-:root[data-glass="cards"] #main-layout .m3-profile,
-:root[data-glass="cards"] #main-layout .m3-blog-postcard,
-:root[data-glass="cards"] #main-layout .book-card,
-:root[data-glass="cards"] #main-layout .reading-goal-card,
-:root[data-glass="cards"] #main-layout .compass-tile,
-:root[data-glass="cards"] #main-layout .catalog-shell__sidebar-inner,
-:root[data-glass="cards"] #main-layout .card-base {
-	background: color-mix(in srgb, var(--card-bg) 48%, transparent) !important;
-	backdrop-filter: blur(14px) saturate(180%) !important;
-	-webkit-backdrop-filter: blur(14px) saturate(180%) !important;
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 40%, rgba(255, 255, 255, 0.16)) !important;
-	box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12), 0 8px 24px -4px rgba(0, 0, 0, 0.25) !important;
+#main-layout .catalog-shell__sidebar-inner:hover {
+	border: none !important;
 }
 
-:root[data-glass="cards"] #main-layout .m3-blog-postcard:hover,
-:root[data-glass="cards"] #main-layout .book-card:hover,
-:root[data-glass="cards"] #main-layout .reading-goal-card:hover,
-:root[data-glass="cards"] #main-layout .compass-tile:hover {
-	border-color: color-mix(in srgb, var(--outline-variant) 50%, rgba(255, 255, 255, 0.24)) !important;
-	box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.18), 0 12px 28px -4px rgba(0, 0, 0, 0.3) !important;
-}
-
-:root[data-glass="cards"] #main-layout .catalog-shell__sidebar-inner:hover {
-	border-color: color-mix(in srgb, var(--outline-variant) 50%, rgba(255, 255, 255, 0.22)) !important;
-}
-
-.top-app-bar__nav-link {
-	border-radius: var(--shape-corner-full, 9999px);
-}
-
-.top-app-bar__nav-link::before {
-	border-radius: inherit;
-}
-
-/* ── 3. Material 3 Expressive Table of Contents (TOC) ── */
-.m3-blog-toc {
-	position: relative;
-	padding-left: 0;
-}
-
-.m3-blog-toc::before {
-	content: "";
-	position: absolute;
-	left: 0;
-	top: 0.25rem;
-	bottom: 0.25rem;
-	width: 2px;
-	background: var(--outline-variant, color-mix(in oklab, var(--on-surface) 12%, transparent));
-	z-index: 0;
-}
-
-.m3-blog-toc__item {
-	position: relative;
-	z-index: 1;
-	display: flex;
-	align-items: center;
-	padding: 0.4375rem 0.75rem 0.4375rem 0.875rem;
-	margin-left: 0;
-	border-radius: 0 var(--shape-corner-m, 12px) var(--shape-corner-m, 12px) 0;
-	overflow: hidden;
-	color: var(--on-surface-variant);
-	background: transparent;
-	transition: color 150ms ease, background-color 150ms ease;
-}
-
-.m3-blog-toc__item:hover {
-	color: var(--on-surface);
-	background: color-mix(in oklab, var(--on-surface) 6%, transparent);
-}
-
-.m3-blog-toc__item::marker,
-.m3-blog-toc__mark,
-.m3-blog-toc__badge,
-.m3-blog-toc__dot {
+.top-app-bar__nav-link::before,
+.top-app-bar__nav-link::after {
 	display: none !important;
 }
 
-.m3-blog-toc__item.m3-blog-toc__item--active {
+.top-app-bar__nav-link {
+	border-radius: var(--shape-corner-s, 8px) !important;
+	background: transparent !important;
+	font-weight: 500 !important;
+}
+
+.top-app-bar__nav-link--active {
+	font-weight: 500 !important;
+}
+
+.top-app-bar__nav-link:hover {
 	color: var(--primary) !important;
-	font-weight: 600 !important;
-	background: color-mix(in oklab, var(--primary) 12%, transparent) !important;
+}
+
+/* ── 3. Material 3 Expressive Table of Contents (TOC) ── */
+#sidebar-secondary:has(.sidebar-toc) {
+	margin-top: 0 !important;
+}
+
+#sidebar-secondary .sidebar-toc,
+#sidebar-secondary widget-layout:has(.sidebar-toc) {
+	margin-top: 0 !important;
+}
+
+/* Автоматически скрываем весь виджет Оглавления и правую колонку, если в статье нет заголовков */
+widget-layout:has(.sidebar-toc:has(table-of-contents:empty)),
+widget-layout:has(.sidebar-toc:not(:has(.m3-blog-toc__item))),
+.sidebar-toc:has(table-of-contents:empty),
+.sidebar-toc:not(:has(.m3-blog-toc__item)),
+#sidebar-secondary:not(:has(.m3-blog-toc__item)) {
+	display: none !important;
+}
+
+.m3-blog-toc {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	padding-left: 0;
+	position: relative;
+}
+
+.m3-blog-toc::before {
+	display: none;
+}
+
+.m3-blog-toc__item {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	min-height: 2.25rem;
+	padding: 0.4375rem 0.75rem;
+	border-radius: var(--shape-corner-m, 12px);
+	text-decoration: none;
+	color: var(--on-surface-variant);
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
+	transition: background-color 150ms ease, color 150ms ease;
+}
+
+.m3-blog-toc__item:hover {
+	background: color-mix(in oklab, var(--on-surface) 6%, transparent) !important;
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
+}
+
+.m3-blog-toc__item:hover .m3-blog-toc__mark {
+	color: var(--on-surface) !important;
+}
+
+.m3-blog-toc__item:hover .m3-blog-toc__text {
+	color: var(--on-surface) !important;
+	font-weight: 600;
+}
+
+.m3-blog-toc__mark {
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	width: 1.25rem;
+	height: 1.25rem;
+	font-family: ui-monospace, "SF Pro Rounded", "JetBrains Mono Variable", Menlo, monospace;
+	font-size: 0.875rem;
+	font-weight: 700;
+	color: color-mix(in oklab, var(--on-surface-variant) 80%, transparent);
+	background: transparent;
+	transition: color 150ms ease;
+}
+
+.m3-blog-toc__text {
+	min-width: 0;
+	font-size: 0.875rem;
+	line-height: 1.4;
+	color: color-mix(in oklab, var(--on-surface-variant) 90%, transparent);
+	transition: color 150ms ease;
+}
+
+/* Активный пункт: яркий акцентный номер и заголовок */
+.m3-blog-toc__item.m3-blog-toc__item--active {
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
+}
+
+.m3-blog-toc__item.m3-blog-toc__item--active:hover {
+	background: color-mix(in oklab, var(--primary) 8%, transparent) !important;
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
+}
+
+.m3-blog-toc__item.m3-blog-toc__item--active .m3-blog-toc__mark {
+	color: var(--primary) !important;
+	font-weight: 800 !important;
+}
+
+.m3-blog-toc__item.m3-blog-toc__item--active .m3-blog-toc__text {
+	color: var(--primary) !important;
+	font-weight: 700 !important;
 }
 
 .m3-blog-toc__item.m3-blog-toc__item--active::before {
-	content: "";
-	position: absolute;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	width: 3px;
-	border-radius: 0 2px 2px 0;
-	background: var(--primary) !important;
-	z-index: 2;
+	display: none !important;
 }
 
 /* ── 4. Markdown, Callouts, Spoilers & Markers ── */
@@ -432,20 +858,30 @@ dialog.m3-dialog::backdrop {
 	color: var(--on-surface);
 }
 
+.banner-wrapper {
+	max-height: 380px;
+	border-radius: var(--shape-corner-xl) var(--shape-corner-xl) 0 0 !important;
+}
+
 #post-cover {
-	max-height: 360px;
 	aspect-ratio: 21 / 9;
-	width: 100%;
-	border-radius: var(--shape-corner-l, 16px);
-	box-shadow: var(--m3e-elevation-1, 0 1px 3px rgba(0, 0, 0, 0.12));
+	width: 100% !important;
+	max-height: 380px !important;
+	border-radius: var(--shape-corner-xl) var(--shape-corner-xl) 0 0 !important;
+	box-shadow: none !important;
+	margin: 0 !important;
+	display: block !important;
+	overflow: hidden !important;
 }
 
 #post-cover img,
 #post-cover picture {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	object-position: center;
+	width: 100% !important;
+	height: 100% !important;
+	max-height: 380px !important;
+	border-radius: var(--shape-corner-xl) var(--shape-corner-xl) 0 0 !important;
+	object-fit: cover !important;
+	object-position: center 36% !important;
 }
 
 .custom-md .m3-content-note__trigger {
@@ -576,11 +1012,25 @@ widget-layout .m3-card,
 #main-layout .m3-profile,
 .m3-profile,
 #category-bar {
-	padding: 1rem 1.25rem !important;
+	padding: 1.25rem 1.25rem !important;
+	border-radius: var(--shape-corner-extra-large, 20px) !important;
+	border: none !important;
+	box-shadow: none !important;
 }
 
+/* Заголовки виджетов сайдбара как на скриншоте: жирный чистый текст без полоски-акцента */
 widget-layout .widget-layout__header {
-	margin: 0 0 0.75rem 0 !important;
+	margin: 0 0 1rem 0 !important;
+	font-size: 1.05rem !important;
+	font-weight: 700 !important;
+	letter-spacing: -0.01em !important;
+	color: var(--on-surface) !important;
+	display: flex !important;
+	align-items: center !important;
+}
+
+widget-layout .widget-layout__header .m3-accent-bar {
+	display: none !important;
 }
 
 widget-layout .collapse-wrapper {
@@ -600,139 +1050,281 @@ widget-layout .collapse-wrapper.collapsed {
  * the override is limited to these selectors. Remove an entry once the theme
  * exposes the matching token or prop.
  */
-/* Категории: интерактивные плашки с иконкой папки и бейджем */
+/* Категории и Серии: интерактивные плашки с иконкой контурной папки и аккуратным счётчиком */
 .m3-blog-categorylist {
-	gap: 0.375rem !important;
+	gap: 0.5rem !important;
 }
 
 .m3-blog-categorylist .m3-button {
 	position: relative !important;
-	background: color-mix(in srgb, var(--surface-container-high) 45%, transparent) !important;
-	backdrop-filter: blur(8px) !important;
-	-webkit-backdrop-filter: blur(8px) !important;
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 25%, transparent) !important;
-	border-radius: var(--shape-corner-m, 12px) !important;
-	padding: 0.5rem 0.75rem !important;
-	min-height: 2.375rem !important;
-	transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease, color 150ms ease !important;
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	border-radius: var(--shape-corner-m, 10px) !important;
+	padding: 0.35rem 0.5rem !important;
+	min-height: 2.25rem !important;
+	transition: background-color 150ms ease, color 150ms ease !important;
 }
 
 .m3-blog-categorylist .m3-button:hover {
-	background: color-mix(in srgb, var(--primary) 14%, var(--surface-container-high)) !important;
-	border-color: color-mix(in srgb, var(--primary) 45%, transparent) !important;
-	transform: translateX(3px) !important;
+	background: color-mix(in srgb, var(--on-surface) 6%, transparent) !important;
+	border-color: transparent !important;
+	transform: none !important;
 }
 
 .m3-blog-categorylist__name {
-	font-size: 0.84rem !important;
+	font-size: 0.92rem !important;
 	font-weight: 500 !important;
-	color: var(--on-surface) !important;
+	color: color-mix(in srgb, var(--on-surface) 88%, transparent) !important;
 	transition: color 150ms ease !important;
 	display: inline-flex !important;
 	align-items: center !important;
-	gap: 0.45rem !important;
+	gap: 0.65rem !important;
 }
 
 .m3-blog-categorylist__name::before {
 	content: "" !important;
 	display: inline-block !important;
-	width: 0.95rem !important;
-	height: 0.95rem !important;
-	background-color: var(--primary) !important;
-	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h6l2 2h8q.825 0 1.413.588T22 8v10q0 .825-.587 1.413T20 20zm0-2h16V8h-8.825l-2-2H4zm0 0V6z'/%3E%3C/svg%3E") !important;
-	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h6l2 2h8q.825 0 1.413.588T22 8v10q0 .825-.587 1.413T20 20zm0-2h16V8h-8.825l-2-2H4zm0 0V6z'/%3E%3C/svg%3E") !important;
+	width: 1.15rem !important;
+	height: 1.15rem !important;
+	background-color: color-mix(in srgb, var(--on-surface-variant) 75%, transparent) !important;
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h6l2 2h8q.825 0 1.413.588T22 8v10q0 .825-.587 1.413T20 20zm0-2h16V8h-8.825l-2-2H4zm0 0V6z'/%3E%3C/svg%3E") !important;
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h6l2 2h8q.825 0 1.413.588T22 8v10q0 .825-.587 1.413T20 20zm0-2h16V8h-8.825l-2-2H4zm0 0V6z'/%3E%3C/svg%3E") !important;
 	mask-size: contain !important;
 	-webkit-mask-size: contain !important;
 	mask-repeat: no-repeat !important;
 	-webkit-mask-repeat: no-repeat !important;
-	opacity: 0.85 !important;
-	transition: transform 150ms ease, opacity 150ms ease !important;
+	opacity: 0.9 !important;
+	transition: background-color 150ms ease, opacity 150ms ease !important;
 	flex-shrink: 0 !important;
 }
 
 .m3-blog-categorylist .m3-button:hover .m3-blog-categorylist__name::before {
+	background-color: var(--primary) !important;
 	opacity: 1 !important;
-	transform: scale(1.1) !important;
+	transform: none !important;
 }
 
 .m3-blog-categorylist .m3-button:hover .m3-blog-categorylist__name {
-	color: var(--primary) !important;
+	color: var(--on-surface) !important;
 }
 
+/* Счётчик количества постов (округлая таблетка) */
 .m3-blog-categorylist__badge {
-	min-width: 1.625rem !important;
-	height: 1.4rem !important;
+	min-width: 1.5rem !important;
+	height: 1.5rem !important;
 	padding: 0 0.45rem !important;
 	border-radius: 9999px !important;
-	background: color-mix(in srgb, var(--primary) 16%, transparent) !important;
-	color: var(--primary) !important;
-	font-size: 0.72rem !important;
-	font-weight: 700 !important;
-	border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent) !important;
-	transition: background-color 150ms ease, transform 150ms ease, border-color 150ms ease !important;
+	background: color-mix(in srgb, var(--surface-container-highest) 75%, transparent) !important;
+	color: color-mix(in srgb, var(--on-surface-variant) 80%, transparent) !important;
+	font-size: 0.75rem !important;
+	font-weight: 600 !important;
+	border: 1px solid color-mix(in srgb, var(--outline-variant) 30%, transparent) !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	transition: all 150ms ease !important;
 }
 
 .m3-blog-categorylist .m3-button:hover .m3-blog-categorylist__badge {
-	background: var(--primary) !important;
-	color: var(--on-primary) !important;
-	border-color: var(--primary) !important;
-	transform: scale(1.05) !important;
+	background: color-mix(in srgb, var(--surface-container-highest) 95%, transparent) !important;
+	color: var(--on-surface) !important;
+	border-color: color-mix(in srgb, var(--outline-variant) 50%, transparent) !important;
+	transform: none !important;
 }
 
-/* Теги: современные чипы в стиле Pill с решёткой '#' */
+/* Теги: аккуратный полупрозрачный матовый чип */
 .m3-blog-taglist {
-	gap: 0.45rem !important;
+	gap: 0.5rem !important;
 }
 
 .m3-blog-taglist .m3-chip {
-	height: 1.875rem !important;
-	padding: 0 0.8rem !important;
-	background: color-mix(in srgb, var(--surface-container-high) 50%, transparent) !important;
-	backdrop-filter: blur(8px) !important;
-	-webkit-backdrop-filter: blur(8px) !important;
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 30%, transparent) !important;
-	border-radius: 9999px !important;
-	color: var(--on-surface-variant) !important;
-	font-size: 0.78rem !important;
+	height: 2.1rem !important;
+	padding: 0 0.85rem !important;
+	background: color-mix(in srgb, var(--surface-container-highest) 35%, transparent) !important;
+	border: none !important;
+	border-radius: var(--shape-corner-m, 10px) !important;
+	color: color-mix(in srgb, var(--on-surface) 85%, transparent) !important;
+	font-size: 0.82rem !important;
 	font-weight: 500 !important;
-	transition: all 160ms cubic-bezier(0.2, 0, 0, 1) !important;
+	box-shadow: none !important;
+	transition: all 150ms ease !important;
 }
 
 .m3-blog-taglist .m3-chip .m3-chip__content::before {
 	content: "#" !important;
-	color: var(--primary) !important;
-	font-weight: 700 !important;
+	color: color-mix(in srgb, var(--on-surface-variant) 60%, transparent) !important;
+	font-weight: 600 !important;
 	font-size: 0.85rem !important;
-	opacity: 0.8 !important;
-	margin-right: -0.25rem !important;
-	transition: opacity 150ms ease !important;
+	margin-right: 0.25rem !important;
+	transition: color 150ms ease !important;
 }
 
 .m3-blog-taglist .m3-chip:hover {
-	background: color-mix(in srgb, var(--primary) 18%, var(--surface-container-high)) !important;
-	border-color: color-mix(in srgb, var(--primary) 55%, transparent) !important;
+	background: color-mix(in srgb, var(--surface-container-highest) 55%, transparent) !important;
 	color: var(--primary) !important;
-	transform: translateY(-1.5px) !important;
-	box-shadow: 0 4px 10px -2px color-mix(in srgb, var(--primary) 30%, transparent) !important;
+	transform: none !important;
+	box-shadow: none !important;
+	border: none !important;
 }
 
 .m3-blog-taglist .m3-chip:hover .m3-chip__content::before {
-	opacity: 1 !important;
+	color: var(--primary) !important;
+}
+
+/* Теги на отдельной странице всех тегов (/tags/): Chip и счётчик */
+.tag-index__cloud .tag-index__chip {
+	height: 2.1rem !important;
+	padding: 0 0.85rem !important;
+	background: color-mix(in srgb, var(--surface-container-highest) 35%, transparent) !important;
+	border: none !important;
+	border-radius: var(--shape-corner-m, 10px) !important;
+	color: color-mix(in srgb, var(--on-surface) 85%, transparent) !important;
+	font-size: 0.82rem !important;
+	font-weight: 500 !important;
+	box-shadow: none !important;
+	transition: all 150ms ease !important;
+}
+
+.tag-index__cloud .tag-index__chip .m3-chip__content::before {
+	content: "#" !important;
+	color: color-mix(in srgb, var(--on-surface-variant) 60%, transparent) !important;
+	font-weight: 600 !important;
+	font-size: 0.85rem !important;
+	margin-right: 0.25rem !important;
+	transition: color 150ms ease !important;
+}
+
+.tag-index__cloud .tag-index__chip:hover {
+	background: color-mix(in srgb, var(--surface-container-highest) 55%, transparent) !important;
+	color: var(--primary) !important;
+	transform: none !important;
+	box-shadow: none !important;
+	border: none !important;
+}
+
+.tag-index__cloud .tag-index__chip:hover .m3-chip__content::before {
+	color: var(--primary) !important;
+}
+
+.tag-index__cloud .tag-index__count {
+	min-width: 1.4rem !important;
+	height: 1.35rem !important;
+	margin-left: 0.45rem !important;
+	padding: 0 0.35rem !important;
+	border-radius: 9999px !important;
+	background: color-mix(in srgb, var(--surface-container-high) 50%, transparent) !important;
+	color: color-mix(in srgb, var(--on-surface-variant) 80%, transparent) !important;
+	font-size: 0.72rem !important;
+	font-weight: 600 !important;
+	border: none !important;
+	transition: all 150ms ease !important;
+}
+
+.tag-index__cloud .tag-index__chip:hover .tag-index__count {
+	background: color-mix(in srgb, var(--primary) 20%, transparent) !important;
+	color: var(--primary) !important;
+	border: none !important;
+}
+
+/* Теги на карточках постов (TagBadge): компактные, аккуратные чипы */
+.m3-blog-postcard .m3-blog-tagbadge {
+	display: inline-flex !important;
+	align-items: center !important;
+	height: 1.75rem !important;
+	padding: 0 0.65rem !important;
+	background: color-mix(in srgb, var(--surface-container-highest) 35%, transparent) !important;
+	border: none !important;
+	border-radius: var(--shape-corner-s, 8px) !important;
+	color: color-mix(in srgb, var(--on-surface-variant) 90%, transparent) !important;
+	text-decoration: none !important;
+	font-size: 0.75rem !important;
+	font-weight: 500 !important;
+	letter-spacing: normal !important;
+	box-shadow: none !important;
+	transition: all 150ms ease !important;
+}
+
+.m3-blog-postcard .m3-blog-tagbadge .m3-blog-tagbadge__text {
+	display: inline-flex !important;
+	align-items: center !important;
+	font-size: 0.75rem !important;
+	font-weight: 500 !important;
+	letter-spacing: normal !important;
+	color: color-mix(in srgb, var(--on-surface-variant) 90%, transparent) !important;
+	transition: color 150ms ease !important;
+}
+
+.m3-blog-postcard .m3-blog-tagbadge:hover {
+	background: color-mix(in srgb, var(--surface-container-highest) 55%, transparent) !important;
+	color: var(--primary) !important;
+	transform: none !important;
+	box-shadow: none !important;
+	border: none !important;
+}
+
+.m3-blog-postcard .m3-blog-tagbadge:hover .m3-blog-tagbadge__text {
+	color: var(--primary) !important;
+	transform: none !important;
+}
+
+/* Кнопка «Все ...» внизу виджетов (Категории, Серии, Теги) */
+.widget-index-link {
+	padding: 0.5rem 0 0 !important;
+	margin-top: 0.35rem !important;
+	border-top: none !important;
+}
+
+.widget-index-link > a {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	width: 100% !important;
+	min-height: 2.1rem !important;
+	padding: 0.35rem 0.75rem !important;
+	border-radius: var(--shape-corner-m, 10px) !important;
+	background: color-mix(in srgb, var(--surface-container-highest) 35%, transparent) !important;
+	border: none !important;
+	box-shadow: none !important;
+	color: color-mix(in srgb, var(--on-surface-variant) 90%, transparent) !important;
+	font-size: 0.8rem !important;
+	font-weight: 500 !important;
+	letter-spacing: 0.01em !important;
+	text-decoration: none !important;
+	gap: 0.35rem !important;
+	transition: all 160ms ease !important;
+}
+
+.widget-index-link > a > svg {
+	display: none !important;
+}
+
+.widget-index-link > a:hover {
+	background: color-mix(in srgb, var(--surface-container-highest) 55%, transparent) !important;
+	border: none !important;
+	box-shadow: none !important;
+	color: var(--on-surface) !important;
 }
 
 .m3-blog-postcard {
 	border-radius: var(--shape-corner-extra-large, 24px) !important;
-	transform: none !important;
-}
-
-.m3-blog-postcard:hover {
-	transform: none !important;
 }
 
 .m3-blog-postcard__title {
+	font-size: 1.2rem !important;
+	font-weight: 700 !important;
+	line-height: 1.35 !important;
+	letter-spacing: -0.015em !important;
 	cursor: pointer !important;
 	transition: color var(--m3e-duration-short4, 150ms) ease,
 	            transform var(--m3e-duration-short4, 150ms) ease !important;
+}
+
+.m3-blog-postcard__desc {
+	font-size: 0.875rem !important;
+	line-height: 1.55 !important;
+	color: var(--on-surface-variant) !important;
+	opacity: 0.88 !important;
 }
 
 .m3-blog-postcard__title:hover {
@@ -741,12 +1333,11 @@ widget-layout .collapse-wrapper.collapsed {
 
 .m3-blog-postcard__title:hover .m3-accent-bar {
 	transform: scaleY(1.15) !important;
-	box-shadow: 0 0 8px var(--primary) !important;
+	box-shadow: none !important;
 }
 
 .m3-blog-postcard__title .m3-accent-bar {
-	transition: transform var(--m3e-duration-short4, 150ms) ease,
-	            box-shadow var(--m3e-duration-short4, 150ms) ease !important;
+	transition: transform var(--m3e-duration-short4, 150ms) ease !important;
 }
 
 .m3-blog-postcard__title:hover .m3-blog-postcard__arrow {
@@ -817,6 +1408,31 @@ widget-layout .collapse-wrapper.collapsed {
 	opacity: 0.85 !important;
 }
 
+/* Категория в мете карточки поста: заменяем иконку на папку, как в сайдбаре и в статье */
+.m3-blog-postmeta__item:has(.m3-blog-postmeta__link) .m3-meta-icon {
+	display: inline-flex !important;
+	align-items: center !important;
+}
+
+.m3-blog-postmeta__item:has(.m3-blog-postmeta__link) .m3-meta-icon > svg {
+	display: none !important;
+}
+
+.m3-blog-postmeta__item:has(.m3-blog-postmeta__link) .m3-meta-icon::after {
+	content: "" !important;
+	display: inline-block !important;
+	width: 1rem !important;
+	height: 1rem !important;
+	background-color: var(--primary) !important;
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h6l2 2h8q.825 0 1.413.588T22 8v10q0 .825-.587 1.413T20 20zm0-2h16V8h-8.825l-2-2H4zm0 0V6z'/%3E%3C/svg%3E") !important;
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h6l2 2h8q.825 0 1.413.588T22 8v10q0 .825-.587 1.413T20 20zm0-2h16V8h-8.825l-2-2H4zm0 0V6z'/%3E%3C/svg%3E") !important;
+	mask-size: contain !important;
+	-webkit-mask-size: contain !important;
+	mask-repeat: no-repeat !important;
+	-webkit-mask-repeat: no-repeat !important;
+	opacity: 0.85 !important;
+}
+
 .m3-blog-postmeta__text,
 .m3-blog-postmeta__link {
 	font: var(--m3e-type-label-medium) !important;
@@ -844,28 +1460,72 @@ widget-layout .collapse-wrapper.collapsed {
 .m3-blog-pagination__arrow,
 .m3-blog-pagination__num,
 .m3-blog-pagination__jump {
-	border-radius: var(--shape-corner-medium, 12px);
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 40%, transparent);
+	border-radius: var(--shape-corner-medium, 14px);
+	border: none !important;
 	background: color-mix(in srgb, var(--surface-container-high) 80%, transparent);
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-	transition: background-color 150ms ease, color 150ms ease, transform 140ms ease, border-color 150ms ease, box-shadow 150ms ease;
+	box-shadow: none !important;
+	transition: background-color 150ms ease, color 150ms ease, transform 140ms ease;
+}
+
+/* Мобильная пагинация: увеличенный размер для удобного тапа пальцем */
+.m3-blog-pagination__mobile {
+	gap: 0.75rem !important;
+}
+
+.m3-blog-pagination__mobile .m3-blog-pagination__arrow {
+	width: 3.25rem !important;
+	height: 3.25rem !important;
+	min-width: 3.25rem !important;
+	border-radius: var(--shape-corner-l, 16px) !important;
+}
+
+.m3-blog-pagination__mobile .m3-blog-pagination__arrow > svg {
+	width: 1.75rem !important;
+	height: 1.75rem !important;
+}
+
+.m3-blog-pagination__mobile .m3-blog-pagination__jump {
+	min-width: 6.5rem !important;
+	height: 3.25rem !important;
+	padding: 0 1.25rem !important;
+	font-size: 1.05rem !important;
+	border-radius: var(--shape-corner-l, 16px) !important;
+	gap: 0.35rem !important;
+}
+
+.m3-blog-pagination__mobile .m3-blog-pagination__jump-current {
+	font-size: 1.15rem !important;
+	font-weight: 800 !important;
+}
+
+.m3-blog-pagination__mobile .m3-blog-pagination__jump-sep,
+.m3-blog-pagination__mobile .m3-blog-pagination__jump-total {
+	font-size: 1.05rem !important;
+}
+
+.m3-blog-pagination__mobile .m3-blog-pagination__jump-input {
+	width: 6.5rem !important;
+	height: 3.25rem !important;
+	font-size: 1.1rem !important;
+	border-radius: var(--shape-corner-l, 16px) !important;
+	border: none !important;
 }
 
 .m3-blog-pagination__arrow:hover:not(.m3-blog-pagination__arrow--disabled),
 .m3-blog-pagination__num:hover:not(.m3-blog-pagination__num--active),
 .m3-blog-pagination__jump:hover {
-	background: color-mix(in srgb, var(--primary) 18%, var(--surface-container-highest));
-	color: var(--primary);
-	border-color: color-mix(in srgb, var(--primary) 55%, transparent);
+	background: color-mix(in srgb, var(--surface-container-highest) 95%, transparent);
+	color: var(--on-surface);
+	border: none !important;
 	transform: translateY(-1px);
-	box-shadow: 0 3px 8px color-mix(in srgb, var(--primary) 22%, transparent);
+	box-shadow: none !important;
 }
 
 .m3-blog-pagination__num--active {
 	background: var(--primary);
 	color: var(--on-primary);
-	border-color: var(--primary);
-	box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 35%, transparent);
+	border: none !important;
+	box-shadow: none !important;
 }
 
 /* ── 6. Страницы Категорий, Тегов и Архива ── */
@@ -879,25 +1539,25 @@ widget-layout .collapse-wrapper.collapsed {
 	min-height: 3.75rem;
 	padding: 0.75rem 1.25rem;
 	border-radius: var(--shape-corner-l, 16px);
-	background: var(--surface-container-low);
-	border: 1px solid var(--outline-variant);
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+	background: var(--shirone-card-bg);
+	backdrop-filter: var(--shirone-card-blur);
+	-webkit-backdrop-filter: var(--shirone-card-blur);
+	border: none !important;
+	box-shadow: none !important;
 	text-decoration: none;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	gap: 1rem;
 	transition: background-color var(--m3e-duration-short, 150ms) var(--m3e-easing-standard),
-	            border-color var(--m3e-duration-short, 150ms) var(--m3e-easing-standard),
-	            transform var(--m3e-duration-short, 150ms) var(--m3e-easing-standard),
-	            box-shadow var(--m3e-duration-short, 150ms) var(--m3e-easing-standard);
+	            transform var(--m3e-duration-short, 150ms) var(--m3e-easing-standard);
 }
 
 .category-index__row:hover {
-	background: color-mix(in srgb, var(--primary) 10%, var(--surface-container-high));
-	border-color: color-mix(in srgb, var(--primary) 50%, var(--outline-variant));
+	background: var(--shirone-card-bg-hover);
+	border: none !important;
 	transform: translateY(-2px);
-	box-shadow: var(--m3e-elevation-1, 0 3px 10px rgba(0, 0, 0, 0.12));
+	box-shadow: none !important;
 }
 
 .category-index__rule {
@@ -925,19 +1585,18 @@ widget-layout .collapse-wrapper.collapsed {
 	border-radius: var(--shape-corner-full, 9999px);
 	background: color-mix(in srgb, var(--surface-container-highest) 80%, transparent);
 	color: var(--on-surface-variant);
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 40%, transparent);
+	border: none !important;
 	font: var(--m3e-type-label-small);
 	font-weight: 700;
 	font-variant-numeric: tabular-nums;
 	transition: background-color var(--m3e-duration-short, 150ms) ease,
-	            color var(--m3e-duration-short, 150ms) ease,
-	            border-color var(--m3e-duration-short, 150ms) ease;
+	            color var(--m3e-duration-short, 150ms) ease;
 }
 
 .category-index__row:hover .category-index__count {
 	background: var(--primary);
 	color: var(--on-primary);
-	border-color: var(--primary);
+	border: none !important;
 }
 
 /* /tags/ */
@@ -945,24 +1604,25 @@ widget-layout .collapse-wrapper.collapsed {
 	height: 2.125rem;
 	padding: 0 0.5rem 0 0.875rem;
 	border-radius: var(--shape-corner-full, 9999px);
-	background: color-mix(in srgb, var(--surface-container-high) 80%, transparent);
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 40%, transparent);
+	background: var(--shirone-card-bg);
+	backdrop-filter: var(--shirone-card-blur);
+	-webkit-backdrop-filter: var(--shirone-card-blur);
+	border: none !important;
+	box-shadow: none !important;
 	color: var(--on-surface);
 	font: var(--m3e-type-label-medium);
 	font-weight: 600;
 	transition: background-color var(--m3e-duration-short, 150ms) ease,
-	            border-color var(--m3e-duration-short, 150ms) ease,
 	            color var(--m3e-duration-short, 150ms) ease,
-	            transform var(--m3e-duration-short, 150ms) ease,
-	            box-shadow var(--m3e-duration-short, 150ms) ease;
+	            transform var(--m3e-duration-short, 150ms) ease;
 }
 
 .tag-index__chip:hover {
-	background: color-mix(in srgb, var(--primary) 18%, var(--surface-container-highest));
-	border-color: color-mix(in srgb, var(--primary) 55%, transparent);
+	background: var(--shirone-card-bg-hover);
+	border: none !important;
 	color: var(--primary);
 	transform: translateY(-1px);
-	box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 22%, transparent);
+	box-shadow: none !important;
 }
 
 .tag-index__count {
@@ -988,7 +1648,7 @@ widget-layout .collapse-wrapper.collapsed {
 
 /* /archive/ Timeline */
 #main-layout .m3-blog-archive__group + .m3-blog-archive__group {
-	margin-top: 2rem;
+	margin-top: 1.5rem;
 }
 
 #main-layout .m3-blog-archive__header {
@@ -996,29 +1656,34 @@ widget-layout .collapse-wrapper.collapsed {
 	align-items: center;
 	gap: 0.75rem;
 	width: 100%;
-	height: 3.25rem;
+	height: 3.125rem;
 	padding: 0 1rem;
-	margin-bottom: 0.625rem;
+	margin-bottom: 0.5rem;
 	border-radius: var(--shape-corner-l, 16px);
-	background: color-mix(in srgb, var(--surface-container-high) 65%, transparent);
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 40%, transparent);
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-	transition: background-color var(--m3e-duration-short, 150ms) ease,
-	            border-color var(--m3e-duration-short, 150ms) ease,
-	            transform var(--m3e-duration-short, 150ms) ease,
-	            box-shadow var(--m3e-duration-short, 150ms) ease;
+	background: color-mix(in srgb, var(--surface-container-high) 50%, transparent) !important;
+	border: 1px solid color-mix(in srgb, var(--outline-variant) 30%, transparent) !important;
+	box-shadow: none !important;
+	cursor: pointer;
+	text-align: left;
+	user-select: none;
+	transition: background-color var(--m3e-duration-short, 150ms) var(--m3e-easing-standard),
+	            border-color var(--m3e-duration-short, 150ms) var(--m3e-easing-standard);
 }
 
 #main-layout .m3-blog-archive__header:hover {
-	background: var(--surface-container-high);
-	border-color: color-mix(in srgb, var(--primary) 45%, var(--outline-variant));
-	box-shadow: var(--m3e-elevation-1, 0 2px 8px rgba(0, 0, 0, 0.12));
+	background: color-mix(in srgb, var(--surface-container-highest) 65%, transparent) !important;
+	border-color: color-mix(in srgb, var(--outline-variant) 50%, transparent) !important;
+}
+
+#main-layout .m3-blog-archive__header:active {
+	background: color-mix(in srgb, var(--surface-container-highest) 85%, transparent) !important;
 }
 
 #main-layout .m3-blog-archive__group-title {
 	flex: 0 0 auto;
-	font: var(--m3e-type-title-large);
-	font-weight: 800;
+	font-family: var(--m3e-font-body), system-ui, sans-serif !important;
+	font-size: 1.125rem !important;
+	font-weight: 700 !important;
 	color: var(--on-surface);
 	letter-spacing: -0.01em;
 }
@@ -1027,211 +1692,211 @@ widget-layout .collapse-wrapper.collapsed {
 	display: none !important;
 }
 
+#main-layout .m3-blog-archive__header-end {
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 0.75rem !important;
+	margin-left: auto !important;
+}
+
 #main-layout .m3-blog-archive__count {
-	display: inline-flex;
-	align-items: center;
-	height: 1.5rem;
-	padding: 0 0.625rem;
-	border-radius: var(--shape-corner-full, 9999px);
-	background: var(--secondary-container);
-	color: var(--on-secondary-container);
-	font: var(--m3e-type-label-small);
-	font-weight: 700;
-	font-variant-numeric: tabular-nums;
-	letter-spacing: 0.02em;
-	border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent);
+	display: inline-block !important;
+	color: var(--on-surface-variant) !important;
+	font: var(--m3e-type-label-medium) !important;
+	font-weight: 500 !important;
+	font-variant-numeric: tabular-nums !important;
+	opacity: 0.8 !important;
+	background: transparent !important;
+	border: none !important;
+	padding: 0 !important;
+	height: auto !important;
+	border-radius: 0 !important;
+	transition: color var(--m3e-duration-short, 150ms) var(--m3e-easing-standard),
+	            opacity var(--m3e-duration-short, 150ms) var(--m3e-easing-standard);
+}
+
+#main-layout .m3-blog-archive__header:hover .m3-blog-archive__count {
+	color: var(--primary) !important;
+	opacity: 1 !important;
 }
 
 #main-layout .m3-blog-archive__chevron {
-	margin-left: auto;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 2.25rem;
-	height: 2.25rem;
-	border-radius: var(--shape-corner-full, 9999px);
-	background: color-mix(in srgb, var(--surface-container-highest) 70%, transparent);
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 30%, transparent);
-	color: var(--on-surface-variant);
-	transition: background-color var(--m3e-duration-short, 150ms) ease,
-	            border-color var(--m3e-duration-short, 150ms) ease,
-	            color var(--m3e-duration-short, 150ms) ease,
-	            transform var(--m3e-duration-short, 150ms) ease;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	width: 2rem !important;
+	height: 2rem !important;
+	margin-left: 0 !important;
+	border-radius: var(--shape-corner-full, 9999px) !important;
+	background: transparent !important;
+	border: none !important;
+	color: var(--on-surface-variant) !important;
+	transition: background-color var(--m3e-duration-short, 150ms) var(--m3e-easing-standard),
+	            color var(--m3e-duration-short, 150ms) var(--m3e-easing-standard),
+	            transform var(--m3e-duration-short, 150ms) var(--m3e-easing-emphasized-decelerate);
 }
 
 #main-layout .m3-blog-archive__header:hover .m3-blog-archive__chevron {
-	background: var(--primary);
-	color: var(--on-primary);
-	border-color: var(--primary);
+	background: color-mix(in srgb, var(--on-surface) 8%, transparent) !important;
+	color: var(--on-surface) !important;
 }
 
 #main-layout .m3-blog-archive__list {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	gap: 0.25rem;
-	padding: 0.25rem 0;
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 0 !important;
+	padding: 0.15rem 0 !important;
 }
 
 #main-layout .m3-blog-archive__list::before {
-	content: "";
-	position: absolute;
-	top: 1.625rem;
-	bottom: 1.625rem;
-	left: calc(5.875rem - 1px);
-	width: 2px;
-	border-radius: 9999px;
-	background: linear-gradient(180deg,
-		color-mix(in srgb, var(--primary) 50%, var(--outline-variant)),
-		color-mix(in srgb, var(--outline-variant) 40%, transparent)
-	);
-	z-index: 1;
+	display: none !important;
 }
 
 #main-layout .m3-blog-archive__item {
-	position: relative;
-	z-index: 2;
-	display: flex;
-	align-items: center;
-	min-height: 3.25rem;
-	padding: 0.5rem 1rem 0.5rem 0.875rem;
-	border-radius: var(--shape-corner-m, 14px);
-	border: 1px solid transparent;
-	gap: 0.75rem;
-	text-decoration: none;
-	transition: background-color var(--m3e-duration-short, 150ms) ease,
-	            border-color var(--m3e-duration-short, 150ms) ease,
-	            box-shadow var(--m3e-duration-short, 150ms) ease;
+	position: relative !important;
+	z-index: 2 !important;
+	display: flex !important;
+	align-items: center !important;
+	min-height: 2.25rem !important;
+	padding: 0.15rem 0.5rem !important;
+	gap: 0.5rem !important;
+	border-radius: var(--shape-corner-m, 12px) !important;
+	border: none !important;
+	box-shadow: none !important;
+	background: transparent !important;
+	text-decoration: none !important;
+	transition: background-color var(--m3e-duration-short, 150ms) var(--m3e-easing-standard);
 }
 
 #main-layout .m3-blog-archive__item:hover {
-	background: var(--surface-container-high);
-	border-color: color-mix(in srgb, var(--primary) 35%, var(--outline-variant));
-	box-shadow: var(--m3e-elevation-1, 0 2px 8px rgba(0, 0, 0, 0.12));
+	background: color-mix(in srgb, var(--on-surface) 5%, transparent) !important;
+	border: none !important;
+	box-shadow: none !important;
 }
 
 #main-layout .m3-blog-archive__date {
-	flex-shrink: 0;
-	width: 3.875rem;
-	font-family: var(--font-mono, monospace), var(--m3e-font-body);
-	font-variant-numeric: tabular-nums;
-	font-size: 0.875rem;
-	font-weight: 600;
-	color: var(--on-surface-variant);
-	letter-spacing: 0.03em;
+	flex: 0 0 2.5rem !important;
+	width: 2.5rem !important;
+	padding-top: 0 !important;
+	font-family: var(--font-mono, monospace), var(--m3e-font-body) !important;
+	font-variant-numeric: tabular-nums !important;
+	font-size: 0.8125rem !important;
+	font-weight: 600 !important;
+	color: var(--on-surface-variant) !important;
+	opacity: 0.75 !important;
+	letter-spacing: 0.01em !important;
 	transition: color var(--m3e-duration-short, 150ms) ease;
 }
 
 #main-layout .m3-blog-archive__item:hover .m3-blog-archive__date {
-	color: var(--primary);
+	color: var(--primary) !important;
+	opacity: 1 !important;
+}
+
+#main-layout .m3-blog-archive__track {
+	position: relative !important;
+	flex: 0 0 0.75rem !important;
+	width: 0.75rem !important;
+	height: 2.25rem !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	margin: 0 !important;
+}
+
+#main-layout .m3-blog-archive__line {
+	position: absolute !important;
+	top: -2px !important;
+	bottom: -2px !important;
+	left: 50% !important;
+	width: 2px !important;
+	margin-left: -1px !important;
+	background: color-mix(in srgb, var(--outline-variant) 60%, transparent) !important;
+	pointer-events: none !important;
+	z-index: 1 !important;
+}
+
+#main-layout .m3-blog-archive__list li:first-child .m3-blog-archive__line {
+	top: 50% !important;
+}
+
+#main-layout .m3-blog-archive__list li:last-child .m3-blog-archive__line {
+	bottom: 50% !important;
 }
 
 #main-layout .m3-blog-archive__node {
-	flex-shrink: 0;
-	width: 0.625rem;
-	height: 0.625rem;
-	border-radius: var(--shape-corner-full, 9999px);
-	background: var(--surface);
-	border: 2px solid color-mix(in srgb, var(--outline-variant) 80%, var(--primary));
-	box-shadow: 0 0 0 2px var(--surface);
-	z-index: 3;
-	transition: transform var(--m3e-duration-short, 150ms) ease,
-	            border-color var(--m3e-duration-short, 150ms) ease,
-	            background-color var(--m3e-duration-short, 150ms) ease,
-	            box-shadow var(--m3e-duration-short, 150ms) ease;
+	position: relative !important;
+	z-index: 2 !important;
+	width: 0.45rem !important;
+	height: 0.45rem !important;
+	margin: 0 !important;
+	border-radius: var(--shape-corner-full, 9999px) !important;
+	background: var(--surface) !important;
+	border: 2px solid var(--outline-variant) !important;
+	box-shadow: 0 0 0 2px var(--surface) !important;
+	box-sizing: border-box !important;
+	transition: transform var(--m3e-duration-short, 150ms) var(--m3e-easing-emphasized-decelerate),
+	            border-color var(--m3e-duration-short, 150ms) var(--m3e-easing-standard),
+	            background-color var(--m3e-duration-short, 150ms) var(--m3e-easing-standard),
+	            box-shadow var(--m3e-duration-short, 150ms) var(--m3e-easing-standard);
 }
 
 #main-layout .m3-blog-archive__item:hover .m3-blog-archive__node {
-	background: var(--primary);
-	border-color: var(--primary);
-	transform: scale(1.35);
-	box-shadow: 0 0 0 2px var(--surface), 0 0 10px var(--primary);
-}
-
-#main-layout .m3-blog-archive__title {
-	flex: 1 1 auto;
-	min-width: 0;
-	display: flex;
-	align-items: center;
-	gap: 0.625rem;
-}
-
-#main-layout .m3-blog-archive__cat {
-	flex-shrink: 0;
-	display: inline-flex;
-	align-items: center;
-	height: 1.5rem;
-	padding: 0 0.625rem;
-	border-radius: var(--shape-corner-full, 9999px);
-	background: var(--primary-container);
-	color: var(--on-primary-container);
-	font: var(--m3e-type-label-small);
-	font-weight: 700;
-	letter-spacing: 0.02em;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-	transition: background-color var(--m3e-duration-short, 150ms) ease,
-	            color var(--m3e-duration-short, 150ms) ease;
-}
-
-#main-layout .m3-blog-archive__item:hover .m3-blog-archive__cat {
-	background: var(--primary);
-	color: var(--on-primary);
+	background: var(--primary) !important;
+	border-color: var(--primary) !important;
+	transform: scale(1.35) !important;
+	box-shadow: 0 0 0 2px var(--surface), 0 0 10px var(--primary) !important;
 }
 
 #main-layout .m3-blog-archive__title-text {
-	min-width: 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	font: var(--m3e-type-body-large);
-	font-size: 0.9375rem;
-	font-weight: 600;
-	color: var(--on-surface);
-	transition: color var(--m3e-duration-short, 150ms) ease,
-	            transform var(--m3e-duration-short, 150ms) ease;
+	flex: 1 1 auto !important;
+	min-width: 0 !important;
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+	white-space: nowrap !important;
+	font: var(--m3e-type-body-large) !important;
+	font-size: 0.9375rem !important;
+	font-weight: 500 !important;
+	color: var(--on-surface) !important;
+	line-height: 1.4 !important;
+	transition: color var(--m3e-duration-short, 150ms) ease;
 }
 
 #main-layout .m3-blog-archive__item:hover .m3-blog-archive__title-text {
-	color: var(--primary);
-	transform: translateX(2px);
-}
-
-#main-layout .m3-blog-archive__tags {
-	flex-shrink: 0;
-	max-width: 35%;
-	display: inline-flex;
-	align-items: center;
-	gap: 0.35rem;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	font: var(--m3e-type-label-small);
-	font-weight: 500;
-	letter-spacing: 0.02em;
-	color: var(--on-surface-variant);
-	opacity: 0.75;
-	transition: opacity var(--m3e-duration-short, 150ms) ease,
-	            color var(--m3e-duration-short, 150ms) ease;
-}
-
-#main-layout .m3-blog-archive__item:hover .m3-blog-archive__tags {
-	opacity: 1;
-	color: var(--primary);
+	color: var(--primary) !important;
 }
 
 @media (max-width: 639px) {
+	#main-layout .m3-blog-archive__header {
+		height: 2.75rem !important;
+		padding: 0 0.5rem !important;
+		gap: 0.5rem !important;
+	}
+	#main-layout .m3-blog-archive__group-title {
+		font-size: 1.15rem !important;
+	}
+	#main-layout .m3-blog-archive__count {
+		font-size: 0.8125rem !important;
+	}
+	#main-layout .m3-blog-archive__chevron {
+		width: 1.875rem !important;
+		height: 1.875rem !important;
+	}
 	#main-layout .m3-blog-archive__item {
-		padding: 0.5rem 0.625rem;
-		gap: 0.5rem;
+		padding: 0.15rem 0.25rem !important;
+		gap: 0.375rem !important;
+		min-height: 2rem !important;
 	}
 	#main-layout .m3-blog-archive__date {
-		width: 3.25rem;
+		flex: 0 0 2.25rem !important;
+		width: 2.25rem !important;
+		font-size: 0.75rem !important;
 	}
-	#main-layout .m3-blog-archive__list::before {
-		left: calc(0.625rem + 3.25rem + 0.5rem + 0.3125rem - 1px);
+	#main-layout .m3-blog-archive__track {
+		height: 2rem !important;
 	}
-	#main-layout .m3-blog-archive__tags {
-		display: none;
+	#main-layout .m3-blog-archive__title-text {
+		font-size: 0.8125rem !important;
 	}
 }
 
@@ -1303,12 +1968,12 @@ html.motion-reduced #m3e-texture-canvas {
 	justify-content: space-between;
 	flex-wrap: wrap;
 	gap: 0.75rem;
-	padding: 0.75rem 1rem;
-	margin-bottom: 1.25rem;
-	border-radius: var(--shape-corner-l, 16px);
-	background: color-mix(in oklab, var(--primary) 7%, var(--surface-container-low));
-	border: 1px solid color-mix(in oklab, var(--primary) 24%, var(--outline-variant));
-	backdrop-filter: blur(8px);
+	padding: 0.25rem 0.25rem 0.85rem;
+	margin-bottom: 0.75rem;
+	background: transparent !important;
+	border: none !important;
+	border-bottom: 1px dashed color-mix(in srgb, var(--outline-variant) 40%, transparent) !important;
+	box-shadow: none !important;
 }
 
 .m3e-filter-header__main {
@@ -1325,19 +1990,20 @@ html.motion-reduced #m3e-texture-canvas {
 	height: 2.125rem;
 	padding: 0 0.875rem 0 0.625rem;
 	border-radius: var(--shape-corner-full, 9999px);
-	background: var(--surface-container-high);
+	background: color-mix(in srgb, var(--surface-container-high) 60%, transparent);
 	color: var(--on-surface);
 	font: var(--m3e-type-label-medium);
 	font-weight: 600;
 	text-decoration: none;
-	border: 1px solid var(--outline-variant);
+	border: none !important;
+	box-shadow: none !important;
 	transition: background-color var(--m3e-duration-short) var(--m3e-easing-standard),
 	            color var(--m3e-duration-short) var(--m3e-easing-standard),
 	            transform var(--m3e-duration-short) var(--m3e-easing-standard);
 }
 
 .m3e-assist-chip:hover {
-	background: var(--surface-container-highest);
+	background: color-mix(in srgb, var(--surface-container-highest) 80%, transparent);
 	color: var(--primary);
 	transform: translateY(-1px);
 }
@@ -1346,26 +2012,34 @@ html.motion-reduced #m3e-texture-canvas {
 	display: inline-flex;
 	align-items: center;
 	gap: 0.5rem;
-	height: 2.125rem;
-	padding: 0 0.375rem 0 0.75rem;
+	height: 2rem;
+	padding: 0 0.35rem 0 0.75rem;
 	border-radius: var(--shape-corner-full, 9999px);
-	background: var(--secondary-container);
-	color: var(--on-secondary-container);
-	font: var(--m3e-type-label-large);
-	font-weight: 700;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-	border: 1px solid color-mix(in oklab, var(--primary) 35%, transparent);
+	background: color-mix(in srgb, var(--surface-container-high) 70%, transparent);
+	color: var(--on-surface);
+	font: var(--m3e-type-label-medium);
+	font-weight: 600;
+	border: 1px solid color-mix(in srgb, var(--outline-variant) 40%, transparent) !important;
+	box-shadow: none !important;
+	transition: border-color var(--m3e-duration-short) var(--m3e-easing-standard),
+	            background-color var(--m3e-duration-short) var(--m3e-easing-standard);
+}
+
+.m3e-active-chip:hover {
+	border-color: color-mix(in srgb, var(--primary) 50%, transparent) !important;
 }
 
 .m3e-active-chip__icon {
 	display: inline-flex;
 	align-items: center;
-	font-size: 1.15rem;
+	font-size: 1rem;
 	color: var(--primary);
+	opacity: 0.9;
 }
 
 .m3e-active-chip__label {
 	letter-spacing: 0.01em;
+	color: var(--on-surface);
 }
 
 .m3e-active-chip__badge {
@@ -1376,8 +2050,8 @@ html.motion-reduced #m3e-texture-canvas {
 	height: 1.25rem;
 	padding: 0 0.35rem;
 	border-radius: var(--shape-corner-full, 9999px);
-	background: var(--primary);
-	color: var(--on-primary);
+	background: color-mix(in srgb, var(--primary) 15%, transparent);
+	color: var(--primary);
 	font-size: 0.75rem;
 	font-weight: 700;
 	line-height: 1;
@@ -1387,19 +2061,19 @@ html.motion-reduced #m3e-texture-canvas {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 1.5rem;
-	height: 1.5rem;
+	width: 1.35rem;
+	height: 1.35rem;
 	border-radius: 50%;
-	color: var(--on-secondary-container);
+	color: var(--on-surface-variant);
 	text-decoration: none;
-	font-size: 1rem;
+	font-size: 0.95rem;
 	transition: background-color var(--m3e-duration-short) var(--m3e-easing-standard),
-	            transform var(--m3e-duration-short) var(--m3e-easing-standard);
+	            color var(--m3e-duration-short) var(--m3e-easing-standard);
 }
 
 .m3e-active-chip__clear:hover {
-	background: color-mix(in oklab, var(--on-secondary-container) 16%, transparent);
-	transform: scale(1.1);
+	background: color-mix(in srgb, var(--on-surface) 10%, transparent);
+	color: var(--on-surface);
 }
 
 .m3e-filter-header__meta {
@@ -1420,56 +2094,60 @@ html.motion-reduced #m3e-texture-canvas {
 
 .m3-segmented {
 	display: flex;
-	gap: 4px;
-	padding: 4px;
-	height: 2.75rem;
+	align-items: stretch;
+	width: 100%;
+	height: 2.375rem;
+	border-radius: var(--shape-corner-medium, 0.75rem) !important;
+	border: 1px solid var(--outline-variant) !important;
+	background: color-mix(in srgb, var(--surface) 60%, transparent) !important;
+	overflow: hidden;
 	box-sizing: border-box;
-	border-radius: var(--shape-corner-full, 9999px);
-	background: var(--surface-container-low);
-	border: 1px solid var(--outline-variant);
+	padding: 0 !important;
+	gap: 0 !important;
+	box-shadow: none !important;
 }
 
 .m3-segmented__segment {
-	flex: 1;
-	display: flex;
+	flex: 1 1 0;
+	min-width: 0;
+	height: 100%;
+	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: 0.45rem;
-	height: 100%;
-	padding: 0 1rem;
-	border: none;
-	border-radius: var(--shape-corner-full, 9999px);
-	font: var(--m3e-type-label-large);
-	font-weight: 500;
-	color: var(--on-surface-variant);
+	padding: 0 0.75rem;
+	border: none !important;
+	border-right: 1px solid var(--outline-variant) !important;
+	border-radius: 0 !important;
 	background: transparent;
+	color: var(--on-surface-variant);
+	font: var(--m3e-type-label-medium);
+	font-size: 0.8125rem;
+	font-weight: 500;
+	letter-spacing: 0.01em;
 	cursor: pointer;
+	white-space: nowrap;
 	user-select: none;
-	text-align: center;
 	line-height: 1;
+	box-shadow: none !important;
+	-webkit-tap-highlight-color: transparent;
 	transition: background-color var(--m3e-duration-short) var(--m3e-easing-standard),
-	            color var(--m3e-duration-short) var(--m3e-easing-standard),
-	            box-shadow var(--m3e-duration-short) var(--m3e-easing-standard);
+	            color var(--m3e-duration-short) var(--m3e-easing-standard);
 }
 
-.m3-segmented__segment:hover {
-	background: color-mix(in oklab, var(--on-surface) 8%, transparent);
+.m3-segmented__segment:last-child {
+	border-right: none !important;
+}
+
+.m3-segmented__segment:hover:not(.selected) {
+	background: color-mix(in srgb, var(--on-surface) 8%, transparent);
 	color: var(--on-surface);
 }
 
 .m3-segmented__segment.selected {
-	background: var(--secondary-container);
-	color: var(--on-secondary-container);
-	font-weight: 600;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-}
-
-.m3-segmented__check {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 1.15rem;
-	color: var(--primary);
+	background: var(--secondary-container) !important;
+	color: var(--on-secondary-container) !important;
+	font-weight: 600 !important;
+	box-shadow: none !important;
 }
 
 .archive-panel__empty {
@@ -1488,13 +2166,28 @@ html.motion-reduced #m3e-texture-canvas {
 	opacity: 0.6;
 }
 
-@media (max-width: 479px) {
+@media (max-width: 639px) {
+	.archive-panel__group-switch {
+		margin-bottom: 1.25rem;
+	}
+	.m3-segmented {
+		height: 2.375rem !important;
+		padding: 0 !important;
+		gap: 0 !important;
+	}
+	.m3-segmented__segment {
+		padding: 0 0.5rem !important;
+		font-size: 0.8125rem !important;
+	}
 	.m3e-filter-header {
 		padding: 0.625rem 0.75rem;
 	}
+}
+
+@media (max-width: 479px) {
 	.m3-segmented__segment {
-		padding: 0 0.5rem;
-		font-size: 0.8125rem;
+		padding: 0 0.35rem !important;
+		font-size: 0.75rem !important;
 	}
 }
 
@@ -1536,12 +2229,35 @@ html.motion-reduced #m3e-texture-canvas {
 	--shape-corner-xl: 16px;
 }
 
-/* Обеспечиваем концентрическое скругление основных контейнеров и карточек */
-#main-layout .m3-card,
+/* Обеспечиваем единый фон «матовое стекло» (как везде на сайте) для всех блоков, кроме постеров */
+#main-layout .m3-card:not(.media-card),
 #main-layout .m3-profile,
 #main-layout .card-base,
+article.compass-tile,
+.compass-tile,
+#main-layout .compass-tile {
+	border-radius: var(--card-outer-radius, 16px) !important;
+	border: none !important;
+	box-shadow: none !important;
+	background: var(--shirone-card-bg) !important;
+	backdrop-filter: var(--shirone-card-blur) !important;
+	-webkit-backdrop-filter: var(--shirone-card-blur) !important;
+}
+
 #main-layout .m3-blog-postcard {
 	border-radius: var(--card-outer-radius) !important;
+	border: none !important;
+	box-shadow: none !important;
+	background: var(--shirone-card-bg) !important;
+	backdrop-filter: var(--shirone-card-blur) !important;
+	-webkit-backdrop-filter: var(--shirone-card-blur) !important;
+	transition: background 200ms ease, transform 200ms ease !important;
+}
+
+#main-layout .m3-blog-postcard:hover {
+	background: var(--shirone-card-bg-hover) !important;
+	box-shadow: none !important;
+	transform: translateY(-2px);
 }
 
 /* Вложенные кнопки, инпуты и элементы внутри карточек */
@@ -1555,9 +2271,70 @@ html.motion-reduced #m3e-texture-canvas {
 	border-radius: 10px !important;
 }
 
+/* В режиме списка (list) делаем обложку шире (42%) */
+@media (min-width: 768px) {
+	#main-layout .m3e-post-list:not(.m3e-post-list--grid) .m3-blog-postcard__cover {
+		width: 42% !important;
+	}
+	#main-layout .m3e-post-list:not(.m3e-post-list--grid) .m3-blog-postcard--cover .m3-blog-postcard__body {
+		padding-right: calc(42% + 1.75rem) !important;
+	}
+	#main-layout .m3e-post-list--cover-left:not(.m3e-post-list--grid) .m3-blog-postcard--cover .m3-blog-postcard__body {
+		padding-right: 1.75rem !important;
+		padding-left: calc(42% + 1.75rem) !important;
+	}
+}
+
 #main-layout .m3e-post-list--grid .m3-blog-postcard__cover {
 	margin: 0.625rem 0.625rem 0 !important;
 	border-radius: 10px !important;
+	flex-shrink: 0 !important;
+	aspect-ratio: 16 / 9 !important;
+}
+
+/* Единая минимальная высота текстового блока в сетке */
+#main-layout .m3e-post-list--grid .m3-blog-postcard__body {
+	display: flex !important;
+	flex-direction: column !important;
+	min-height: 12.5rem !important;
+}
+
+/* Описание: фиксируем минимальную высоту на 2 строки */
+#main-layout .m3e-post-list--grid .m3-blog-postcard__desc {
+	min-height: 2.8em !important;
+	display: -webkit-box !important;
+	-webkit-line-clamp: 2 !important;
+	line-clamp: 2 !important;
+	-webkit-box-orient: vertical !important;
+	overflow: hidden !important;
+}
+
+/* Прижимаем теги к нижнему краю текстового блока */
+#main-layout .m3e-post-list--grid .m3-blog-postcard__tags {
+	margin-top: auto !important;
+	padding-top: 0.75rem !important;
+}
+
+/* Единая минимальная высота в режиме списка под пропорции 42% */
+@media (min-width: 768px) {
+	#main-layout .m3e-post-list:not(.m3e-post-list--grid) .m3-blog-postcard__body {
+		min-height: 15.5rem !important;
+		display: flex !important;
+		flex-direction: column !important;
+		justify-content: flex-start !important;
+	}
+	#main-layout .m3e-post-list:not(.m3e-post-list--grid) .m3-blog-postcard__desc {
+		min-height: 4.4em !important;
+		display: -webkit-box !important;
+		-webkit-line-clamp: 3 !important;
+		line-clamp: 3 !important;
+		-webkit-box-orient: vertical !important;
+		overflow: hidden !important;
+	}
+	#main-layout .m3e-post-list:not(.m3e-post-list--grid) .m3-blog-postcard__tags {
+		margin-top: auto !important;
+		padding-top: 0.75rem !important;
+	}
 }
 
 @media (max-width: 767px) {
@@ -1574,15 +2351,27 @@ html.motion-reduced #m3e-texture-canvas {
 
 /* ── 11. Модернизация шапки статьи (Post Header Modernization — M3E Chips & Layout) ── */
 
-/* Карточка заголовка статьи */
+/* Карточка поста и статьи: единый полупрозрачный фон с размытием без тени */
 .post-card,
 .post-card.m3-card {
 	border-radius: var(--card-outer-radius, 16px) !important;
-	box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.12) !important;
+	background: var(--shirone-card-bg) !important;
+	backdrop-filter: var(--shirone-card-blur) !important;
+	-webkit-backdrop-filter: var(--shirone-card-blur) !important;
+	box-shadow: none !important;
+	border: none !important;
 }
 
 div:has(> .post-card) {
 	border-radius: var(--card-outer-radius, 16px) !important;
+	background: transparent !important;
+}
+
+/* Нижний блок статьи (поделиться и навигация) — полупрозрачный с согласованным стилем */
+.post-card > footer {
+	background: color-mix(in srgb, var(--surface-container-low) 60%, transparent) !important;
+	backdrop-filter: var(--shirone-card-blur) !important;
+	-webkit-backdrop-filter: var(--shirone-card-blur) !important;
 }
 
 /* Верхняя строка статистики (Слова, Время чтения, Статистика просмотров) */
@@ -1728,24 +2517,43 @@ div:has(> .post-card) {
    БОКОВАЯ ПАНЕЛЬ (SIDEBAR): Glassmorphism, Категории и Теги
    ============================================================ */
 
-/* 1. Карточки виджетов сайдбара — утонченное стекло (Glassmorphism) */
+
+
+/* 1. Карточки виджетов сайдбара и сайдбара медиатеки — единый фон как везде */
+#sidebar widget-layout .m3-card,
+#sidebar-secondary widget-layout .m3-card,
 aside#sidebar widget-layout .m3-card,
 aside#sidebar-secondary widget-layout .m3-card,
+#sidebar .m3-profile,
+#sidebar-secondary .m3-profile,
 aside#sidebar .m3-profile,
-aside#sidebar-secondary .m3-profile {
-	background: color-mix(in srgb, var(--surface) 58%, transparent) !important;
-	backdrop-filter: blur(18px) saturate(180%) !important;
-	-webkit-backdrop-filter: blur(18px) saturate(180%) !important;
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 38%, rgba(255, 255, 255, 0.12)) !important;
-	box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.18), inset 0 1px 0 0 rgba(255, 255, 255, 0.1) !important;
-	transition: border-color var(--m3e-duration-medium) var(--m3e-easing-standard),
-	            box-shadow var(--m3e-duration-medium) var(--m3e-easing-standard) !important;
+aside#sidebar-secondary .m3-profile,
+.catalog-shell__sidebar-inner,
+.catalog-shell .catalog-shell__sidebar-inner {
+	background: var(--shirone-card-bg) !important;
+	backdrop-filter: var(--shirone-card-blur) !important;
+	-webkit-backdrop-filter: var(--shirone-card-blur) !important;
+	border: none !important;
+	box-shadow: none !important;
+	border-radius: var(--card-outer-radius, 16px) !important;
 }
 
+#sidebar widget-layout:hover .m3-card,
+#sidebar-secondary widget-layout:hover .m3-card,
 aside#sidebar widget-layout:hover .m3-card,
 aside#sidebar-secondary widget-layout:hover .m3-card {
-	border-color: color-mix(in srgb, var(--primary) 35%, var(--outline-variant)) !important;
-	box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.24), 0 0 16px -4px color-mix(in srgb, var(--primary) 20%, transparent), inset 0 1px 0 0 rgba(255, 255, 255, 0.18) !important;
+	background: var(--shirone-card-bg) !important;
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
+}
+
+.catalog-shell__sidebar-inner:hover,
+.catalog-shell .catalog-shell__sidebar-inner:hover {
+	background: var(--shirone-card-bg-hover) !important;
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
 }
 
 /* 2. Категории и Теги в сайдбаре: стили консолидированы в секции 5 */
@@ -1757,13 +2565,13 @@ aside#sidebar-secondary widget-layout:hover .m3-card {
 .article-share {
 	position: relative !important;
 	border-radius: var(--shape-corner-m, 12px) !important;
-	background: color-mix(in srgb, var(--surface-container-low) 65%, transparent) !important;
-	backdrop-filter: blur(12px) saturate(160%) !important;
-	-webkit-backdrop-filter: blur(12px) saturate(160%) !important;
-	border: 1px solid color-mix(in srgb, var(--outline-variant) 32%, rgba(255, 255, 255, 0.08)) !important;
-	box-shadow: 0 2px 8px -1px rgba(0, 0, 0, 0.12) !important;
+	background: color-mix(in srgb, var(--surface) 58%, transparent) !important;
+	backdrop-filter: blur(18px) saturate(180%) !important;
+	-webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+	border: none !important;
+	box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.18) !important;
 	padding: 1rem 1.25rem !important;
-	transition: border-color var(--m3e-duration-medium) ease, box-shadow var(--m3e-duration-medium) ease !important;
+	transition: background var(--m3e-duration-medium) ease, box-shadow var(--m3e-duration-medium) ease !important;
 }
 
 .article-share:hover {
@@ -1850,13 +2658,300 @@ aside#sidebar-secondary widget-layout:hover .m3-card {
 	display: none !important;
 }
 
+/* ── На мобильных устройствах (< 1024px): скрываем сайдбары, блок TOC и статический футер ── */
+@media (max-width: 63.9375rem) {
+	/* Полностью скрываем оба сайдбара на мобилке: лента постов и страницы занимают всю полезную ширину */
+	#sidebar,
+	#sidebar-secondary,
+	aside#sidebar,
+	aside#sidebar-secondary {
+		display: none !important;
+	}
+
+	/* Скрываем статический виджет TOC в сайдбаре (на мобилке есть плавающая FAB кнопка TOC) */
+	.sidebar-widget:has(.sidebar-toc),
+	.sidebar-widget:has(.m3-blog-toc),
+	.sidebar-toc,
+	#toc-inner-wrapper {
+		display: none !important;
+	}
+
+	/* Скрываем статический футер внизу страницы */
+	.footer,
+	#catalog-footer-row,
+	.m3-blog-footer {
+		display: none !important;
+	}
+}
+
+/* ── Дневная тема (:root:not(.dark)): убираем грубые тёмные тени, оставляем чистый светлый стиль Material 3 ── */
+:root:not(.dark) #main-layout .m3-card,
+:root:not(.dark) #main-layout .m3-profile,
+:root:not(.dark) #main-layout .m3-blog-postcard,
+:root:not(.dark) #main-layout .card-base,
+:root:not(.dark) #main-layout .book-card,
+:root:not(.dark) #main-layout .reading-goal-card,
+:root:not(.dark) #main-layout .compass-tile,
+:root:not(.dark) .post-card,
+:root:not(.dark) .post-card.m3-card,
+:root:not(.dark) div:has(> .post-card),
+:root:not(.dark) aside#sidebar widget-layout .m3-card,
+:root:not(.dark) aside#sidebar-secondary widget-layout .m3-card,
+:root:not(.dark) aside#sidebar .m3-profile,
+:root:not(.dark) aside#sidebar-secondary .m3-profile,
+:root:not(.dark) .article-share,
+:root:not(.dark) .service-card,
+:root:not(.dark) .wishlist-card,
+:root:not(.dark) .wishlist-list-container,
+:root:not(.dark) .anime-card,
+:root:not(.dark) .game-card,
+:root:not(.dark) .cinema-card,
+:root:not(.dark) .media-card,
+:root:not(.dark) .media-card__media-wrap,
+:root:not(.dark) .catalog-shell__sidebar-inner,
+:root:not(.dark) .catalog-shell .catalog-shell__sidebar-inner {
+	box-shadow: none !important;
+	border: none !important;
+}
+
+:root:not(.dark) #main-layout .m3-blog-postcard:hover,
+:root:not(.dark) #main-layout .book-card:hover,
+:root:not(.dark) #main-layout .reading-goal-card:hover,
+:root:not(.dark) #main-layout .compass-tile:hover,
+:root:not(.dark) .service-card:hover,
+:root:not(.dark) .wishlist-card:hover,
+:root:not(.dark) .anime-card:hover,
+:root:not(.dark) .game-card:hover,
+:root:not(.dark) .cinema-card:hover,
+:root:not(.dark) aside#sidebar widget-layout:hover .m3-card,
+:root:not(.dark) aside#sidebar-secondary widget-layout:hover .m3-card,
+:root:not(.dark) .article-share:hover,
+:root:not(.dark) .media-card:hover .media-card__media-wrap,
+:root:not(.dark) .catalog-shell__sidebar-inner:hover,
+:root:not(.dark) .catalog-shell .catalog-shell__sidebar-inner:hover {
+	box-shadow: none !important;
+	border: none !important;
+}
+
+:root:not(.dark) #navbar.top-app-bar:not(.top-app-bar--transparent) {
+	box-shadow: 0 1px 0 0 color-mix(in srgb, var(--outline-variant) 60%, transparent) !important;
+	border-bottom: 1px solid var(--outline-variant) !important;
+}
+
+:root:not(.dark) .bottom-music-bar {
+	box-shadow: 0 -1px 0 0 color-mix(in srgb, var(--outline-variant) 60%, transparent) !important;
+	border-top: 1px solid var(--outline-variant) !important;
+}
+
+:root:not(.dark) #floating-controls .m3-fab,
+:root:not(.dark) #back-to-top-btn .m3-fab {
+	box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 15%, transparent) !important;
+	border: none !important;
+}
+
+:root:not(.dark) .float-panel,
+:root:not(.dark) #display-setting,
+:root:not(.dark) #search-panel {
+	box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.08) !important;
+	border: 1px solid var(--outline-variant) !important;
+}
+
+/* ── Единый строгий пропорциональный рост всех карточек медиатеки ── */
+.media-card .media-card__media-wrap {
+	aspect-ratio: 2 / 3 !important;
+	width: 100% !important;
+	height: auto !important;
+	overflow: visible !important;
+}
+
+.media-card .media-card__cover {
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: cover !important;
+	object-position: center !important;
+	display: block !important;
+}
+
+.media-card--landscape .media-card__media-wrap {
+	aspect-ratio: 16 / 9 !important;
+}
+
+/* ── Мобильная шторка настроек: чистый плоский дизайн без «коробка в коробке» ── */
+.right-drawer__body {
+	padding: 1.25rem 1rem !important;
+}
+
+.right-drawer .m3e-segmented-group {
+	display: flex !important;
+	flex-direction: column !important;
+	height: auto !important;
+	padding: 0 !important;
+	gap: 0.125rem !important;
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+}
+
+.right-drawer .m3e-segment {
+	width: 100% !important;
+	height: 2.75rem !important;
+	min-height: 2.75rem !important;
+	padding: 0 0.5rem !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: flex-start !important;
+	gap: 0.85rem !important;
+	border-radius: var(--shape-corner-s, 8px) !important;
+	font-size: 0.9375rem !important;
+	font-weight: 500 !important;
+	color: var(--on-surface-variant) !important;
+	background: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	transition: background-color var(--m3e-duration-short) ease, color var(--m3e-duration-short) ease !important;
+}
+
+.right-drawer .m3e-segment:hover {
+	color: var(--on-surface) !important;
+	background: color-mix(in srgb, var(--on-surface) 4%, transparent) !important;
+}
+
+.right-drawer .m3e-segment.selected {
+	background: color-mix(in srgb, var(--primary) 8%, transparent) !important;
+	color: var(--primary) !important;
+	font-weight: 600 !important;
+}
+
+.right-drawer .m3e-segment svg {
+	width: 1.25rem !important;
+	height: 1.25rem !important;
+	color: inherit !important;
+	opacity: 0.9 !important;
+	flex-shrink: 0 !important;
+}
+
+.right-drawer .m3e-segment.selected svg {
+	color: var(--primary) !important;
+	opacity: 1 !important;
+}
+
+.right-drawer .m3e-palette-disc {
+	width: 1.25rem !important;
+	height: 1.25rem !important;
+	flex-shrink: 0 !important;
+}
+
+/* Заголовки секций в шторке */
+.right-drawer .display-settings__section-label {
+	font-size: 0.75rem !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.05em !important;
+	font-weight: 700 !important;
+	opacity: 0.65 !important;
+	margin-bottom: 0.25rem !important;
+	margin-left: 0.5rem !important;
+}
+
+/* Переключатель анимации: вписываем в общую сетку и стиль */
+.right-drawer .m3e-switches-card {
+	background: transparent !important;
+	border: none !important;
+	padding: 0 !important;
+	margin-top: 0.25rem !important;
+}
+
+.right-drawer .m3e-switch-row {
+	height: 2.75rem !important;
+	min-height: 2.75rem !important;
+	padding: 0 0.5rem !important;
+	border-radius: var(--shape-corner-s, 8px) !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+}
+
+.right-drawer .m3e-switch-meta {
+	gap: 0.85rem !important;
+	display: flex !important;
+	align-items: center !important;
+}
+
+.right-drawer .m3e-switch-icon-wrap {
+	width: 1.25rem !important;
+	height: 1.25rem !important;
+	background: transparent !important;
+	border-radius: 0 !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	flex-shrink: 0 !important;
+}
+
+.right-drawer .m3e-switch-icon-wrap svg {
+	width: 1.25rem !important;
+	height: 1.25rem !important;
+	color: var(--on-surface-variant) !important;
+}
+
+.right-drawer .m3e-switch-title {
+	font-size: 0.9375rem !important;
+	font-weight: 500 !important;
+	color: var(--on-surface-variant) !important;
+	letter-spacing: normal !important;
+}
+
+.right-drawer .m3e-switch-row:hover .m3e-switch-title {
+	color: var(--on-surface) !important;
+}
+
+.right-drawer .m3-switch {
+	margin-left: auto !important;
+	transform: scale(0.85) !important;
+	transform-origin: right center !important;
+}
+
+/* ============================================================
+   АДАПТАЦИЯ ХОВЕР-ЭФФЕКТОВ ПОСТЕРОВ К ДНЕВНОЙ ТЕМЕ
+   Чистый светлый оверлей, контрастный текст, никакой грязи
+   ============================================================ */
+
+:root:not(.dark) .media-card:hover .media-card__media-wrap {
+	box-shadow: 0 10px 24px -4px color-mix(in srgb, var(--primary) 18%, rgba(0, 0, 0, 0.12)) !important;
+	transform: translateY(-2px);
+}
+
+/* Убираем неоновые контуры, градиентные лучи и лишние рамки на светлой теме */
+:root:not(.dark) .media-card__fancy-border,
+:root:not(.dark) .media-card__gradient-border,
+:root:not(.dark) .media-card__gold-aura,
+:root:not(.dark) .media-card__media-link::before {
+	display: none !important;
+}
 
 
 
+/* Угловые бейджи статуса и рейтинга в светлой теме */
+:root:not(.dark) .media-card__top-status,
+:root:not(.dark) .media-card__top-rating {
+	background: color-mix(in srgb, var(--surface-container-highest) 88%, transparent) !important;
+	backdrop-filter: blur(12px) !important;
+	-webkit-backdrop-filter: blur(12px) !important;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1) !important;
+}
 
+:root:not(.dark) .media-card:hover .media-card__top-status,
+:root:not(.dark) .media-card:hover .media-card__top-rating {
+	background: var(--primary) !important;
+}
 
+:root:not(.dark) .media-card__top-status-icon,
+:root:not(.dark) .media-card__top-rating-val {
+	color: var(--on-surface) !important;
+}
 
-
-
+:root:not(.dark) .media-card:hover .media-card__top-status-icon,
+:root:not(.dark) .media-card:hover .media-card__top-rating-val {
+	color: var(--on-primary) !important;
+}
 
 

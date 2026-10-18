@@ -1,0 +1,22 @@
+---
+/**
+ * Раздел «Компас» (Закладки и полезные сервисы).
+ */
+import CompassSection from "../components/organisms/CompassSection.svelte";
+import I18nKey from "@i18n/i18nKey";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { compassConfig } from "../../shirones/config/compassConfig";
+import { resolveI18nText } from "@utils/i18n-utils";
+import { compassData } from "../../shirones/config/data/compass";
+
+if (!compassConfig.enable) {
+	return Astro.redirect("/404/");
+}
+
+const pageTitle = resolveI18nText(compassConfig.title, I18nKey.compass);
+const pageDescription = resolveI18nText(compassConfig.description, I18nKey.compassBanner);
+---
+
+<MainGridLayout title={pageTitle} description={pageDescription} page="compass">
+	<CompassSection shelves={compassData} title={pageTitle} subtitle={pageDescription} client:load />
+</MainGridLayout>

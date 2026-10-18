@@ -12,7 +12,7 @@ import { withUserConfig } from "@/utils/config-overlay.ts";
 export const siteConfig: SiteConfig = withUserConfig("site", {
 	site: "https://nullvert.uz",
 	base: "/",
-	title: "nv://blog",
+	title: "nullvert",
 	subtitle: "личный техноблог",
 	ogImage: "/assets/images/og.jpg",
 	// Выравнивание заголовка и навигации в верхней панели на десктопе: "left" — по левому краю, "center" — по центру.
@@ -32,7 +32,7 @@ export const siteConfig: SiteConfig = withUserConfig("site", {
 	// IANA time zone for precise post and moment timestamps. It is independent of lang.
 	timeZone: "Asia/Tashkent",
 	themeColor: {
-		hue: 180, // Default hue 0-360. Чистый циан (Cyan 180°)
+		hue: 235, // Default hue 0-360.
 		fixed: false, // Hide the theme color picker for visitors
 		// Dynamic Material 3 palette style (TonalSpot/Vibrant/Content/Expressive/Rainbow/FruitSalad/Monochrome/Neutral/Fidelity)
 		style: "tonalSpot",

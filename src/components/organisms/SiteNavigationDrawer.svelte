@@ -60,10 +60,20 @@ try {
 		height: 24,
 		body: '<path fill="currentColor" d="M4 22V6q0-.825.588-1.412T6 4h12q.825 0 1.413.588T20 6v16l-8-3.5zm2-3.05l6-2.625l6 2.625V6H6zM4 4h16V2H4z"/>',
 	});
-	addIcon("material-symbols:menu-book-outline-rounded", {
+	addIcon("material-symbols:book-4-outline-rounded", {
 		width: 24,
 		height: 24,
-		body: '<path fill="currentColor" d="M6.5 17q1.125 0 2.2-.288T10.75 16q.925-.5 1.938-.775T14.625 15q1.125 0 2.2.288t2.05.862q.313.175.613.263t.612.087q.575 0 1.013-.288T20 18.15V6.1q0-.275-.137-.525T19.45 5.2q-1.175-.575-2.412-.888T14.5 4q-1.45 0-2.837.375T9 5.5q-1.275-.75-2.662-1.125T3.5 4q-1.3 0-2.538.313T1.55 5.2q-.275.125-.412.375T1 6.1v12.05q0 .575.488.875t1.012.025q.925-.5 1.938-.775T6.5 17M3 16.6V6.7q.875-.35 1.738-.525T6.5 6q1.1 0 2.175.3t2.175.9v9.85q-1.1-.525-2.212-.787T6.5 16q-.9 0-1.762.15T3 16.6m18 0q-.875-.35-1.737-.525T17.5 16q-1.1 0-2.212.788T13 17.05V7.2q1.025-.6 2.175-.9T17.5 6q.9 0 1.763.15T21 6.6zM14 9.9q.95-.225 1.825-.225t1.825.225q.6.225 1.213.338T20 10.6v-1.6q-.6-.225-1.225-.25T17.5 8.5q-.775 0-1.525.125t-1.45.375zm0 2.75q.95-.237 1.825-.237t1.825.237q.6.225 1.213.338T20 13.35v-1.6q-.6-.225-1.225-.25T17.5 11.25q-.775 0-1.525.125T14 11.75zm0 2.75q.95-.225 1.825-.225t1.825.225q.6.225 1.213.338T20 16.1v-1.6q-.6-.225-1.225-.25T17.5 14q-.775 0-1.525.125t-1.45.375z"/>',
+		body: '<path fill="currentColor" d="M6 22q-1.25 0-2.125-.875T3 19V5q0-1.25.875-2.125T6 2h9q.825 0 1.413.588T17 4v12q0 .825-.587 1.413T15 18H6q-.425 0-.712.288T5 19t.288.713T6 20h13V5q0-.425.288-.712T20 4t.713.288T21 5v15q0 .825-.587 1.413T19 22zm3-6h6V4H9zm-2 0V4H6q-.425 0-.712.288T5 5v11.175q.25-.075.488-.125T6 16zM5 4v12.175z"/>',
+	});
+	addIcon("material-symbols:video-library-outline-rounded", {
+		width: 24,
+		height: 24,
+		body: '<path fill="currentColor" d="M17.525 10.625q.35-.225.35-.625t-.35-.625L12.65 6.25q-.375-.25-.763-.038t-.387.663v6.25q0 .45.388.663t.762-.038zM8 18q-.825 0-1.412-.587T6 16V4q0-.825.588-1.412T8 2h12q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm0-2h12V4H8zm-4 6q-.825 0-1.412-.587T2 20V7q0-.425.288-.712T3 6t.713.288T4 7v13h13q.425 0 .713.288T18 21t-.288.713T17 22zM8 4v12z"/>',
+	});
+	addIcon("material-symbols:savings-rounded", {
+		width: 24,
+		height: 24,
+		body: '<path fill="currentColor" d="M5.925 21q-.575 0-1.112-.4t-.713-.975q-.625-2.1-1.025-3.637t-.638-2.7t-.337-2.063T2 9.5q0-2.3 1.6-3.9T7.5 4h5q.675-.9 1.713-1.45T16.5 2q.625 0 1.063.438T18 3.5q0 .15-.038.3t-.087.275q-.1.275-.187.55t-.138.6L19.825 7.5H21q.425 0 .713.288T22 8.5v5.25q0 .325-.187.575t-.513.375l-2.125.7l-1.25 4.175q-.2.65-.725 1.038T16 21h-2q-.825 0-1.412-.587T12 19h-2q0 .825-.587 1.413T8 21zm10.788-10.288Q17 10.425 17 10t-.288-.712T16 9t-.712.288T15 10t.288.713T16 11t.713-.288M12 9q.425 0 .713-.288T13 8t-.288-.712T12 7H9q-.425 0-.712.288T8 8t.288.713T9 9z"/>',
 	});
 	addIcon("material-symbols:close-rounded", {
 		width: 24,
@@ -84,6 +94,16 @@ const openGroups = $state<Record<string, boolean>>({});
 const links = resolveNavBarLinks(navBarConfig.links);
 
 const STATIC_ICONS: Record<string, { width: number; height: number; body: string }> = {
+	"material-symbols:video-library-outline-rounded": {
+		width: 24,
+		height: 24,
+		body: '<path fill="currentColor" d="M17.525 10.625q.35-.225.35-.625t-.35-.625L12.65 6.25q-.375-.25-.763-.038t-.387.663v6.25q0 .45.388.663t.762-.038zM8 18q-.825 0-1.412-.587T6 16V4q0-.825.588-1.412T8 2h12q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm0-2h12V4H8zm-4 6q-.825 0-1.412-.587T2 20V7q0-.425.288-.712T3 6t.713.288T4 7v13h13q.425 0 .713.288T18 21t-.288.713T17 22zM8 4v12z"/>',
+	},
+	"material-symbols:book-4-outline-rounded": {
+		width: 24,
+		height: 24,
+		body: '<path fill="currentColor" d="M6 22q-1.25 0-2.125-.875T3 19V5q0-1.25.875-2.125T6 2h9q.825 0 1.413.588T17 4v12q0 .825-.587 1.413T15 18H6q-.425 0-.712.288T5 19t.288.713T6 20h13V5q0-.425.288-.712T20 4t.713.288T21 5v15q0 .825-.587 1.413T19 22zm3-6h6V4H9zm-2 0V4H6q-.425 0-.712.288T5 5v11.175q.25-.075.488-.125T6 16zM5 4v12.175z"/>',
+	},
 	"material-symbols:home-outline-rounded": {
 		width: 24,
 		height: 24,
@@ -129,10 +149,10 @@ const STATIC_ICONS: Record<string, { width: number; height: number; body: string
 		height: 24,
 		body: '<path fill="currentColor" d="M4 22V6q0-.825.588-1.412T6 4h12q.825 0 1.413.588T20 6v16l-8-3.5zm2-3.05l6-2.625l6 2.625V6H6zM4 4h16V2H4z"/>',
 	},
-	"material-symbols:menu-book-outline-rounded": {
+	"material-symbols:savings-rounded": {
 		width: 24,
 		height: 24,
-		body: '<path fill="currentColor" d="M6.5 17q1.125 0 2.2-.288T10.75 16q.925-.5 1.938-.775T14.625 15q1.125 0 2.2.288t2.05.862q.313.175.613.263t.612.087q.575 0 1.013-.288T20 18.15V6.1q0-.275-.137-.525T19.45 5.2q-1.175-.575-2.412-.888T14.5 4q-1.45 0-2.837.375T9 5.5q-1.275-.75-2.662-1.125T3.5 4q-1.3 0-2.538.313T1.55 5.2q-.275.125-.412.375T1 6.1v12.05q0 .575.488.875t1.012.025q.925-.5 1.938-.775T6.5 17M3 16.6V6.7q.875-.35 1.738-.525T6.5 6q1.1 0 2.175.3t2.175.9v9.85q-1.1-.525-2.212-.787T6.5 16q-.9 0-1.762.15T3 16.6m18 0q-.875-.35-1.737-.525T17.5 16q-1.1 0-2.212.788T13 17.05V7.2q1.025-.6 2.175-.9T17.5 6q.9 0 1.763.15T21 6.6zM14 9.9q.95-.225 1.825-.225t1.825.225q.6.225 1.213.338T20 10.6v-1.6q-.6-.225-1.225-.25T17.5 8.5q-.775 0-1.525.125t-1.45.375zm0 2.75q.95-.237 1.825-.237t1.825.237q.6.225 1.213.338T20 13.35v-1.6q-.6-.225-1.225-.25T17.5 11.25q-.775 0-1.525.125T14 11.75zm0 2.75q.95-.225 1.825-.225t1.825.225q.6.225 1.213.338T20 16.1v-1.6q-.6-.225-1.225-.25T17.5 14q-.775 0-1.525.125t-1.45.375z"/>',
+		body: '<path fill="currentColor" d="M5.925 21q-.575 0-1.112-.4t-.713-.975q-.625-2.1-1.025-3.637t-.638-2.7t-.337-2.063T2 9.5q0-2.3 1.6-3.9T7.5 4h5q.675-.9 1.713-1.45T16.5 2q.625 0 1.063.438T18 3.5q0 .15-.038.3t-.087.275q-.1.275-.187.55t-.138.6L19.825 7.5H21q.425 0 .713.288T22 8.5v5.25q0 .325-.187.575t-.513.375l-2.125.7l-1.25 4.175q-.2.65-.725 1.038T16 21h-2q-.825 0-1.412-.587T12 19h-2q0 .825-.587 1.413T8 21zm10.788-10.288Q17 10.425 17 10t-.288-.712T16 9t-.712.288T15 10t.288.713T16 11t.713-.288M12 9q.425 0 .713-.288T13 8t-.288-.712T12 7H9q-.425 0-.712.288T8 8t.288.713T9 9z"/>',
 	},
 	"material-symbols:close-rounded": {
 		width: 24,
@@ -203,8 +223,19 @@ function syncFromRoute() {
 	}
 }
 
+let instantClose = $state(false);
+
 function handleNavClick() {
+	if (typeof document !== "undefined") {
+		if (document.activeElement instanceof HTMLElement) {
+			document.activeElement.blur();
+		}
+	}
+	instantClose = true;
 	open = false;
+	setTimeout(() => {
+		instantClose = false;
+	}, 300);
 }
 
 function toggleGroup(group: string) {
@@ -295,6 +326,7 @@ let drawerEl: HTMLElement | undefined = $state();
 <div
 	class="site-drawer"
 	class:site-drawer--open={open}
+	class:site-drawer--instant-close={instantClose}
 >
 	<div class="site-drawer__scrim" aria-hidden="true" onclick={() => (open = false)}></div>
 	<aside
@@ -328,51 +360,9 @@ let drawerEl: HTMLElement | undefined = $state();
 		</div>
 
 		<nav class="site-drawer__nav" aria-label="Navigation drawer">
-			{#each primaryItems as item (item.value)}
-				{#if item.children}
-					<div class="site-drawer__group">
-						<button
-							type="button"
-							class="site-drawer__group-head"
-							class:site-drawer__item--active={item.children.some((child) => activePrimary === child.value)}
-							onclick={() => toggleGroup(item.value)}
-							aria-expanded={openGroups[item.value] ?? false}
-						>
-							{#if item.icon}
-								<span class="site-drawer__group-icon" aria-hidden="true">
-									<Icon icon={item.icon} />
-								</span>
-							{/if}
-							<span class="site-drawer__group-label">{item.label}</span>
-							<Icon
-								class={openGroups[item.value] ? "site-drawer__group-arrow site-drawer__group-arrow--open" : "site-drawer__group-arrow"}
-								icon="material-symbols:keyboard-arrow-down"
-							/>
-						</button>
-						{#if openGroups[item.value]}
-							<div class="site-drawer__group-body">
-								{#each item.children as child (child.value)}
-									<a
-										href={child.href}
-										class="site-drawer__item site-drawer__item--child"
-										class:site-drawer__item--active={activePrimary === child.value}
-										aria-current={activePrimary === child.value ? "page" : undefined}
-										target={child.external ? "_blank" : undefined}
-										rel={child.external ? "noopener noreferrer" : undefined}
-										onclick={handleNavClick}
-									>
-										{#if child.icon}
-											<span class="site-drawer__item-icon" aria-hidden="true">
-												<Icon icon={child.icon} />
-											</span>
-										{/if}
-										<span class="site-drawer__item-label">{child.label}</span>
-									</a>
-								{/each}
-							</div>
-						{/if}
-					</div>
-				{:else if item.href}
+			<div class="site-drawer__section-label">Навигация</div>
+			{#each primaryItems.filter((i) => !i.children) as item (item.value)}
+				{#if item.href}
 					<a
 						href={item.href}
 						class="site-drawer__item"
@@ -380,7 +370,7 @@ let drawerEl: HTMLElement | undefined = $state();
 						aria-current={activePrimary === item.value ? "page" : undefined}
 						target={item.external ? "_blank" : undefined}
 						rel={item.external ? "noopener noreferrer" : undefined}
-						onclick={handleNavClick}
+						onclick={() => handleNavClick()}
 					>
 						{#if item.icon}
 							<span class="site-drawer__item-icon" aria-hidden="true">
@@ -389,6 +379,31 @@ let drawerEl: HTMLElement | undefined = $state();
 						{/if}
 						<span class="site-drawer__item-label">{item.label}</span>
 					</a>
+				{/if}
+			{/each}
+
+			{#each primaryItems.filter((i) => i.children) as group (group.value)}
+				<div class="site-drawer__divider" role="separator" aria-hidden="true"></div>
+				<div class="site-drawer__section-label">{group.label}</div>
+				{#if group.children}
+					{#each group.children as child (child.value)}
+						<a
+							href={child.href}
+							class="site-drawer__item"
+							class:site-drawer__item--active={activePrimary === child.value}
+							aria-current={activePrimary === child.value ? "page" : undefined}
+							target={child.external ? "_blank" : undefined}
+							rel={child.external ? "noopener noreferrer" : undefined}
+							onclick={() => handleNavClick()}
+						>
+							{#if child.icon}
+								<span class="site-drawer__item-icon" aria-hidden="true">
+									<Icon icon={child.icon} />
+								</span>
+							{/if}
+							<span class="site-drawer__item-label">{child.label}</span>
+						</a>
+					{/each}
 				{/if}
 			{/each}
 		</nav>
@@ -407,14 +422,20 @@ let drawerEl: HTMLElement | undefined = $state();
 		visibility: visible
 		pointer-events: auto
 
+	&--instant-close
+		transition: none !important
+		& ^[0]__scrim, & ^[0]__panel
+			transition: none !important
+
 	&__scrim
 		position: absolute
 		inset: 0
 		background: unquote("color-mix(in srgb, var(--scrim, #000) 65%, transparent)")
-		backdrop-filter: blur(8px)
-		-webkit-backdrop-filter: blur(8px)
+		backdrop-filter: blur(4px)
+		-webkit-backdrop-filter: blur(4px)
 		opacity: 0
 		transition: opacity var(--m3e-duration-medium) var(--m3e-easing-standard)
+		will-change: opacity
 
 	&--open &__scrim
 		opacity: 1
@@ -433,12 +454,14 @@ let drawerEl: HTMLElement | undefined = $state();
 		color: var(--on-surface)
 		border-radius: 0 var(--shape-corner-xl, 28px) var(--shape-corner-xl, 28px) 0
 		box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4)
-		transform: translateX(-100%)
-		transition: transform var(--m3e-duration-long) var(--m3e-easing-emphasized-decelerate)
+		transform: translate3d(-100%, 0, 0)
+		transition: transform var(--m3e-duration-medium) var(--m3e-easing-emphasized-decelerate)
+		will-change: transform
+		contain: paint layout
 		z-index: 1
 
 	&--open &__panel
-		transform: translateX(0)
+		transform: translate3d(0, 0, 0)
 
 	&__header
 		display: flex
@@ -593,4 +616,17 @@ let drawerEl: HTMLElement | undefined = $state();
 
 	&__group-body
 		padding: 4px 0 8px
+
+	&__divider
+		height: 1px
+		margin: var(--m3e-space-3) var(--m3e-space-2)
+		background: unquote("color-mix(in srgb, var(--outline-variant) 25%, transparent)")
+
+	&__section-label
+		padding: var(--m3e-space-2) var(--m3e-space-4) var(--m3e-space-1)
+		font: var(--m3e-type-label-medium)
+		font-weight: 700
+		letter-spacing: 0.06em
+		text-transform: uppercase
+		color: unquote("color-mix(in srgb, var(--on-surface-variant) 70%, transparent)")
 </style>

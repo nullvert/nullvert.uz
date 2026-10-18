@@ -22,10 +22,10 @@ import { withUserConfig } from "@/utils/config-overlay.ts";
 export const fabConfig: FabConfig = withUserConfig("fab", {
 	enable: true,
 	align: "end",
-	size: "regular",
+	size: "small",
 	offset: {
-		bottom: "var(--m3e-space-8)",
-		right: "var(--m3e-space-6)",
+		bottom: "var(--m3e-space-6)",
+		right: "var(--m3e-space-4)",
 	},
 	items: [
 		{
@@ -40,18 +40,6 @@ export const fabConfig: FabConfig = withUserConfig("fab", {
 			pages: ["post"],
 			depth: 3,
 			closeOnSelect: true,
-		},
-		{
-			type: "comment",
-			enable: true,
-			devices: ["mobile", "tablet"],
-			pages: ["post"],
-		},
-		{
-			type: "home",
-			enable: true,
-			devices: ["mobile", "tablet"],
-			onlySubPages: true,
 		},
 	],
 });

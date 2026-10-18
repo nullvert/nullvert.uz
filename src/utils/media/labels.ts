@@ -34,6 +34,25 @@ export const MEDIA_LABEL = {
 	gamesUnitHours: "games.unitHours",
 	gamesStatusCompleted: "games.statusCompleted",
 
+	// Книги
+	booksAll: "books.all",
+	booksCounts: "books.counts",
+	booksReading: "books.reading",
+	booksCompleted: "books.completed",
+	booksPlanned: "books.planned",
+	booksOnHold: "books.onHold",
+	booksDropped: "books.dropped",
+	booksSortPages: "books.sortPages",
+	booksSortTitle: "books.sortTitle",
+	booksProgress: "books.progress",
+	booksUnitPages: "books.unitPages",
+	booksGenres: "books.genres",
+	booksChallenge: "books.challenge",
+	booksDaysLeft: "books.daysLeft",
+	booksReadingGoal: "books.readingGoal",
+	booksMetricBooks: "books.metricBooks",
+	booksMetricPages: "books.metricPages",
+
 	// Общие статусы
 	statusWatching: "mediaCatalog.statusWatching",
 	statusPlaying: "mediaCatalog.statusPlaying",

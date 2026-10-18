@@ -6,17 +6,15 @@
  * - Справа: sticky-сайдбар с поиском и списком категорий / полок
  * - На мобильных: плавная шторка RightSideDrawer
  */
-import LoadingIndicator from "@components/atoms/feedback/LoadingIndicator.svelte";
 import CatalogSearchInput from "../molecules/CatalogSearchInput.svelte";
 import CatalogFilterItem from "../molecules/CatalogFilterItem.svelte";
 import CompassTile from "../molecules/CompassTile.svelte";
-import SectionTitle from "@components/molecules/SectionTitle.svelte";
 import CatalogShell from "../molecules/CatalogShell.svelte";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
 import { onMount } from "svelte";
-import type { CompassShelf } from "../../data/compass";
+import type { CompassShelf, CompassEntry } from "../../types/compass";
 
 let {
 	shelves = [] as CompassShelf[],
@@ -52,7 +50,7 @@ const filteredShelves = $derived.by(() => {
 		.map((shelf) => ({
 			...shelf,
 			entries: normalizedQuery
-				? shelf.entries.filter((entry) =>
+				? shelf.entries.filter((entry: CompassEntry) =>
 						[entry.label, entry.note ?? "", hostOf(entry.href)]
 							.join(" ")
 							.toLowerCase()
@@ -144,7 +142,6 @@ onMount(() => {
 					title="Все разделы"
 					count={allEntriesCount}
 					active={!selectedGroup}
-					icon="material-symbols:bookmarks-rounded"
 					onclick={() => handleGroupSelect("")}
 				/>
 
@@ -153,7 +150,6 @@ onMount(() => {
 						title={shelf.name}
 						count={shelf.entries.length}
 						active={selectedGroup === shelf.key}
-						icon={shelf.icon || "material-symbols:folder-rounded"}
 						onclick={() => handleGroupSelect(shelf.key)}
 					/>
 				{/each}
@@ -172,7 +168,6 @@ onMount(() => {
 					class:compass-controls__chip--active={!selectedGroup}
 					onclick={() => handleGroupSelect("")}
 				>
-					<Icon icon="material-symbols:bookmarks-rounded" aria-hidden="true" />
 					<span>Все</span>
 					<span class="compass-controls__chip-count">{allEntriesCount}</span>
 				</button>
@@ -183,9 +178,6 @@ onMount(() => {
 						class:compass-controls__chip--active={selectedGroup === shelf.key}
 						onclick={() => handleGroupSelect(shelf.key)}
 					>
-						{#if shelf.icon}
-							<Icon icon={shelf.icon} aria-hidden="true" />
-						{/if}
 						<span>{shelf.name}</span>
 						<span class="compass-controls__chip-count">{shelf.entries.length}</span>
 					</button>
@@ -198,13 +190,25 @@ onMount(() => {
 				class="compass-section__loading"
 				class:compass-section__loading--out={phase === "out"}
 			>
-				<LoadingIndicator contained size={64} />
+				<div class="w-12 h-12 rounded-full border-3 border-[var(--primary)] border-t-transparent animate-spin"></div>
 			</div>
 		{:else if filteredShelves.length > 0}
 			{#key `${selectedGroup}|${query}`}
 				{#each filteredShelves as shelf (shelf.key)}
 					<section class="compass-shelf" data-shelf={shelf.key}>
-						<SectionTitle title={shelf.name} subtitle={shelf.blurb} icon={shelf.icon} />
+						<div class="compass-shelf__header mb-3">
+							<div class="flex items-center gap-2.5">
+								{#if shelf.icon}
+									<span class="text-[var(--primary)] text-xl flex items-center shrink-0" aria-hidden="true">
+										<Icon icon={shelf.icon} />
+									</span>
+								{/if}
+								<h2 class="text-xl font-bold text-[var(--on-surface)] tracking-tight">{shelf.name}</h2>
+							</div>
+							{#if shelf.blurb}
+								<p class="text-sm text-[var(--on-surface-variant)] mt-1">{shelf.blurb}</p>
+							{/if}
+						</div>
 						<div class="compass-shelf__grid">
 							{#each shelf.entries as entry, i (entry.href)}
 								<CompassTile {entry} delay={Math.min(i, 7) * 45} />
@@ -249,7 +253,8 @@ onMount(() => {
 	&__label
 		display: flex
 		align-items: center
-		color: rgba(255, 255, 255, 0.6)
+		color: var(--on-surface-variant)
+		opacity: 0.8
 		font: var(--m3e-type-label-small)
 		font-size: 0.6875rem
 		font-weight: 700
@@ -282,7 +287,7 @@ onMount(() => {
 		height: 2.125rem
 		padding: 0 0.75rem
 		border-radius: var(--shape-corner-medium, 0.75rem)
-		border: 1px solid var(--outline-variant)
+		border: none
 		background: var(--surface-container-high)
 		color: var(--on-surface-variant)
 		font: var(--m3e-type-label-medium)
@@ -293,7 +298,6 @@ onMount(() => {
 		user-select: none
 		transition:
 			background-color var(--m3e-duration-short) var(--m3e-easing-standard),
-			border-color var(--m3e-duration-short) var(--m3e-easing-standard),
 			color var(--m3e-duration-short) var(--m3e-easing-standard)
 
 		> :global(svg)
@@ -304,7 +308,7 @@ onMount(() => {
 		&--active
 			background: unquote("color-mix(in oklab, var(--primary) 15%, var(--surface-container-highest))")
 			color: var(--on-surface)
-			border-color: var(--primary)
+			border: none
 			font-weight: 600
 
 			.compass-controls__chip-count

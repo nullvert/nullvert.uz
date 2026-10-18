@@ -1,235 +1,50 @@
 ---
-/**
- * Пользовательский компактный футер с поддержкой i18n и сворачиваемой вторичной информацией.
- */
-import * as fs from "node:fs";
-import * as path from "node:path";
 import { Icon } from "astro-icon/components";
-import type I18nKey from "@i18n/i18nKey";
-import { i18n } from "@i18n/translation";
 import { url } from "@utils/url-utils";
-import { footerConfig } from "@/config";
-
-function t(key: string, fallback: string): string {
-	return i18n(key as I18nKey) ?? fallback;
-}
-
-const poweredByLabel = t("footer.poweredBy", "Powered by");
-const versionLabel = t("footer.version", "Version");
-const detailsSummaryLabel = t("footer.moreDetails", "Подробнее");
-
-const links = [
-	{ label: t("footer.licenses", "Лицензии"), href: url("credits-and-licenses/") },
-	{ label: "RSS", href: url("rss/") },
-	{ label: "Atom", href: url("atom/") },
-	{ label: t("footer.sitemap", "Sitemap"), href: url("sitemap-index.xml"), external: true },
-];
-
-const poweredBy = [
-	{ label: "Astro", href: "https://astro.build", external: true },
-	{
-		label: "Shirone",
-		href: "https://github.com/LyraVoid/Shirone",
-		external: true,
-	},
-];
-
-const version = "0.1.5";
-const versionHref = "https://github.com/LyraVoid/Shirone";
-
-let customFooterHtml = "";
-if (footerConfig.enable) {
-	try {
-		const footerConfigPath = [
-			path.join(process.cwd(), "shirones", "config", "FooterConfig.html"),
-			path.join(process.cwd(), "src", "config", "FooterConfig.html"),
-		].find((candidate) => fs.existsSync(candidate));
-		if (footerConfigPath) {
-			const raw = fs.readFileSync(footerConfigPath, "utf-8");
-			const cleaned = raw.replace(/<!--[\s\S]*?-->/g, "").trim();
-			if (cleaned) {
-				customFooterHtml = cleaned;
-			}
-		}
-	} catch {
-		customFooterHtml = "";
-	}
-}
-
-const hasSecondaryInfo = links.length > 0 || poweredBy.length > 0 || Boolean(version) || Boolean(customFooterHtml);
 ---
 
 <footer class="m3-blog-footer">
-	<div class="m3-blog-footer__divider" aria-hidden="true"></div>
 	<div class="m3-blog-footer__inner">
-		{hasSecondaryInfo ? (
-			<details class="m3-blog-footer__details group">
-				<summary class="m3-blog-footer__summary" aria-label={detailsSummaryLabel} title={detailsSummaryLabel}>
-					<span class="m3-blog-footer__copyright m3-blog-footer__text">
-						&copy; All Rights Reserved
-					</span>
-					<Icon name="material-symbols:expand-more-rounded" class="m3-blog-footer__summary-icon" />
-				</summary>
-
-				<div class="m3-blog-footer__details-content">
-					{links.length > 0 && (
-						<div class="m3-blog-footer__links m3-blog-footer__text">
-							{links.map((l, index) => (
-								<Fragment>
-									{index > 0 && <span class="m3-blog-footer__sep" aria-hidden="true">·</span>}
-									<a
-										class="m3-blog-footer__link"
-										href={l.href}
-										target={l.external ? "_blank" : undefined}
-										rel={l.external ? "noopener noreferrer" : undefined}
-									>
-										{l.label}
-									</a>
-								</Fragment>
-							))}
-						</div>
-					)}
-
-					{poweredBy.length > 0 && (
-						<p class="m3-blog-footer__text">
-							{poweredByLabel}{" "}
-							{poweredBy.map((l, i) => (
-								<Fragment>
-									{i > 0 && <span class="m3-blog-footer__sep" aria-hidden="true">&amp;</span>}
-									<a
-										class="m3-blog-footer__link"
-										href={l.href}
-										target={l.external ? "_blank" : undefined}
-										rel={l.external ? "noopener noreferrer" : undefined}
-									>
-										{l.label}
-									</a>
-								</Fragment>
-							))}
-							{version && (
-								<Fragment>
-									<span class="m3-blog-footer__sep" aria-hidden="true">·</span>
-									<span class="m3-blog-footer__version">
-										<span>{versionLabel}</span>
-										{versionHref ? (
-											<a
-												class="m3-blog-footer__link"
-												href={versionHref}
-												target="_blank"
-												rel="noopener noreferrer"
-											>
-												{version}
-											</a>
-										) : (
-											version
-										)}
-									</span>
-								</Fragment>
-							)}
-						</p>
-					)}
-
-					{customFooterHtml && (
-						<div class="m3-blog-footer__custom" set:html={customFooterHtml} />
-					)}
+		<details class="m3-blog-footer__details group">
+			<summary class="m3-blog-footer__summary">
+				<span class="m3-blog-footer__copyright">&copy; All Rights Reserved</span>
+				<Icon name="material-symbols:expand-more-rounded" class="m3-blog-footer__summary-icon" />
+			</summary>
+			<div class="m3-blog-footer__details-content">
+				<div class="m3-blog-footer__row">
+					<a class="m3-blog-footer__link" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a>
+					<span class="m3-blog-footer__sep" aria-hidden="true">·</span>
+					<a class="m3-blog-footer__link" href={url("rss/")}>RSS</a>
+					<span class="m3-blog-footer__sep" aria-hidden="true">·</span>
+					<a class="m3-blog-footer__link" href={url("atom/")}>Atom</a>
+					<span class="m3-blog-footer__sep" aria-hidden="true">·</span>
+					<a class="m3-blog-footer__link" href={url("sitemap-index.xml")} target="_blank" rel="noopener noreferrer">Sitemap</a>
 				</div>
-			</details>
-		) : (
-			<p class="m3-blog-footer__copyright m3-blog-footer__text">
-				&copy; All Rights Reserved
-			</p>
-		)}
+				<div class="m3-blog-footer__row m3-blog-footer__powered">
+					Powered by <a class="m3-blog-footer__link" href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> &amp; <a class="m3-blog-footer__link" href="https://github.com/LyraVoid/Shirone" target="_blank" rel="noopener noreferrer">Shirone</a>
+					<span class="m3-blog-footer__sep" aria-hidden="true">·</span>
+					<span>v0.1.5</span>
+				</div>
+			</div>
+		</details>
 	</div>
 </footer>
-
-<script>
-	function setupFooterScroll() {
-		const details = document.querySelector<HTMLDetailsElement>(".m3-blog-footer__details");
-		if (!details) return;
-
-		details.addEventListener("toggle", () => {
-			if (details.open) {
-				requestAnimationFrame(() => {
-					details.scrollIntoView({ behavior: "smooth", block: "end" });
-				});
-			}
-		});
-	}
-
-	setupFooterScroll();
-	document.addEventListener("swup:contentReplaced", setupFooterScroll);
-</script>
 
 <style>
 .m3-blog-footer {
 	width: 100%;
+	margin-top: 1.5rem;
+	margin-bottom: 0;
 }
 
-.m3-blog-footer__divider {
-	display: none;
-}
+
 
 .m3-blog-footer__inner {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 0.5rem;
-	margin: 0 auto;
-	padding: 0 1.5rem 5.5rem;
+	padding: 0 0.5rem 1.5rem;
 	text-align: center;
-}
-
-@media (max-width: 768px) {
-	.m3-blog-footer__inner {
-		padding-bottom: 7rem;
-	}
-}
-
-.m3-blog-footer__text,
-.m3-blog-footer__custom {
-	font: var(--m3e-type-body-small);
-	color: var(--on-surface-variant);
-	line-height: 1.7;
-	letter-spacing: 0.01em;
-}
-
-.m3-blog-footer__copyright {
-	user-select: text;
-	font-size: 0.775rem;
-	opacity: 0.45;
-	transition: opacity var(--m3e-duration-short) var(--m3e-easing-standard);
-}
-
-.m3-blog-footer__summary:hover .m3-blog-footer__copyright {
-	opacity: 0.85;
-}
-
-.m3-blog-footer__sep {
-	display: inline-block;
-	margin: 0 0.45rem;
-	font-size: 0.875rem;
-	line-height: 1;
-	color: color-mix(in srgb, var(--outline-variant) 70%, transparent);
-	user-select: none;
-}
-
-.m3-blog-footer__link {
-	color: var(--on-surface-variant);
-	text-decoration: none;
-	font-weight: 500;
-	transition: color var(--m3e-duration-short) var(--m3e-easing-standard),
-		opacity var(--m3e-duration-short) var(--m3e-easing-standard);
-}
-
-.m3-blog-footer__link:hover {
-	color: var(--primary);
-	opacity: 1;
-}
-
-.m3-blog-footer__version {
-	display: inline-flex;
-	align-items: baseline;
-	gap: 0.35rem;
 }
 
 .m3-blog-footer__details {
@@ -243,17 +58,14 @@ const hasSecondaryInfo = links.length > 0 || poweredBy.length > 0 || Boolean(ver
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: 0.15rem;
-	margin: 0;
-	padding: 0.1rem 0.35rem 0.1rem 0.4rem;
+	gap: 0.25rem;
 	cursor: pointer;
 	list-style: none;
 	user-select: none;
-	border-radius: var(--shape-corner-full);
-	border: 1px solid transparent;
-	transition:
-		background-color var(--m3e-duration-short) var(--m3e-easing-standard),
-		border-color var(--m3e-duration-short) var(--m3e-easing-standard);
+	font-size: 0.8rem;
+	color: var(--on-surface-variant);
+	opacity: 0.65;
+	transition: opacity 150ms ease;
 }
 
 .m3-blog-footer__summary::-webkit-details-marker {
@@ -261,39 +73,17 @@ const hasSecondaryInfo = links.length > 0 || poweredBy.length > 0 || Boolean(ver
 }
 
 .m3-blog-footer__summary:hover {
-	background-color: color-mix(in srgb, var(--on-surface) 4%, transparent);
-}
-
-.m3-blog-footer__summary:hover .m3-blog-footer__summary-icon {
-	color: var(--primary);
-	opacity: 0.85;
-}
-
-.m3-blog-footer__summary:focus-visible {
-	outline: none;
-	border-color: var(--primary);
-	background-color: color-mix(in srgb, var(--primary) 8%, transparent);
+	opacity: 1;
 }
 
 .m3-blog-footer__summary-icon {
-	font-size: 1rem;
-	color: var(--on-surface-variant);
-	opacity: 0.35;
-	vertical-align: middle;
-	transition:
-		transform var(--m3e-duration-short) var(--m3e-easing-standard),
-		color var(--m3e-duration-short) var(--m3e-easing-standard),
-		opacity var(--m3e-duration-short) var(--m3e-easing-standard);
+	width: 1.1rem;
+	height: 1.1rem;
+	transition: transform 200ms ease;
 }
 
 .m3-blog-footer__details[open] .m3-blog-footer__summary-icon {
 	transform: rotate(180deg);
-	color: var(--primary);
-	opacity: 1;
-}
-
-.m3-blog-footer__details[open] .m3-blog-footer__copyright {
-	opacity: 0.75;
 }
 
 .m3-blog-footer__details-content {
@@ -302,21 +92,38 @@ const hasSecondaryInfo = links.length > 0 || poweredBy.length > 0 || Boolean(ver
 	align-items: center;
 	gap: 0.35rem;
 	margin-top: 0.5rem;
-	animation: m3e-footer-fade-in var(--m3e-duration-short) var(--m3e-easing-standard);
+	width: 100%;
 }
 
-@keyframes m3e-footer-fade-in {
-	from {
-		opacity: 0;
-		transform: translateY(-4px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
+.m3-blog-footer__row {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	white-space: nowrap;
+	font-size: 0.775rem;
+	color: var(--on-surface-variant);
+	line-height: 1.4;
 }
 
-.m3-blog-footer__custom {
-	margin-top: 0.25rem;
+.m3-blog-footer__powered {
+	font-size: 0.72rem;
+	opacity: 0.7;
+}
+
+.m3-blog-footer__sep {
+	margin: 0 0.35rem;
+	font-size: 0.75rem;
+	opacity: 0.5;
+	user-select: none;
+}
+
+.m3-blog-footer__link {
+	color: inherit;
+	text-decoration: none;
+	transition: color 150ms ease;
+}
+
+.m3-blog-footer__link:hover {
+	color: var(--primary);
 }
 </style>

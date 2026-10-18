@@ -6,8 +6,7 @@ import Footer from "@components/organisms/Footer.astro";
 import RouteProgress from "@components/organisms/RouteProgress.svelte";
 import SideBar from "@components/organisms/SideBar.astro";
 import SiteNavigationDrawer from "../components/organisms/SiteNavigationDrawer.svelte";
-import TopAppBar from "@components/organisms/TopAppBar.astro";
-import BottomMusicBar from "../components/organisms/music/BottomMusicBar.astro";
+import TopAppBar from "../components/organisms/TopAppBar.astro";
 import {
 	generateGridClasses,
 	generateMainContentClasses,
@@ -62,6 +61,9 @@ const gridClasses = generateGridClasses(sidebarResponsive);
 const sidebarClasses = generatePrimarySidebarClasses(sidebarResponsive);
 const secondarySidebarClasses = generateSecondarySidebarClasses(sidebarResponsive);
 const mainContentClasses = generateMainContentClasses(sidebarResponsive);
+const isCatalogPage = Boolean(
+	page && ["archive", "categories", "tags", "anime", "cinema", "games", "books", "compass", "series", "support"].includes(page),
+);
 ---
 
 <Layout title={title} banner={banner} ogImage={ogImage} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} page={page}>
@@ -79,14 +81,25 @@ const mainContentClasses = generateMainContentClasses(sidebarResponsive);
 <!-- Main content -->
 <div id="main-layout" class="absolute w-full z-30 pointer-events-none">
     <div class="relative max-w-[var(--page-width)] mx-auto pointer-events-auto">
-		<div id="main-grid" class:list={["transition duration-[var(--m3e-duration-long)] w-full left-0 right-0 grid grid-rows-[auto_1fr_auto] lg:grid-rows-[auto] mx-auto gap-4 px-2 md:px-4", gridClasses]}>
-			<SideBar class={sidebarClasses} currentPage={typedPage} headings={headings}></SideBar>
+		<div id="main-grid" class:list={[
+			"w-full left-0 right-0 mx-auto gap-4 px-2 md:px-4",
+			"grid grid-rows-[auto_1fr_auto] lg:grid-rows-[auto]",
+			isCatalogPage ? "grid-cols-1" : gridClasses
+		]}>
+			<div id="sidebar" class:list={[sidebarClasses, { hidden: isCatalogPage }, "flex flex-col"]}>
+				<SideBar currentPage={typedPage} headings={headings}></SideBar>
+				<div class="footer onload-animation hidden lg:block mt-auto pt-2">
+					<Footer></Footer>
+				</div>
+			</div>
 			{isDualColumn(sidebarResponsive) && (
-				<SideBar id="sidebar-secondary" column="secondary" class={secondarySidebarClasses} currentPage={typedPage} headings={headings}></SideBar>
+				<SideBar id="sidebar-secondary" column="secondary" class:list={[secondarySidebarClasses, { hidden: isCatalogPage }]} currentPage={typedPage} headings={headings}></SideBar>
 			)}
 
             <!-- 主内容列：内容区随导航替换 -->
-            <div id="main-content-column" class={mainContentClasses.replace("transition-swup-fade", "").trim()}>
+            <div id="main-content-column" class:list={[
+				isCatalogPage ? "col-span-1 min-w-0" : mainContentClasses.replace("transition-swup-fade", "").trim()
+			]}>
                 <main
                     id="swup-container"
                     data-current-post-category={postCategory || ""}
@@ -98,15 +111,17 @@ const mainContentClasses = generateMainContentClasses(sidebarResponsive);
                     class="transition-swup-fade"
                 >
                     <div id="content-wrapper" class="onload-animation">
+                        {title && <h1 class="sr-only">{title}</h1>}
                         <slot></slot>
-                        <div class="footer col-span-2 onload-animation hidden lg:block">
-                            <Footer></Footer>
-                        </div>
                     </div>
+                    {(!headings || headings.length === 0) && (
+                        <div id="toc" class="hidden" aria-hidden="true" style="display:none"></div>
+                    )}
                 </main>
             </div>
 
-            <div id="catalog-footer-row" class="footer col-span-2 onload-animation block lg:hidden">
+            <!-- Мобильный резервный футер для страниц-каталогов без сайдбара -->
+            <div id="catalog-footer-row" class="footer col-span-full onload-animation block lg:hidden">
                 <Footer></Footer>
             </div>
         </div>
@@ -117,9 +132,6 @@ const mainContentClasses = generateMainContentClasses(sidebarResponsive);
 </div>
 
 
-<!-- Полноразмерный нижний стриминговый аудиоплеер в постоянной оболочке (Persistent Shell) -->
-<BottomMusicBar />
-
 <SiteNavigationDrawer client:load />
 {contextMenuConfig.enable && (
 	<ContextMenu
@@ -129,5 +141,135 @@ const mainContentClasses = generateMainContentClasses(sidebarResponsive);
 	/>
 )}
 
+
+<script is:inline define:vars={{ defaultGridClasses: gridClasses, defaultMainClasses: mainContentClasses.replace("transition-swup-fade", "").trim() }}>
+const CATALOG_PAGES = new Set(["archive", "categories", "tags", "anime", "cinema", "games", "books", "compass", "series", "support"]);
+
+function extractPageFromUrl(urlStr) {
+	if (!urlStr) return "";
+	try {
+		const path = new URL(urlStr, window.location.origin).pathname;
+		const trimmed = path.replace(/^\/+|\/+$/g, "");
+		if (!trimmed) return "home";
+		return trimmed.split("/")[0];
+	} catch {
+		return "";
+	}
+}
+
+function applyLayoutForPage(targetPage) {
+	const mainGrid = document.getElementById("main-grid");
+	const mainCol = document.getElementById("main-content-column");
+	const sidebar = document.getElementById("sidebar");
+	const sidebarSec = document.getElementById("sidebar-secondary");
+	if (!mainGrid) return;
+
+	let page = targetPage;
+	if (!page) {
+		const container = document.getElementById("swup-container");
+		page = container?.dataset.currentPage || extractPageFromUrl(window.location.pathname);
+	}
+	if (!page) return;
+
+	document.body.dataset.currentPage = page;
+	const isCatalog = CATALOG_PAGES.has(page);
+	document.body.classList.toggle("is-catalog-page", isCatalog);
+
+	const normalGridClassList = defaultGridClasses.split(/\s+/).filter(Boolean);
+	const normalMainClassList = defaultMainClasses.split(/\s+/).filter(Boolean);
+
+	if (isCatalog) {
+		if (sidebar) {
+			sidebar.classList.add("hidden");
+			sidebar.style.display = "none";
+		}
+		if (sidebarSec) {
+			sidebarSec.classList.add("hidden");
+			sidebarSec.style.display = "none";
+		}
+
+		mainGrid.style.gridTemplateColumns = "minmax(0, 1fr)";
+		mainGrid.classList.remove(...normalGridClassList);
+		mainGrid.classList.add("grid-cols-1");
+
+		if (mainCol) {
+			mainCol.style.gridColumn = "1 / -1";
+			mainCol.style.width = "100%";
+			mainCol.style.maxWidth = "100%";
+			mainCol.classList.remove(...normalMainClassList);
+			mainCol.classList.add("col-span-1", "min-w-0");
+		}
+	} else {
+		mainGrid.style.gridTemplateColumns = "";
+		mainGrid.classList.remove("grid-cols-1");
+		mainGrid.classList.add(...normalGridClassList);
+
+		if (sidebar) {
+			sidebar.classList.remove("hidden");
+			sidebar.style.display = "";
+		}
+		if (sidebarSec) {
+			sidebarSec.classList.remove("hidden");
+			sidebarSec.style.display = "";
+		}
+
+		if (mainCol) {
+			mainCol.style.gridColumn = "";
+			mainCol.style.width = "";
+			mainCol.style.maxWidth = "";
+			mainCol.classList.remove("col-span-1");
+			mainCol.classList.add(...normalMainClassList);
+		}
+	}
+}
+
+// 1. Синхронизация при первой загрузке (SSR)
+applyLayoutForPage();
+
+// 2. Синхронизация при браузерной навигации назад/вперед
+window.addEventListener("popstate", () => {
+	const targetPage = extractPageFromUrl(window.location.pathname);
+	if (targetPage) applyLayoutForPage(targetPage);
+});
+
+// 3. Синхронизация при Swup-навигации: ТОЛЬКО в момент content:replace,
+// когда старый контент уже исчез (opacity: 0), а новый еще не проявился.
+function bindSwupLayoutSync() {
+	if (window.__mainGridLayoutSwupBound) return true;
+	if (window.swup?.hooks) {
+		window.__mainGridLayoutSwupBound = true;
+		window.swup.hooks.on("content:replace", () => {
+			const container = document.getElementById("swup-container");
+			const targetPage = container?.dataset.currentPage || extractPageFromUrl(window.location.pathname);
+			if (targetPage) applyLayoutForPage(targetPage);
+		});
+		window.swup.hooks.on("visit:end", () => {
+			const container = document.getElementById("swup-container");
+			const targetPage = container?.dataset.currentPage || extractPageFromUrl(window.location.pathname);
+			if (targetPage) applyLayoutForPage(targetPage);
+		});
+		return true;
+	}
+	return false;
+}
+
+if (!bindSwupLayoutSync()) {
+	const swupCheckTimer = setInterval(() => {
+		if (bindSwupLayoutSync()) clearInterval(swupCheckTimer);
+	}, 100);
+	setTimeout(() => clearInterval(swupCheckTimer), 5000);
+}
+
+document.addEventListener("astro:after-swap", () => {
+	const container = document.getElementById("swup-container");
+	const targetPage = container?.dataset.currentPage || extractPageFromUrl(window.location.pathname);
+	if (targetPage) applyLayoutForPage(targetPage);
+});
+document.addEventListener("astro:page-load", () => {
+	const container = document.getElementById("swup-container");
+	const targetPage = container?.dataset.currentPage || extractPageFromUrl(window.location.pathname);
+	if (targetPage) applyLayoutForPage(targetPage);
+});
+</script>
 
 </Layout>

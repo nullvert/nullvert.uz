@@ -37,8 +37,6 @@ let selectedStatus = $state(untrack(() => domain.defaultStatus));
 let currentSort = $state(untrack(() => domain.defaultSort));
 let sortOrder = $state<"asc" | "desc">(untrack(() => domain.defaultSortOrder || "desc"));
 let currentSource = $state("all");
-let forceHover = $state(false);
-let showBorder = $state(true);
 let initialized = false;
 
 // Динамические варианты сортировки в зависимости от выбранного статуса/режима
@@ -238,8 +236,6 @@ onMount(() => {
 	totalAllCount={domain.countAllItems ? domain.countAllItems(itemsBySource) : itemsBySource.length}
 	totalFilteredCount={filteredItems.length}
 	countLabel={domain.countLabel ? domain.countLabel(filteredItems.length) : `${filteredItems.length}`}
-	bind:forceHover
-	bind:showBorder
 	{onStatusChange}
 	{onSourceChange}
 	{onSortChange}
@@ -254,8 +250,6 @@ onMount(() => {
 	{#if filteredItems.length > 0}
 		<MediaCardGrid
 			ariaLabel={title}
-			{forceHover}
-			{showBorder}
 			columns={domain.cardProps?.columns ?? 4}
 		>
 			{#each filteredItems as item (domain.getId(item))}

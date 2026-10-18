@@ -19,6 +19,7 @@ let {
 	actionSnippet,
 	showDirection = false,
 	sortOrder = "desc",
+	class: className = "",
 	onclick,
 }: {
 	title: string;
@@ -29,25 +30,26 @@ let {
 	actionSnippet?: Snippet;
 	showDirection?: boolean;
 	sortOrder?: "asc" | "desc";
+	class?: string;
 	onclick?: () => void;
 } = $props();
 </script>
 
 <button
 	type="button"
-	class="catalog-filter-item"
+	class="catalog-filter-item {className}"
 	class:catalog-filter-item--active={active}
 	{onclick}
 >
-	<span class="catalog-filter-item__icon">
-		{#if iconSnippet}
-			{@render iconSnippet()}
-		{:else if icon}
-			<Icon {icon} aria-hidden="true" />
-		{:else}
-			<span class="catalog-filter-item__dot" aria-hidden="true"></span>
-		{/if}
-	</span>
+	{#if iconSnippet || icon}
+		<span class="catalog-filter-item__icon">
+			{#if iconSnippet}
+				{@render iconSnippet()}
+			{:else}
+				<Icon {icon} aria-hidden="true" />
+			{/if}
+		</span>
+	{/if}
 
 	<span class="catalog-filter-item__title">{title}</span>
 
@@ -93,41 +95,33 @@ let {
 		background-color var(--m3e-duration-short) var(--m3e-easing-standard),
 		border-color var(--m3e-duration-short) var(--m3e-easing-standard),
 		color var(--m3e-duration-short) var(--m3e-easing-standard),
-		box-shadow var(--m3e-duration-short) var(--m3e-easing-standard)
-
-	:global(:root[data-glass="cards"]) &:hover:not(&--active)
-		background: unquote("color-mix(in srgb, var(--surface-container-highest, rgba(255, 255, 255, 0.08)) 60%, transparent)")
-		backdrop-filter: blur(10px) saturate(160%)
-		-webkit-backdrop-filter: blur(10px) saturate(160%)
-		box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.1)
+		box-shadow var(--m3e-duration-short) var(--m3e-easing-standard),
+		transform var(--m3e-duration-short) var(--m3e-easing-standard)
 
 	&:hover:not(&--active)
 		background: var(--surface-container-high, rgba(125, 125, 125, 0.08))
 		color: var(--on-surface)
 
-	&--active
-		background: var(--surface-container-highest, rgba(125, 125, 125, 0.14))
-		border-color: var(--outline-variant, rgba(255, 255, 255, 0.1))
-		color: var(--on-surface)
-		font-weight: 600
+		.catalog-filter-item__icon
+			transform: translateX(2px)
+			color: var(--primary)
 
-		:global(:root[data-glass="cards"]) &
-			background: unquote("color-mix(in srgb, var(--surface-container-highest, rgba(255, 255, 255, 0.12)) 80%, transparent)")
-			border-color: unquote("color-mix(in srgb, var(--outline-variant) 60%, rgba(255, 255, 255, 0.15))")
-			backdrop-filter: blur(12px) saturate(140%)
-			-webkit-backdrop-filter: blur(12px) saturate(140%)
-			box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.08)
+	&--active
+		background: unquote("color-mix(in srgb, var(--primary) 14%, transparent)")
+		border-color: transparent
+		color: var(--primary)
+		font-weight: 600
 
 		.catalog-filter-item__icon
 			color: var(--primary)
+			transform: scale(1.05)
 
 		.catalog-filter-item__badge
-			background: unquote("color-mix(in srgb, var(--on-surface) 10%, transparent)")
-			border-color: transparent
-			color: var(--on-surface)
+			color: var(--primary)
+			font-weight: 600
 
 		.catalog-filter-item__action
-			color: var(--on-surface-variant)
+			color: var(--primary)
 
 	&__icon
 		display: inline-flex
@@ -137,6 +131,7 @@ let {
 		height: 1.25rem
 		flex-shrink: 0
 		color: var(--on-surface-variant)
+		transition: transform var(--m3e-duration-short) var(--m3e-easing-standard), color var(--m3e-duration-short) var(--m3e-easing-standard)
 
 		> :global(svg)
 			width: 1.2rem
@@ -158,16 +153,11 @@ let {
 	&__badge
 		display: inline-flex
 		align-items: center
-		justify-content: center
-		min-width: 1.75rem
-		height: 1.375rem
-		padding: 0 0.5rem
-		border-radius: var(--shape-corner-small, 0.5rem)
-		background: transparent
-		border: 1px solid var(--outline-variant)
+		justify-content: flex-end
+		min-width: 1.5rem
 		color: var(--on-surface-variant)
 		font: var(--m3e-type-label-small)
-		font-size: 0.75rem
+		font-size: 0.8125rem
 		font-weight: 500
 		font-variant-numeric: tabular-nums
 

@@ -18,7 +18,14 @@ let {
 } = $props();
 </script>
 
-<div class="catalog-search">
+<div
+	class="catalog-search"
+	onclick={(e) => {
+		if ((e.target as HTMLElement)?.closest('.catalog-search__clear')) return;
+		const input = (e.currentTarget as HTMLElement).querySelector('input');
+		input?.focus();
+	}}
+>
 	<TextField
 		{id}
 		type="text"
@@ -55,18 +62,18 @@ let {
 		height: 2.75rem !important
 		border-radius: var(--shape-corner-medium, 0.75rem) !important
 		background: var(--surface-container, rgba(125, 125, 125, 0.08)) !important
-		border: 1px solid var(--outline-variant) !important
-		transition: border-color var(--m3e-duration-short) ease, background-color var(--m3e-duration-short) ease
+		border: none !important
+		box-shadow: none !important
+		transition: background-color var(--m3e-duration-short) ease
 		padding-left: 0.875rem !important
 		padding-right: 0.875rem !important
 		gap: 0.5rem !important
 
 	:global(.m3-text-field:hover)
-		border-color: var(--outline) !important
+		background: var(--surface-container-high, rgba(125, 125, 125, 0.12)) !important
 
 	:global(.m3-text-field:focus-within)
-		border-color: var(--primary) !important
-		background: var(--surface-container-high, rgba(125, 125, 125, 0.12)) !important
+		background: var(--surface-container-highest, rgba(125, 125, 125, 0.16)) !important
 
 	:global(.m3-text-field input)
 		outline: none !important

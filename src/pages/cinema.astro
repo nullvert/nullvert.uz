@@ -4,7 +4,7 @@
  */
 import CinemaSection from "../components/organisms/CinemaSection.svelte";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
-import { cinemaConfig } from "../../shirones/config/cinemaConfig";
+import { cinemaConfig } from "../config/domains/cinemaConfig";
 
 if (!cinemaConfig.enable) {
 	return Astro.redirect("/404/");
@@ -15,5 +15,5 @@ const pageDescription = cinemaConfig.description;
 ---
 
 <MainGridLayout title={pageTitle} description={pageDescription} page="cinema">
-	<CinemaSection client:visible />
+	<CinemaSection client:load />
 </MainGridLayout>

@@ -41,7 +41,7 @@ export interface MediaDomain<T> {
 	sort?(items: T[], currentSort: string, sortOrder: "asc" | "desc"): T[];
 	cardProps?: {
 		showTitleOnPoster?: boolean;
-		aspect?: "poster" | "landscape" | "game";
+		aspect?: "poster" | "landscape" | "game" | "book";
 		maxNativeWidth?: number;
 		columns?: number;
 		bookSpine?: boolean;

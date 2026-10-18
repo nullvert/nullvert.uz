@@ -6,10 +6,11 @@
 import MediaCatalog from "./MediaCatalog.svelte";
 import BookCard from "../molecules/BookCard.svelte";
 import { booksDomain, type BookItem, type BooksSnapshot } from "../../utils/media/domains/books";
-import hardcoverSnapshot from "../../../shirones/config/data/snapshots/hardcover.json";
+import hardcoverSnapshot from "../../data/snapshots/hardcover.json";
+import { MEDIA_LABEL, mediaLabel } from "../../utils/media/labels";
 
 let {
-	title = "Книги",
+	title = mediaLabel(MEDIA_LABEL.booksAll, "Книги"),
 }: {
 	title?: string;
 } = $props();
@@ -18,14 +19,13 @@ const snapshot = (hardcoverSnapshot as unknown as BooksSnapshot) || { items: [],
 const allBooks: BookItem[] = snapshot.items || [];
 </script>
 
-{#snippet renderBookItem(item: BookItem)}
-	<BookCard item={booksDomain.toCard(item)} />
-{/snippet}
-
 <MediaCatalog
 	domain={booksDomain}
 	items={allBooks}
 	{title}
-	itemSnippet={renderBookItem}
-/>
+>
+	{#snippet itemSnippet(book)}
+		<BookCard item={booksDomain.toCard(book)} />
+	{/snippet}
+</MediaCatalog>
 

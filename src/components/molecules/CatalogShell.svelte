@@ -8,9 +8,10 @@
  */
 import RightSideDrawer from "./RightSideDrawer.svelte";
 import type { Snippet } from "svelte";
+import { MEDIA_LABEL, mediaLabel } from "../../utils/media/labels";
 
 let {
-	drawerTitle = "Параметры",
+	drawerTitle = mediaLabel(MEDIA_LABEL.options, "Параметры"),
 	hasActiveFilters = false,
 	sidebar,
 	mobileHeader,
@@ -173,7 +174,7 @@ let isDrawerOpen = $state(false);
 		width: 2.75rem
 		height: 2.75rem
 		flex-shrink: 0
-		border: 1px solid var(--outline-variant)
+		border: none
 		border-radius: var(--shape-corner-medium, 0.75rem)
 		background: var(--surface-container-high)
 		color: var(--on-surface)
@@ -181,14 +182,14 @@ let isDrawerOpen = $state(false);
 		-webkit-tap-highlight-color: transparent
 		transition:
 			background-color var(--m3e-duration-short) var(--m3e-easing-standard),
-			border-color var(--m3e-duration-short) var(--m3e-easing-standard)
+			color var(--m3e-duration-short) var(--m3e-easing-standard)
 
 		&:hover
 			background: var(--surface-container-highest)
 
 		&--active
 			background: unquote("color-mix(in oklab, var(--primary) 15%, var(--surface-container-highest))")
-			border-color: var(--primary)
+			border: none
 			color: var(--primary)
 
 	&__trigger-pill
@@ -198,7 +199,7 @@ let isDrawerOpen = $state(false);
 		gap: 0.5rem
 		height: 2.5rem
 		padding: 0 1rem
-		border: 1px solid var(--outline-variant)
+		border: none
 		border-radius: var(--shape-corner-medium, 0.75rem)
 		background: var(--surface-container-high)
 		color: var(--on-surface)
@@ -208,14 +209,14 @@ let isDrawerOpen = $state(false);
 		-webkit-tap-highlight-color: transparent
 		transition:
 			background-color var(--m3e-duration-short) var(--m3e-easing-standard),
-			border-color var(--m3e-duration-short) var(--m3e-easing-standard)
+			color var(--m3e-duration-short) var(--m3e-easing-standard)
 
 		&:hover
 			background: var(--surface-container-highest)
 
 		&--active
 			background: unquote("color-mix(in oklab, var(--primary) 15%, var(--surface-container-highest))")
-			border-color: var(--primary)
+			border: none
 			color: var(--primary)
 
 	&__badge

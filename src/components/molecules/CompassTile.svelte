@@ -7,7 +7,7 @@
  */
 import Icon from "@iconify/svelte";
 import { reveal } from "@utils/motion";
-import type { CompassEntry } from "shirones/src/data/compass";
+import type { CompassEntry } from "../../types/compass";
 
 let {
 	entry,
@@ -102,23 +102,22 @@ const host = $derived.by(() => {
 <style lang="stylus">
 .compass-tile
 	box-sizing: border-box
-	background: var(--card-bg, var(--surface-container-low, rgba(125, 125, 125, 0.05)))
-	border: 1px solid var(--outline-variant)
-	border-radius: 1.5rem
+	background: var(--shirone-card-bg)
+	border: none
+	border-radius: var(--card-outer-radius, 16px)
 	padding: 1.25rem 1.375rem
 	height: 100%
 	display: flex
 	flex-direction: column
-	backdrop-filter: blur(8px)
-	-webkit-backdrop-filter: blur(8px)
+	box-shadow: none
 	transition:
-		border-color var(--m3e-duration-medium) var(--m3e-easing-emphasized-decelerate),
 		background-color var(--m3e-duration-medium) var(--m3e-easing-standard),
 		transform var(--m3e-duration-short) var(--m3e-easing-standard)
 
 	&:hover
-		border-color: unquote("color-mix(in oklab, var(--primary) 40%, var(--outline-variant))")
-		background: var(--surface-container, rgba(125, 125, 125, 0.08))
+		border: none
+		background: var(--shirone-card-bg-hover)
+		box-shadow: none
 		transform: translateY(-2px)
 
 	&__link
@@ -224,4 +223,40 @@ const host = $derived.by(() => {
 			color: var(--primary)
 			border-color: unquote("color-mix(in oklab, var(--primary) 35%, transparent)")
 			background: unquote("color-mix(in oklab, var(--primary) 10%, transparent)")
+
+@media (max-width: 48rem)
+	.compass-tile
+		padding: 0.875rem 1rem
+		border-radius: var(--shape-corner-m, 12px)
+
+		&__link
+			gap: 0.375rem
+
+		&__header
+			gap: 0.625rem
+
+		&__icon,
+		&__letter
+			width: 1.5rem
+			height: 1.5rem
+
+			> :global(svg)
+				width: 1.35rem
+				height: 1.35rem
+
+		&__label
+			font-size: 0.9375rem
+			line-height: 1.25
+
+		&__note
+			font-size: 0.8125rem
+			line-height: 1.35
+
+		&__footer
+			padding-top: 0.5rem
+
+		&__host
+			height: 1.25rem
+			font-size: 0.6875rem
+			padding: 0 0.5rem
 </style>

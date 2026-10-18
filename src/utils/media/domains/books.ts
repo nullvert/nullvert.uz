@@ -1,4 +1,5 @@
 import type { MediaDomain } from "../../../types/mediaCatalog";
+import { MEDIA_LABEL, mediaLabel } from "../labels";
 
 export interface BookGoal {
 	id: string;
@@ -47,7 +48,8 @@ export const booksDomain: MediaDomain<BookItem> = {
 	getId: (item) => item.id,
 	toCard: (item) => {
 		const meta = booksDomain.statusMeta[item.status];
-		const pagesLabel = item.pages ? `${item.pages} стр.` : undefined;
+		const pagesUnit = mediaLabel(MEDIA_LABEL.booksUnitPages, "стр.");
+		const pagesLabel = item.pages ? `${item.pages} ${pagesUnit}` : undefined;
 
 		// Filter redundant compound genres, language tags, and secondary noise tags
 		const rawGenres = item.genres || [];
@@ -106,36 +108,36 @@ export const booksDomain: MediaDomain<BookItem> = {
 	statusOrder: ["reading", "completed", "planned", "onHold", "dropped"],
 	statusMeta: {
 		reading: {
-			label: "Читаю",
+			label: mediaLabel(MEDIA_LABEL.booksReading, "Читаю"),
 			icon: "material-symbols:menu-book-rounded",
 			color: "var(--primary)",
 		},
 		completed: {
-			label: "Прочитано",
+			label: mediaLabel(MEDIA_LABEL.booksCompleted, "Прочитано"),
 			icon: "material-symbols:check-rounded",
 			color: "var(--tertiary)",
 		},
 		planned: {
-			label: "В планах",
+			label: mediaLabel(MEDIA_LABEL.booksPlanned, "В планах"),
 			icon: "material-symbols:bookmark-rounded",
 			color: "var(--secondary)",
 		},
 		onHold: {
-			label: "Отложено",
+			label: mediaLabel(MEDIA_LABEL.booksOnHold, "Отложено"),
 			icon: "material-symbols:pause-rounded",
 			color: "var(--on-surface-variant)",
 		},
 		dropped: {
-			label: "Брошено",
+			label: mediaLabel(MEDIA_LABEL.booksDropped, "Брошено"),
 			icon: "material-symbols:close-rounded",
 			color: "var(--error)",
 		},
 	},
 	defaultStatus: "",
 	sortOptions: [
-		{ value: "default", label: "По умолчанию", icon: "material-symbols:format-list-numbered-rounded" },
-		{ value: "pages", label: "По страницам", icon: "material-symbols:auto-stories-outline-rounded", toggleDirection: true },
-		{ value: "title", label: "По названию", icon: "material-symbols:sort-by-alpha-rounded", toggleDirection: true },
+		{ value: "default", label: mediaLabel(MEDIA_LABEL.sortDefault, "По умолчанию"), icon: "material-symbols:format-list-numbered-rounded" },
+		{ value: "pages", label: mediaLabel(MEDIA_LABEL.booksSortPages, "По страницам"), icon: "material-symbols:auto-stories-outline-rounded", toggleDirection: true },
+		{ value: "title", label: mediaLabel(MEDIA_LABEL.booksSortTitle, "По названию"), icon: "material-symbols:sort-by-alpha-rounded", toggleDirection: true },
 	],
 	defaultSort: "default",
 	defaultSortOrder: "desc",
@@ -154,13 +156,12 @@ export const booksDomain: MediaDomain<BookItem> = {
 			return 0;
 		});
 	},
-	searchPlaceholder: "Поиск...",
-	countLabel: (count) => `${count} книг`,
+	searchPlaceholder: mediaLabel(MEDIA_LABEL.searchPlaceholder, "Поиск..."),
+	countLabel: (count) => `${count} ${mediaLabel(MEDIA_LABEL.booksCounts, "книг")}`,
 	cardProps: {
 		showTitleOnPoster: false,
-		aspect: "poster",
-		maxNativeWidth: 480,
-		columns: 3,
-		bookSpine: false,
+		aspect: "book",
+		maxNativeWidth: 640,
+		columns: 2,
 	},
 };

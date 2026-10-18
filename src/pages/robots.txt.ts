@@ -5,7 +5,6 @@ const siteUrl = import.meta.env.SITE ? new URL("sitemap-index.xml", import.meta.
 const robotsTxt = `
 User-agent: *
 Disallow: /_astro/
-Disallow: /assets/music/
 
 Sitemap: ${siteUrl}
 `.trim();

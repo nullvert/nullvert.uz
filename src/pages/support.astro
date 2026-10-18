@@ -1,0 +1,34 @@
+---
+/**
+ * Страница поддержки автора и блога (/support).
+ * Чистый M3 Expressive лейаут: заголовок без рамки прямо на сетке фона,
+ * сфокусированная ширина контейнера max-w-2xl (~680px).
+ */
+import SupportPanel from "../components/organisms/SupportPanel.svelte";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { supportConfig } from "../config/domains/supportConfig";
+
+if (!supportConfig.enable) {
+	return Astro.redirect("/404/");
+}
+
+const pageTitle = supportConfig.title;
+const pageDescription = supportConfig.description;
+---
+
+<MainGridLayout title={pageTitle} description={pageDescription} page="support">
+	<div class="support-page-container w-full max-w-4xl mx-auto flex flex-col gap-9 sm:gap-11 py-6 sm:py-10 px-4 sm:px-2">
+		<!-- Вводный заголовок прямо на фоне с просторным отступом -->
+		<header class="flex flex-col gap-3.5 max-w-2xl">
+			<h1 class="text-3xl sm:text-4xl lg:text-[2.6rem] font-extrabold text-[var(--on-surface)] tracking-tight leading-tight">
+				{supportConfig.title}
+			</h1>
+			<p class="text-base sm:text-lg text-[var(--on-surface-variant)] leading-relaxed opacity-90">
+				{supportConfig.description}
+			</p>
+		</header>
+
+		<!-- Основная панель поддержки -->
+		<SupportPanel client:load />
+	</div>
+</MainGridLayout>

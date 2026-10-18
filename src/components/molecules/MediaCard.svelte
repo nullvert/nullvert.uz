@@ -7,7 +7,6 @@
  * - Никаких лишних иконок Play: вся карточка или постер интерактивны.
  */
 import Icon from "@iconify/svelte";
-import { reveal } from "@utils/motion";
 import { url } from "@utils/url-utils";
 import type { MediaItemData, MediaProgress } from "@/types/media";
 
@@ -23,7 +22,7 @@ let {
 	bookCoverStyle = "typographic",
 }: {
 	item: MediaItemData;
-	aspect?: "poster" | "landscape" | "game";
+	aspect?: "poster" | "landscape" | "game" | "book";
 	delay?: number;
 	showTitle?: boolean;
 	showTitleOnPoster?: boolean;
@@ -38,7 +37,9 @@ const imageDimensions = $derived(
 		? { width: 264, height: 352 }
 		: aspect === "landscape"
 			? { width: 640, height: 360 }
-			: { width: 340, height: 510 },
+			: aspect === "book"
+				? { width: 340, height: 520 }
+				: { width: 340, height: 510 },
 );
 
 const showCover = $derived(Boolean(item.cover) && !coverFailed);
@@ -75,6 +76,8 @@ let ty = 0;
 let cx = 0;
 let cy = 0;
 let curDeg = 0;
+let cachedW = 1;
+let cachedH = 1;
 
 const glowTick = () => {
 	if (!glowEl) {
@@ -83,9 +86,8 @@ const glowTick = () => {
 	}
 	cx += (tx - cx) * 0.06;
 	cy += (ty - cy) * 0.06;
-	const rect = glowEl.getBoundingClientRect();
-	const w = rect.width || 1;
-	const h = rect.height || 1;
+	const w = cachedW || 1;
+	const h = cachedH || 1;
 
 	// Нормализованные координаты [-1 ... 1] для мягкого 3D наклона (6.5°)
 	const nx = (cx / w - 0.5) * 2;
@@ -115,6 +117,8 @@ const trackPointer = (event: PointerEvent, snap: boolean) => {
 	if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 	glowEl = event.currentTarget as HTMLElement;
 	const rect = glowEl.getBoundingClientRect();
+	cachedW = rect.width || 1;
+	cachedH = rect.height || 1;
 	tx = event.clientX - rect.left;
 	ty = event.clientY - rect.top;
 	if (snap) {
@@ -126,9 +130,8 @@ const trackPointer = (event: PointerEvent, snap: boolean) => {
 
 const resetPointer = (event: PointerEvent) => {
 	if (!glowEl || event.pointerType === "touch") return;
-	const rect = glowEl.getBoundingClientRect();
-	tx = rect.width * 0.5;
-	ty = rect.height * 0.5;
+	tx = cachedW * 0.5;
+	ty = cachedH * 0.5;
 	if (!glowRaf) glowRaf = requestAnimationFrame(glowTick);
 };
 
@@ -143,7 +146,6 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 	onpointerenter={(e) => trackPointer(e, true)}
 	onpointermove={(e) => trackPointer(e, false)}
 	onpointerleave={(e) => resetPointer(e)}
-	use:reveal={{ delay }}
 >
 	<!-- Постер с плавающими иконками-бейджами -->
 	<div class="media-card__media-wrap">
@@ -158,9 +160,6 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 					alt={item.title}
 					width={imageDimensions.width}
 					height={imageDimensions.height}
-					loading="lazy"
-					decoding="async"
-					fetchpriority="low"
 					referrerpolicy="no-referrer"
 					onerror={() => (coverFailed = true)}
 				/>
@@ -549,6 +548,9 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 	&--game &__media-wrap
 		aspect-ratio: 2 / 3
 
+	&--book &__media-wrap
+		aspect-ratio: 1 / 1.55
+
 	&--landscape &__media-wrap
 		aspect-ratio: 16 / 9
 
@@ -556,6 +558,7 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 		perspective: none
 
 		.media-card__media-wrap
+			aspect-ratio: 1 / 1.55 !important
 			border-radius: 0
 			box-shadow: none
 			transform: none !important
@@ -571,7 +574,8 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 			&::before
 				display: none
 	&__media-link
-		position: relative
+		position: absolute
+		inset: 0
 		display: block
 		width: 100%
 		height: 100%
@@ -580,6 +584,8 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 		overflow: hidden
 
 	&__cover
+		position: absolute
+		inset: 0
 		display: block
 		width: 100%
 		height: 100%
@@ -673,8 +679,6 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 		box-sizing: border-box
 		border-radius: unquote("0 0 calc(var(--badge-size, 1.875rem) * 0.33) 0")
 		background: rgba(15, 23, 42, 0.72)
-		backdrop-filter: blur(12px)
-		-webkit-backdrop-filter: blur(12px)
 		border: none
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3)
 		transition:
@@ -731,8 +735,6 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 
 		&--discounted
 			background: linear-gradient(90deg, #3d581a 0%, #344c16 48%, #1f2b1d 68%, #0f1822 100%)
-			backdrop-filter: blur(8px)
-			-webkit-backdrop-filter: blur(8px)
 
 	&__steam-discount
 		display: inline-flex
@@ -755,8 +757,6 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 		justify-content: center
 		padding: 0 0.5rem
 		background: rgba(15, 23, 42, 0.78)
-		backdrop-filter: blur(12px)
-		-webkit-backdrop-filter: blur(12px)
 		color: #ffffff
 		font-family: "Motiva Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
 		font-size: 0.75rem
@@ -766,8 +766,6 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 
 		&--discounted
 			background: transparent
-			backdrop-filter: none
-			-webkit-backdrop-filter: none
 			color: #ffffff
 			text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7)
 			font-weight: 700
@@ -787,8 +785,6 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 		box-sizing: border-box
 		border-radius: unquote("0 0 0 calc(var(--badge-size, 1.875rem) * 0.33)")
 		background: rgba(15, 23, 42, 0.72)
-		backdrop-filter: blur(12px)
-		-webkit-backdrop-filter: blur(12px)
 		border: none
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3)
 		transition:
@@ -1026,8 +1022,6 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 		padding: 0 0.5rem
 		border-radius: var(--shape-corner-xs, 4px)
 		background: rgba(255, 255, 255, 0.16)
-		backdrop-filter: blur(6px)
-		-webkit-backdrop-filter: blur(6px)
 		border: 1px solid rgba(255, 255, 255, 0.08)
 		color: rgba(255, 255, 255, 0.95)
 		font: var(--m3e-type-label-small)
@@ -1050,8 +1044,6 @@ $effect(() => () => cancelAnimationFrame(glowRaf));
 		padding: 0 0.4375rem
 		border-radius: var(--shape-corner-xs, 4px)
 		background: rgba(10, 14, 20, 0.78)
-		backdrop-filter: blur(8px)
-		-webkit-backdrop-filter: blur(8px)
 		border: 1px solid rgba(255, 255, 255, 0.12)
 		color: rgba(255, 255, 255, 0.95)
 		font: var(--m3e-type-label-small)

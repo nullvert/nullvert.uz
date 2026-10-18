@@ -16,6 +16,7 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
 import type { Snippet } from "svelte";
+import { MEDIA_LABEL, mediaLabel } from "../../utils/media/labels";
 
 export interface SourceOption {
 	value: string;
@@ -51,10 +52,8 @@ let {
 	totalAllCount = 0,
 	totalFilteredCount = 0,
 	countLabel = "",
-	searchPlaceholder = "Поиск...",
-	sourceLabel = "Источник",
-	forceHover = $bindable(false),
-	showBorder = $bindable(true),
+	searchPlaceholder = mediaLabel(MEDIA_LABEL.searchPlaceholder, "Поиск..."),
+	sourceLabel = mediaLabel(MEDIA_LABEL.source, "Источник"),
 	onStatusChange = () => {},
 	onSourceChange = () => {},
 	onSortChange = () => {},
@@ -76,8 +75,6 @@ let {
 	currentSort?: string;
 	sortOrder?: "asc" | "desc";
 	listMode?: "grid" | "list";
-	forceHover?: boolean;
-	showBorder?: boolean;
 	totalAllCount?: number;
 	totalFilteredCount?: number;
 	countLabel?: string;
@@ -182,18 +179,17 @@ function handleSortClick(item: SortOption) {
 						/>
 					{/if}
 				{/each}
-			</div>
 
-			{#if extraStatusBottom}
-				<div class="media-controls__status-divider" role="separator"></div>
-				{@render extraStatusBottom()}
-			{/if}
+				{#if extraStatusBottom}
+					{@render extraStatusBottom()}
+				{/if}
+			</div>
 		</div>
 
 		<!-- Сортировка -->
 		{#if sortOptions.length > 0}
 			<div class="media-controls__section">
-				<span class="media-controls__label">Сортировка</span>
+				<span class="media-controls__label">{mediaLabel(MEDIA_LABEL.sort, "Сортировка")}</span>
 				<div class="media-controls__list-group">
 					{#each sortOptions as sortItem}
 						{#if sortItem.value === "default"}
@@ -380,7 +376,7 @@ function handleSortClick(item: SortOption) {
 		height: 2.125rem
 		padding: 0 0.75rem
 		border-radius: var(--shape-corner-medium, 0.75rem)
-		border: 1px solid var(--outline-variant)
+		border: none
 		background: var(--surface-container-high)
 		color: var(--on-surface-variant)
 		font: var(--m3e-type-label-medium)
@@ -391,32 +387,14 @@ function handleSortClick(item: SortOption) {
 		user-select: none
 		transition:
 			background-color var(--m3e-duration-short) var(--m3e-easing-standard),
-			border-color var(--m3e-duration-short) var(--m3e-easing-standard),
 			color var(--m3e-duration-short) var(--m3e-easing-standard),
 			box-shadow var(--m3e-duration-short) var(--m3e-easing-standard)
-
-		:global(:root[data-glass="cards"]) &
-			background: unquote("color-mix(in srgb, var(--surface-container-high) 55%, transparent)")
-			backdrop-filter: blur(12px) saturate(180%)
-			-webkit-backdrop-filter: blur(12px) saturate(180%)
-			border-color: unquote("color-mix(in srgb, var(--outline-variant) 40%, rgba(255, 255, 255, 0.16))")
-			box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12), 0 2px 6px rgba(0, 0, 0, 0.15)
-
-		> :global(svg)
-			width: 1rem
-			height: 1rem
-			color: currentColor
 
 		&--active
 			background: unquote("color-mix(in oklab, var(--primary) 15%, var(--surface-container-highest))")
 			color: var(--on-surface)
-			border-color: var(--primary)
+			border: none
 			font-weight: 600
-
-			:global(:root[data-glass="cards"]) &
-				background: unquote("color-mix(in srgb, var(--primary) 28%, rgba(255, 255, 255, 0.08))")
-				border-color: var(--primary)
-				box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.25), 0 2px 8px unquote("color-mix(in srgb, var(--primary) 35%, transparent)")
 
 			.media-controls__status-tab-count
 				background: var(--primary)

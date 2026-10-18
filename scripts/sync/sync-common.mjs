@@ -13,7 +13,7 @@ const MODULE_DIR = dirname(fileURLToPath(import.meta.url));
 
 /** Absolute project root, independent of the directory used to invoke Node. */
 export const ROOT_DIR = resolve(MODULE_DIR, "../..");
-export const SNAPSHOT_DIR = resolve(ROOT_DIR, "shirones/config/data/snapshots");
+export const SNAPSHOT_DIR = resolve(ROOT_DIR, "src/data/snapshots");
 
 /**
  * Read the project's simple KEY=VALUE .env format without requiring dotenv.

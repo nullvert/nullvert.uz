@@ -1,0 +1,93 @@
+---
+import type { SeriesPostContext } from "@utils/series-utils";
+import { getPostUrlBySlug, getSeriesUrl } from "@utils/url-utils";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	context: SeriesPostContext;
+	currentSlug?: string;
+	class?: string;
+}
+
+const { context, currentSlug, class: className = "" } = Astro.props;
+---
+
+<details
+	class={`series-accordion group rounded-xl bg-[color-mix(in_srgb,var(--surface-container-high)_30%,transparent)] border border-[color-mix(in_srgb,var(--outline-variant)_30%,transparent)] overflow-hidden transition-all duration-200 ${className}`}
+>
+	<summary
+		class="flex items-center justify-between gap-3 px-4 py-3 cursor-pointer select-none list-none outline-none focus:outline-none focus-visible:outline-none hover:bg-[color-mix(in_srgb,var(--surface-container-high)_55%,transparent)] transition-colors"
+	>
+		<div class="flex items-center gap-2.5 min-w-0">
+			<Icon name="material-symbols:auto-stories-outline-rounded" class="text-lg text-[var(--primary)] shrink-0 opacity-90" />
+			<div class="flex items-baseline gap-2 min-w-0 truncate text-[0.85rem] sm:text-[0.875rem]">
+				<span class="text-[var(--on-surface-variant)] opacity-75 shrink-0 font-normal">
+					Часть {context.index} из {context.total} в серии
+				</span>
+				<a
+					href={getSeriesUrl(context.slug)}
+					onclick="event.stopPropagation()"
+					class="series-title-link font-semibold text-[var(--on-surface)] hover:text-[var(--primary)] transition-colors truncate"
+				>
+					{context.title}
+				</a>
+			</div>
+		</div>
+
+		<div class="flex items-center gap-2 shrink-0 text-[0.8rem] text-[var(--on-surface-variant)]">
+			<span class="opacity-60 group-open:hidden">все части</span>
+			<div class="w-4 h-4 flex items-center justify-center transition-transform duration-200 group-open:rotate-180 opacity-70">
+				<Icon name="material-symbols:keyboard-arrow-down-rounded" class="text-base" />
+			</div>
+		</div>
+	</summary>
+
+	<div class="px-2.5 py-2 flex flex-col gap-1 border-t border-[color-mix(in_srgb,var(--outline-variant)_20%,transparent)]">
+		{context.posts.map((post, idx) => {
+			const postIndex = idx + 1;
+			const isCurrent = currentSlug ? (post.slug === currentSlug) : (postIndex === context.index);
+
+			return (
+				<div>
+					{isCurrent ? (
+						<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-[0.84rem] font-semibold text-[var(--primary)] select-none">
+							<span class="w-1.5 h-1.5 rounded-full bg-[var(--primary)] shrink-0 shadow-[0_0_6px_var(--primary)]"></span>
+							<span class="opacity-60 text-[0.8rem] font-mono tabular-nums">{postIndex}.</span>
+							<span class="flex-1 truncate">
+								{post.title}
+							</span>
+							<span class="text-[0.72rem] font-medium opacity-70">
+								сейчас
+							</span>
+						</div>
+					) : (
+						<a
+							href={getPostUrlBySlug(post.slug)}
+							class="group/item flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[color-mix(in_srgb,var(--surface-container-high)_50%,transparent)] transition-all text-[0.84rem] text-[var(--on-surface-variant)] hover:text-[var(--on-surface)]"
+						>
+							<span class="w-1.5 h-1.5 rounded-full bg-transparent shrink-0"></span>
+							<span class="opacity-50 text-[0.8rem] font-mono tabular-nums">{postIndex}.</span>
+							<span class="flex-1 truncate transition-colors">
+								{post.title}
+							</span>
+						</a>
+					)}
+				</div>
+			);
+		})}
+	</div>
+</details>
+
+<style>
+	/* Скрываем стандартный треугольник details и убираем дефолтный белый фокус браузера */
+	details summary::-webkit-details-marker,
+	details summary::marker {
+		display: none;
+		content: "";
+	}
+	details summary:focus,
+	details summary:focus-visible {
+		outline: none !important;
+		box-shadow: none !important;
+	}
+</style>

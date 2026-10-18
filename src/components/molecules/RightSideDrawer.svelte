@@ -214,10 +214,11 @@ onDestroy(() => {
 		position: absolute
 		inset: 0
 		background: unquote("color-mix(in srgb, var(--scrim, #000) 65%, transparent)")
-		backdrop-filter: blur(8px)
-		-webkit-backdrop-filter: blur(8px)
+		backdrop-filter: blur(4px)
+		-webkit-backdrop-filter: blur(4px)
 		opacity: 0
 		transition: opacity var(--m3e-duration-medium) var(--m3e-easing-standard)
+		will-change: opacity
 
 	&--open &__scrim
 		opacity: 1
@@ -239,13 +240,15 @@ onDestroy(() => {
 		border-left: 1px solid unquote("color-mix(in srgb, var(--outline-variant) 35%, transparent)")
 		border-radius: var(--shape-corner-xl, 28px) 0 0 var(--shape-corner-xl, 28px)
 		box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45)
-		transform: translateX(100%)
-		transition: transform var(--m3e-duration-long) var(--m3e-easing-emphasized-decelerate)
+		transform: translate3d(100%, 0, 0)
+		transition: transform var(--m3e-duration-medium) var(--m3e-easing-emphasized-decelerate)
+		will-change: transform
+		contain: paint layout
 		z-index: 1
 		overflow: hidden
 
 	&--open &__panel
-		transform: translateX(0)
+		transform: translate3d(0, 0, 0)
 
 	&__header
 		display: flex

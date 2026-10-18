@@ -1,0 +1,110 @@
+{
+  "updatedAt": "2026-10-18T11:12:16.147Z",
+  "user": {
+    "id": "nullvert",
+    "username": "nullvert",
+    "name": "Javohir"
+  },
+  "goals": [
+    {
+      "id": "2026-storygraph-goal",
+      "description": "2026 Reading Goal",
+      "goal": 2,
+      "progress": 1,
+      "metric": "book",
+      "startDate": "2026-01-01",
+      "endDate": "2027-01-01",
+      "state": "active"
+    }
+  ],
+  "items": [
+    {
+      "id": "sg-the-metamorphosis",
+      "title": "The Metamorphosis",
+      "author": "Franz Kafka",
+      "cover": "",
+      "link": "https://app.thestorygraph.com/profile/nullvert",
+      "status": "planned",
+      "starred": false,
+      "pages": 201,
+      "year": "1986",
+      "genres": [
+        "Classics",
+        "Science Fiction"
+      ],
+      "description": "Gregor Samsa hates his job. He works himself to exhaustion as a traveling salesman to support a family that takes him for granted. One morning, his whole life changes. He wakes up to discover that he has turned into a giant insect. As he and his family come to grips with the fantastical event, The Metamorphosis explores themes of alienation, family loyalty, and unconditional love."
+    },
+    {
+      "id": "sg-sweetpea",
+      "title": "Sweetpea",
+      "author": "C.J. Skuse",
+      "cover": "",
+      "link": "https://app.thestorygraph.com/profile/nullvert",
+      "status": "planned",
+      "starred": false,
+      "year": "2017",
+      "genres": [
+        "Thriller"
+      ],
+      "description": "The last person who called me Sweetpea ended up dead... A darkly comic and outrageous psychological thriller following Rhiannon, an average girl with a deadly secret."
+    },
+    {
+      "id": "sg-animal-farm-1984",
+      "title": "Animal Farm / 1984",
+      "author": "George Orwell, Christopher Hitchens",
+      "cover": "",
+      "link": "https://app.thestorygraph.com/profile/nullvert",
+      "status": "planned",
+      "starred": false,
+      "year": "2021"
+    },
+    {
+      "id": "sg-soft-skills",
+      "title": "Soft Skills",
+      "author": "John Z. Sonmez",
+      "cover": "",
+      "link": "https://app.thestorygraph.com/profile/nullvert",
+      "status": "completed",
+      "starred": false,
+      "progress": {
+        "watched": 470,
+        "total": 470,
+        "unit": "стр."
+      },
+      "pages": 470,
+      "year": "2015",
+      "genres": [
+        "Career"
+      ],
+      "description": "This guide offers advice to technology professionals and developers on subjects of career and productivity, personal finance and investing, and fitness and relationships. It will help you become a better programmer, a more valuable employee, and a happier, healthier person."
+    },
+    {
+      "id": "sg-the-fault-in-our-stars",
+      "title": "The Fault in Our Stars",
+      "author": "John Green",
+      "cover": "",
+      "link": "https://app.thestorygraph.com/profile/nullvert",
+      "status": "planned",
+      "starred": false,
+      "pages": 318,
+      "year": "2012",
+      "genres": [
+        "Romance",
+        "Self-Help"
+      ],
+      "description": "Despite the tumor-shrinking medical miracle that has bought her a few years, Hazel has never been anything but terminal, her final chapter inscribed upon diagnosis. But when a gorgeous plot twist named Augustus Waters suddenly appears at Cancer Kid Support Group, Hazel's story is about to be completely rewritten. ([source]) :"
+    },
+    {
+      "id": "sg-metro-2033",
+      "title": "Metro 2033",
+      "author": "Dmitry Glukhovsky",
+      "cover": "",
+      "link": "https://app.thestorygraph.com/profile/nullvert",
+      "status": "planned",
+      "starred": false,
+      "pages": 458,
+      "year": "2013",
+      "description": "\"The novel that gave birth to the video games 'Metro 2033' and 'Metro: Last Light.' ... In 2013 the world was devastated by an apocalyptic event, annihilating almost all mankind and turning the earth's surface into a poisonous wasteland. A handful of survivors took refuge in the depths of the Moscow underground, and human civilization entered a new Dark Age. The year is 2033. An entire generation has been born and raised underground, and their besieged Metro Station-Cities struggle for survival, with each other, and the mutant horrors that await outside. Artyom was born in the last days before the fire. Having never ventured beyond his Metro Station-City limits, one fateful event sparks a desperate mission to the heart of the Metro system, to warn the remnants of mankind of a terrible impending threat. His journey takes him from the forgotten catacombs beneath the subway to the desolate wastelands above, where his actions will determine the fate of mankind\"--P. of Cover."
+    }
+  ]
+}

@@ -31,6 +31,7 @@ import { createFontRoleStyle } from "@utils/font-options";
 import { resolvePageWidth } from "@utils/responsive-utils";
 import "@/styles/main.css";
 import "@/styles/font-faces.css";
+import "../styles/theme-custom.css";
 import textureStyles from "@/styles/textures.css?raw";
 
 interface Props {
@@ -48,6 +49,9 @@ let { title, banner, ogImage, description, lang, setOGTypeArticle, page } =
 
 const initialPage =
 	page ?? (pathsEqual(Astro.url.pathname, url("/")) ? "home" : undefined);
+const isCatalogPage = Boolean(
+	initialPage && ["archive", "categories", "tags", "anime", "cinema", "games", "books", "compass", "series", "support"].includes(initialPage),
+);
 
 // `Astro.url` in a static build does not inherit a `site` set through an
 // integration's `updateConfig()` — Astro snapshots the build origin in the
@@ -163,7 +167,7 @@ const hasMonoFont =
 		<link rel="apple-touch-icon" sizes="180x180" href={url('/favicon/apple-touch-icon.png')} />
 
 		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, configHue, lightTheme, darkTheme, defaultWallpaperMode, defaultTexturePreset, defaultTextureOpacity, textureEnabled}}>
-			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
+			const theme = localStorage.getItem('theme') || DARK_MODE;
 			let isDark = false;
 			switch (theme) {
 				case LIGHT_MODE:
@@ -208,12 +212,6 @@ const hasMonoFont =
 				}
 			}
 
-			if (localStorage.getItem('shirone-music-enabled') === 'false') {
-				document.documentElement.dataset.music = 'disabled';
-			}
-			if (localStorage.getItem('shirone-glass-effect') === 'true') {
-				document.documentElement.dataset.glass = 'cards';
-			}
 
 			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
 			offset = offset - offset % 4;
@@ -224,12 +222,46 @@ const hasMonoFont =
 			'page-width': resolvePageWidth(),
 		}}></style>
 
+		<!-- Critical zero-latency layout rules for catalog & media pages -->
+		<style is:inline>
+			body.is-catalog-page #main-grid,
+			body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"]) #main-grid,
+			#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"])),
+			body:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"])) #main-grid {
+				display: grid !important;
+				grid-template-columns: minmax(0, 1fr) !important;
+				width: 100% !important;
+			}
+			body.is-catalog-page #sidebar,
+			body.is-catalog-page #sidebar-secondary,
+			body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"]) #sidebar,
+			body:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"]) #sidebar-secondary,
+			#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"])) #sidebar,
+			#main-grid:has(#swup-container:is([data-current-page="archive"], [data-current-page="categories"], [data-current-page="tags"], [data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"], [data-current-page="support"])) #sidebar-secondary {
+				display: none !important;
+			}
+			body.is-catalog-page:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #main-content-column,
+			body:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #main-content-column,
+			body:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #swup-container,
+			body:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"]) #content-wrapper,
+			#main-grid:has(#swup-container:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) #main-content-column,
+			#main-grid:has(#swup-container:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) #swup-container,
+			#main-grid:has(#swup-container:is([data-current-page="anime"], [data-current-page="cinema"], [data-current-page="games"], [data-current-page="books"], [data-current-page="compass"])) #content-wrapper {
+				grid-column: 1 / -1 !important;
+				width: 100% !important;
+				max-width: 100% !important;
+				min-width: 0 !important;
+				overflow: visible !important;
+			}
+		</style>
+
 		<slot name="head"></slot>
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 		<link rel="alternate" type="application/atom+xml" title={profileConfig.name} href={`${Astro.site}atom.xml`}/>
 	</head>
 	<body
 		class="min-h-screen transition"
+		class:list={[{ "is-catalog-page": isCatalogPage }]}
 		data-current-page={initialPage}
 		data-banner-visible="false"
 		data-banner-layout="compact"
@@ -361,15 +393,20 @@ if (window.swup?.hooks) setup();
 else document.addEventListener('swup:enable', setup, { once: true });
 
 const backToTopBtn = document.getElementById('back-to-top-btn');
+const navbar = document.getElementById('navbar');
+const bannerStage = document.getElementById('banner-wrapper');
+let cachedBannerBottom = 0;
+
+function updateBannerMetrics() {
+	cachedBannerBottom = bannerStage ? bannerStage.getBoundingClientRect().height : 0;
+}
+
 function scrollFunction() {
 	const scrollTop = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
 	const backToTopThreshold = window.innerHeight * (BANNER_HEIGHT / 100);
 	backToTopBtn?.classList.toggle('hide', scrollTop <= backToTopThreshold);
 	const bannerVisible = document.body.dataset.bannerVisible === 'true';
-	const navbar = document.getElementById('navbar');
-	const bannerStage = document.getElementById('banner-wrapper');
-	const bannerBottom = bannerStage?.getBoundingClientRect().height ?? 0;
-	const overBanner = bannerVisible && scrollTop < Math.max(0, bannerBottom - 64);
+	const overBanner = bannerVisible && scrollTop < Math.max(0, cachedBannerBottom - 64);
 	document.body.dataset.bannerScrolled = String(!overBanner);
 	navbar?.classList.toggle('top-app-bar--transparent', overBanner);
 	navbar?.classList.toggle('top-app-bar--scrolled', scrollTop > 16);
@@ -379,12 +416,28 @@ window.addEventListener('resize', () => {
 	let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
 	offset = offset - offset % 4;
 	document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
+	updateBannerMetrics();
 	scrollFunction();
 });
-new MutationObserver(scrollFunction).observe(document.body, { attributes: true, attributeFilter: ['data-banner-visible', 'data-banner-layout'] });
-window.addEventListener(WALLPAPER_MODE_CHANGE_EVENT, () => requestAnimationFrame(scrollFunction));
-document.addEventListener('swup:page:view', scrollFunction);
+new MutationObserver(() => {
+	updateBannerMetrics();
+	scrollFunction();
+}).observe(document.body, { attributes: true, attributeFilter: ['data-banner-visible', 'data-banner-layout'] });
+window.addEventListener(WALLPAPER_MODE_CHANGE_EVENT, () => {
+	requestAnimationFrame(() => {
+		updateBannerMetrics();
+		scrollFunction();
+	});
+});
+document.addEventListener('swup:page:view', () => {
+	requestAnimationFrame(() => {
+		updateBannerMetrics();
+		scrollFunction();
+	});
+});
+updateBannerMetrics();
 scrollFunction();
+
 </script>
 
 <script>

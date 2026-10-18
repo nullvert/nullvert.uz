@@ -90,3 +90,6 @@ artifacts/shirone-ai-*
 
 # backup of firefly repository
 _firefly/
+
+# backups
+backups/

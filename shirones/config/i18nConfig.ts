@@ -391,6 +391,24 @@ const ru: Partial<Record<I18nKey | string, string>> = {
 	"games.unitHours": "ч.",
 	"games.statusCompleted": "Пройдено",
 
+	"books.all": "Все книги",
+	"books.counts": "книг",
+	"books.reading": "Читаю",
+	"books.completed": "Прочитано",
+	"books.planned": "В планах",
+	"books.onHold": "Отложено",
+	"books.dropped": "Брошено",
+	"books.sortPages": "По страницам",
+	"books.sortTitle": "По названию",
+	"books.progress": "Прогресс",
+	"books.unitPages": "стр.",
+	"books.genres": "Жанры",
+	"books.challenge": "Челлендж",
+	"books.daysLeft": "дн. осталось",
+	"books.readingGoal": "Цель чтения",
+	"books.metricBooks": "книг",
+	"books.metricPages": "стр.",
+
 	"mediaCatalog.statusWatching": "Смотрю",
 	"mediaCatalog.statusPlaying": "Играю",
 	"mediaCatalog.statusCompleted": "Просмотрено",
@@ -398,6 +416,9 @@ const ru: Partial<Record<I18nKey | string, string>> = {
 	"mediaCatalog.statusWishlist": "Список желаемого",
 	"mediaCatalog.statusOnHold": "Отложено",
 	"mediaCatalog.statusDropped": "Брошено",
+
+	"creditsAndLicenses.title": "Лицензии и благодарности",
+	"creditsAndLicenses.description": "Использованные на сайте материалы, лицензии и благодарности",
 
 	// ── RSS и Atom ──
 	[I18nKey.rss]: "RSS-лента",

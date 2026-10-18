@@ -6,6 +6,7 @@
  * - Капсульный стеклянный стиль в гармонии с боковой панелью
  */
 import type { BookGoal } from "../../utils/media/domains/books";
+import { MEDIA_LABEL, mediaLabel } from "../../utils/media/labels";
 
 let {
 	goal,
@@ -18,7 +19,9 @@ const progressPercent = $derived(
 );
 
 const metricLabel = $derived(
-	goal.metric === "book" || goal.metric === "books" ? "книг" : "стр.",
+	goal.metric === "book" || goal.metric === "books"
+		? mediaLabel(MEDIA_LABEL.booksMetricBooks, "книг")
+		: mediaLabel(MEDIA_LABEL.booksMetricPages, "стр."),
 );
 
 const remainingDays = $derived.by(() => {
@@ -68,14 +71,14 @@ const strokeDashoffset = $derived(
 		<!-- Инфо блока: заголовок и тег -->
 		<div class="reading-goal-card__content">
 			<div class="reading-goal-card__badge-row">
-				<span class="reading-goal-card__badge-tag">Челлендж</span>
+				<span class="reading-goal-card__badge-tag">{mediaLabel(MEDIA_LABEL.booksChallenge, "Челлендж")}</span>
 				{#if remainingDays !== null}
-					<span class="reading-goal-card__badge-days">{remainingDays} дн. осталось</span>
+					<span class="reading-goal-card__badge-days">{remainingDays} {mediaLabel(MEDIA_LABEL.booksDaysLeft, "дн. осталось")}</span>
 				{/if}
 			</div>
 
 			<h4 class="reading-goal-card__title" title={goal.description}>
-				{goal.description || "Цель чтения"}
+				{goal.description || mediaLabel(MEDIA_LABEL.booksReadingGoal, "Цель чтения")}
 			</h4>
 		</div>
 

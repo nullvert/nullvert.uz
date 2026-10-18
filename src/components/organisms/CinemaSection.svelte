@@ -5,10 +5,11 @@
  */
 import MediaCatalog from "./MediaCatalog.svelte";
 import { cinemaDomain, type CinemaItem } from "../../utils/media/domains/cinema";
-import simklSnapshot from "../../../shirones/config/data/snapshots/simkl.json";
+import simklSnapshot from "../../data/snapshots/simkl.json";
+import { MEDIA_LABEL, mediaLabel } from "../../utils/media/labels";
 
 let {
-	title = "Кино",
+	title = mediaLabel(MEDIA_LABEL.cinemaTypeAll, "Кино"),
 }: {
 	title?: string;
 } = $props();
