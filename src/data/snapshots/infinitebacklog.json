@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-15T18:36:21.479Z",
-  "total": 29,
+  "updatedAt": "2026-10-19T05:24:44.476Z",
+  "total": 31,
   "items": [
     {
       "id": "119277",
@@ -327,7 +327,7 @@
       "title": "Devil May Cry 5",
       "cover": "/assets/media/games/steam_601150.jpg",
       "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/601150/header.jpg?t=1790215341",
-      "link": "https://store.steampowered.com/wishlist/id/nullvert/?sort=name&st=634644444734479457",
+      "link": "https://store.steampowered.com/app/601150/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
@@ -337,18 +337,18 @@
       ],
       "developer": "CAPCOM Co., Ltd.",
       "description": "Лучший охотник на демонов возвращается в новом стильном боевике.",
-      "rank": "#1",
+      "rank": "#10",
       "price": "$7.49",
       "discount": 75,
       "isFree": false,
-      "_fetchedAt": "2026-10-15T18:35:57.268Z"
+      "_fetchedAt": "2026-10-19T05:24:40.838Z"
     },
     {
       "id": "steam_557340",
       "title": "My Friend Pedro",
       "cover": "/assets/media/games/steam_557340.jpg",
       "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/557340/header.jpg?t=1745954928",
-      "link": "https://store.steampowered.com/wishlist/id/nullvert/?sort=name&st=634644444734479457",
+      "link": "https://store.steampowered.com/app/557340/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
@@ -363,14 +363,14 @@
       "price": "$19.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-15T18:35:57.446Z"
+      "_fetchedAt": "2026-10-19T05:24:40.710Z"
     },
     {
       "id": "steam_257510",
       "title": "The Talos Principle",
       "cover": "/assets/media/games/steam_257510.jpg",
       "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/257510/header.jpg?t=1744327639",
-      "link": "https://store.steampowered.com/wishlist/id/nullvert/?sort=name&st=634644444734479457",
+      "link": "https://store.steampowered.com/app/257510/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
@@ -382,18 +382,18 @@
       ],
       "developer": "Croteam",
       "description": "The Talos Principle - головоломка от первого лица в лучших традициях научно-философской фантастики. Разработана Croteam, создателями Serious Sam, в соавторстве с Томом Жубертом (FTL, The Swapper) и Йонасом Киратзесом (The Sea Will Claim Everything).",
-      "rank": "#3",
+      "rank": "#4",
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-15T18:36:01.262Z"
+      "_fetchedAt": "2026-10-19T05:24:41.097Z"
     },
     {
       "id": "steam_1049410",
       "title": "Superliminal",
       "cover": "/assets/media/games/steam_1049410.jpg",
       "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1049410/header.jpg?t=1755294276",
-      "link": "https://store.steampowered.com/wishlist/id/nullvert/?sort=name&st=634644444734479457",
+      "link": "https://store.steampowered.com/app/1049410/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
@@ -404,18 +404,18 @@
       ],
       "developer": "Pillow Castle",
       "description": "Восприятие – это реальность. В этой умопомрачительной головоломке от первого лица вам предстоит сбежать из сюрреалистического мира снов, решая невозможные загадки при помощи перспективы.",
-      "rank": "#4",
+      "rank": "#5",
       "price": "$7.99",
       "discount": 60,
       "isFree": false,
-      "_fetchedAt": "2026-10-15T18:36:01.688Z"
+      "_fetchedAt": "2026-10-19T05:24:41.185Z"
     },
     {
       "id": "steam_233130",
       "title": "Shadow Warrior",
       "cover": "/assets/media/games/steam_233130.jpg",
       "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/233130/header.jpg?t=1710246206",
-      "link": "https://store.steampowered.com/wishlist/id/nullvert/?sort=name&st=634644444734479457",
+      "link": "https://store.steampowered.com/app/233130/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
@@ -426,18 +426,18 @@
       ],
       "developer": "Flying Wild Hog",
       "description": "Shadow Warrior is a bold reimagining of the classic 3D Realms’ shooter from independent developer Flying Wild Hog (Hard Reset) starring the legendary and quick-witted warrior Lo Wang.",
-      "rank": "#5",
+      "rank": "#6",
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-15T18:36:03.055Z"
+      "_fetchedAt": "2026-10-19T05:24:41.480Z"
     },
     {
       "id": "steam_1164940",
       "title": "Trepang2",
       "cover": "/assets/media/games/steam_1164940.jpg",
       "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1164940/header.jpg?t=1765814715",
-      "link": "https://store.steampowered.com/wishlist/id/nullvert/?sort=name&st=634644444734479457",
+      "link": "https://store.steampowered.com/app/1164940/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
@@ -448,18 +448,18 @@
       ],
       "developer": "Trepang Studios",
       "description": "Trepang2, сумасшедший кровавый шутер от первого лица в мире далекого будущего, сделает вас крепким орешком. Враги пожалеют, что они родились на свет, увидев, как вы уклоняетесь от пуль и оставляете за собой одни разрушения в этой лихорадочной стрелялке не для слабонервных.",
-      "rank": "#6",
+      "rank": "#11",
       "price": "$7.49",
       "discount": 75,
       "isFree": false,
-      "_fetchedAt": "2026-10-15T18:36:05.674Z"
+      "_fetchedAt": "2026-10-19T05:24:41.542Z"
     },
     {
       "id": "steam_322500",
       "title": "SUPERHOT",
       "cover": "/assets/media/games/steam_322500.jpg",
       "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322500/header.jpg?t=1726509130",
-      "link": "https://store.steampowered.com/wishlist/id/nullvert/?sort=name&st=634644444734479457",
+      "link": "https://store.steampowered.com/app/322500/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
@@ -474,14 +474,14 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-15T18:36:08.085Z"
+      "_fetchedAt": "2026-10-19T05:24:41.824Z"
     },
     {
       "id": "steam_1265920",
       "title": "Life is Strange Remastered",
       "cover": "/assets/media/games/steam_1265920.jpg",
       "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1265920/header.jpg?t=1779117636",
-      "link": "https://store.steampowered.com/wishlist/id/nullvert/?sort=name&st=634644444734479457",
+      "link": "https://store.steampowered.com/app/1265920/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
@@ -492,18 +492,18 @@
       ],
       "developer": "Deck Nine",
       "description": "Лауреат премии BAFTA Life is Strange возвращается с новой графикой и анимацией, основанной на технологии захвата мимики.",
-      "rank": "#8",
+      "rank": "#1",
       "price": "$7.99",
       "discount": 80,
       "isFree": false,
-      "_fetchedAt": "2026-10-15T18:36:07.176Z"
+      "_fetchedAt": "2026-10-19T05:24:41.932Z"
     },
     {
       "id": "steam_1091500",
       "title": "Cyberpunk 2077",
       "cover": "/assets/media/games/steam_1091500.jpg",
       "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/e9047d8ec47ae3d94bb8b464fb0fc9e9972b4ac7/header.jpg?t=1784714077",
-      "link": "https://store.steampowered.com/wishlist/id/nullvert/?sort=name&st=634644444734479457",
+      "link": "https://store.steampowered.com/app/1091500/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
@@ -513,18 +513,18 @@
       ],
       "developer": "CD PROJEKT RED",
       "description": "Cyberpunk 2077 — приключенческая ролевая игра с открытым миром, действие которой происходит в футуристическом мегаполисе Найт-Сити, где выше всего ценятся власть, роскошь и модификации тела.",
-      "rank": "#9",
+      "rank": "#3",
       "price": "$17.99",
       "discount": 70,
       "isFree": false,
-      "_fetchedAt": "2026-10-15T18:36:09.065Z"
+      "_fetchedAt": "2026-10-19T05:24:42.174Z"
     },
     {
       "id": "steam_508980",
       "title": "Crashday Redline Edition",
       "cover": "/assets/media/games/steam_508980.jpg",
       "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/508980/cbdf3281c0dc9d6d1f9cfb39876c83ce35b2ad5a/header.jpg?t=1786485436",
-      "link": "https://store.steampowered.com/wishlist/id/nullvert/?sort=name&st=634644444734479457",
+      "link": "https://store.steampowered.com/app/508980/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
@@ -535,18 +535,18 @@
       ],
       "developer": "Moonbyte",
       "description": "Crashday, культовая сетевая гоночная игра, вернулась! В новой Crashday – Redline Edition, созданной с любовью и вниманием к оригиналу, вас ждет атмосфера веселья и море возможностей, включая поддержку Мастерской Steam. Настал день Crashday!",
-      "rank": "#10",
+      "rank": "#8",
       "price": "$11.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-15T18:36:09.811Z"
+      "_fetchedAt": "2026-10-19T05:24:42.323Z"
     },
     {
       "id": "steam_1029690",
       "title": "Sniper Elite 5",
       "cover": "/assets/media/games/steam_1029690.jpg",
       "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1029690/header.jpg?t=1770633150",
-      "link": "https://store.steampowered.com/wishlist/id/nullvert/?sort=name&st=634644444734479457",
+      "link": "https://store.steampowered.com/app/1029690/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
@@ -557,18 +557,18 @@
       ],
       "developer": "Rebellion",
       "description": "Легендарная серия Sniper Elite возвращается. 1944 год, Франция, Карл Фейрберн против проекта «Кракен». Лучшая в жанре симуляция снайперской стрельбы, новая камера убийств и интерактивные карты. Остановите нацистскую военную машину, пока она не перевернула ход войны!",
-      "rank": "#11",
+      "rank": "#9",
       "price": "$49.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-15T18:36:10.418Z"
+      "_fetchedAt": "2026-10-19T05:24:42.543Z"
     },
     {
       "id": "steam_690040",
       "title": "SUPERHOT: MIND CONTROL DELETE",
       "cover": "/assets/media/games/steam_690040.jpg",
       "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/690040/header.jpg?t=1726508997",
-      "link": "https://store.steampowered.com/wishlist/id/nullvert/?sort=name&st=634644444734479457",
+      "link": "https://store.steampowered.com/app/690040/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
@@ -579,18 +579,18 @@
       ],
       "developer": "SUPERHOT Team",
       "description": "Третья игра в серии SUPERHOT, MIND CONTROL DELETE, подарит вам новые тайны мира SUPERHOT, новые сюжетные повороты и больше полюбившегося вам игрового процесса. Вас ждет танец разрушений в замедленной съемке — и насладиться им вы сможете дольше, чем когда-либо раньше.",
-      "rank": "#12",
+      "rank": "#14",
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-15T18:36:12.558Z"
+      "_fetchedAt": "2026-10-19T05:24:42.909Z"
     },
     {
       "id": "steam_3919340",
       "title": "Eco Volunteer",
       "cover": "/assets/media/games/steam_3919340.jpg",
       "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3919340/b1fecd3bdebb576845ceb7c82d896ff93410d06b/header.jpg?t=1789027726",
-      "link": "https://store.steampowered.com/wishlist/id/nullvert/?sort=name&st=634644444734479457",
+      "link": "https://store.steampowered.com/app/3919340/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
@@ -606,7 +606,53 @@
       "price": "$11.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-15T18:36:13.932Z"
+      "_fetchedAt": "2026-10-19T05:24:43.385Z"
+    },
+    {
+      "id": "steam_2698780",
+      "title": "ContractVille",
+      "cover": "/assets/media/games/steam_2698780.jpg",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2698780/1adb47e8aa5c6404f99b5b8be94449f96094bced/header.jpg?t=1789233418",
+      "link": "https://store.steampowered.com/app/2698780/",
+      "status": "wishlist",
+      "hours": 0,
+      "platform": "PC",
+      "year": "2025",
+      "genres": [
+        "Casual",
+        "Indie",
+        "Simulator"
+      ],
+      "developer": "MYM Games Studios",
+      "description": "Планируйте, проектируйте, стройте и украшайте дом своей мечты в открытом мире. Разрушайте стены, делайте эскизы планировки, а затем стройте и украшайте каждый сантиметр - как внутри, так и в саду. Занимайтесь каждым ремонтом в одиночку или в компании до 4 друзей. Дом вашей мечты ждет вас!",
+      "rank": "#12",
+      "price": "$9.99",
+      "discount": 0,
+      "isFree": false,
+      "_fetchedAt": "2026-10-19T05:24:43.454Z"
+    },
+    {
+      "id": "steam_2483190",
+      "title": "Forza Horizon 6",
+      "cover": "/assets/media/games/steam_2483190.jpg",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2483190/bd1e762f4720cb68af365f2e41d002f14dd74fbf/header_alt_assets_5.jpg?t=1791312088",
+      "link": "https://store.steampowered.com/app/2483190/",
+      "status": "wishlist",
+      "hours": 0,
+      "platform": "PC",
+      "year": "2026",
+      "genres": [
+        "Racing",
+        "Simulator",
+        "Спорт"
+      ],
+      "developer": "Playground Games",
+      "description": "Исследуйте потрясающие пейзажи Японии за рулем любой из более чем 550 реальных машин и станьте настоящей легендой фестиваля Horizon в самом масштабном гоночном приключении в открытом мире.",
+      "rank": "#15",
+      "price": "$69.99",
+      "discount": 0,
+      "isFree": false,
+      "_fetchedAt": "2026-10-19T05:24:43.856Z"
     }
   ]
 }
