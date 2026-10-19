@@ -368,7 +368,7 @@ const jsonLd = {
 						<!-- Кнопка 1: Поддержать -->
 						<a
 							href={url("/support/")}
-							class="group/support flex-1 sm:flex-none flex items-center justify-center gap-2.5 h-11 px-5 sm:px-6 rounded-[var(--shape-corner-m,10px)] bg-[var(--surface-container-high)] hover:bg-[var(--primary)] text-[var(--on-surface)] hover:text-[var(--on-primary)] transition-all duration-200 font-semibold text-sm select-none border border-[var(--outline-variant)]/40 hover:border-[var(--primary)] whitespace-nowrap"
+							class="group/support flex-1 sm:flex-none flex items-center justify-center gap-2.5 h-11 px-5 sm:px-6 rounded-[var(--shape-corner-m,10px)] bg-[var(--surface-container-high)] hover:bg-[var(--primary)] text-[var(--on-surface)] hover:text-[var(--on-primary)] transition-all duration-200 font-semibold text-sm select-none border-none whitespace-nowrap"
 						>
 							<Icon
 								name="material-symbols:savings-rounded"
@@ -380,7 +380,9 @@ const jsonLd = {
 						<button
 							type="button"
 							id="native-share-btn"
-							class="flex-1 sm:flex-none flex items-center justify-center gap-2.5 h-11 px-5 sm:px-6 rounded-[var(--shape-corner-m,10px)] bg-[var(--surface-container-high)] hover:bg-[var(--surface-container-highest)] text-[var(--on-surface)] hover:text-[var(--primary)] transition-all duration-200 font-semibold text-sm cursor-pointer select-none border border-[var(--outline-variant)]/40 hover:border-[var(--primary)]/60"
+							data-title={entry.data.title}
+							data-url={canonicalPostUrl}
+							class="flex-1 sm:flex-none flex items-center justify-center gap-2.5 h-11 px-5 sm:px-6 rounded-[var(--shape-corner-m,10px)] bg-[var(--surface-container-high)] hover:bg-[var(--surface-container-highest)] text-[var(--on-surface)] hover:text-[var(--primary)] transition-all duration-200 font-semibold text-sm cursor-pointer select-none border-none"
 						>
 							<Icon name="material-symbols:share-outline-rounded" class="text-lg shrink-0" />
 							<span>Поделиться</span>
@@ -517,7 +519,15 @@ const jsonLd = {
 		const shareSection = document.querySelector("[data-article-share]");
 		const triggerBtn = shareSection ? shareSection.querySelector("button") : null;
 		if (triggerBtn) {
-			triggerBtn.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true }));
+			triggerBtn.click();
+			return;
+		}
+		// Фолбэк, если ArticleShare ещё не гидратирован: системное меню или копирование ссылки
+		const shareUrl = new URL(target.dataset.url || location.pathname, location.origin).href;
+		if (navigator.share) {
+			navigator.share({ title: target.dataset.title || document.title, url: shareUrl }).catch(() => {});
+		} else if (navigator.clipboard) {
+			navigator.clipboard.writeText(shareUrl).catch(() => {});
 		}
 	});
 </script>
