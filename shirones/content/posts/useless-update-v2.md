@@ -1,14 +1,14 @@
 ---
-title: "Обновления блога: дизайн, медиатека и новые страницы"
+title: "Обновления сайта v2"
 published: 2026-10-18
 pinned: true
 description: "Список изменений: переработанная тема, разделы аниме, кино и игр, страница находок «Закладки» и поддержка."
-tags: ["Обновления", "Дизайн", "Блог"]
+tags: ["Блог"]
 category: "Заметки"
-series: "blog-notes"
-seriesOrder: 1
+# series: "blog-notes"
+# seriesOrder: 1
 image: "/assets/images/blog-update-new.jpg"
-alias: "blog-big-update"
+alias: "useless-update-v2"
 draft: false
 ---
 

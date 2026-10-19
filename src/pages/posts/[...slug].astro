@@ -244,8 +244,8 @@ const jsonLd = {
     {hasMath && <link slot="head" rel="stylesheet" data-swup-optional="math" href={overlayScrollbarsStylesheet} />}
     {markdownStylesheetAssets.map(({ pack, css }) => <style is:inline slot="head" data-swup-optional={pack} set:html={css}></style>)}
     <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
-    <div class="flex w-full rounded-[var(--shape-corner-xl)] overflow-hidden relative mb-4">
-		<Card color="var(--card-bg)" radius="xl" class="post-card z-10 !p-0 relative w-full overflow-hidden !rounded-[var(--shape-corner-xl)]">
+    <div class="flex w-full rounded-[16px] overflow-hidden relative mb-4">
+		<Card color="var(--card-bg)" radius="l" class="post-card z-10 !p-0 relative w-full overflow-hidden !rounded-[16px]">
 			
 			<!-- 1. Премиум Edge-to-Edge Hero баннер обложки на самом верху карточки -->
 			{entry.data.image && (
@@ -355,7 +355,7 @@ const jsonLd = {
 			</div>
 
 			<!-- 5. Завершение статьи: от края до края карточки (как обложка наверху) -->
-			<footer class="onload-animation border-t border-[var(--outline-variant)]/30 bg-[var(--surface-container-low)] divide-y divide-[var(--outline-variant)]/25 rounded-b-[var(--shape-corner-xl)] overflow-hidden">
+			<footer class="onload-animation border-t border-[var(--outline-variant)]/30 bg-[var(--surface-container-low)] divide-y divide-[var(--outline-variant)]/25 rounded-b-[16px] overflow-hidden">
 				<!-- 1. Верхний ряд: На десктопе вопрос слева + кнопки справа; на мобилке чистые центрированные кнопки -->
 				<div class="flex items-center justify-center sm:justify-between gap-4 px-5 sm:px-8 py-5 sm:py-6">
 					<div class="hidden sm:flex items-center gap-2.5 text-[var(--on-surface)] select-none shrink-0">
@@ -365,22 +365,22 @@ const jsonLd = {
 						</span>
 					</div>
 					<div class="flex items-center justify-center sm:justify-end gap-3 w-full sm:w-auto max-w-sm sm:max-w-none">
-						<!-- Кнопка 1: Закинуть монетку -->
+						<!-- Кнопка 1: Поддержать -->
 						<a
 							href={url("/support/")}
-							class="group/support flex-1 sm:flex-none flex items-center justify-center gap-2.5 h-11 px-5 sm:px-6 rounded-[var(--shape-corner-m,14px)] bg-[var(--surface-container-high)] hover:bg-[var(--primary)] text-[var(--on-surface)] hover:text-[var(--on-primary)] transition-all duration-200 font-semibold text-sm select-none border border-[var(--outline-variant)]/40 hover:border-[var(--primary)]"
+							class="group/support flex-1 sm:flex-none flex items-center justify-center gap-2.5 h-11 px-5 sm:px-6 rounded-[var(--shape-corner-m,10px)] bg-[var(--surface-container-high)] hover:bg-[var(--primary)] text-[var(--on-surface)] hover:text-[var(--on-primary)] transition-all duration-200 font-semibold text-sm select-none border border-[var(--outline-variant)]/40 hover:border-[var(--primary)] whitespace-nowrap"
 						>
 							<Icon
 								name="material-symbols:savings-rounded"
 								class="text-lg text-[var(--primary)] group-hover/support:text-[var(--on-primary)] transition-colors shrink-0"
 							/>
-							<span>Закинуть монетку</span>
+							<span>Поддержать</span>
 						</a>
 						<!-- Кнопка 2: Поделиться -->
 						<button
 							type="button"
 							id="native-share-btn"
-							class="flex-1 sm:flex-none flex items-center justify-center gap-2.5 h-11 px-5 sm:px-6 rounded-[var(--shape-corner-m,14px)] bg-[var(--surface-container-high)] hover:bg-[var(--surface-container-highest)] text-[var(--on-surface)] hover:text-[var(--primary)] transition-all duration-200 font-semibold text-sm cursor-pointer select-none border border-[var(--outline-variant)]/40 hover:border-[var(--primary)]/60"
+							class="flex-1 sm:flex-none flex items-center justify-center gap-2.5 h-11 px-5 sm:px-6 rounded-[var(--shape-corner-m,10px)] bg-[var(--surface-container-high)] hover:bg-[var(--surface-container-highest)] text-[var(--on-surface)] hover:text-[var(--primary)] transition-all duration-200 font-semibold text-sm cursor-pointer select-none border border-[var(--outline-variant)]/40 hover:border-[var(--primary)]/60"
 						>
 							<Icon name="material-symbols:share-outline-rounded" class="text-lg shrink-0" />
 							<span>Поделиться</span>

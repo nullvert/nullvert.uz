@@ -860,14 +860,14 @@ widget-layout:has(.sidebar-toc:not(:has(.m3-blog-toc__item))),
 
 .banner-wrapper {
 	max-height: 380px;
-	border-radius: var(--shape-corner-xl) var(--shape-corner-xl) 0 0 !important;
+	border-radius: 16px 16px 0 0 !important;
 }
 
 #post-cover {
 	aspect-ratio: 21 / 9;
 	width: 100% !important;
 	max-height: 380px !important;
-	border-radius: var(--shape-corner-xl) var(--shape-corner-xl) 0 0 !important;
+	border-radius: 16px 16px 0 0 !important;
 	box-shadow: none !important;
 	margin: 0 !important;
 	display: block !important;
@@ -879,7 +879,7 @@ widget-layout:has(.sidebar-toc:not(:has(.m3-blog-toc__item))),
 	width: 100% !important;
 	height: 100% !important;
 	max-height: 380px !important;
-	border-radius: var(--shape-corner-xl) var(--shape-corner-xl) 0 0 !important;
+	border-radius: 16px 16px 0 0 !important;
 	object-fit: cover !important;
 	object-position: center 36% !important;
 }
@@ -1307,7 +1307,18 @@ widget-layout .collapse-wrapper.collapsed {
 }
 
 .m3-blog-postcard {
-	border-radius: var(--shape-corner-extra-large, 24px) !important;
+	border-radius: 16px !important;
+}
+
+/* Скрываем круглую иконку пина, а самой закрепленной карточке даем стильный акцентный фон */
+.m3-blog-postcard .m3-blog-postcard__pin {
+	display: none !important;
+}
+
+.m3-blog-postcard:has(.m3-blog-postcard__pin) {
+	background: color-mix(in srgb, var(--primary) 8%, var(--card-bg, var(--surface-container-low))) !important;
+	border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent) !important;
+	box-shadow: 0 4px 20px -2px color-mix(in srgb, var(--primary) 12%, transparent) !important;
 }
 
 .m3-blog-postcard__title {
