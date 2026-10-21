@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T05:24:44.476Z",
+  "updatedAt": "2026-10-21T08:27:33.389Z",
   "total": 31,
   "items": [
     {
@@ -52,7 +52,7 @@
       "link": "https://infinitebacklog.net/games/wuthering-waves",
       "status": "playing",
       "rating": 8,
-      "hours": 128,
+      "hours": 130,
       "platform": "PC",
       "year": "2024",
       "genres": [
@@ -323,47 +323,26 @@
       "_fetchedAt": "2026-10-15T18:11:30.736Z"
     },
     {
-      "id": "steam_601150",
-      "title": "Devil May Cry 5",
-      "cover": "/assets/media/games/steam_601150.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/601150/header.jpg?t=1790215341",
-      "link": "https://store.steampowered.com/app/601150/",
+      "id": "steam_233130",
+      "title": "Shadow Warrior",
+      "cover": "/assets/media/games/steam_233130.jpg",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/233130/header.jpg?t=1710246206",
+      "link": "https://store.steampowered.com/app/233130/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
-      "year": "2019",
-      "genres": [
-        "Action"
-      ],
-      "developer": "CAPCOM Co., Ltd.",
-      "description": "Лучший охотник на демонов возвращается в новом стильном боевике.",
-      "rank": "#10",
-      "price": "$7.49",
-      "discount": 75,
-      "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:40.838Z"
-    },
-    {
-      "id": "steam_557340",
-      "title": "My Friend Pedro",
-      "cover": "/assets/media/games/steam_557340.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/557340/header.jpg?t=1745954928",
-      "link": "https://store.steampowered.com/app/557340/",
-      "status": "wishlist",
-      "hours": 0,
-      "platform": "PC",
-      "year": "2019",
+      "year": "2013",
       "genres": [
         "Action",
-        "Indie"
+        "Adventure"
       ],
-      "developer": "DeadToast Entertainment",
-      "description": "My Friend Pedro — это жестокая смесь дружбы, фантазии и стремления уничтожить всех на своем пути по приказу разумного банана. Стратегическое использование раздельного прицеливания, замедленного движения и старого доброго вышибания окон позволяет выстраивать одну сногсшибательную боевую сцену за другой.",
-      "rank": "#2",
-      "price": "$19.99",
+      "developer": "Flying Wild Hog",
+      "description": "Shadow Warrior is a bold reimagining of the classic 3D Realms’ shooter from independent developer Flying Wild Hog (Hard Reset) starring the legendary and quick-witted warrior Lo Wang.",
+      "rank": "#6",
+      "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:40.710Z"
+      "_fetchedAt": "2026-10-21T08:27:29.263Z"
     },
     {
       "id": "steam_257510",
@@ -386,73 +365,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:41.097Z"
-    },
-    {
-      "id": "steam_1049410",
-      "title": "Superliminal",
-      "cover": "/assets/media/games/steam_1049410.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1049410/header.jpg?t=1755294276",
-      "link": "https://store.steampowered.com/app/1049410/",
-      "status": "wishlist",
-      "hours": 0,
-      "platform": "PC",
-      "year": "2020",
-      "genres": [
-        "Action",
-        "Adventure"
-      ],
-      "developer": "Pillow Castle",
-      "description": "Восприятие – это реальность. В этой умопомрачительной головоломке от первого лица вам предстоит сбежать из сюрреалистического мира снов, решая невозможные загадки при помощи перспективы.",
-      "rank": "#5",
-      "price": "$7.99",
-      "discount": 60,
-      "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:41.185Z"
-    },
-    {
-      "id": "steam_233130",
-      "title": "Shadow Warrior",
-      "cover": "/assets/media/games/steam_233130.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/233130/header.jpg?t=1710246206",
-      "link": "https://store.steampowered.com/app/233130/",
-      "status": "wishlist",
-      "hours": 0,
-      "platform": "PC",
-      "year": "2013",
-      "genres": [
-        "Action",
-        "Adventure"
-      ],
-      "developer": "Flying Wild Hog",
-      "description": "Shadow Warrior is a bold reimagining of the classic 3D Realms’ shooter from independent developer Flying Wild Hog (Hard Reset) starring the legendary and quick-witted warrior Lo Wang.",
-      "rank": "#6",
-      "price": "$29.99",
-      "discount": 0,
-      "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:41.480Z"
-    },
-    {
-      "id": "steam_1164940",
-      "title": "Trepang2",
-      "cover": "/assets/media/games/steam_1164940.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1164940/header.jpg?t=1765814715",
-      "link": "https://store.steampowered.com/app/1164940/",
-      "status": "wishlist",
-      "hours": 0,
-      "platform": "PC",
-      "year": "2023",
-      "genres": [
-        "Action",
-        "Indie"
-      ],
-      "developer": "Trepang Studios",
-      "description": "Trepang2, сумасшедший кровавый шутер от первого лица в мире далекого будущего, сделает вас крепким орешком. Враги пожалеют, что они родились на свет, увидев, как вы уклоняетесь от пуль и оставляете за собой одни разрушения в этой лихорадочной стрелялке не для слабонервных.",
-      "rank": "#11",
-      "price": "$7.49",
-      "discount": 75,
-      "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:41.542Z"
+      "_fetchedAt": "2026-10-21T08:27:29.251Z"
     },
     {
       "id": "steam_322500",
@@ -474,50 +387,7 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:41.824Z"
-    },
-    {
-      "id": "steam_1265920",
-      "title": "Life is Strange Remastered",
-      "cover": "/assets/media/games/steam_1265920.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1265920/header.jpg?t=1779117636",
-      "link": "https://store.steampowered.com/app/1265920/",
-      "status": "wishlist",
-      "hours": 0,
-      "platform": "PC",
-      "year": "2022",
-      "genres": [
-        "Action",
-        "Adventure"
-      ],
-      "developer": "Deck Nine",
-      "description": "Лауреат премии BAFTA Life is Strange возвращается с новой графикой и анимацией, основанной на технологии захвата мимики.",
-      "rank": "#1",
-      "price": "$7.99",
-      "discount": 80,
-      "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:41.932Z"
-    },
-    {
-      "id": "steam_1091500",
-      "title": "Cyberpunk 2077",
-      "cover": "/assets/media/games/steam_1091500.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/e9047d8ec47ae3d94bb8b464fb0fc9e9972b4ac7/header.jpg?t=1784714077",
-      "link": "https://store.steampowered.com/app/1091500/",
-      "status": "wishlist",
-      "hours": 0,
-      "platform": "PC",
-      "year": "2020",
-      "genres": [
-        "RPG"
-      ],
-      "developer": "CD PROJEKT RED",
-      "description": "Cyberpunk 2077 — приключенческая ролевая игра с открытым миром, действие которой происходит в футуристическом мегаполисе Найт-Сити, где выше всего ценятся власть, роскошь и модификации тела.",
-      "rank": "#3",
-      "price": "$17.99",
-      "discount": 70,
-      "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:42.174Z"
+      "_fetchedAt": "2026-10-21T08:27:29.712Z"
     },
     {
       "id": "steam_508980",
@@ -539,29 +409,50 @@
       "price": "$11.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:42.323Z"
+      "_fetchedAt": "2026-10-21T08:27:29.801Z"
     },
     {
-      "id": "steam_1029690",
-      "title": "Sniper Elite 5",
-      "cover": "/assets/media/games/steam_1029690.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1029690/header.jpg?t=1770633150",
-      "link": "https://store.steampowered.com/app/1029690/",
+      "id": "steam_557340",
+      "title": "My Friend Pedro",
+      "cover": "/assets/media/games/steam_557340.jpg",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/557340/header.jpg?t=1745954928",
+      "link": "https://store.steampowered.com/app/557340/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
-      "year": "2022",
+      "year": "2019",
       "genres": [
         "Action",
-        "Adventure"
+        "Indie"
       ],
-      "developer": "Rebellion",
-      "description": "Легендарная серия Sniper Elite возвращается. 1944 год, Франция, Карл Фейрберн против проекта «Кракен». Лучшая в жанре симуляция снайперской стрельбы, новая камера убийств и интерактивные карты. Остановите нацистскую военную машину, пока она не перевернула ход войны!",
-      "rank": "#9",
-      "price": "$49.99",
+      "developer": "DeadToast Entertainment",
+      "description": "My Friend Pedro — это жестокая смесь дружбы, фантазии и стремления уничтожить всех на своем пути по приказу разумного банана. Стратегическое использование раздельного прицеливания, замедленного движения и старого доброго вышибания окон позволяет выстраивать одну сногсшибательную боевую сцену за другой.",
+      "rank": "#2",
+      "price": "$19.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:42.543Z"
+      "_fetchedAt": "2026-10-21T08:27:30.074Z"
+    },
+    {
+      "id": "steam_601150",
+      "title": "Devil May Cry 5",
+      "cover": "/assets/media/games/steam_601150.jpg",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/601150/header.jpg?t=1790215341",
+      "link": "https://store.steampowered.com/app/601150/",
+      "status": "wishlist",
+      "hours": 0,
+      "platform": "PC",
+      "year": "2019",
+      "genres": [
+        "Action"
+      ],
+      "developer": "CAPCOM Co., Ltd.",
+      "description": "Лучший охотник на демонов возвращается в новом стильном боевике.",
+      "rank": "#10",
+      "price": "$7.49",
+      "discount": 75,
+      "isFree": false,
+      "_fetchedAt": "2026-10-21T08:27:30.456Z"
     },
     {
       "id": "steam_690040",
@@ -583,30 +474,139 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:42.909Z"
+      "_fetchedAt": "2026-10-21T08:27:30.867Z"
     },
     {
-      "id": "steam_3919340",
-      "title": "Eco Volunteer",
-      "cover": "/assets/media/games/steam_3919340.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3919340/b1fecd3bdebb576845ceb7c82d896ff93410d06b/header.jpg?t=1789027726",
-      "link": "https://store.steampowered.com/app/3919340/",
+      "id": "steam_1029690",
+      "title": "Sniper Elite 5",
+      "cover": "/assets/media/games/steam_1029690.jpg",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1029690/header.jpg?t=1770633150",
+      "link": "https://store.steampowered.com/app/1029690/",
+      "status": "wishlist",
+      "hours": 0,
+      "platform": "PC",
+      "year": "2022",
+      "genres": [
+        "Action",
+        "Adventure"
+      ],
+      "developer": "Rebellion",
+      "description": "Легендарная серия Sniper Elite возвращается. 1944 год, Франция, Карл Фейрберн против проекта «Кракен». Лучшая в жанре симуляция снайперской стрельбы, новая камера убийств и интерактивные карты. Остановите нацистскую военную машину, пока она не перевернула ход войны!",
+      "rank": "#9",
+      "price": "$49.99",
+      "discount": 0,
+      "isFree": false,
+      "_fetchedAt": "2026-10-21T08:27:30.860Z"
+    },
+    {
+      "id": "steam_1049410",
+      "title": "Superliminal",
+      "cover": "/assets/media/games/steam_1049410.jpg",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1049410/header.jpg?t=1755294276",
+      "link": "https://store.steampowered.com/app/1049410/",
+      "status": "wishlist",
+      "hours": 0,
+      "platform": "PC",
+      "year": "2020",
+      "genres": [
+        "Action",
+        "Adventure"
+      ],
+      "developer": "Pillow Castle",
+      "description": "Восприятие – это реальность. В этой умопомрачительной головоломке от первого лица вам предстоит сбежать из сюрреалистического мира снов, решая невозможные загадки при помощи перспективы.",
+      "rank": "#5",
+      "price": "$7.99",
+      "discount": 60,
+      "isFree": false,
+      "_fetchedAt": "2026-10-21T08:27:31.239Z"
+    },
+    {
+      "id": "steam_1091500",
+      "title": "Cyberpunk 2077",
+      "cover": "/assets/media/games/steam_1091500.jpg",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/e9047d8ec47ae3d94bb8b464fb0fc9e9972b4ac7/header.jpg?t=1784714077",
+      "link": "https://store.steampowered.com/app/1091500/",
+      "status": "wishlist",
+      "hours": 0,
+      "platform": "PC",
+      "year": "2020",
+      "genres": [
+        "RPG"
+      ],
+      "developer": "CD PROJEKT RED",
+      "description": "Cyberpunk 2077 — приключенческая ролевая игра с открытым миром, действие которой происходит в футуристическом мегаполисе Найт-Сити, где выше всего ценятся власть, роскошь и модификации тела.",
+      "rank": "#3",
+      "price": "$17.99",
+      "discount": 70,
+      "isFree": false,
+      "_fetchedAt": "2026-10-21T08:27:31.290Z"
+    },
+    {
+      "id": "steam_1164940",
+      "title": "Trepang2",
+      "cover": "/assets/media/games/steam_1164940.jpg",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1164940/header.jpg?t=1765814715",
+      "link": "https://store.steampowered.com/app/1164940/",
+      "status": "wishlist",
+      "hours": 0,
+      "platform": "PC",
+      "year": "2023",
+      "genres": [
+        "Action",
+        "Indie"
+      ],
+      "developer": "Trepang Studios",
+      "description": "Trepang2, сумасшедший кровавый шутер от первого лица в мире далекого будущего, сделает вас крепким орешком. Враги пожалеют, что они родились на свет, увидев, как вы уклоняетесь от пуль и оставляете за собой одни разрушения в этой лихорадочной стрелялке не для слабонервных.",
+      "rank": "#11",
+      "price": "$7.49",
+      "discount": 75,
+      "isFree": false,
+      "_fetchedAt": "2026-10-21T08:27:31.662Z"
+    },
+    {
+      "id": "steam_1265920",
+      "title": "Life is Strange Remastered",
+      "cover": "/assets/media/games/steam_1265920.jpg",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1265920/header.jpg?t=1779117636",
+      "link": "https://store.steampowered.com/app/1265920/",
+      "status": "wishlist",
+      "hours": 0,
+      "platform": "PC",
+      "year": "2022",
+      "genres": [
+        "Action",
+        "Adventure"
+      ],
+      "developer": "Deck Nine",
+      "description": "Лауреат премии BAFTA Life is Strange возвращается с новой графикой и анимацией, основанной на технологии захвата мимики.",
+      "rank": "#1",
+      "price": "$39.99",
+      "discount": 0,
+      "isFree": false,
+      "_fetchedAt": "2026-10-21T08:27:31.704Z"
+    },
+    {
+      "id": "steam_2483190",
+      "title": "Forza Horizon 6",
+      "cover": "/assets/media/games/steam_2483190.jpg",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2483190/bd1e762f4720cb68af365f2e41d002f14dd74fbf/header_alt_assets_5.jpg?t=1791312088",
+      "link": "https://store.steampowered.com/app/2483190/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
       "year": "2026",
       "genres": [
-        "Casual",
-        "Indie",
-        "Simulator"
+        "Racing",
+        "Simulator",
+        "Спорт"
       ],
-      "developer": "Scope Creepers",
-      "description": "Спокойная, уютная и умиротворяющая игра про сбор мусора и другие экологические активности на природе. Отправляйтесь в путешествие по красивейшим природным местам и делайте добрые дела!",
+      "developer": "Playground Games",
+      "description": "Исследуйте потрясающие пейзажи Японии за рулем любой из более чем 550 реальных машин и станьте настоящей легендой фестиваля Horizon в самом масштабном гоночном приключении в открытом мире.",
       "rank": "#13",
-      "price": "$11.99",
+      "price": "$69.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:43.385Z"
+      "_fetchedAt": "2026-10-21T08:27:32.127Z"
     },
     {
       "id": "steam_2698780",
@@ -629,30 +629,30 @@
       "price": "$9.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:43.454Z"
+      "_fetchedAt": "2026-10-21T08:27:32.220Z"
     },
     {
-      "id": "steam_2483190",
-      "title": "Forza Horizon 6",
-      "cover": "/assets/media/games/steam_2483190.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2483190/bd1e762f4720cb68af365f2e41d002f14dd74fbf/header_alt_assets_5.jpg?t=1791312088",
-      "link": "https://store.steampowered.com/app/2483190/",
+      "id": "steam_3919340",
+      "title": "Eco Volunteer",
+      "cover": "/assets/media/games/steam_3919340.jpg",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3919340/b1fecd3bdebb576845ceb7c82d896ff93410d06b/header.jpg?t=1789027726",
+      "link": "https://store.steampowered.com/app/3919340/",
       "status": "wishlist",
       "hours": 0,
       "platform": "PC",
       "year": "2026",
       "genres": [
-        "Racing",
-        "Simulator",
-        "Спорт"
+        "Casual",
+        "Indie",
+        "Simulator"
       ],
-      "developer": "Playground Games",
-      "description": "Исследуйте потрясающие пейзажи Японии за рулем любой из более чем 550 реальных машин и станьте настоящей легендой фестиваля Horizon в самом масштабном гоночном приключении в открытом мире.",
-      "rank": "#15",
-      "price": "$69.99",
+      "developer": "Scope Creepers",
+      "description": "Спокойная, уютная и умиротворяющая игра про сбор мусора и другие экологические активности на природе. Отправляйтесь в путешествие по красивейшим природным местам и делайте добрые дела!",
+      "rank": "#13",
+      "price": "$11.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T05:24:43.856Z"
+      "_fetchedAt": "2026-10-21T08:27:32.632Z"
     }
   ]
 }
