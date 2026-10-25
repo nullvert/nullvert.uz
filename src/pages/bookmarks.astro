@@ -1,0 +1,22 @@
+---
+/**
+ * Раздел «Закладки» (Bookmarks) — полезные сервисы и ссылки из Raindrop.io.
+ */
+import CompassSection from "../components/organisms/CompassSection.svelte";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { compassConfig } from "../../shirones/config/compassConfig";
+import bookmarksSnapshot from "../data/snapshots/bookmarks.json";
+import type { CompassShelf } from "@/types/compass";
+
+if (!compassConfig.enable) {
+	return Astro.redirect("/404/");
+}
+
+const pageTitle = "Закладки";
+const pageDescription = "Коллекция полезных сервисов, инструментов и закладок";
+const shelves = (bookmarksSnapshot.items || []) as CompassShelf[];
+---
+
+<MainGridLayout title={pageTitle} description={pageDescription} page="compass">
+	<CompassSection {shelves} title={pageTitle} subtitle={pageDescription} client:load />
+</MainGridLayout>

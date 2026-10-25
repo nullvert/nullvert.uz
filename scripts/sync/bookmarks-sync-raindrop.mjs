@@ -160,8 +160,8 @@ async function main() {
 
 	console.log(`[Raindrop] Generated ${shelves.length} shelves with ${shelves.reduce((acc, s) => acc + s.entries.length, 0)} total links.`);
 
-	// 1. Запись стандартизированного снапшота в src/data/snapshots/compass.json
-	const SNAPSHOT_FILE = resolve(ROOT_DIR, "src/data/snapshots/compass.json");
+	// 1. Запись стандартизированного снапшота в src/data/snapshots/bookmarks.json
+	const SNAPSHOT_FILE = resolve(ROOT_DIR, "src/data/snapshots/bookmarks.json");
 	const snapshotPayload = createSnapshotEnvelope({
 		provider: "raindrop",
 		items: shelves,
@@ -175,10 +175,10 @@ async function main() {
 	// 2. Обратная совместимость: компактный compass.ts импортирует снапшот
 	const compatContent = `/**
  * Автоматически сгенерированный адаптер для обратной совместимости.
- * Первичный снапшот хранится в src/data/snapshots/compass.json
+ * Первичный снапшот хранится в src/data/snapshots/bookmarks.json
  */
 import type { CompassShelf } from "@/types/compass";
-import snapshot from "../../../src/data/snapshots/compass.json";
+import snapshot from "../../../src/data/snapshots/bookmarks.json";
 
 export const compassData = (snapshot.items || []) as CompassShelf[];
 `;

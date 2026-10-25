@@ -196,17 +196,15 @@ onMount(() => {
 			{#key `${selectedGroup}|${query}`}
 				{#each filteredShelves as shelf (shelf.key)}
 					<section class="compass-shelf" data-shelf={shelf.key}>
-						<div class="compass-shelf__header mb-3">
+						<div class="compass-shelf__header flex items-center justify-between gap-4 mb-4 pb-2.5 border-b border-[var(--outline-variant)]/30">
 							<div class="flex items-center gap-2.5">
-								{#if shelf.icon}
-									<span class="text-[var(--primary)] text-xl flex items-center shrink-0" aria-hidden="true">
-										<Icon icon={shelf.icon} />
-									</span>
-								{/if}
-								<h2 class="text-xl font-bold text-[var(--on-surface)] tracking-tight">{shelf.name}</h2>
+								<h2 class="text-lg font-extrabold text-[var(--on-surface)] tracking-tight">{shelf.name}</h2>
+								<span class="compass-shelf__badge text-xs font-bold px-2 py-0.5 rounded-[var(--shape-corner-small,6px)] bg-[var(--surface-container-high)] text-[var(--primary)] tabular-nums">
+									{shelf.entries.length}
+								</span>
 							</div>
 							{#if shelf.blurb}
-								<p class="text-sm text-[var(--on-surface-variant)] mt-1">{shelf.blurb}</p>
+								<p class="text-xs text-[var(--on-surface-variant)] opacity-75">{shelf.blurb}</p>
 							{/if}
 						</div>
 						<div class="compass-shelf__grid">
@@ -353,14 +351,10 @@ onMount(() => {
 
 .compass-shelf__grid
 	display: grid
-	grid-template-columns: repeat(3, minmax(0, 1fr))
+	grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr))
 	gap: 1.25rem
 
-	@media (max-width: 64rem)
-		grid-template-columns: repeat(2, minmax(0, 1fr))
-		gap: 1rem
-
-	@media (max-width: 40rem)
+	@media (max-width: 48rem)
 		grid-template-columns: 1fr
 		gap: 0.875rem
 

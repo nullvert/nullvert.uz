@@ -74,8 +74,8 @@ export const LinkPresets: Record<string, NavBarLink> = {
 		pageKey: "books",
 	},
 	Compass: {
-		name: i18n(I18nKey.compass),
-		url: "/compass/",
+		name: "Закладки",
+		url: "/bookmarks/",
 		icon: "material-symbols:bookmarks-rounded",
 		pageKey: "compass",
 	},
