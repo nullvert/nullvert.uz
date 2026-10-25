@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-19T16:35:06.126Z",
+  "updatedAt": "2026-10-25T19:49:44.472Z",
   "total": 31,
   "provider": "infinitebacklog",
   "accountRef": "nullvert",
@@ -55,7 +55,7 @@
       "link": "https://infinitebacklog.net/games/wuthering-waves",
       "status": "playing",
       "rating": 8,
-      "hours": 128,
+      "hours": 131,
       "platform": "PC",
       "year": "2024",
       "genres": [
@@ -345,7 +345,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:34:52.928Z"
+      "_fetchedAt": "2026-10-25T19:49:26.626Z"
     },
     {
       "id": "steam_257510",
@@ -368,7 +368,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:34:52.890Z"
+      "_fetchedAt": "2026-10-25T19:49:26.588Z"
     },
     {
       "id": "steam_322500",
@@ -390,7 +390,7 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:34:55.304Z"
+      "_fetchedAt": "2026-10-25T19:49:29.415Z"
     },
     {
       "id": "steam_508980",
@@ -412,7 +412,7 @@
       "price": "$11.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:34:55.299Z"
+      "_fetchedAt": "2026-10-25T19:49:29.711Z"
     },
     {
       "id": "steam_557340",
@@ -434,7 +434,7 @@
       "price": "$19.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:34:56.385Z"
+      "_fetchedAt": "2026-10-25T19:49:31.552Z"
     },
     {
       "id": "steam_601150",
@@ -452,10 +452,10 @@
       "developer": "CAPCOM Co., Ltd.",
       "description": "Лучший охотник на демонов возвращается в новом стильном боевике.",
       "rank": "#10",
-      "price": "$7.49",
-      "discount": 75,
+      "price": "$29.99",
+      "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:34:57.302Z"
+      "_fetchedAt": "2026-10-25T19:49:34.773Z"
     },
     {
       "id": "steam_690040",
@@ -477,7 +477,7 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:34:57.684Z"
+      "_fetchedAt": "2026-10-25T19:49:35.203Z"
     },
     {
       "id": "steam_1029690",
@@ -499,7 +499,7 @@
       "price": "$49.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:34:59.908Z"
+      "_fetchedAt": "2026-10-25T19:49:36.251Z"
     },
     {
       "id": "steam_1049410",
@@ -518,16 +518,16 @@
       "developer": "Pillow Castle",
       "description": "Восприятие – это реальность. В этой умопомрачительной головоломке от первого лица вам предстоит сбежать из сюрреалистического мира снов, решая невозможные загадки при помощи перспективы.",
       "rank": "#5",
-      "price": "$7.99",
-      "discount": 60,
+      "price": "$19.99",
+      "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:35:00.941Z"
+      "_fetchedAt": "2026-10-25T19:49:36.702Z"
     },
     {
       "id": "steam_1091500",
       "title": "Cyberpunk 2077",
       "cover": "/assets/media/games/steam_1091500.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/e9047d8ec47ae3d94bb8b464fb0fc9e9972b4ac7/header.jpg?t=1784714077",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/48a93d6445a67520ea49833c93dae8f2e68fc540/header_alt_assets_9.jpg?t=1792682505",
       "link": "https://store.steampowered.com/app/1091500/",
       "status": "wishlist",
       "hours": 0,
@@ -542,7 +542,7 @@
       "price": "$17.99",
       "discount": 70,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:35:01.813Z"
+      "_fetchedAt": "2026-10-25T19:49:38.112Z"
     },
     {
       "id": "steam_1164940",
@@ -561,10 +561,10 @@
       "developer": "Trepang Studios",
       "description": "Trepang2, сумасшедший кровавый шутер от первого лица в мире далекого будущего, сделает вас крепким орешком. Враги пожалеют, что они родились на свет, увидев, как вы уклоняетесь от пуль и оставляете за собой одни разрушения в этой лихорадочной стрелялке не для слабонервных.",
       "rank": "#11",
-      "price": "$7.49",
-      "discount": 75,
+      "price": "$29.99",
+      "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:35:01.996Z"
+      "_fetchedAt": "2026-10-25T19:49:39.460Z"
     },
     {
       "id": "steam_1265920",
@@ -583,10 +583,10 @@
       "developer": "Deck Nine",
       "description": "Лауреат премии BAFTA Life is Strange возвращается с новой графикой и анимацией, основанной на технологии захвата мимики.",
       "rank": "#1",
-      "price": "$7.99",
-      "discount": 80,
+      "price": "$39.99",
+      "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:35:02.900Z"
+      "_fetchedAt": "2026-10-25T19:49:39.604Z"
     },
     {
       "id": "steam_2483190",
@@ -609,7 +609,7 @@
       "price": "$69.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:35:03.044Z"
+      "_fetchedAt": "2026-10-25T19:49:41.117Z"
     },
     {
       "id": "steam_2698780",
@@ -632,13 +632,13 @@
       "price": "$9.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:35:04.026Z"
+      "_fetchedAt": "2026-10-25T19:49:41.228Z"
     },
     {
       "id": "steam_3919340",
       "title": "Eco Volunteer",
       "cover": "/assets/media/games/steam_3919340.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3919340/b1fecd3bdebb576845ceb7c82d896ff93410d06b/header.jpg?t=1789027726",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3919340/b1fecd3bdebb576845ceb7c82d896ff93410d06b/header.jpg?t=1792760197",
       "link": "https://store.steampowered.com/app/3919340/",
       "status": "wishlist",
       "hours": 0,
@@ -655,7 +655,7 @@
       "price": "$11.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-19T16:35:04.914Z"
+      "_fetchedAt": "2026-10-25T19:49:42.718Z"
     }
   ]
 }

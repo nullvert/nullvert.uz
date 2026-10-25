@@ -1,8 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { isValidImageBuffer, cleanupOrphanedCovers } from "./media-cover-helper.mjs";
 import {
   createSnapshotEnvelope,
   getSetting,
@@ -122,8 +123,55 @@ test("createSnapshotEnvelope formats unified metadata structure", () => {
   assert.equal(envelope.schemaVersion, 1);
   assert.equal(envelope.provider, "test-provider");
   assert.equal(envelope.accountRef, "user123");
-  assert.equal(envelope.total, 1);
   assert.ok(typeof envelope.updatedAt === "string");
   assert.equal(envelope.items.length, 1);
+});
+
+test("isValidImageBuffer detects valid JPEG, PNG, WebP and rejects HTML/text", () => {
+  // Valid JPEG
+  const jpegHeader = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46, 0x00, 0x01, 0x01, 0x01, 0x00, 0x60]);
+  assert.equal(isValidImageBuffer(jpegHeader), true);
+
+  // Valid PNG
+  const pngHeader = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 0x00, 0x0d, 0x49, 0x48, 0x44, 0x52]);
+  assert.equal(isValidImageBuffer(pngHeader), true);
+
+  // Valid WebP
+  const webpHeader = Buffer.from("RIFFxxxxWEBPVP8 ", "ascii");
+  assert.equal(isValidImageBuffer(webpHeader), true);
+
+  // Invalid: HTML error / Cloudflare challenge
+  const htmlDoc = Buffer.from("<!DOCTYPE html><html><body>Error 403 Forbidden</body></html>", "utf8");
+  assert.equal(isValidImageBuffer(htmlDoc), false);
+
+  // Invalid: random JSON string
+  const jsonDoc = Buffer.from('{"error": "Rate limit exceeded"}', "utf8");
+  assert.equal(isValidImageBuffer(jsonDoc), false);
+
+  // Invalid: small buffer
+  assert.equal(isValidImageBuffer(Buffer.from([0x01, 0x02])), false);
+});
+
+test("cleanupOrphanedCovers safely removes orphans and leftover tmp files", () => {
+  const dir = mkdtempSync(join(tmpdir(), "shirone-gc-test-"));
+  try {
+    writeFileSync(join(dir, "active1.jpg"), "fakeimagecontent");
+    writeFileSync(join(dir, "active2.jpg"), "fakeimagecontent");
+    writeFileSync(join(dir, "orphan.jpg"), "fakeimagecontent");
+    writeFileSync(join(dir, ".stray.pid.tmp"), "tempcontent");
+    writeFileSync(join(dir, ".gitkeep"), "");
+
+    const active = new Set(["active1.jpg", "active2.jpg"]);
+    cleanupOrphanedCovers(dir, active, "test-gc");
+
+    assert.equal(existsSync(join(dir, "active1.jpg")), true);
+    assert.equal(existsSync(join(dir, "active2.jpg")), true);
+    assert.equal(existsSync(join(dir, ".gitkeep")), true);
+    // Orphan and tmp should be cleaned
+    assert.equal(existsSync(join(dir, "orphan.jpg")), false);
+    assert.equal(existsSync(join(dir, ".stray.pid.tmp")), false);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
 });
 

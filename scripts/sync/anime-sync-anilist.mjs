@@ -60,6 +60,7 @@ async function fetchAniListUserAnime(userName) {
             status
             score(format: POINT_10_DECIMAL)
             progress
+            repeat
             media {
               id
               title {
@@ -72,7 +73,10 @@ async function fetchAniListUserAnime(userName) {
                 large
               }
               episodes
+              season
               seasonYear
+              format
+              averageScore
               startDate { year month day }
               genres
               studios(isMain: true) {
@@ -168,15 +172,24 @@ async function sync() {
 				const genres = Array.isArray(media.genres) ? media.genres : [];
 				const description = cleanDescription(media.description);
 				const link = media.siteUrl || `https://anilist.co/anime/${media.id}`;
+				const format = media.format || undefined;
+				const season = media.season || undefined;
+				const repeat = typeof entry.repeat === "number" && entry.repeat > 0 ? entry.repeat : undefined;
+				const communityRating = typeof media.averageScore === "number" && media.averageScore > 0 ? media.averageScore : undefined;
 
 				items.push({
+					id: `anime-${media.id}`,
 					title,
 					status,
 					rating,
+					communityRating,
 					progress: {
 						watched,
 						total: episodes,
 					},
+					repeat,
+					format,
+					season,
 					cover,
 					link,
 					description,

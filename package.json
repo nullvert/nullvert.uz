@@ -15,8 +15,10 @@
     "cinema:auth": "node scripts/sync/cinema-auth-simkl.mjs",
     "games:sync": "node scripts/sync/games-sync-infinitebacklog.mjs",
     "compass:sync": "node scripts/sync/compass-sync-raindrop.mjs",
+    "raindrop:sync": "node scripts/sync/compass-sync-raindrop.mjs",
     "media:sync": "node scripts/sync/anime-sync-anilist.mjs && node scripts/sync/cinema-sync-simkl.mjs && node scripts/sync/games-sync-infinitebacklog.mjs",
     "all:sync": "pnpm media:sync && pnpm compass:sync",
+    "sync:all": "pnpm all:sync",
     "test:scripts": "node --test scripts/sync/*.test.mjs",
     "astro": "astro"
   },
