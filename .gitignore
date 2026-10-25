@@ -88,6 +88,9 @@ artifacts/shirone-ai-*
 .shirones/
 .shirones-backup/
 
+# Transfer export bundle
+transfer/
+
 # backup of firefly repository
 _firefly/
 
