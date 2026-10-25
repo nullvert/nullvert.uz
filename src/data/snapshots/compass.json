@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-25T20:15:51.669Z",
+  "updatedAt": "2026-10-25T20:20:36.080Z",
   "total": 3,
   "provider": "raindrop",
   "totalLinks": 5,
@@ -8,7 +8,6 @@
     {
       "key": "utility-i-soft",
       "name": "Утилиты и софт",
-      "icon": "material-symbols:build-outline-rounded",
       "entries": [
         {
           "label": "ShareX",
@@ -33,7 +32,6 @@
     {
       "key": "igry",
       "name": "Игры",
-      "icon": "material-symbols:sports-esports-outline-rounded",
       "entries": [
         {
           "label": "SteamDB",
@@ -46,7 +44,6 @@
     {
       "key": "razrabotka-i-veb",
       "name": "Разработка и веб",
-      "icon": "material-symbols:code-rounded",
       "entries": [
         {
           "label": "Современный учебник JavaScript",

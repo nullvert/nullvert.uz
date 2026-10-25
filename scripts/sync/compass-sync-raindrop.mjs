@@ -51,35 +51,6 @@ function slugify(text) {
 }
 
 /**
- * Иконка по умолчанию для категорий
- */
-function resolveShelfIcon(title) {
-	const lower = String(title ?? "").toLowerCase();
-	if (lower.includes("програм") || lower.includes("dev") || lower.includes("код") || lower.includes("разработ") || lower.includes("веб")) {
-		return "material-symbols:code-rounded";
-	}
-	if (lower.includes("утилит") || lower.includes("софт") || lower.includes("tool") || lower.includes("приложен") || lower.includes("app")) {
-		return "material-symbols:build-outline-rounded";
-	}
-	if (lower.includes("пк") || lower.includes("комп") || lower.includes("pc") || lower.includes("desktop")) {
-		return "material-symbols:desktop-windows-outline-rounded";
-	}
-	if (lower.includes("андроид") || lower.includes("android") || lower.includes("телефон") || lower.includes("mobile")) {
-		return "material-symbols:phone-android-rounded";
-	}
-	if (lower.includes("игр") || lower.includes("game")) {
-		return "material-symbols:sports-esports-outline-rounded";
-	}
-	if (lower.includes("книг") || lower.includes("read") || lower.includes("стать") || lower.includes("чтен")) {
-		return "material-symbols:menu-book-rounded";
-	}
-	if (lower.includes("дизайн") || lower.includes("design") || lower.includes("арт") || lower.includes("art")) {
-		return "material-symbols:palette-outline-rounded";
-	}
-	return "material-symbols:folder-outline-rounded";
-}
-
-/**
  * Получение всех подколлекций Raindrop
  */
 async function fetchCollections() {
@@ -183,7 +154,6 @@ async function main() {
 		shelves.push({
 			key: slugify(col.title),
 			name: col.title,
-			icon: resolveShelfIcon(col.title),
 			entries,
 		});
 	}
