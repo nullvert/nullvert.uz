@@ -58,6 +58,33 @@ export function loadEnvFile(envPath = resolve(ROOT_DIR, ".env")) {
 	return env;
 }
 
+/**
+ * Updates or appends keys in the project's .env file preserving existing formatting and comments.
+ */
+export function updateEnvFile(updates, envPath = resolve(ROOT_DIR, ".env")) {
+	let content = existsSync(envPath) ? readFileSync(envPath, "utf8").replace(/^\uFEFF/, "") : "";
+	const lines = content ? content.split(/\r?\n/) : [];
+	const pending = { ...updates };
+
+	const newLines = lines.map((line) => {
+		const match = line.match(/^(?:export\s+)?([\w.-]+)\s*=/);
+		if (match && pending[match[1]] !== undefined) {
+			const key = match[1];
+			const val = pending[key];
+			delete pending[key];
+			return `${key}="${val}"`;
+		}
+		return line;
+	});
+
+	for (const [key, val] of Object.entries(pending)) {
+		newLines.push(`${key}="${val}"`);
+	}
+
+	const normalized = `${newLines.join("\n").trim()}\n`;
+	writeTextAtomic(envPath, normalized);
+}
+
 /** Resolve CLI argument > process environment > .env file > fallback. */
 export function getSetting(name, { cliValue, env = loadEnvFile(), fallback } = {}) {
 	if (typeof cliValue === "string" && cliValue.trim()) return cliValue.trim();
@@ -69,6 +96,17 @@ export function getSetting(name, { cliValue, env = loadEnvFile(), fallback } = {
 	if (typeof fileValue === "string" && fileValue.trim()) return fileValue.trim();
 
 	return fallback;
+}
+
+/** Check if force-refresh flag is requested via CLI or environment variable. */
+export function isForceRefreshRequested(argv = process.argv, env = process.env) {
+	return (
+		argv.includes("--refresh") ||
+		argv.includes("--force-refresh") ||
+		argv.includes("-r") ||
+		env.REFRESH_METADATA === "true" ||
+		env.FORCE_REFRESH === "true"
+	);
 }
 
 export function delay(ms) {
@@ -174,6 +212,54 @@ export function getSnapshotItems(snapshot) {
 	if (Array.isArray(snapshot)) return snapshot;
 	if (Array.isArray(snapshot?.items)) return snapshot.items;
 	return [];
+}
+
+/**
+ * Load snapshot file into a key-value Map for fast caching and incremental updates.
+ */
+export function loadSnapshotCache(filePath, keyField = "id") {
+	const snapshot = readJsonFile(filePath, { fallback: null, warn: true });
+	const cache = new Map();
+	for (const item of getSnapshotItems(snapshot)) {
+		if (item && item[keyField] !== undefined && item[keyField] !== null) {
+			cache.set(String(item[keyField]), item);
+		}
+	}
+	return cache;
+}
+
+/**
+ * Determines file extension from image URL with query string stripping and known format priorities.
+ * Prioritizes modern web formats (.webp, .png, .jpg/.jpeg, .avif).
+ */
+export function inferImageExtension(url, defaultExt = "jpg") {
+	if (typeof url !== "string" || !url.trim()) return defaultExt;
+	try {
+		const cleanPath = url.split("?")[0].split("#")[0];
+		const match = cleanPath.match(/\.(webp|png|jpe?g|avif|gif|svg)$/i);
+		if (match) {
+			const ext = match[1].toLowerCase();
+			return ext === "jpeg" ? "jpg" : ext;
+		}
+	} catch {
+		// Fallback to defaultExt
+	}
+	return defaultExt;
+}
+
+/**
+ * Creates standardized snapshot envelope matching Shirone schema conventions.
+ */
+export function createSnapshotEnvelope({ items, provider, accountRef, extra = {} }) {
+	return {
+		schemaVersion: 1,
+		updatedAt: new Date().toISOString(),
+		total: items.length,
+		...(provider ? { provider } : {}),
+		...(accountRef ? { accountRef } : {}),
+		...extra,
+		items,
+	};
 }
 
 /**

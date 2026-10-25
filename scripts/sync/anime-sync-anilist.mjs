@@ -7,6 +7,8 @@ import {
 	getSetting,
 	fetchJson,
 	writeJsonAtomic,
+	inferImageExtension,
+	createSnapshotEnvelope,
 } from "./sync-common.mjs";
 import { syncLocalCovers } from "./media-cover-helper.mjs";
 
@@ -196,19 +198,17 @@ async function sync() {
 			publicPrefix: "/assets/media/anime",
 			getFilename: (item, i) => {
 				const id = item.identity?.subjectId || String(i);
-				const ext = item.cover.endsWith(".png") ? "png" : item.cover.endsWith(".webp") ? "webp" : "jpg";
+				const ext = inferImageExtension(item.cover, "jpg");
 				return `${id}.${ext}`;
 			},
 			providerName: "AniList",
 		});
 
-		const envelope = {
-			schemaVersion: 1,
+		const envelope = createSnapshotEnvelope({
 			provider: "anilist",
-			fetchedAt: new Date().toISOString(),
 			accountRef: USERNAME,
 			items,
-		};
+		});
 
 		writeJsonAtomic(SNAPSHOT_FILE, envelope);
 		console.log(`[AniList] Snapshot saved to: ${SNAPSHOT_FILE}`);

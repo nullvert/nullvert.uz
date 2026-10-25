@@ -4,9 +4,13 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
+  createSnapshotEnvelope,
   getSetting,
   getSnapshotItems,
+  inferImageExtension,
+  isForceRefreshRequested,
   loadEnvFile,
+  loadSnapshotCache,
   readJsonFile,
   writeJsonAtomic,
 } from "./sync-common.mjs";
@@ -73,3 +77,53 @@ test("writeJsonAtomic writes valid JSON with a trailing newline", () => {
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test("isForceRefreshRequested recognizes CLI flags and environment variables", () => {
+  assert.equal(isForceRefreshRequested(["node", "script.mjs"]), false);
+  assert.equal(isForceRefreshRequested(["node", "script.mjs", "--refresh"]), true);
+  assert.equal(isForceRefreshRequested(["node", "script.mjs", "-r"]), true);
+  assert.equal(isForceRefreshRequested(["node", "script.mjs"], { REFRESH_METADATA: "true" }), true);
+});
+
+test("inferImageExtension handles query strings, hashes, and default fallback", () => {
+  assert.equal(inferImageExtension("https://simkl.in/posters/abc_m.webp"), "webp");
+  assert.equal(inferImageExtension("https://example.com/cover.PNG?version=2&size=large#top"), "png");
+  assert.equal(inferImageExtension("https://example.com/cover.JPEG?token=xyz"), "jpg");
+  assert.equal(inferImageExtension("https://example.com/image_without_extension"), "jpg");
+  assert.equal(inferImageExtension("", "webp"), "webp");
+});
+
+test("loadSnapshotCache loads items into a fast Map by given keyField", () => {
+  const dir = mkdtempSync(join(tmpdir(), "shirone-cache-test-"));
+  const file = join(dir, "snapshot.json");
+  try {
+    writeJsonAtomic(file, {
+      items: [
+        { id: "101", title: "Game A" },
+        { id: "102", title: "Game B" },
+      ],
+    });
+    const cache = loadSnapshotCache(file, "id");
+    assert.equal(cache.size, 2);
+    assert.equal(cache.get("101")?.title, "Game A");
+    assert.equal(cache.get("102")?.title, "Game B");
+    assert.equal(cache.get("999"), undefined);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("createSnapshotEnvelope formats unified metadata structure", () => {
+  const envelope = createSnapshotEnvelope({
+    provider: "test-provider",
+    accountRef: "user123",
+    items: [{ id: "1" }],
+  });
+  assert.equal(envelope.schemaVersion, 1);
+  assert.equal(envelope.provider, "test-provider");
+  assert.equal(envelope.accountRef, "user123");
+  assert.equal(envelope.total, 1);
+  assert.ok(typeof envelope.updatedAt === "string");
+  assert.equal(envelope.items.length, 1);
+});
+

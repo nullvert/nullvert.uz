@@ -1,7 +1,45 @@
 {
-  "updatedAt": "2026-10-15T08:47:14.133Z",
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-19T16:37:09.976Z",
   "total": 61,
+  "provider": "simkl",
   "items": [
+    {
+      "id": "show-1188702",
+      "type": "show",
+      "title": "Arcane",
+      "cover": "/assets/media/cinema/show-1188702.webp",
+      "link": "https://simkl.com/tv/1188702/arcane",
+      "status": "watching",
+      "rating": 10,
+      "progress": {
+        "watched": 9,
+        "total": 18,
+        "unit": "эп."
+      },
+      "year": "2021",
+      "runtime": 40,
+      "genres": [
+        "Action",
+        "Adventure",
+        "Animation",
+        "Drama",
+        "Fantasy",
+        "Science-Fiction"
+      ],
+      "description": "Amid the stark discord of twin cities Piltover and Zaun, two sisters fight on rival sides of a war between magic technologies and clashing convictions.",
+      "directorOrStudio": "Netflix",
+      "ids": {
+        "simkl": 1188702,
+        "slug": "arcane",
+        "imdb": "tt11126994",
+        "tmdb": "94605",
+        "tvdb": "371028",
+        "tvdbslug": "arcane",
+        "traktslug": "arcane"
+      },
+      "lastWatchedAt": "2024-12-04T18:56:24Z"
+    },
     {
       "id": "show-27046",
       "type": "show",
@@ -48,7 +86,7 @@
         "unit": "эп."
       },
       "year": "2024",
-      "runtime": 42,
+      "runtime": 43,
       "genres": [
         "Comedy",
         "Crime",
@@ -68,42 +106,6 @@
         "traktslug": "sweetpea"
       },
       "lastWatchedAt": "2025-02-16T12:52:09Z"
-    },
-    {
-      "id": "show-1188702",
-      "type": "show",
-      "title": "Arcane",
-      "cover": "/assets/media/cinema/show-1188702.webp",
-      "link": "https://simkl.com/tv/1188702/arcane",
-      "status": "completed",
-      "rating": 10,
-      "progress": {
-        "watched": 18,
-        "total": 18,
-        "unit": "эп."
-      },
-      "year": "2021",
-      "runtime": 40,
-      "genres": [
-        "Action",
-        "Adventure",
-        "Animation",
-        "Drama",
-        "Fantasy",
-        "Science-Fiction"
-      ],
-      "description": "Amid the stark discord of twin cities Piltover and Zaun, two sisters fight on rival sides of a war between magic technologies and clashing convictions.",
-      "directorOrStudio": "Netflix",
-      "ids": {
-        "simkl": 1188702,
-        "slug": "arcane",
-        "imdb": "tt11126994",
-        "tmdb": "94605",
-        "tvdb": "371028",
-        "tvdbslug": "arcane",
-        "traktslug": "arcane"
-      },
-      "lastWatchedAt": "2024-12-07T17:53:56Z"
     },
     {
       "id": "show-1201482",
@@ -1121,8 +1123,8 @@
       "ids": {
         "simkl": 1328254,
         "slug": "soulmates",
-        "imdb": "tt16752442",
-        "tmdb": "325808",
+        "imdb": "tt10394844",
+        "tmdb": "100771",
         "tvdb": "380909",
         "tvdbslug": "soulmates-2020",
         "traktslug": "soulmates-2020"

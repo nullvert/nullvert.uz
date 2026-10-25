@@ -3,49 +3,24 @@ import { resolve } from "node:path";
 import {
 	ROOT_DIR,
 	SNAPSHOT_DIR,
-	loadEnvFile,
-	getSetting,
 	delay,
 	fetchJson,
-	readJsonFile,
-	getSnapshotItems,
 	writeJsonAtomic,
 	mapConcurrent,
 	shouldRefresh,
+	loadSnapshotCache,
+	isForceRefreshRequested,
+	createSnapshotEnvelope,
 } from "./sync-common.mjs";
 import { syncLocalCovers } from "./media-cover-helper.mjs";
+import { SimklAuthManager } from "./simkl-auth-helper.mjs";
 
 const SNAPSHOT_FILE = resolve(SNAPSHOT_DIR, "simkl.json");
 const COVERS_DIR = resolve(ROOT_DIR, "public/assets/media/cinema");
 
-const env = loadEnvFile();
-const CLIENT_ID = getSetting("SIMKL_CLIENT_ID", { env });
-const ACCESS_TOKEN = getSetting("SIMKL_ACCESS_TOKEN", { env });
-const FORCE_REFRESH = process.argv.includes("--refresh") || process.argv.includes("--force-refresh") || process.env.REFRESH_METADATA === "true";
-
-if (!CLIENT_ID || !ACCESS_TOKEN) {
-	console.error("[Simkl] Error: SIMKL_CLIENT_ID or SIMKL_ACCESS_TOKEN not found in .env!");
-	process.exit(1);
-}
-
-/**
- * Загрузка предыдущего снепшота (для кэша метаданных, чтобы не опрашивать повторно)
- */
-function loadExistingCache() {
-	const snapshot = readJsonFile(SNAPSHOT_FILE, { fallback: null, warn: true });
-	const map = new Map();
-	for (const item of getSnapshotItems(snapshot)) {
-		if (item?.id) {
-			map.set(item.id, {
-				description: item.description,
-				genres: item.genres,
-				directorOrStudio: item.directorOrStudio,
-				_fetchedAt: item._fetchedAt,
-			});
-		}
-	}
-	return map;
-}
+const auth = new SimklAuthManager();
+auth.validate();
+const FORCE_REFRESH = isForceRefreshRequested();
 
 /**
  * Маппинг статусов Simkl в стандартные статусы
@@ -77,7 +52,7 @@ async function fetchDetails(type, simklId) {
 	const endpoint = type === "movie" ? `https://api.simkl.com/movies/${simklId}?extended=full` : `https://api.simkl.com/tv/${simklId}?extended=full`;
 	try {
 		return await fetchJson(endpoint, {
-			headers: { "simkl-api-key": CLIENT_ID },
+			headers: { "simkl-api-key": auth.clientId },
 		}, { label: "Simkl details" });
 	} catch (error) {
 		console.warn(`[Simkl] Could not fetch ${type} details for ${simklId}: ${error.message}`);
@@ -88,18 +63,13 @@ async function fetchDetails(type, simklId) {
 async function syncCinema() {
 	console.log(`[Simkl] Fetching cinema library (movies and shows)...${FORCE_REFRESH ? " [FORCE REFRESH ENABLED]" : ""}`);
 
-	const data = await fetchJson("https://api.simkl.com/sync/all-items?extended=full", {
-		headers: {
-			Authorization: `Bearer ${ACCESS_TOKEN}`,
-			"simkl-api-key": CLIENT_ID,
-		},
-	}, { label: "Simkl" });
+	const data = await auth.fetchWithAuth("https://api.simkl.com/sync/all-items?extended=full", {}, "Simkl Library");
 	const rawMovies = data.movies || [];
 	const rawShows = data.shows || [];
 
 	console.log(`[Simkl] Received ${rawMovies.length} movies and ${rawShows.length} shows.`);
 
-	const cache = loadExistingCache();
+	const cache = loadSnapshotCache(SNAPSHOT_FILE, "id");
 
 	// 1. Обработка фильмов параллельным пулом (concurrency = 3)
 	console.log("[Simkl] Enriching movie details with controlled concurrency (limit=3)...");
@@ -225,11 +195,10 @@ async function syncCinema() {
 		providerName: "Simkl",
 	});
 
-	const snapshotPayload = {
-		updatedAt: new Date().toISOString(),
-		total: items.length,
+	const snapshotPayload = createSnapshotEnvelope({
+		provider: "simkl",
 		items,
-	};
+	});
 
 	writeJsonAtomic(SNAPSHOT_FILE, snapshotPayload);
 	console.log(`[Simkl] Successfully saved ${items.length} cinema entries with descriptions & genres to: ${SNAPSHOT_FILE}`);

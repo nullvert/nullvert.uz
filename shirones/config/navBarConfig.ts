@@ -169,7 +169,6 @@ const defaultNavBarConfig: NavBarConfig = {
 				LinkPresets.Compass,
 			],
 		},
-		LinkPresets.Support,
 	],
 };
 
