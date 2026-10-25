@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-21T08:27:33.389Z",
+  "updatedAt": "2026-10-25T08:18:31.998Z",
   "total": 31,
   "items": [
     {
@@ -52,7 +52,7 @@
       "link": "https://infinitebacklog.net/games/wuthering-waves",
       "status": "playing",
       "rating": 8,
-      "hours": 130,
+      "hours": 131,
       "platform": "PC",
       "year": "2024",
       "genres": [
@@ -342,7 +342,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:29.263Z"
+      "_fetchedAt": "2026-10-25T08:18:28.702Z"
     },
     {
       "id": "steam_257510",
@@ -365,7 +365,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:29.251Z"
+      "_fetchedAt": "2026-10-25T08:18:28.690Z"
     },
     {
       "id": "steam_322500",
@@ -387,7 +387,7 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:29.712Z"
+      "_fetchedAt": "2026-10-25T08:18:29.122Z"
     },
     {
       "id": "steam_508980",
@@ -409,7 +409,7 @@
       "price": "$11.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:29.801Z"
+      "_fetchedAt": "2026-10-25T08:18:29.123Z"
     },
     {
       "id": "steam_557340",
@@ -431,7 +431,7 @@
       "price": "$19.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:30.074Z"
+      "_fetchedAt": "2026-10-25T08:18:29.419Z"
     },
     {
       "id": "steam_601150",
@@ -449,10 +449,10 @@
       "developer": "CAPCOM Co., Ltd.",
       "description": "Лучший охотник на демонов возвращается в новом стильном боевике.",
       "rank": "#10",
-      "price": "$7.49",
-      "discount": 75,
+      "price": "$29.99",
+      "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:30.456Z"
+      "_fetchedAt": "2026-10-25T08:18:29.718Z"
     },
     {
       "id": "steam_690040",
@@ -474,7 +474,7 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:30.867Z"
+      "_fetchedAt": "2026-10-25T08:18:30.052Z"
     },
     {
       "id": "steam_1029690",
@@ -496,7 +496,7 @@
       "price": "$49.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:30.860Z"
+      "_fetchedAt": "2026-10-25T08:18:30.126Z"
     },
     {
       "id": "steam_1049410",
@@ -515,16 +515,16 @@
       "developer": "Pillow Castle",
       "description": "Восприятие – это реальность. В этой умопомрачительной головоломке от первого лица вам предстоит сбежать из сюрреалистического мира снов, решая невозможные загадки при помощи перспективы.",
       "rank": "#5",
-      "price": "$7.99",
-      "discount": 60,
+      "price": "$19.99",
+      "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:31.239Z"
+      "_fetchedAt": "2026-10-25T08:18:30.353Z"
     },
     {
       "id": "steam_1091500",
       "title": "Cyberpunk 2077",
       "cover": "/assets/media/games/steam_1091500.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/e9047d8ec47ae3d94bb8b464fb0fc9e9972b4ac7/header.jpg?t=1784714077",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/48a93d6445a67520ea49833c93dae8f2e68fc540/header_alt_assets_9.jpg?t=1792682505",
       "link": "https://store.steampowered.com/app/1091500/",
       "status": "wishlist",
       "hours": 0,
@@ -539,7 +539,7 @@
       "price": "$17.99",
       "discount": 70,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:31.290Z"
+      "_fetchedAt": "2026-10-25T08:18:30.439Z"
     },
     {
       "id": "steam_1164940",
@@ -558,10 +558,10 @@
       "developer": "Trepang Studios",
       "description": "Trepang2, сумасшедший кровавый шутер от первого лица в мире далекого будущего, сделает вас крепким орешком. Враги пожалеют, что они родились на свет, увидев, как вы уклоняетесь от пуль и оставляете за собой одни разрушения в этой лихорадочной стрелялке не для слабонервных.",
       "rank": "#11",
-      "price": "$7.49",
-      "discount": 75,
+      "price": "$29.99",
+      "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:31.662Z"
+      "_fetchedAt": "2026-10-25T08:18:30.717Z"
     },
     {
       "id": "steam_1265920",
@@ -583,7 +583,7 @@
       "price": "$39.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:31.704Z"
+      "_fetchedAt": "2026-10-25T08:18:30.806Z"
     },
     {
       "id": "steam_2483190",
@@ -606,7 +606,7 @@
       "price": "$69.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:32.127Z"
+      "_fetchedAt": "2026-10-25T08:18:31.141Z"
     },
     {
       "id": "steam_2698780",
@@ -629,13 +629,13 @@
       "price": "$9.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:32.220Z"
+      "_fetchedAt": "2026-10-25T08:18:31.129Z"
     },
     {
       "id": "steam_3919340",
       "title": "Eco Volunteer",
       "cover": "/assets/media/games/steam_3919340.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3919340/b1fecd3bdebb576845ceb7c82d896ff93410d06b/header.jpg?t=1789027726",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3919340/b1fecd3bdebb576845ceb7c82d896ff93410d06b/header.jpg?t=1792760197",
       "link": "https://store.steampowered.com/app/3919340/",
       "status": "wishlist",
       "hours": 0,
@@ -652,7 +652,7 @@
       "price": "$11.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-21T08:27:32.632Z"
+      "_fetchedAt": "2026-10-25T08:18:31.428Z"
     }
   ]
 }
