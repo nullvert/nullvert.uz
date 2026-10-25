@@ -6,6 +6,8 @@ import {
 	getSetting,
 	fetchJson,
 	writeTextAtomic,
+	writeJsonAtomic,
+	createSnapshotEnvelope,
 } from "./sync-common.mjs";
 const COMPASS_DATA_FILE = resolve(ROOT_DIR, "shirones/config/data/compass.ts");
 
@@ -188,33 +190,30 @@ async function main() {
 
 	console.log(`[Raindrop] Generated ${shelves.length} shelves with ${shelves.reduce((acc, s) => acc + s.entries.length, 0)} total links.`);
 
-	// Генерируем TypeScript файл shirones/config/data/compass.ts
-	const fileContent = `/**
- * 站点罗盘数据（Сгенерировано автоматически из Raindrop.io: scripts/compass-sync-raindrop.mjs）。
- * Запуск обновления: pnpm compass:sync
+	// 1. Запись стандартизированного снапшота в src/data/snapshots/compass.json
+	const SNAPSHOT_FILE = resolve(ROOT_DIR, "src/data/snapshots/compass.json");
+	const snapshotPayload = createSnapshotEnvelope({
+		provider: "raindrop",
+		items: shelves,
+		extra: {
+			totalLinks: shelves.reduce((acc, s) => acc + s.entries.length, 0),
+		},
+	});
+	writeJsonAtomic(SNAPSHOT_FILE, snapshotPayload);
+	console.log(`[Raindrop] Successfully saved snapshot to ${SNAPSHOT_FILE}`);
+
+	// 2. Обратная совместимость: компактный compass.ts импортирует снапшот
+	const compatContent = `/**
+ * Автоматически сгенерированный адаптер для обратной совместимости.
+ * Первичный снапшот хранится в src/data/snapshots/compass.json
  */
+import type { CompassShelf } from "@/types/compass";
+import snapshot from "../../../src/data/snapshots/compass.json";
 
-export interface CompassEntry {
-	label: string;
-	href: string;
-	note?: string;
-	icon?: string;
-	image?: string;
-}
-
-export interface CompassShelf {
-	key: string;
-	name: string;
-	icon?: string;
-	blurb?: string;
-	entries: CompassEntry[];
-}
-
-export const compassData: CompassShelf[] = ${JSON.stringify(shelves, null, "\t")};
+export const compassData = (snapshot.items || []) as CompassShelf[];
 `;
-
-	writeTextAtomic(COMPASS_DATA_FILE, fileContent);
-	console.log(`[Raindrop] Successfully updated ${COMPASS_DATA_FILE}`);
+	writeTextAtomic(COMPASS_DATA_FILE, compatContent);
+	console.log(`[Raindrop] Updated compatibility module ${COMPASS_DATA_FILE}`);
 }
 
 main().catch((err) => {
