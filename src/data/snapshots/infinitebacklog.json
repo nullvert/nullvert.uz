@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-25T19:49:44.472Z",
+  "updatedAt": "2026-10-29T09:45:29.834Z",
   "total": 31,
   "provider": "infinitebacklog",
   "accountRef": "nullvert",
@@ -55,7 +55,7 @@
       "link": "https://infinitebacklog.net/games/wuthering-waves",
       "status": "playing",
       "rating": 8,
-      "hours": 131,
+      "hours": 132,
       "platform": "PC",
       "year": "2024",
       "genres": [
@@ -345,7 +345,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:26.626Z"
+      "_fetchedAt": "2026-10-29T09:45:25.602Z"
     },
     {
       "id": "steam_257510",
@@ -368,7 +368,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:26.588Z"
+      "_fetchedAt": "2026-10-29T09:45:25.595Z"
     },
     {
       "id": "steam_322500",
@@ -390,7 +390,7 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:29.415Z"
+      "_fetchedAt": "2026-10-29T09:45:26.075Z"
     },
     {
       "id": "steam_508980",
@@ -412,7 +412,7 @@
       "price": "$11.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:29.711Z"
+      "_fetchedAt": "2026-10-29T09:45:26.185Z"
     },
     {
       "id": "steam_557340",
@@ -434,7 +434,7 @@
       "price": "$19.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:31.552Z"
+      "_fetchedAt": "2026-10-29T09:45:26.470Z"
     },
     {
       "id": "steam_601150",
@@ -455,7 +455,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:34.773Z"
+      "_fetchedAt": "2026-10-29T09:45:26.922Z"
     },
     {
       "id": "steam_690040",
@@ -477,7 +477,7 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:35.203Z"
+      "_fetchedAt": "2026-10-29T09:45:27.304Z"
     },
     {
       "id": "steam_1029690",
@@ -499,7 +499,7 @@
       "price": "$49.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:36.251Z"
+      "_fetchedAt": "2026-10-29T09:45:27.513Z"
     },
     {
       "id": "steam_1049410",
@@ -521,7 +521,7 @@
       "price": "$19.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:36.702Z"
+      "_fetchedAt": "2026-10-29T09:45:27.702Z"
     },
     {
       "id": "steam_1091500",
@@ -539,10 +539,10 @@
       "developer": "CD PROJEKT RED",
       "description": "Cyberpunk 2077 — приключенческая ролевая игра с открытым миром, действие которой происходит в футуристическом мегаполисе Найт-Сити, где выше всего ценятся власть, роскошь и модификации тела.",
       "rank": "#3",
-      "price": "$17.99",
-      "discount": 70,
+      "price": "$59.99",
+      "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:38.112Z"
+      "_fetchedAt": "2026-10-29T09:45:27.934Z"
     },
     {
       "id": "steam_1164940",
@@ -561,10 +561,10 @@
       "developer": "Trepang Studios",
       "description": "Trepang2, сумасшедший кровавый шутер от первого лица в мире далекого будущего, сделает вас крепким орешком. Враги пожалеют, что они родились на свет, увидев, как вы уклоняетесь от пуль и оставляете за собой одни разрушения в этой лихорадочной стрелялке не для слабонервных.",
       "rank": "#11",
-      "price": "$29.99",
-      "discount": 0,
+      "price": "$9.99",
+      "discount": 75,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:39.460Z"
+      "_fetchedAt": "2026-10-29T09:45:28.066Z"
     },
     {
       "id": "steam_1265920",
@@ -586,7 +586,7 @@
       "price": "$39.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:39.604Z"
+      "_fetchedAt": "2026-10-29T09:45:28.300Z"
     },
     {
       "id": "steam_2483190",
@@ -609,7 +609,7 @@
       "price": "$69.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:41.117Z"
+      "_fetchedAt": "2026-10-29T09:45:28.693Z"
     },
     {
       "id": "steam_2698780",
@@ -629,16 +629,16 @@
       "developer": "MYM Games Studios",
       "description": "Планируйте, проектируйте, стройте и украшайте дом своей мечты в открытом мире. Разрушайте стены, делайте эскизы планировки, а затем стройте и украшайте каждый сантиметр - как внутри, так и в саду. Занимайтесь каждым ремонтом в одиночку или в компании до 4 друзей. Дом вашей мечты ждет вас!",
       "rank": "#12",
-      "price": "$9.99",
-      "discount": 0,
+      "price": "$4.99",
+      "discount": 50,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:41.228Z"
+      "_fetchedAt": "2026-10-29T09:45:28.820Z"
     },
     {
       "id": "steam_3919340",
       "title": "Eco Volunteer",
       "cover": "/assets/media/games/steam_3919340.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3919340/b1fecd3bdebb576845ceb7c82d896ff93410d06b/header.jpg?t=1792760197",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3919340/b1fecd3bdebb576845ceb7c82d896ff93410d06b/header.jpg?t=1793023744",
       "link": "https://store.steampowered.com/app/3919340/",
       "status": "wishlist",
       "hours": 0,
@@ -652,10 +652,10 @@
       "developer": "Scope Creepers",
       "description": "Спокойная, уютная и умиротворяющая игра про сбор мусора и другие экологические активности на природе. Отправляйтесь в путешествие по красивейшим природным местам и делайте добрые дела!",
       "rank": "#13",
-      "price": "$11.99",
-      "discount": 0,
+      "price": "$9.59",
+      "discount": 20,
       "isFree": false,
-      "_fetchedAt": "2026-10-25T19:49:42.718Z"
+      "_fetchedAt": "2026-10-29T09:45:29.167Z"
     }
   ]
 }

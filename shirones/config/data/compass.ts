@@ -1,6 +1,6 @@
 /**
  * Автоматически сгенерированный адаптер для обратной совместимости.
- * Первичный снапшот хранится в src/data/snapshots/compass.json
+ * Первичный снапшот хранится в src/data/snapshots/bookmarks.json
  */
 import type { CompassShelf } from "@/types/compass";
 import snapshot from "../../../src/data/snapshots/bookmarks.json";
