@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-29T09:45:29.834Z",
+  "updatedAt": "2026-11-01T10:19:49.181Z",
   "total": 31,
   "provider": "infinitebacklog",
   "accountRef": "nullvert",
@@ -345,7 +345,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:25.602Z"
+      "_fetchedAt": "2026-11-01T10:19:45.035Z"
     },
     {
       "id": "steam_257510",
@@ -368,7 +368,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:25.595Z"
+      "_fetchedAt": "2026-11-01T10:19:45.038Z"
     },
     {
       "id": "steam_322500",
@@ -390,7 +390,7 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:26.075Z"
+      "_fetchedAt": "2026-11-01T10:19:45.446Z"
     },
     {
       "id": "steam_508980",
@@ -412,7 +412,7 @@
       "price": "$11.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:26.185Z"
+      "_fetchedAt": "2026-11-01T10:19:45.486Z"
     },
     {
       "id": "steam_557340",
@@ -434,7 +434,7 @@
       "price": "$19.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:26.470Z"
+      "_fetchedAt": "2026-11-01T10:19:45.805Z"
     },
     {
       "id": "steam_601150",
@@ -455,7 +455,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:26.922Z"
+      "_fetchedAt": "2026-11-01T10:19:46.409Z"
     },
     {
       "id": "steam_690040",
@@ -477,7 +477,7 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:27.304Z"
+      "_fetchedAt": "2026-11-01T10:19:46.516Z"
     },
     {
       "id": "steam_1029690",
@@ -499,7 +499,7 @@
       "price": "$49.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:27.513Z"
+      "_fetchedAt": "2026-11-01T10:19:46.728Z"
     },
     {
       "id": "steam_1049410",
@@ -521,7 +521,7 @@
       "price": "$19.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:27.702Z"
+      "_fetchedAt": "2026-11-01T10:19:47.056Z"
     },
     {
       "id": "steam_1091500",
@@ -542,7 +542,7 @@
       "price": "$59.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:27.934Z"
+      "_fetchedAt": "2026-11-01T10:19:47.083Z"
     },
     {
       "id": "steam_1164940",
@@ -564,7 +564,7 @@
       "price": "$9.99",
       "discount": 75,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:28.066Z"
+      "_fetchedAt": "2026-11-01T10:19:47.435Z"
     },
     {
       "id": "steam_1265920",
@@ -586,7 +586,7 @@
       "price": "$39.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:28.300Z"
+      "_fetchedAt": "2026-11-01T10:19:47.766Z"
     },
     {
       "id": "steam_2483190",
@@ -609,7 +609,7 @@
       "price": "$69.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:28.693Z"
+      "_fetchedAt": "2026-11-01T10:19:47.798Z"
     },
     {
       "id": "steam_2698780",
@@ -632,7 +632,7 @@
       "price": "$4.99",
       "discount": 50,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:28.820Z"
+      "_fetchedAt": "2026-11-01T10:19:48.208Z"
     },
     {
       "id": "steam_3919340",
@@ -655,7 +655,7 @@
       "price": "$9.59",
       "discount": 20,
       "isFree": false,
-      "_fetchedAt": "2026-10-29T09:45:29.167Z"
+      "_fetchedAt": "2026-11-01T10:19:48.443Z"
     }
   ]
 }
