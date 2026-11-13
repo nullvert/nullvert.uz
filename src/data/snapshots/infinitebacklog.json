@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-09T11:16:50.501Z",
+  "updatedAt": "2026-11-13T10:48:05.647Z",
   "total": 31,
   "provider": "infinitebacklog",
   "accountRef": "nullvert",
@@ -345,7 +345,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:45.680Z"
+      "_fetchedAt": "2026-11-13T10:48:01.864Z"
     },
     {
       "id": "steam_257510",
@@ -368,7 +368,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:45.683Z"
+      "_fetchedAt": "2026-11-13T10:48:01.870Z"
     },
     {
       "id": "steam_322500",
@@ -390,7 +390,7 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:46.369Z"
+      "_fetchedAt": "2026-11-13T10:48:02.349Z"
     },
     {
       "id": "steam_508980",
@@ -412,7 +412,7 @@
       "price": "$11.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:46.342Z"
+      "_fetchedAt": "2026-11-13T10:48:02.350Z"
     },
     {
       "id": "steam_557340",
@@ -434,7 +434,7 @@
       "price": "$19.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:46.742Z"
+      "_fetchedAt": "2026-11-13T10:48:02.819Z"
     },
     {
       "id": "steam_601150",
@@ -455,7 +455,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:47.208Z"
+      "_fetchedAt": "2026-11-13T10:48:03.201Z"
     },
     {
       "id": "steam_690040",
@@ -477,7 +477,7 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:47.548Z"
+      "_fetchedAt": "2026-11-13T10:48:03.440Z"
     },
     {
       "id": "steam_1029690",
@@ -496,10 +496,10 @@
       "developer": "Rebellion",
       "description": "Легендарная серия Sniper Elite возвращается. 1944 год, Франция, Карл Фейрберн против проекта «Кракен». Лучшая в жанре симуляция снайперской стрельбы, новая камера убийств и интерактивные карты. Остановите нацистскую военную машину, пока она не перевернула ход войны!",
       "rank": "#9",
-      "price": "$49.99",
-      "discount": 0,
+      "price": "$4.99",
+      "discount": 90,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:47.946Z"
+      "_fetchedAt": "2026-11-13T10:48:03.686Z"
     },
     {
       "id": "steam_1049410",
@@ -521,13 +521,13 @@
       "price": "$19.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:47.986Z"
+      "_fetchedAt": "2026-11-13T10:48:03.891Z"
     },
     {
       "id": "steam_1091500",
       "title": "Cyberpunk 2077",
       "cover": "/assets/media/games/steam_1091500.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/48a93d6445a67520ea49833c93dae8f2e68fc540/header_alt_assets_9.jpg?t=1792682505",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/48a93d6445a67520ea49833c93dae8f2e68fc540/header_alt_assets_9.jpg?t=1794474878",
       "link": "https://store.steampowered.com/app/1091500/",
       "status": "wishlist",
       "hours": 0,
@@ -542,7 +542,7 @@
       "price": "$59.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:48.354Z"
+      "_fetchedAt": "2026-11-13T10:48:04.024Z"
     },
     {
       "id": "steam_1164940",
@@ -561,10 +561,10 @@
       "developer": "Trepang Studios",
       "description": "Trepang2, сумасшедший кровавый шутер от первого лица в мире далекого будущего, сделает вас крепким орешком. Враги пожалеют, что они родились на свет, увидев, как вы уклоняетесь от пуль и оставляете за собой одни разрушения в этой лихорадочной стрелялке не для слабонервных.",
       "rank": "#11",
-      "price": "$9.99",
+      "price": "$8.74",
       "discount": 75,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:48.473Z"
+      "_fetchedAt": "2026-11-13T10:48:04.398Z"
     },
     {
       "id": "steam_1265920",
@@ -586,7 +586,7 @@
       "price": "$39.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:48.720Z"
+      "_fetchedAt": "2026-11-13T10:48:04.358Z"
     },
     {
       "id": "steam_2483190",
@@ -609,7 +609,7 @@
       "price": "$69.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:49.174Z"
+      "_fetchedAt": "2026-11-13T10:48:04.703Z"
     },
     {
       "id": "steam_2698780",
@@ -632,7 +632,7 @@
       "price": "$9.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:49.183Z"
+      "_fetchedAt": "2026-11-13T10:48:04.821Z"
     },
     {
       "id": "steam_3919340",
@@ -652,10 +652,10 @@
       "developer": "Scope Creepers",
       "description": "Спокойная, уютная и умиротворяющая игра про сбор мусора и другие экологические активности на природе. Отправляйтесь в путешествие по красивейшим природным местам и делайте добрые дела!",
       "rank": "#13",
-      "price": "$9.59",
-      "discount": 20,
+      "price": "$11.99",
+      "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-09T11:16:49.792Z"
+      "_fetchedAt": "2026-11-13T10:48:05.222Z"
     }
   ]
 }

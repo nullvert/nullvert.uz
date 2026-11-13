@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-09T11:16:43.477Z",
-  "total": 27,
+  "updatedAt": "2026-11-13T10:47:59.390Z",
+  "total": 42,
   "provider": "anilist",
   "accountRef": "nullvert",
   "items": [
@@ -198,6 +198,426 @@
       "identity": {
         "provider": "anilist",
         "subjectId": "11981"
+      }
+    },
+    {
+      "id": "anime-1535",
+      "title": "Death Note",
+      "status": "completed",
+      "rating": 10,
+      "communityRating": 84,
+      "progress": {
+        "watched": 37,
+        "total": 37
+      },
+      "repeat": 2,
+      "format": "TV",
+      "season": "FALL",
+      "cover": "/assets/media/anime/1535.jpg",
+      "link": "https://anilist.co/anime/1535",
+      "description": "Light Yagami is a genius high school student who is about to learn about life through a book of death. When a bored shinigami, a God of Death, named Ryuk drops a black notepad called a Death Note , Light receives power over life and death with the stroke of a pen. Determined to use this dark gift for the best, Light sets out to rid the world of evil… namely, the people he believes to be evil. Should anyone hold such power? The consequences of Light’s actions will set the world ablaze. (Source: VIZ Media)",
+      "year": "2006",
+      "studio": "MADHOUSE",
+      "genres": [
+        "Mystery",
+        "Psychological",
+        "Supernatural",
+        "Thriller"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "1535"
+      }
+    },
+    {
+      "id": "anime-9253",
+      "title": "Steins;Gate",
+      "status": "completed",
+      "rating": 7.7,
+      "communityRating": 89,
+      "progress": {
+        "watched": 24,
+        "total": 24
+      },
+      "format": "TV",
+      "season": "SPRING",
+      "cover": "/assets/media/anime/9253.jpg",
+      "link": "https://anilist.co/anime/9253",
+      "description": "Self-proclaimed mad scientist Okabe Rintarou lives in a small room in Akihabara, where he invents \"future gadgets\" with fellow lab members Shiina Mayuri, his air-headed childhood friend, and Hashida Itaru, an otaku hacker. The three pass the time by tinkering with their latest creation, a \"Phone Microwave\" that can be controlled through text messages. The lab members soon face a string of mysterious incidents that lead to a game-changing discovery: the Phone Microwave can send emails to the past and thus alter history. Adapted from the critically acclaimed visual novel by 5pb. and Nitroplus, Steins;Gate takes Okabe to the depths of scientific theory and human despair as he faces the dire consequences of changing the past.",
+      "year": "2011",
+      "studio": "Frontier Works",
+      "genres": [
+        "Drama",
+        "Psychological",
+        "Sci-Fi",
+        "Thriller"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "9253"
+      }
+    },
+    {
+      "id": "anime-97986",
+      "title": "Made in Abyss",
+      "status": "completed",
+      "rating": 8.7,
+      "communityRating": 84,
+      "progress": {
+        "watched": 13,
+        "total": 13
+      },
+      "format": "TV",
+      "season": "SUMMER",
+      "cover": "/assets/media/anime/97986.jpg",
+      "link": "https://anilist.co/anime/97986",
+      "description": "The \"Abyss\" is the last unexplored place in the world. Strange and wonderful creatures roam within, and it is full of precious relics that present humans can't recreate. Those that dare to explore the depths are known as \"Cave Raiders.\" An orphan girl named Riko lives on the rim. Her dream is to become a Cave Raider like her mother and solve the mysteries of the cave system. One day, Riko starts exploring the caves and discovers a robot who resembles a human boy. (Source: Anime News Network, edited) Note: The last episode aired with a runtime of ~48 minutes as opposed to the standard 24 minute long episode.",
+      "year": "2017",
+      "studio": "Kinema Citrus",
+      "genres": [
+        "Adventure",
+        "Drama",
+        "Fantasy",
+        "Horror",
+        "Mystery",
+        "Sci-Fi"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "97986"
+      }
+    },
+    {
+      "id": "anime-20623",
+      "title": "Parasyte -the maxim-",
+      "status": "completed",
+      "rating": 9,
+      "communityRating": 81,
+      "progress": {
+        "watched": 24,
+        "total": 24
+      },
+      "format": "TV",
+      "season": "FALL",
+      "cover": "/assets/media/anime/20623.jpg",
+      "link": "https://anilist.co/anime/20623",
+      "description": "They arrive in silence and darkness. They descend from the skies. They have a hunger for human flesh. They are everywhere. They are parasites, alien creatures who must invade–and take control of–a human host to survive. And once they have infected their victims, they can assume any deadly form they choose: monsters with giant teeth, winged demons, creatures with blades for hands. But most have chosen to conceal their lethal purpose behind ordinary human faces. So no one knows their secret–except an ordinary high school student. Shin is battling for control of his own body against an alien parasite, but can he find a way to warn humanity of the horrors to come? (Source: Del Rey)",
+      "year": "2014",
+      "studio": "MADHOUSE",
+      "genres": [
+        "Action",
+        "Drama",
+        "Horror",
+        "Psychological",
+        "Sci-Fi"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "20623"
+      }
+    },
+    {
+      "id": "anime-21234",
+      "title": "ERASED",
+      "status": "completed",
+      "rating": 8.3,
+      "communityRating": 81,
+      "progress": {
+        "watched": 12,
+        "total": 12
+      },
+      "format": "TV",
+      "season": "WINTER",
+      "cover": "/assets/media/anime/21234.jpg",
+      "link": "https://anilist.co/anime/21234",
+      "description": "Satoru Fujinuma is a 29 year old manga artist struggling to make a name for himself following his debut. But, that was not the only thing in his life that Satoru was feeling frustrated about… He has a unique supernatural ability of being forced to prevent deaths and catastrophes by being sent back in time before the incident occurred, repeating time until the accident is prevented. One day, he gets involved in an accident that has him framed as a murderer. Desperate to save the victim, he sends himself back in time only to find himself as a grade-schooler one month before fellow classmate Kayo Hinazuki went missing. Satoru now embarks on a new quest: to save Kayo and solve the mystery behind her disappearance.",
+      "year": "2016",
+      "studio": "A-1 Pictures",
+      "genres": [
+        "Drama",
+        "Mystery",
+        "Psychological",
+        "Supernatural",
+        "Thriller"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "21234"
+      }
+    },
+    {
+      "id": "anime-11757",
+      "title": "Sword Art Online",
+      "status": "completed",
+      "rating": 9.3,
+      "communityRating": 70,
+      "progress": {
+        "watched": 25,
+        "total": 25
+      },
+      "format": "TV",
+      "season": "SUMMER",
+      "cover": "/assets/media/anime/11757.jpg",
+      "link": "https://anilist.co/anime/11757",
+      "description": "In the near future, a Virtual Reality Massive Multiplayer Online Role-Playing Game (VRMMORPG) called Sword Art Online has been released where players control their avatars with their bodies using a piece of technology called Nerve Gear. One day, players discover they cannot log out, as the game creator is holding them captive unless they reach the 100th floor of the game's tower and defeat the final boss. However, if they die in the game, they die in real life. Their struggle for survival starts now... (Source: Crunchyroll)",
+      "year": "2012",
+      "studio": "Aniplex",
+      "genres": [
+        "Action",
+        "Adventure",
+        "Fantasy",
+        "Romance"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "11757"
+      }
+    },
+    {
+      "id": "anime-199",
+      "title": "Spirited Away",
+      "status": "completed",
+      "rating": 7,
+      "communityRating": 86,
+      "progress": {
+        "watched": 1,
+        "total": 1
+      },
+      "format": "MOVIE",
+      "season": "SUMMER",
+      "cover": "/assets/media/anime/199.jpg",
+      "link": "https://anilist.co/anime/199",
+      "description": "On the way to their new home, 10-year-old Chihiro Ogino's family stumbles upon a deserted theme park. Intrigued, the family investigates the park, though unbeknownst to them, it is secretly inhabited by spirits who sleep by day and appear at night. When Chihiro's mother and father eat food from a restaurant in the street, angry spirits turn them into pigs. Furthermore, a wide sea has appeared between the spirit world and the human one, trapping Chihiro, the sole human, in a land of spirits. Luckily for her though, a mysterious boy named Haku appears, claiming to know her from the past. Under his instructions, Chihiro secures a job in the bathhouse where Haku works. With only her courage and some new found friends to aid her, Chihiro embarks on a journey to turn her parents back to their original forms and return home.",
+      "year": "2001",
+      "studio": "Studio Ghibli",
+      "genres": [
+        "Adventure",
+        "Drama",
+        "Fantasy",
+        "Supernatural"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "199"
+      }
+    },
+    {
+      "id": "anime-20954",
+      "title": "A Silent Voice",
+      "status": "completed",
+      "rating": 10,
+      "communityRating": 88,
+      "progress": {
+        "watched": 1,
+        "total": 1
+      },
+      "format": "MOVIE",
+      "season": "SUMMER",
+      "cover": "/assets/media/anime/20954.jpg",
+      "link": "https://anilist.co/anime/20954",
+      "description": "After transferring into a new school, a deaf girl, Shouko Nishimiya, is bullied by the popular Shouya Ishida. As Shouya continues to bully Shouko, the class turns its back on him. Shouko transfers and Shouya grows up as an outcast. Alone and depressed, the regretful Shouya finds Shouko to make amends. (Source: Eleven Arts)",
+      "year": "2016",
+      "studio": "Kyoto Animation",
+      "genres": [
+        "Drama",
+        "Romance",
+        "Slice of Life"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "20954"
+      }
+    },
+    {
+      "id": "anime-21519",
+      "title": "Your Name.",
+      "status": "completed",
+      "rating": 9,
+      "communityRating": 85,
+      "progress": {
+        "watched": 1,
+        "total": 1
+      },
+      "format": "MOVIE",
+      "season": "SUMMER",
+      "cover": "/assets/media/anime/21519.png",
+      "link": "https://anilist.co/anime/21519",
+      "description": "Mitsuha Miyamizu, a high school girl, yearns to live the life of a boy in the bustling city of Tokyo—a dream that stands in stark contrast to her present life in the countryside. Meanwhile in the city, Taki Tachibana lives a busy life as a high school student while juggling his part-time job and hopes for a future in architecture. One day, Mitsuha awakens in a room that is not her own and suddenly finds herself living the dream life in Tokyo—but in Taki's body! Elsewhere, Taki finds himself living Mitsuha's life in the humble countryside. In pursuit of an answer to this strange phenomenon, they begin to search for one another. Kimi no Na wa. revolves around Mitsuha and Taki's actions, which begin to have a dramatic impact on each other's lives, weaving them into a fabric held together by fate and circumstance. (Source: MAL Rewrite)",
+      "year": "2016",
+      "studio": "CoMix Wave",
+      "genres": [
+        "Drama",
+        "Romance",
+        "Supernatural"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "21519"
+      }
+    },
+    {
+      "id": "anime-99457",
+      "title": "Maquia: When the Promised Flower Blooms",
+      "status": "completed",
+      "rating": 10,
+      "communityRating": 82,
+      "progress": {
+        "watched": 1,
+        "total": 1
+      },
+      "format": "MOVIE",
+      "season": "WINTER",
+      "cover": "/assets/media/anime/99457.png",
+      "link": "https://anilist.co/anime/99457",
+      "description": "The people of Iorph live far away from the lands of men, weaving the happenings of each day into a fabric called Hibiol. They live for centuries while maintaining their youthful appearance. Maquia, an orphaned Iorph girl, lives her life in an oasis surrounded by friends, yet somehow feels “alone”. But the tranquil lives of the Iorph are shattered in an instant when the Mezarte army invades their territory on a dragon fleet, seeking the blood that grants the Iorph long life. Maquia manages to escape, but loses her friends and her home in the chaos. She then encounters an orphaned baby who is “alone”. Maquia raises this boy \"Ariel\", with the help of some new friends. But as the era changes, the bond between Maquia and Ariel changes too, amidst a backdrop of racial tensions between the Iorph and the Mezarte. This is a story of irreplaceable time, woven by two lonely people who can only find solace in each other. (Source: Eleven Arts)",
+      "year": "2018",
+      "studio": "P.A.WORKS",
+      "genres": [
+        "Drama",
+        "Fantasy",
+        "Psychological"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "99457"
+      }
+    },
+    {
+      "id": "anime-512",
+      "title": "Kiki's Delivery Service",
+      "status": "completed",
+      "rating": 9,
+      "communityRating": 81,
+      "progress": {
+        "watched": 1,
+        "total": 1
+      },
+      "repeat": 3,
+      "format": "MOVIE",
+      "season": "SUMMER",
+      "cover": "/assets/media/anime/512.png",
+      "link": "https://anilist.co/anime/512",
+      "description": "Kiki is an enterprising young girl who must follow tradition to become a full-fledged witch. Venturing out with only her chatty black cat, Jiji, Kiki flies off for the adventure of a lifetime. Landing in a far-off city, she sets up a high-flying delivery service and begins a wonderful experience of independence and responsibility as she finds her place in the world. (Source: Disney)",
+      "year": "1989",
+      "studio": "Studio Ghibli",
+      "genres": [
+        "Adventure",
+        "Drama",
+        "Fantasy",
+        "Slice of Life"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "512"
+      }
+    },
+    {
+      "id": "anime-99750",
+      "title": "I Want to Eat Your Pancreas",
+      "status": "completed",
+      "rating": 10,
+      "communityRating": 84,
+      "progress": {
+        "watched": 1,
+        "total": 1
+      },
+      "format": "MOVIE",
+      "season": "SUMMER",
+      "cover": "/assets/media/anime/99750.jpg",
+      "link": "https://anilist.co/anime/99750",
+      "description": "Spring time in April and the last of the cherry blossoms are still in bloom. The usually aloof bookworm with no interest in others comes across a book in a hospital waiting room. Handwritten on the cover are the words: \"Living with Dying.\" He soon discovers that it is a diary kept by his very popular and genuinely cheerful classmate, Sakura Yamauchi, who reveals to him that she is secretly suffering from a pancreatic illness and only has a limited time left. It is at this moment that she gains just one more person to share her secret. Trying to maintain a normal life as much as possible, Sakura is determined to live her life to the fullest until the very last day. As her free spirit and unpredictable actions throw him for a loop, his heart begins to gradually change. (Source: Aniplex USA)",
+      "year": "2018",
+      "studio": "Studio VOLN",
+      "genres": [
+        "Drama",
+        "Romance",
+        "Slice of Life"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "99750"
+      }
+    },
+    {
+      "id": "anime-113596",
+      "title": "Josee, the Tiger and the Fish",
+      "status": "completed",
+      "rating": 9,
+      "communityRating": 82,
+      "progress": {
+        "watched": 1,
+        "total": 1
+      },
+      "format": "MOVIE",
+      "season": "FALL",
+      "cover": "/assets/media/anime/113596.jpg",
+      "link": "https://anilist.co/anime/113596",
+      "description": "The story centers on the relationship between Tsuneo and Josee. Tsuneo is a university student, and Josee is a young girl who has rarely gone out of the house by herself due to her being unable to walk. The two meet when Tsuneo finds Josee's grandmother taking her out for a morning walk. (Source: Anime News Network)",
+      "year": "2020",
+      "studio": "bones",
+      "genres": [
+        "Drama",
+        "Romance",
+        "Slice of Life"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "113596"
+      }
+    },
+    {
+      "id": "anime-16782",
+      "title": "The Garden of Words",
+      "status": "completed",
+      "rating": 9,
+      "communityRating": 75,
+      "progress": {
+        "watched": 1,
+        "total": 1
+      },
+      "format": "MOVIE",
+      "season": "SPRING",
+      "cover": "/assets/media/anime/16782.jpg",
+      "link": "https://anilist.co/anime/16782",
+      "description": "Some people revel and play in the rain; others dread it and hide at the first drop. For high school student Takao, a summer shower is a source of artistic inspiration… but when he skips school in order to sketch in a rainy garden, Takao finds an even greater muse in Yukino, an older woman who seems adrift in the world. Despite the difference in their ages and lives, they strike up a comfortable relationship that slowly evolves as they randomly meet in the same garden whenever it rains. But with the rainy season coming to a close, Takao wonders if there's enough time left to put his feelings into actions and words. (Source: Sentai Filmworks)",
+      "year": "2013",
+      "studio": "CoMix Wave",
+      "genres": [
+        "Drama",
+        "Psychological",
+        "Romance",
+        "Slice of Life"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "16782"
+      }
+    },
+    {
+      "id": "anime-2236",
+      "title": "The Girl Who Leapt Through Time",
+      "status": "completed",
+      "rating": 9.2,
+      "communityRating": 78,
+      "progress": {
+        "watched": 1,
+        "total": 1
+      },
+      "format": "MOVIE",
+      "season": "SUMMER",
+      "cover": "/assets/media/anime/2236.png",
+      "link": "https://anilist.co/anime/2236",
+      "description": "The power to travel through time... It can be used for the good of humanity, or just selfishly abused. While many may fantasize about obtaining such a power, it has become nothing less than reality for otherwise-normal schoolgirl Konno Makoto. After a fated event, her life takes a turn for the extraordinary. Though she initially uses her power to literally \"leap\" into the past and change little things in order to make her life easier, she soon has to face the fact that changing the past can have drastic consequences.",
+      "year": "2006",
+      "studio": "MADHOUSE",
+      "genres": [
+        "Drama",
+        "Romance",
+        "Sci-Fi"
+      ],
+      "identity": {
+        "provider": "anilist",
+        "subjectId": "2236"
       }
     },
     {
