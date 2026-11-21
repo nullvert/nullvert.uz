@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-17T11:39:59.340Z",
+  "updatedAt": "2026-11-21T10:52:32.443Z",
   "total": 24,
   "provider": "infinitebacklog",
   "accountRef": "nullvert",
@@ -346,7 +346,7 @@
       "price": "$29.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-17T11:39:57.354Z"
+      "_fetchedAt": "2026-11-21T10:52:30.477Z"
     },
     {
       "id": "steam_322500",
@@ -368,7 +368,7 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-17T11:39:57.293Z"
+      "_fetchedAt": "2026-11-21T10:52:30.469Z"
     },
     {
       "id": "steam_557340",
@@ -390,7 +390,7 @@
       "price": "$19.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-17T11:39:57.685Z"
+      "_fetchedAt": "2026-11-21T10:52:30.997Z"
     },
     {
       "id": "steam_601150",
@@ -408,10 +408,10 @@
       "developer": "CAPCOM Co., Ltd.",
       "description": "Лучший охотник на демонов возвращается в новом стильном боевике.",
       "rank": "#6",
-      "price": "$29.99",
-      "discount": 0,
+      "price": "$7.49",
+      "discount": 75,
       "isFree": false,
-      "_fetchedAt": "2026-11-17T11:39:57.693Z"
+      "_fetchedAt": "2026-11-21T10:52:31.034Z"
     },
     {
       "id": "steam_690040",
@@ -433,7 +433,7 @@
       "price": "$24.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-17T11:39:58.084Z"
+      "_fetchedAt": "2026-11-21T10:52:31.454Z"
     },
     {
       "id": "steam_1029690",
@@ -452,10 +452,10 @@
       "developer": "Rebellion",
       "description": "Легендарная серия Sniper Elite возвращается. 1944 год, Франция, Карл Фейрберн против проекта «Кракен». Лучшая в жанре симуляция снайперской стрельбы, новая камера убийств и интерактивные карты. Остановите нацистскую военную машину, пока она не перевернула ход войны!",
       "rank": "#3",
-      "price": "$4.99",
-      "discount": 90,
+      "price": "$49.99",
+      "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-17T11:39:58.130Z"
+      "_fetchedAt": "2026-11-21T10:52:31.502Z"
     },
     {
       "id": "steam_1091500",
@@ -476,13 +476,13 @@
       "price": "$59.99",
       "discount": 0,
       "isFree": false,
-      "_fetchedAt": "2026-11-17T11:39:58.552Z"
+      "_fetchedAt": "2026-11-21T10:52:31.864Z"
     },
     {
       "id": "steam_2483190",
       "title": "Forza Horizon 6",
       "cover": "/assets/media/games/steam_2483190.jpg",
-      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2483190/c53fe3362cc3267a5d34aca3e796b90963e0e23f/header_alt_assets_6.jpg?t=1793894652",
+      "banner": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2483190/c53fe3362cc3267a5d34aca3e796b90963e0e23f/header_alt_assets_6.jpg?t=1795104806",
       "link": "https://store.steampowered.com/app/2483190/",
       "status": "wishlist",
       "hours": 0,
@@ -496,10 +496,10 @@
       "developer": "Playground Games",
       "description": "Исследуйте потрясающие пейзажи Японии за рулем любой из более чем 550 реальных машин и станьте настоящей легендой фестиваля Horizon в самом масштабном гоночном приключении в открытом мире.",
       "rank": "#8",
-      "price": "$69.99",
-      "discount": 0,
+      "price": "$52.49",
+      "discount": 25,
       "isFree": false,
-      "_fetchedAt": "2026-11-17T11:39:58.814Z"
+      "_fetchedAt": "2026-11-21T10:52:31.928Z"
     }
   ]
 }
